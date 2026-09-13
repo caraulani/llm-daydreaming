@@ -1,0 +1,26 @@
+# Filler note topics (24). Ordinary working notes with no planted bridge. Hand-authored, v0.1.
+fillers:
+  - {domain: ecom, topic: warehouse packing checklist and the mislabelled box incident}
+  - {domain: ecom, topic: switching the product photography to a white background}
+  - {domain: ecom, topic: the returns policy wording and the two most common complaints}
+  - {domain: mleval, topic: rubric wording changes that reduced judge disagreement}
+  - {domain: mleval, topic: how to sample eval items so the hard tail is represented}
+  - {domain: mleval, topic: cost of a full eval run and where the tokens go}
+  - {domain: mleval, topic: the client's request for a pass/fail threshold instead of a score}
+  - {domain: fraud, topic: the manual review queue and how long a hold can stay open}
+  - {domain: fraud, topic: geographic allowlist for destination countries}
+  - {domain: fraud, topic: writing the incident timeline for the payment processor}
+  - {domain: fraud, topic: the refund policy for accounts closed for abuse}
+  - {domain: fraud, topic: two-factor prompts and their effect on signup completion}
+  - {domain: health, topic: bloodwork markers to watch and the date of the next panel}
+  - {domain: health, topic: morning walk routine and step count targets}
+  - {domain: health, topic: hydration and caffeine cutoff time}
+  - {domain: grants, topic: partner search for a consortium and the two universities contacted}
+  - {domain: grants, topic: the budget template and personnel cost rules}
+  - {domain: grants, topic: pitch deck feedback from a former evaluator}
+  - {domain: grants, topic: the difference between the two funding instruments considered}
+  - {domain: grants, topic: reading the evaluation summary report from the last rejection}
+  - {domain: iot, topic: soldering station setup and the tip that keeps oxidising}
+  - {domain: iot, topic: enclosure choice for the outdoor humidity sensor}
+  - {domain: iot, topic: the MQTT topic naming scheme}
+  - {domain: iot, topic: the spare parts bin inventory}

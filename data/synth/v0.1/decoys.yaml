@@ -1,0 +1,27 @@
+# Decoy pairs: two notes sharing surface vocabulary and no mechanism. A generator that connects
+# these is pattern-matching on words. Hand-authored, v0.1, 2026-09-13.
+decoys:
+  - id: dc01
+    shared_term: cart
+    note_a: {domain: ecom, topic: shopping-cart abandonment rate and the exit-intent popup test}
+    note_b: {domain: iot, topic: the rolling sensor cart used to move the test rig around the workshop}
+  - id: dc02
+    shared_term: ring
+    note_a: {domain: fraud, topic: how a fraud ring was identified from shared device fingerprints}
+    note_b: {domain: health, topic: sleep-tracking ring firmware update and battery life}
+  - id: dc03
+    shared_term: token
+    note_a: {domain: mleval, topic: output token budgets and truncation in long evaluations}
+    note_b: {domain: fraud, topic: payment tokenisation and why raw card numbers never touch the server}
+  - id: dc04
+    shared_term: protocol
+    note_a: {domain: health, topic: the current morning supplement protocol and its ordering}
+    note_b: {domain: iot, topic: choosing between two radio protocols for the workshop sensors}
+  - id: dc05
+    shared_term: call
+    note_a: {domain: grants, topic: the open call deadlines and which calls to skip this year}
+    note_b: {domain: ecom, topic: customer support call volume after the shipping change}
+  - id: dc06
+    shared_term: benchmark
+    note_a: {domain: mleval, topic: a public benchmark whose numbers are saturated}
+    note_b: {domain: ecom, topic: benchmark pricing against two competitors for the flagship product}

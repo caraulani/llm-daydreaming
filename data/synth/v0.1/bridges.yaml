@@ -1,0 +1,236 @@
+# Hand-authored planted bridges (ground truth by construction). Written by a human before any
+# note was generated. Each bridge is realised by two notes, one per domain; neither note names
+# the other domain or the mechanism. Version: v0.1, 2026-09-13.
+persona: >
+  A solo builder who runs a small e-commerce store, evaluates LLM systems for clients, handles
+  payments fraud on a calling app, follows a personal health protocol, applies for EU grants,
+  and tinkers with IoT sensors in a workshop. Notes are terse working memory, not essays.
+domains:
+  ecom: e-commerce store operations
+  mleval: evaluation of LLM systems
+  fraud: payments fraud on a consumer app
+  health: personal health protocols and tracking
+  grants: EU grant fundraising
+  iot: hardware and IoT sensors in a workshop
+bridges:
+  - id: br01
+    domain_a: ecom
+    domain_b: fraud
+    hidden_mechanism: refund spikes right after promo launches are card-testing validation runs
+    gold_connection: >-
+      Refund requests clustering within 48 hours of a promo code launch are card-testing rings
+      validating stolen cards, so the refund queue is the earliest fraud detector the store has.
+    gold_implication: >-
+      Flag refunds requested within 48 hours on orders whose payment method is under 7 days old,
+      then compare that set against chargebacks arriving 30 to 60 days later.
+    ingredients_a:
+      - support sees refund requests bunch up in the two days after each promo code goes live
+      - refunds are approved from the support queue without looking at how new the payment method is
+      - the refund spikes were filed under buyer's remorse and never investigated
+    ingredients_b:
+      - card-testing rings make small purchases and then request quick refunds to confirm a stolen card works
+      - chargebacks arrive 30 to 60 days after the purchase, so the rings are invisible for weeks
+      - a payment method added in the last week is the strongest single risk feature
+  - id: br02
+    domain_a: mleval
+    domain_b: grants
+    hidden_mechanism: anchoring on previously visible scores inflates both LLM judges and grant reviewers
+    gold_connection: >-
+      Showing an evaluator the previous score anchors the new one upward, whether the evaluator
+      is an LLM judge re-scoring an iteration or a grant panel scoring a resubmission.
+    gold_implication: >-
+      Re-run the internal grant self-scoring rubric with prior scores hidden and compare against
+      the anchored version.
+    ingredients_a:
+      - judge scores creep upward across iterations when the prompt includes the previous score
+      - blind re-scoring of the same outputs lands about 0.8 points lower on a 10-point scale
+      - the fix was to strip any prior score from the judge context
+    ingredients_b:
+      - resubmitted proposals that quote their previous evaluation score tend to score higher the second time
+      - the funder moved to blind panels for resubmissions in 2025
+      - internal self-scoring of drafts always sees last round's score first
+  - id: br03
+    domain_a: health
+    domain_b: iot
+    hidden_mechanism: a fixed listen window on the receiving side requires a fixed emit schedule on the sending side
+    gold_connection: >-
+      Adherence to a fixed-window protocol and packet delivery to a fixed-window gateway fail the
+      same way: the sender's schedule jitters while the receiver's window does not move.
+    gold_implication: >-
+      Switch dose reminders from "hours since last dose" to a fixed clock time for two weeks and
+      measure adherence against the previous two weeks.
+    ingredients_a:
+      - the protocol calls for an injection inside a fixed morning window
+      - the reminder is set relative to the previous dose, so it drifts later each day
+      - adherence has been falling since the reminder started drifting
+    ingredients_b:
+      - the gateway only listens during a fixed wake window to save power
+      - sensor wake schedules drift with clock jitter and start missing the gateway window
+      - packet loss dropped once the sensors were pinned to fixed wall-clock wake times
+  - id: br04
+    domain_a: ecom
+    domain_b: mleval
+    hidden_mechanism: evaluating on the tuning window is leakage; use the following period as a temporal holdout
+    gold_connection: >-
+      An A/B lift measured on the same week the variant was tuned on is a leaked estimate; the
+      honest number comes from the period after tuning, a temporal holdout.
+    gold_implication: >-
+      Recompute the landing variant's lift using only the week after tuning ended.
+    ingredients_a:
+      - the landing page variant was tweaked daily against that week's traffic
+      - the reported lift came from that same week
+      - the lift disappeared the following month and nobody knows why
+    ingredients_b:
+      - random train/test splits hide leakage that a time-ordered split exposes
+      - scoring on data that predates the cutoff overstates performance
+      - the rule is to freeze the model then test only on later data
+  - id: br05
+    domain_a: fraud
+    domain_b: grants
+    hidden_mechanism: sequential identifiers across supposedly independent entities reveal a single operator
+    gold_connection: >-
+      Sequential identifiers across accounts or companies that claim to be independent expose
+      one operator, whether the identifiers are phone numbers in a fraud ring or company
+      registration numbers in duplicate grant applications.
+    gold_implication: >-
+      Run a sequential-identifier scan over new signups' phone numbers and over applicant company
+      registration numbers.
+    ingredients_a:
+      - the attack used destination numbers in strict sequential order
+      - three accounts turned out to share one operator once the numbers were lined up
+      - the blocklist now checks number adjacency, not just the number itself
+    ingredients_b:
+      - two applications from different companies reused the same boilerplate
+      - their registration numbers were consecutive
+      - the funder cross-checks registries for linked applicants
+  - id: br06
+    domain_a: health
+    domain_b: mleval
+    hidden_mechanism: without a no-intervention baseline the measured effect may be the measurement itself
+    gold_connection: >-
+      A felt improvement after starting a supplement while also starting to track sleep has no
+      baseline; the tracking can be the effect, exactly like a personalised system beating
+      nothing but matching the no-data control.
+    gold_implication: >-
+      Run two weeks with the ring but without the supplement, then compare against the two weeks
+      on the supplement.
+    ingredients_a:
+      - started a nightly supplement and a sleep-tracking ring in the same week
+      - sleep felt better within days
+      - there is no baseline period with the ring alone
+    ingredients_b:
+      - the control arm that saw no personal data gained as much engagement as the personalised arm
+      - the whole gain was novelty of the interface, not personalisation
+      - every study needs an arm with the measurement but without the intervention
+  - id: br07
+    domain_a: iot
+    domain_b: ecom
+    hidden_mechanism: thundering herd; stagger the senders with randomised backoff
+    gold_connection: >-
+      A flash-sale email hitting the whole list at once is a thundering herd on checkout, the
+      same failure as 200 sensors reporting together after a power restore; randomised staggering
+      fixes both.
+    gold_implication: >-
+      Split the next campaign send into 10 batches over 30 minutes and compare checkout error
+      rate against the last single-blast send.
+    ingredients_a:
+      - after a power cut every sensor reconnects in the same second and the gateway drops most packets
+      - the gateway handles the normal load fine
+      - adding a random delay before each reconnect removed the drops
+    ingredients_b:
+      - the flash-sale email went to the entire list in one blast
+      - checkout timed out for twenty minutes
+      - the site had handled half that traffic without trouble earlier that week
+  - id: br08
+    domain_a: grants
+    domain_b: iot
+    hidden_mechanism: emit progress as continuous telemetry with rollups instead of reconstructing at reporting time
+    gold_connection: >-
+      Grant KPIs should be emitted as continuous events with daily rollups, like sensor
+      telemetry, because reconstructing them from raw history at quarter end fails once the
+      underlying logs are gone.
+    gold_implication: >-
+      Add a KPI event log this week that appends one line per milestone event and a daily rollup.
+    ingredients_a:
+      - quarterly reporting requires evidence for each KPI
+      - the team spends a week reconstructing numbers from chat history and invoices
+      - some evidence from month one could not be found any more
+    ingredients_b:
+      - devices push readings continuously and the server keeps daily rollups
+      - raw readings are deleted after 30 days
+      - anything not rolled up in time is gone for good
+  - id: br09
+    domain_a: fraud
+    domain_b: health
+    hidden_mechanism: rate-limit per window with a hold, not just a total cap
+    gold_connection: >-
+      A dose schedule needs a per-window velocity rule with a hold, the way card transactions
+      are rate-limited per ten minutes, because a total weekly cap does not stop doubling up
+      after a missed day.
+    gold_implication: >-
+      Add a rule of at most one dose per 20-hour window to the tracker and count how often it
+      would have fired in the last month.
+    ingredients_a:
+      - more than three purchases in ten minutes from one card triggers a hold
+      - legitimate users almost never exceed two in ten minutes
+      - the total daily spend limit alone missed the bursts
+    ingredients_b:
+      - the protocol only states a maximum weekly dose
+      - after missing a day it is tempting to take two the next morning
+      - the tracker only counts the weekly total
+  - id: br10
+    domain_a: ecom
+    domain_b: health
+    hidden_mechanism: expectation-lag dropout at the third cycle; intervene before it with a timeline
+    gold_connection: >-
+      Subscription churn peaking at cycle three and protocol dropout peaking at week three are
+      the same expectation-lag failure: results lag the effort, so people quit right before
+      they would have seen them.
+    gold_implication: >-
+      Send a "what to expect by week three" message on day 10 and measure cycle-three churn
+      against the previous cohort.
+    ingredients_a:
+      - churn peaks at the third billing cycle
+      - customers who skip one delivery rarely come back
+      - nothing is sent between deliveries
+    ingredients_b:
+      - most people quit the protocol around week three
+      - visible effects usually start after week four
+      - missing two days in a row usually ends it
+  - id: br11
+    domain_a: mleval
+    domain_b: iot
+    hidden_mechanism: a reference set re-scored on a schedule detects silent judge drift, like sensor calibration
+    gold_connection: >-
+      An LLM judge drifts silently like a temperature sensor, so it needs the same treatment: a
+      fixed reference set re-scored on a schedule, with an alert when the mean moves.
+    gold_implication: >-
+      Build a 50-item reference set, re-score it weekly with the judge, and alert if the mean
+      shifts more than two percent.
+    ingredients_a:
+      - the provider updated the judge model without notice and scores shifted five percent
+      - no code changed
+      - pinning the exact model snapshot id stopped the surprise but not the aging
+    ingredients_b:
+      - the temperature sensors drift about 0.3 degrees a year
+      - a reference sensor is used to recalibrate them monthly
+      - a drift alarm fires if a reading diverges from the reference
+  - id: br12
+    domain_a: grants
+    domain_b: health
+    hidden_mechanism: move the cheap eligibility screen ahead of the expensive step in the funnel
+    gold_connection: >-
+      Both funnels waste the expensive step on people who fail a cheap screen afterwards: grant
+      applications rejected on eligibility after weeks of writing, and protocol purchases
+      refunded after a contraindication check; the screen belongs before the expensive step.
+    gold_implication: >-
+      Put a five-question eligibility check in front of the grant intake form and measure how
+      many applicants it turns away.
+    ingredients_a:
+      - forty percent of applications are rejected at the eligibility stage
+      - eligibility is about company age and technology maturity, five facts at most
+      - applicants spend weeks writing before they find out
+    ingredients_b:
+      - contraindication screening happens after purchase
+      - a fair share of orders get refunded when the screen fails
+      - the screen itself is a short questionnaire
