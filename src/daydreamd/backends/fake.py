@@ -35,6 +35,12 @@ class FakeBackend:
                 for i in range(0, 12, 4)
             ]
             return json.dumps(cards)
+        if "Write one working note" in prompt:
+            body = " ".join(f"fact {digest[i % 60 : i % 60 + 3]} noted" for i in range(0, 160))
+            return (
+                "---\nname: fake-note\ndescription: fake\ntype: project\n---\n"
+                "## Section\n\n" + body + "\n"
+            )
         if "LEAK|CLEAN" in prompt:
             return json.dumps({"verdict": "CLEAN", "evidence": "fake judge: no leak"})
         if "verdict" in prompt and "kill" in prompt:
