@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from ..backends import Backend
 from .io import write_jsonl
-from .llm import complete_json, pmap, usage_record
+from .llm import complete_json, guard_error_rate, pmap, usage_record
 from .run import RunDir, load_prompt
 
 REASONS = {"restates_claim", "not_checkable", "generic", "ok"}
@@ -65,6 +65,7 @@ def run_critic(
     todo = [g for g in generations if g["status"] == "ok"]
     rows = pmap(lambda g: judge_one(backend, model, template, g), todo, concurrency)
     write_jsonl(run.path / outfile, rows)
+    guard_error_rate(rows, "critic")
     cost = sum((r["usage"] or {}).get("cost_usd", 0.0) for r in rows)
     ids: set[str] = {r["usage"]["model_id"] for r in rows if r["usage"]}
     if ids:

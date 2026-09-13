@@ -6,7 +6,7 @@ from typing import Any
 
 from ..backends import Backend
 from .io import write_jsonl
-from .llm import complete_json, pmap, usage_record
+from .llm import complete_json, guard_error_rate, pmap, usage_record
 from .run import RunDir, load_prompt
 from .sampler import Unit
 
@@ -66,6 +66,7 @@ def generate(
         lambda u: generate_one(backend, model, u, pair_prompt, single_prompt), units, concurrency
     )
     write_jsonl(run.path / "generations.jsonl", rows)
+    guard_error_rate(rows, "generate")
     cost = sum((r["usage"] or {}).get("cost_usd", 0.0) for r in rows)
     ids: set[str] = {r["usage"]["model_id"] for r in rows if r["usage"]}
     if ids:

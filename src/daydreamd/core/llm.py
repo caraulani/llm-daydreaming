@@ -33,3 +33,23 @@ def complete_json(backend: Backend, prompt: str, model: str) -> tuple[Any, Compl
     if text.upper().startswith("NONE") and len(text) < 12:
         return None, comp
     return extract_json(text), comp
+
+
+def guard_error_rate(rows: list[dict[str, Any]], stage: str, max_frac: float = 0.2) -> None:
+    """Abort a stage whose outputs are mostly errors (a spent usage window, a dead backend).
+
+    A run that continues past this point produces tables from garbage. Raise instead, so the
+    failure is visible and the run directory can be discarded or resumed.
+    """
+    n = len(rows)
+    if n == 0:
+        return
+    errors = sum(
+        1
+        for r in rows
+        if r.get("status") == "error" or str(r.get("reason", "")).startswith("error")
+    )
+    if errors / n > max_frac:
+        raise RuntimeError(
+            f"stage {stage} aborted: {errors}/{n} calls failed ({errors / n:.0%} > {max_frac:.0%})"
+        )
