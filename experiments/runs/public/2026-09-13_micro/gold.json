@@ -1,0 +1,110 @@
+{
+  "br01": {
+    "domain_a": "ecom",
+    "domain_b": "fraud",
+    "gold_connection": "Refund requests clustering within 48 hours of a promo code launch are card-testing rings validating stolen cards, so the refund queue is the earliest fraud detector the store has.",
+    "gold_implication": "Flag refunds requested within 48 hours on orders whose payment method is under 7 days old, then compare that set against chargebacks arriving 30 to 60 days later.",
+    "hidden_mechanism": "refund spikes right after promo launches are card-testing validation runs",
+    "note_a": "br01-a",
+    "note_b": "br01-b"
+  },
+  "br02": {
+    "domain_a": "mleval",
+    "domain_b": "grants",
+    "gold_connection": "Showing an evaluator the previous score anchors the new one upward, whether the evaluator is an LLM judge re-scoring an iteration or a grant panel scoring a resubmission.",
+    "gold_implication": "Re-run the internal grant self-scoring rubric with prior scores hidden and compare against the anchored version.",
+    "hidden_mechanism": "anchoring on previously visible scores inflates both LLM judges and grant reviewers",
+    "note_a": "br02-a",
+    "note_b": "br02-b"
+  },
+  "br03": {
+    "domain_a": "health",
+    "domain_b": "iot",
+    "gold_connection": "Adherence to a fixed-window protocol and packet delivery to a fixed-window gateway fail the same way: the sender's schedule jitters while the receiver's window does not move.",
+    "gold_implication": "Switch dose reminders from \"hours since last dose\" to a fixed clock time for two weeks and measure adherence against the previous two weeks.",
+    "hidden_mechanism": "a fixed listen window on the receiving side requires a fixed emit schedule on the sending side",
+    "note_a": "br03-a",
+    "note_b": "br03-b"
+  },
+  "br04": {
+    "domain_a": "ecom",
+    "domain_b": "mleval",
+    "gold_connection": "An A/B lift measured on the same week the variant was tuned on is a leaked estimate; the honest number comes from the period after tuning, a temporal holdout.",
+    "gold_implication": "Recompute the landing variant's lift using only the week after tuning ended.",
+    "hidden_mechanism": "evaluating on the tuning window is leakage; use the following period as a temporal holdout",
+    "note_a": "br04-a",
+    "note_b": "br04-b"
+  },
+  "br05": {
+    "domain_a": "fraud",
+    "domain_b": "grants",
+    "gold_connection": "Sequential identifiers across accounts or companies that claim to be independent expose one operator, whether the identifiers are phone numbers in a fraud ring or company registration numbers in duplicate grant applications.",
+    "gold_implication": "Run a sequential-identifier scan over new signups' phone numbers and over applicant company registration numbers.",
+    "hidden_mechanism": "sequential identifiers across supposedly independent entities reveal a single operator",
+    "note_a": "br05-a",
+    "note_b": "br05-b"
+  },
+  "br06": {
+    "domain_a": "health",
+    "domain_b": "mleval",
+    "gold_connection": "A felt improvement after starting a supplement while also starting to track sleep has no baseline; the tracking can be the effect, exactly like a personalised system beating nothing but matching the no-data control.",
+    "gold_implication": "Run two weeks with the ring but without the supplement, then compare against the two weeks on the supplement.",
+    "hidden_mechanism": "without a no-intervention baseline the measured effect may be the measurement itself",
+    "note_a": "br06-a",
+    "note_b": "br06-b"
+  },
+  "br07": {
+    "domain_a": "iot",
+    "domain_b": "ecom",
+    "gold_connection": "A flash-sale email hitting the whole list at once is a thundering herd on checkout, the same failure as 200 sensors reporting together after a power restore; randomised staggering fixes both.",
+    "gold_implication": "Split the next campaign send into 10 batches over 30 minutes and compare checkout error rate against the last single-blast send.",
+    "hidden_mechanism": "thundering herd; stagger the senders with randomised backoff",
+    "note_a": "br07-a",
+    "note_b": "br07-b"
+  },
+  "br08": {
+    "domain_a": "grants",
+    "domain_b": "iot",
+    "gold_connection": "Grant KPIs should be emitted as continuous events with daily rollups, like sensor telemetry, because reconstructing them from raw history at quarter end fails once the underlying logs are gone.",
+    "gold_implication": "Add a KPI event log this week that appends one line per milestone event and a daily rollup.",
+    "hidden_mechanism": "emit progress as continuous telemetry with rollups instead of reconstructing at reporting time",
+    "note_a": "br08-a",
+    "note_b": "br08-b"
+  },
+  "br09": {
+    "domain_a": "fraud",
+    "domain_b": "health",
+    "gold_connection": "A dose schedule needs a per-window velocity rule with a hold, the way card transactions are rate-limited per ten minutes, because a total weekly cap does not stop doubling up after a missed day.",
+    "gold_implication": "Add a rule of at most one dose per 20-hour window to the tracker and count how often it would have fired in the last month.",
+    "hidden_mechanism": "rate-limit per window with a hold, not just a total cap",
+    "note_a": "br09-a",
+    "note_b": "br09-b"
+  },
+  "br10": {
+    "domain_a": "ecom",
+    "domain_b": "health",
+    "gold_connection": "Subscription churn peaking at cycle three and protocol dropout peaking at week three are the same expectation-lag failure: results lag the effort, so people quit right before they would have seen them.",
+    "gold_implication": "Send a \"what to expect by week three\" message on day 10 and measure cycle-three churn against the previous cohort.",
+    "hidden_mechanism": "expectation-lag dropout at the third cycle; intervene before it with a timeline",
+    "note_a": "br10-a",
+    "note_b": "br10-b"
+  },
+  "br11": {
+    "domain_a": "mleval",
+    "domain_b": "iot",
+    "gold_connection": "An LLM judge drifts silently like a temperature sensor, so it needs the same treatment: a fixed reference set re-scored on a schedule, with an alert when the mean moves.",
+    "gold_implication": "Build a 50-item reference set, re-score it weekly with the judge, and alert if the mean shifts more than two percent.",
+    "hidden_mechanism": "a reference set re-scored on a schedule detects silent judge drift, like sensor calibration",
+    "note_a": "br11-a",
+    "note_b": "br11-b"
+  },
+  "br12": {
+    "domain_a": "grants",
+    "domain_b": "health",
+    "gold_connection": "Both funnels waste the expensive step on people who fail a cheap screen afterwards: grant applications rejected on eligibility after weeks of writing, and protocol purchases refunded after a contraindication check; the screen belongs before the expensive step.",
+    "gold_implication": "Put a five-question eligibility check in front of the grant intake form and measure how many applicants it turns away.",
+    "hidden_mechanism": "move the cheap eligibility screen ahead of the expensive step in the funnel",
+    "note_a": "br12-a",
+    "note_b": "br12-b"
+  }
+}

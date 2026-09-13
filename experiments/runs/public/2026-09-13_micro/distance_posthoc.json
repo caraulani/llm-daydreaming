@@ -1,0 +1,111 @@
+{
+  "n_cards": 328,
+  "n_cross_note_card_pairs": 52887,
+  "band_edges": {
+    "q25": 0.8273,
+    "q75": 0.9632,
+    "q95": 1.0417
+  },
+  "planted": [
+    {
+      "bridge": "br01",
+      "min_card_distance": 0.2849,
+      "min_quantile": 0.0,
+      "mean_card_distance": 0.6074,
+      "mean_quantile": 0.0112,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br02",
+      "min_card_distance": 0.588,
+      "min_quantile": 0.0081,
+      "mean_card_distance": 0.7981,
+      "mean_quantile": 0.176,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br03",
+      "min_card_distance": 0.5397,
+      "min_quantile": 0.0037,
+      "mean_card_distance": 0.7131,
+      "mean_quantile": 0.0557,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br04",
+      "min_card_distance": 0.7067,
+      "min_quantile": 0.051,
+      "mean_card_distance": 0.8415,
+      "mean_quantile": 0.2927,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br05",
+      "min_card_distance": 0.5553,
+      "min_quantile": 0.0048,
+      "mean_card_distance": 0.8453,
+      "mean_quantile": 0.3043,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br06",
+      "min_card_distance": 0.6454,
+      "min_quantile": 0.0198,
+      "mean_card_distance": 0.927,
+      "mean_quantile": 0.6098,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br07",
+      "min_card_distance": 0.6281,
+      "min_quantile": 0.0147,
+      "mean_card_distance": 0.8549,
+      "mean_quantile": 0.3363,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br08",
+      "min_card_distance": 0.4896,
+      "min_quantile": 0.0015,
+      "mean_card_distance": 0.7849,
+      "mean_quantile": 0.1503,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br09",
+      "min_card_distance": 0.7182,
+      "min_quantile": 0.06,
+      "mean_card_distance": 0.8487,
+      "mean_quantile": 0.3154,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br10",
+      "min_card_distance": 0.5462,
+      "min_quantile": 0.0041,
+      "mean_card_distance": 0.7481,
+      "mean_quantile": 0.091,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br11",
+      "min_card_distance": 0.691,
+      "min_quantile": 0.0402,
+      "mean_card_distance": 0.853,
+      "mean_quantile": 0.3299,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br12",
+      "min_card_distance": 0.6271,
+      "min_quantile": 0.0144,
+      "mean_card_distance": 0.8379,
+      "mean_quantile": 0.2811,
+      "closest_pair_band": "Q1"
+    }
+  ],
+  "planted_min_median": 0.6076,
+  "random_cross_domain_min_median": 0.7374,
+  "planted_closest_pair_in_Q1": 12,
+  "n_planted": 12
+}
