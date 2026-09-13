@@ -1,0 +1,12 @@
+# Single-arm config (B6). Inherits everything from experiments/micro/config.yaml except arms.
+corpus: {kind: synth, path: data/synth/v0.1}
+visibility: public
+slug: B6_anchor_remote
+seed: 20260913
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku, match: haiku}
+concurrency: 4
+arms:
+  B6: {n: 50}
+dupgate_threshold: 0.85
+stats: {n_perm: 10000}

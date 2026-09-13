@@ -1,0 +1,16 @@
+# Track C (future): owner-blind scoring over a real private corpus. Outputs are gitignored.
+corpus: {kind: claude-memory, path: ~/.claude/projects/<slug>/memory, exclude: [], anonymise: true}
+visibility: private
+slug: owner-blind
+seed: 20260913
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku}
+concurrency: 4
+arms:
+  B1: {n: 100}
+  B3: {per_band: 25}
+  B6: {n: 50}
+  B4: {notes: random, n: 50}
+dupgate_threshold: 0.85
+blind: {enabled: true}
+stats: {n_perm: 10000}

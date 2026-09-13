@@ -1,0 +1,17 @@
+# End-to-end smoke test on the synthetic corpus: 3 planted pairs, 2 decoys, 3 random, tiny arms.
+corpus: {kind: synth, path: data/synth/v0.1}
+visibility: public
+slug: smoke
+seed: 7
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku, match: haiku}
+concurrency: 4
+arms:
+  S0: {planted_limit: 3, decoy_limit: 2, random_pairs: 3}
+  B1: {n: 4}
+  B3: {per_band: 1}
+  B6: {n: 4}
+  B4: {notes: bridge, limit: 4}
+dupgate_threshold: 0.85
+blind: {enabled: true}
+stats: {n_perm: 2000}

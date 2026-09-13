@@ -1,0 +1,12 @@
+# Single-arm config (B1). Inherits everything from experiments/micro/config.yaml except arms.
+corpus: {kind: synth, path: data/synth/v0.1}
+visibility: public
+slug: B1_random
+seed: 20260913
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku, match: haiku}
+concurrency: 4
+arms:
+  B1: {n: 100}
+dupgate_threshold: 0.85
+stats: {n_perm: 10000}
