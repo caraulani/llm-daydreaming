@@ -1,0 +1,91 @@
+# Citation metadata for the daydreamd repository.
+# GitHub reads this file to render the "Cite this repository" button.
+# Validate with: uvx cffconvert --validate
+cff-version: 1.2.0
+type: software
+message: "If you use daydreamd, its evaluation protocol, or its results, please cite it as below. Once the paper is on arXiv, cite the preferred-citation entry instead."
+title: "daydreamd: a selection engine for machine-generated ideas over a private corpus"
+abstract: "A local-first daemon that recombines distant concepts from a corpus, filters the recombinations through a binary critic and a retrieval-grounded duplicate check, and evaluates the survivors against planted ground truth, a random-pairing control and a label-permutation null. v0.1 ships a synthetic corpus with hand-authored bridges so the protocol is reproducible without private data."
+version: 0.1.0
+date-released: 2026-09-13
+license: MIT
+repository-code: "https://github.com/caraulani/llm-daydreaming"
+url: "https://github.com/caraulani/llm-daydreaming"
+authors:
+  - family-names: Caraulani
+    given-names: Julian
+    email: caraulani@gmail.com
+    alias: caraulani
+keywords:
+  - idea generation
+  - computational creativity
+  - large language models
+  - personal knowledge management
+  - novelty evaluation
+  - permutation test
+  - preregistration
+  - sleep-time compute
+  - agent memory
+# Lineage: the idea and the first builds belong to these people. See README "Lineage".
+references:
+  - type: article
+    title: "LLM Daydreaming"
+    authors:
+      - name: "Gwern Branwen"
+    year: 2025
+    url: "https://gwern.net/ai-daydreaming"
+    notes: "Proposed the day-dreaming loop this repository tests."
+  - type: software
+    title: "idea-mill"
+    authors:
+      - family-names: Goedecke
+        given-names: Sean
+    year: 2025
+    url: "https://github.com/sgoedecke/idea-mill"
+    notes: "First prototype of the loop, one day after the essay."
+  - type: software
+    title: "DayDreamingDayDreaming"
+    authors:
+      - family-names: Lukasiak
+        given-names: Zbigniew
+    year: 2025
+    url: "https://github.com/zby/DayDreamingDayDreaming"
+    notes: "First temporal-novelty pilot with pre-cutoff models; named the verifier wall."
+  - type: software
+    title: "Vault Daydream (claude-skills)"
+    authors:
+      - name: "glebis"
+    year: 2026
+    url: "https://github.com/glebis/claude-skills"
+    notes: "Obsidian implementation with generator, critic and writeback; no evaluation."
+  - type: article
+    title: "Discovery by Dreaming: Cross-Domain Recombination in Artificial Memory"
+    authors:
+      - family-names: Zahn
+        given-names: Oliver
+      - family-names: Evans
+        given-names: James
+      - family-names: Eagleman
+        given-names: David
+    year: 2026
+    identifiers:
+      - type: other
+        value: "arXiv:2607.16256"
+        description: "arXiv identifier"
+    url: "https://arxiv.org/abs/2607.16256"
+    notes: "Recombination over public corpora with a post-hoc holdout; no critic, no distance control, no private corpus."
+# Uncomment and fill in once the arXiv identifier exists.
+# preferred-citation:
+#   type: article
+#   title: "daydreamd: a selection engine for machine-generated ideas over a private corpus"
+#   authors:
+#     - family-names: Caraulani
+#       given-names: Julian
+#   journal: "arXiv preprint"
+#   year: 2026
+#   identifiers:
+#     - type: other
+#       value: "arXiv:XXXX.XXXXX"
+#       description: "arXiv identifier"
+#   url: "https://arxiv.org/abs/XXXX.XXXXX"
+#   license: CC-BY-4.0

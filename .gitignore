@@ -1,0 +1,13 @@
+# private runs never leave this machine
+experiments/runs/private/
+data/private/
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+results/private/
+*.egg-info/
+dist/
+.DS_Store

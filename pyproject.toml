@@ -1,0 +1,63 @@
+[project]
+name = "daydreamd"
+version = "0.1.0"
+description = "A local-first daemon that recombines distant concepts from your own notes and keeps only what survives a blind, pre-registered selection test."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+authors = [{ name = "Julian Caraulani" }]
+keywords = ["llm", "ideation", "creativity", "personal-knowledge", "evaluation", "benchmark", "daemon"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "numpy>=2.0",
+  "scipy>=1.14",
+  "pyyaml>=6.0",
+  "typer>=0.15",
+  "sentence-transformers>=3.0",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+
+[project.scripts]
+daydreamd = "daydreamd.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/caraulani/llm-daydreaming"
+Paper = "https://github.com/caraulani/llm-daydreaming/blob/main/paper/paper.md"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.8", "mypy>=1.13", "types-PyYAML"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/daydreamd"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "N", "W"]
+# E501 is left to the formatter (long string literals are split by hand where it matters).
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/daydreamd/cli.py" = ["B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true

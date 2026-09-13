@@ -1,0 +1,53 @@
+name: Preregistration ancestry
+
+# Proves, on every push, that the sealed preregistration commit (tag v0.1.0-prereg) is an
+# ancestor of the first commit that touched any experiment output or results table. If a
+# result was ever committed before the seal, this job fails.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ancestry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve the seal commit
+        id: seal
+        run: |
+          set -euo pipefail
+          if ! git rev-parse -q --verify refs/tags/v0.1.0-prereg >/dev/null; then
+            echo "tag v0.1.0-prereg not found; nothing to check yet"
+            echo "seal=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "seal=$(git rev-list -n 1 v0.1.0-prereg)" >> "$GITHUB_OUTPUT"
+
+      - name: Every result must descend from the seal
+        if: steps.seal.outputs.seal != ''
+        run: |
+          set -euo pipefail
+          seal="${{ steps.seal.outputs.seal }}"
+          echo "seal commit: $seal"
+          # Oldest commit that touched a public run or a results table.
+          first=$(git log --reverse --format=%H -- 'experiments/runs/public/*_micro/**' 'results/public/*_micro/**' | head -n 1 || true)
+          if [ -z "$first" ]; then
+            echo "no experiment outputs committed yet"
+            exit 0
+          fi
+          echo "first results commit: $first"
+          if git merge-base --is-ancestor "$seal" "$first"; then
+            echo "OK: the seal precedes the first result"
+          else
+            echo "FAIL: results were committed before the preregistration seal"
+            exit 1
+          fi
+          # The preregistration file may change after the seal only in the two TBD fields
+          # and the DEVIATIONS section. Show the diff so reviewers can check.
+          git diff "$seal" HEAD -- PREREGISTRATION.md || true

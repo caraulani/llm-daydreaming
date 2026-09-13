@@ -1,0 +1,48 @@
+name: Reproduce tables from committed outputs
+
+# Rebuilds every table and figure in results/ from the raw outputs committed
+# under experiments/runs/. No API keys, no model calls. If this job fails,
+# the published numbers cannot be regenerated and the paper is not reproducible.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/runs/**"
+      - "results/**"
+      - "src/daydreamd/eval/**"
+      - "Makefile"
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync --all-extras
+
+      - name: Reproduce
+        run: make reproduce
+        env:
+          DAYDREAMD_BACKEND: fake
+
+      - name: Fail if reproduction changed a committed table
+        run: |
+          git diff --exit-code -- results/ || {
+            echo "results/ differs from what the committed raw outputs produce."
+            echo "Regenerate locally with 'make reproduce' and commit the result."
+            exit 1
+          }
+
+      - name: Upload regenerated results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results/

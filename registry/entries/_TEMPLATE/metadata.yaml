@@ -1,0 +1,35 @@
+# Copy this directory to registry/entries/<YYYY-MM-DD>_<slug>/ and fill every field.
+entry: "YYYY-MM-DD_slug"
+submitted_by:
+  name: ""
+  github: ""
+  contact: ""            # optional
+corpus:
+  description: ""        # type, document count, date range. No corpus text.
+  private: true
+  snapshot_sha256: ""    # hash of the frozen corpus manifest
+pipeline:
+  daydreamd_version: ""  # tag or commit SHA
+  generator_snapshot: "" # immutable model snapshot ID, never an alias
+  critic_snapshot: ""
+  judge_snapshot: ""
+  access_date: ""        # YYYY-MM-DD
+  sampling: { temperature: null, top_p: null, max_tokens: null, seed: null }
+  prompt_shas:
+    generator: ""
+    critic: ""
+arms: []                 # e.g. [B6]
+counts:
+  pairs_sampled: 0
+  none_outputs: 0
+  critic_kills: 0
+  corpus_duplicates: 0
+  dreams_published: 0
+cost:
+  tokens_in: 0
+  tokens_out: 0
+  usd: 0.0               # read from logs
+timestamp:
+  ots_file: "dreams.jsonl.ots"
+  stamped_at: ""         # YYYY-MM-DD
+license: "CC-BY-4.0"

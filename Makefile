@@ -1,0 +1,46 @@
+.PHONY: setup test lint typecheck smoke synth micro blind stats reproduce clean
+
+UV ?= uv
+RUN ?=
+CONFIG ?= experiments/micro/config.yaml
+
+setup:
+	$(UV) sync --all-extras
+
+test:
+	$(UV) run pytest -q
+
+lint:
+	$(UV) run ruff check src tests
+	$(UV) run ruff format --check src tests
+
+typecheck:
+	$(UV) run mypy src
+
+synth:
+	$(UV) run daydreamd synth --out data/synth/v0.1
+
+# End-to-end on the committed synthetic corpus with tiny arms. Real model calls.
+smoke:
+	$(UV) run daydreamd run-all experiments/smoke/config.yaml
+
+# The pre-registered micro-experiment. Do not run before PREREGISTRATION.md is sealed.
+micro:
+	$(UV) run daydreamd run-all $(CONFIG)
+
+blind:
+	$(UV) run daydreamd blind $(RUN) $(CONFIG)
+
+stats:
+	$(UV) run daydreamd stats $(RUN) $(CONFIG)
+
+# Rebuild every public table from committed run outputs. No API keys, no model calls.
+reproduce:
+	@for d in experiments/runs/public/*/; do \
+	  name=$$(basename $$d); cfg=$$(grep '^config:' $$d/metadata.yaml | sed 's/config: //'); \
+	  echo "== $$name ($$cfg)"; \
+	  $(UV) run daydreamd stats $$d $$cfg --out results/public/$$name; \
+	done
+
+clean:
+	rm -rf .pytest_cache .ruff_cache
