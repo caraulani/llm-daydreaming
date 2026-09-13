@@ -147,8 +147,8 @@ Claims not permitted in v0.1 text: "novel ideas", "discovers", "anticipates", an
 1. Write this file and the answer key (`data/synth/v0.1/bridges.yaml`, `data/synth/v0.1/decoys.yaml`). Do not run any model call for the experiment before step 5. Development smoke tests on a throwaway corpus are not the experiment; they are logged under `experiments/runs/public/*_smoke/` and never enter a table.
 2. Compute `shasum -a 256` of this file and of both answer-key files, and commit the three files together.
 3. Stamp: `ots stamp PREREGISTRATION.md data/synth/v0.1/bridges.yaml data/synth/v0.1/decoys.yaml`; commit the `.ots` proofs. Upgrade the proofs later with `ots upgrade`.
-4. Record the commit hash here after commit: `PREREG_COMMIT = TBD`.
-5. Build the notes from the sealed specs (`make synth`), run the leakage check, freeze the corpus manifest (Section 6) and record `CORPUS_MANIFEST_SHA256 = TBD`.
+4. Record the commit hash here after commit: `PREREG_COMMIT = 056b30e37a3e9f72e7977b190a0f7f13a22903fb` (tag `v0.1.0-prereg`).
+5. Build the notes from the sealed specs (`make synth`), run the leakage check, freeze the corpus manifest (Section 6) and record `CORPUS_MANIFEST_SHA256 = 2401e2b842072ed5f71f57523c89386d95fb58d8cc7904869ed2cba9de45f2b2` (corpus sha256 f17c4f0864305f54ce92f3a3422b3ccf65acfbcd84d072ec87e334e2b8b4c571).
 6. Only then run `make micro` (cards, embed, sample, generate, critic, dupgate, judge) and `make reproduce`.
 
 **Answer-key hashes at seal time (SHA-256):**
@@ -166,4 +166,9 @@ The hash of this file itself is the git blob recorded by the sealed commit and b
 
 ## DEVIATIONS
 
-None yet. Format for entries: date, section, what changed, why, who decided.
+Format: date, section, what changed, why, who decided.
+
+1. 2026-09-13, Section 6 (corpus). Four of the 60 generated notes are 119 to 149 words, below the 150-word floor; none exceed 300. Kept as generated because regeneration for length was not in the plan and the notes pass the leakage check. Decided by the experimenter.
+2. 2026-09-13, Section 8 (measures). Recall is computed as preregistered (non-NONE AND gold match, before the critic). The run shows the critic killed three correct recoveries (S0-0005, S0-0006, S0-0011; reasons "restates_claim", "generic", "generic"), so post-critic survival on planted pairs (5 of 12) is lower than recall (8 of 12). Both numbers are reported; the analysis plan is unchanged.
+3. 2026-09-13, additions after the seal (not deviations from the analysis plan, listed for completeness). Exploratory arms S1 (partner-domain filler control), B7 (cross-domain-near sampler) and generator-size configs, plus a post-hoc analysis of where planted pairs sit in the distance distribution, were written and committed while the sealed run was executing, after reading only its pre-generation artifacts (sampled units, cards, embeddings). They are reported outside T1 to T6 under "exploratory".
+4. 2026-09-13, outcome. Sealed run `experiments/runs/public/2026-09-13_micro`. H1 PASS (p = 0.011), H2 FAIL (B3 p = 0.482, B6 p = 1.0), H3 FAIL (p = 0.110). Decision by the rule in Section 5: NULL.
