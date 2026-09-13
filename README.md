@@ -52,6 +52,10 @@ Sealed run over the synthetic corpus, 2026-09-13, generator `claude-sonnet-5`:
 - **Exploratory X1, not preregistered.** Replace the true partner note with a mechanism-free
   filler from the same domain and recovery collapses: 9 of 12 with the real pair, 1 of 12 with
   the filler (Fisher p = 0.0014). The generator needs the second note; domain cues do not do it.
+- **Exploratory X3, not preregistered.** Sampling near-in-embedding, far-in-domain pairs drew
+  2 planted pairs in 100 (0.6 expected, p = 0.13) and got an answer on 31 percent of pairs, against
+  16 percent for random and 9 percent for distance-banded; the far bands drew NONE on all 50 units.
+  Right direction, underpowered; v0.2 runs it at 300 draws.
 - **Post-hoc, not preregistered.** Every planted bridge's closest card pair sits in the nearest
   distance band (12 of 12; median 0.61 vs 0.74 for random cross-domain pairs): real bridges are
   domain-far but embedding-near, so far-band sampling aims at the wrong band. And the generator's
