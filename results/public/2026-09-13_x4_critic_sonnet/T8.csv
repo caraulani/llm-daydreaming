@@ -1,0 +1,2 @@
+critic,model id,correct recoveries,surviving,killed,decoy answers,decoy surviving,kill rate on random
+sonnet,claude-sonnet-5,8,5,3,1,1,"50.0% [22, 78]"

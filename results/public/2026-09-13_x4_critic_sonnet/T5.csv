@@ -1,0 +1,2 @@
+statistic,observed,expected under null,p,shuffles
+survivors among planted S0 units,7,2.402,0.0009,10000
