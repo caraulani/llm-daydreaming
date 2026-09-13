@@ -303,7 +303,10 @@ def stage_stats(run: RunDir, cfg: dict[str, Any], out_dir: Path | None = None) -
         prereg=str(cfg.get("prereg", "v0.1")),
     )
     human = human_tables(run, out, n_perm=n_perm, seed=int(cfg.get("seed", 0)))
-    run.mark_stage("stats", tables=str(out), human_track=bool(human))
+    if out_dir is None:
+        # Only an in-run stats pass touches the run's metadata. `make reproduce` writes tables
+        # to results/ and must leave committed run directories byte-identical.
+        run.mark_stage("stats", tables=str(out), human_track=bool(human))
     return summary
 
 
