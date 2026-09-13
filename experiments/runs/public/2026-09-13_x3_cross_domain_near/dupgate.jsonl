@@ -1,0 +1,41 @@
+{"unit_id": "B1-0004", "max_cosine": 0.5356, "nearest": "on coherence, factuality, tone match. Right now they see the full distribution. They want a cutoff. ## Implications - Can't report nuance below/above line. Lose", "already_in_corpus": false}
+{"unit_id": "B1-0010", "max_cosine": 0.6475, "nearest": "GPS-synced wake times with staggered offsets reduced packet loss below 2% and remained stable across resets.", "already_in_corpus": false}
+{"unit_id": "B1-0015", "max_cosine": 0.7107, "nearest": "Some orders incorrectly marked shipped while still physically in warehouse inventory.", "already_in_corpus": false}
+{"unit_id": "B1-0025", "max_cosine": 0.5902, "nearest": "Device fingerprint clustering identified 38 linked accounts across Lagos and Johannesburg.", "already_in_corpus": false}
+{"unit_id": "B1-0028", "max_cosine": 0.8006, "nearest": "Shopify webhook backlog suspected of causing tracking data sync delays between regional hubs.", "already_in_corpus": false}
+{"unit_id": "B1-0030", "max_cosine": 0.5223, "nearest": "Raw readings are retained 30 days on the Pi's SD card; only daily aggregates persist long-term in SQLite on the NAS.", "already_in_corpus": false}
+{"unit_id": "B1-0031", "max_cosine": 0.4459, "nearest": "Tracker shows only weekly sums; cannot distinguish consistent versus irregular daily patterns.", "already_in_corpus": false}
+{"unit_id": "B1-0044", "max_cosine": 0.3916, "nearest": "enough to flag as a win. ## October Reversal Ran the same variant unchanged throughout October. The lift disappeared by mid-month. Both variant and control conv", "already_in_corpus": false}
+{"unit_id": "B1-0053", "max_cosine": 0.5865, "nearest": "Removing previous score context from judge input and rescoring blind eliminates score drift.", "already_in_corpus": false}
+{"unit_id": "B1-0058", "max_cosine": 0.5121, "nearest": "Binary system reduces variance in human review process and simplifies operations team workflows.", "already_in_corpus": false}
+{"unit_id": "B1-0059", "max_cosine": 0.6124, "nearest": "Exit-intent popup captured 34 email signups alongside transactional outcomes.", "already_in_corpus": false}
+{"unit_id": "B1-0066", "max_cosine": 0.564, "nearest": "Silent truncation claiming full coverage undermines client trust; transparent handling of incompleteness is essential.", "already_in_corpus": false}
+{"unit_id": "B1-0073", "max_cosine": 0.6955, "nearest": "Refund requests arrive within weeks but chargebacks hit 30-60 days later, dispersing fraud signals across transaction logs.", "already_in_corpus": false}
+{"unit_id": "B3-0000", "max_cosine": 0.5559, "nearest": "Rate limiting increased to 3 attempts per 10 minutes; 3DS verification added to all transactions.", "already_in_corpus": false}
+{"unit_id": "B3-0001", "max_cosine": 0.5953, "nearest": "LLM tone assessment showed persistent judge disagreement despite May revision adding tone examples.", "already_in_corpus": false}
+{"unit_id": "B3-0004", "max_cosine": 0.5704, "nearest": "Consortium structure (one academic, two SMEs) lacks tier-1 industry anchor or end-user validation partner.", "already_in_corpus": false}
+{"unit_id": "B3-0008", "max_cosine": 0.6937, "nearest": "Manual review slots typically open 24-48 hours into a hold if auto-clear doesn't fire.", "already_in_corpus": false}
+{"unit_id": "B3-0009", "max_cosine": 0.5216, "nearest": "Test on 50 tickets first to measure false positive rate in human review queue.", "already_in_corpus": false}
+{"unit_id": "B3-0012", "max_cosine": 0.6652, "nearest": "One 50-item taxonomy evaluation lost 30% of category assignments due to silent truncation.", "already_in_corpus": false}
+{"unit_id": "B3-0022", "max_cosine": 0.4636, "nearest": "Weight sample pool toward inputs that triggered previous model errors.", "already_in_corpus": false}
+{"unit_id": "B7-0000", "max_cosine": 0.4361, "nearest": "## Velocity Signals Noticed the pattern when reviewing false positives on daily spend. Fraudsters don't spread it out. They hammer the card: three or more trans", "already_in_corpus": false}
+{"unit_id": "B7-0002", "max_cosine": 0.5317, "nearest": "Daily compliance tracked against protocol using spreadsheet with adherence flags and SQLite for trend analysis.", "already_in_corpus": false}
+{"unit_id": "B7-0009", "max_cosine": 0.647, "nearest": "Refund requests arrive within weeks but chargebacks hit 30-60 days later, dispersing fraud signals across transaction logs.", "already_in_corpus": false}
+{"unit_id": "B7-0011", "max_cosine": 0.8024, "nearest": "Spike correlation is tight enough to enable calendar-based predictive alerts", "already_in_corpus": false}
+{"unit_id": "B7-0012", "max_cosine": 0.5433, "nearest": "Site previously handled half this traffic successfully; Tuesday's outage appears anomalous.", "already_in_corpus": false}
+{"unit_id": "B7-0013", "max_cosine": 0.6454, "nearest": "Firmware changes to detection algorithms may have increased actigraphy sampling frequency, driving higher battery consumption.", "already_in_corpus": false}
+{"unit_id": "B7-0017", "max_cosine": 0.4093, "nearest": "Judge drift and blind spots Been running eval loops on model outputs and noticed something systematic. When I feed the judge previous scores alongside new outpu", "already_in_corpus": false}
+{"unit_id": "B7-0026", "max_cosine": 0.5438, "nearest": "dropped 18% after round 1 (April run) - Remaining 12% disagreement isolated to edge cases in \"practical utility\" metric - Two judges still diverged on LLM tone ", "already_in_corpus": false}
+{"unit_id": "B7-0028", "max_cosine": 0.736, "nearest": "Content overlap was discovered after submission through internal review, not detected in pre-flight checks.", "already_in_corpus": false}
+{"unit_id": "B7-0034", "max_cosine": 0.5564, "nearest": "## The problem After power cuts, all sensors come back online at once. Gateway handles normal traffic fine, but the simultaneous reconnection flood causes packe", "already_in_corpus": false}
+{"unit_id": "B7-0043", "max_cosine": 0.5877, "nearest": "Daily variant tweaks were replaced with standard weekly A/B testing snapshots.", "already_in_corpus": false}
+{"unit_id": "B7-0045", "max_cosine": 0.5841, "nearest": "Proposing 0.65 threshold instead of 0.7 to capture borderline cases before full deployment.", "already_in_corpus": false}
+{"unit_id": "B7-0048", "max_cosine": 0.7426, "nearest": "Exit-intent popup captured 34 email signups alongside transactional outcomes.", "already_in_corpus": false}
+{"unit_id": "B7-0055", "max_cosine": 0.6402, "nearest": "Multiple accounts from the same device are treated as coordinated abuse and all are blocked.", "already_in_corpus": false}
+{"unit_id": "B7-0058", "max_cosine": 0.6176, "nearest": "Track failures by strata post-eval; oversample struggling tiers next round.", "already_in_corpus": false}
+{"unit_id": "B7-0059", "max_cosine": 0.7662, "nearest": "Internal rubric tool defaults to previous year's scores; users must scroll past them to see fresh criteria.", "already_in_corpus": false}
+{"unit_id": "B7-0073", "max_cosine": 0.4692, "nearest": "Binary threshold prevents distinguishing borderline outputs (0.68 vs 0.72) that might inform future decisions.", "already_in_corpus": false}
+{"unit_id": "B7-0075", "max_cosine": 0.4927, "nearest": "Digital Europe 2026-EDIH-05 (closes Dec 12) funds European Digital Innovation Hubs at 1.2M per hub with e-commerce integration angle.", "already_in_corpus": false}
+{"unit_id": "B7-0081", "max_cosine": 0.7737, "nearest": "Some orders incorrectly marked shipped while still physically in warehouse inventory.", "already_in_corpus": false}
+{"unit_id": "B7-0087", "max_cosine": 0.5689, "nearest": "Binary threshold prevents distinguishing borderline outputs (0.68 vs 0.72) that might inform future decisions.", "already_in_corpus": false}
+{"unit_id": "B7-0094", "max_cosine": 0.5984, "nearest": "Tracker shows only weekly sums; cannot distinguish consistent versus irregular daily patterns.", "already_in_corpus": false}

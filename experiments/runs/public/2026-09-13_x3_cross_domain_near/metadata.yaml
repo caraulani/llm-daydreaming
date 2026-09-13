@@ -1,0 +1,85 @@
+backend: claude-cli
+config: experiments/exploratory/X3_cross_domain_near/config.yaml
+corpus_sha256: f17c4f0864305f54ce92f3a3422b3ccf65acfbcd84d072ec87e334e2b8b4c571
+cost_usd_total: 29.512699
+created: '2026-09-13T21:16:12+00:00'
+models:
+  cards:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_haiku:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  generator:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  match_gold:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+n_docs: 60
+prompts:
+  cards: f2a7ac1a733d6e0e1d85783c70fec47a8b6bb5e607d9186e4269507c18495f83
+  critic: 49ec635bc7728fd788fefbe89a9c950518d024e087a014a5c78be6a0b3e63232
+  generate_pair: feddedd87fb396dbc5a724189027844ae38afdf09d3fa132f3ea44654c784dc3
+  generate_single: 1547b9759c6bf811367f0455a35373aa570d47ced44250e830f8c74037f0d632
+  match_gold: 09d4576cca8726d24b2f74030fa7c9334d2b4a3284bd3482f9bf03958470a1fc
+run_id: 2026-09-13_x3_cross_domain_near
+seed: 20260915
+stages:
+  cards:
+    cost_usd: 2.1808
+    finished: '2026-09-13T21:22:37+00:00'
+    n_cards: 323
+    n_docs: 60
+  critic:
+    critics:
+    - haiku
+    finished: '2026-09-13T21:40:58+00:00'
+    n_judged: 56
+    n_keep: 41
+    primary: haiku
+  critic_haiku:
+    cost_usd: 1.6218
+    finished: '2026-09-13T21:40:58+00:00'
+    n_judged: 56
+    n_keep: 41
+  dupgate:
+    finished: '2026-09-13T21:41:02+00:00'
+    n_checked: 41
+    n_dup: 0
+    threshold: 0.85
+  embed:
+    finished: '2026-09-13T21:22:49+00:00'
+    model: sentence-transformers/all-MiniLM-L6-v2
+    n: 323
+  generate:
+    cost_usd: 25.6577
+    error: 0
+    finished: '2026-09-13T21:36:04+00:00'
+    malformed: 0
+    n_units: 300
+    none: 244
+    ok: 56
+  match_gold:
+    cost_usd: 0.0524
+    finished: '2026-09-13T21:41:22+00:00'
+    n_judged: 2
+    n_match: 1
+  sample:
+    arms:
+      B1: 100
+      B3: 100
+      B7: 100
+    finished: '2026-09-13T21:22:49+00:00'
+    n_units: 300
+  snapshot:
+    finished: '2026-09-13T21:16:12+00:00'
+    n_docs: 60
+  stats:
+    finished: '2026-09-13T21:41:22+00:00'
+    human_track: false
+    tables: /Users/julian/Desktop/I/dreaming/repo/experiments/runs/public/2026-09-13_x3_cross_domain_near/tables
+visibility: public
