@@ -230,7 +230,9 @@ Everything in this subsection was decided after the seal. The post-hoc distance 
 
 **Exploratory finds.** Of the 36 non-planted survivors, a single rater classified 15 as plausible unplanted inferences, 8 as generic bridge-like syntheses, 6 as restatements and 7 as confabulations. Single rater; not a reportable number until a second rater scores the same items.
 
-**In progress.** Exploratory runs X1 (partner-domain control: each bridge note paired with a mechanism-free filler from the partner's domain) and X3 (cross-domain-near sampler B7 against B1 and B3) are running and will be added under this heading.
+**X1, partner-domain control (run `2026-09-13_x1_partner_control`, same corpus, prompts and models, new seed; measured list-price cost $9.62).** Each of the 24 bridge notes was paired with a filler note from its partner's domain that carries the domain's vocabulary but none of the mechanism's ingredients (arm S1). The oracle set was re-run alongside it. Results (tables T3, T6, T7 of that run): S0 planted recall 9 of 12 (75.0 percent, Wilson 47 to 91), decoys answered 0 of 6; S1 answered on 5 of 24 units and recovered 1 of 12 mechanisms (8.3 percent, Wilson 1 to 35), Fisher one-sided S0 greater than S1, p = 0.0014; B4 single note recovered 3 of 12, Fisher S0 greater than B4, p = 0.0196 in this run (p = 0.11 in the sealed run). Reading: on this corpus the generator does not produce the planted mechanism from one note plus domain cues; it needs the second note. This answers the strongest objection to H1 in the adversarial review (section 2(a) of `research/06`). It does not repair the paraphrase leakage in the four B4 recoveries, which remains a corpus flaw. S1 is not preregistered; it becomes hypothesis H4 in v0.2.
+
+**In progress.** X3 (cross-domain-near sampler B7 against B1 and B3) and X4 (critic ablation with a Sonnet-class critic on the sealed run's generations) will be added under this heading.
 
 ---
 
