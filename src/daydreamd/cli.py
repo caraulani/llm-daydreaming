@@ -37,6 +37,10 @@ def synth(
     ),
     judge_model: str = typer.Option("haiku", help="Paraphrase-leak judge alias (oblique specs)"),
     max_tries: int | None = typer.Option(None, help="Override the regeneration cap"),
+    min_words: int = typer.Option(150, help="Notes shorter than this are regenerated"),
+    resume: bool = typer.Option(
+        False, "--resume", help="Keep notes that already pass every check; rebuild the rest"
+    ),
 ) -> None:
     """Write the synthetic corpus from the hand-authored specs (bridges, decoys, fillers)."""
     from .synth.generate import build_corpus, load_writers
@@ -52,9 +56,12 @@ def synth(
         writers=load_writers(pipeline.resolve(writers)) if writers else None,
         judge_model=judge_model,
         max_tries=max_tries,
+        min_words=min_words,
+        resume=resume,
     )
     typer.echo(
-        f"wrote {manifest['n_notes']} notes to {out} (writers {manifest['writer_model_ids']}, "
+        f"wrote {manifest['n_notes']} notes to {out} (reused {manifest['reused_notes']}, "
+        f"writers {manifest['writer_model_ids']}, "
         f"cost ${manifest['cost_usd']}, leakage failures {manifest['leakage_failures']}, "
         f"leak-judge failures {manifest['leak_judge']['failures']})"
     )

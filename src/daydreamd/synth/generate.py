@@ -88,6 +88,36 @@ def render(template: str, spec: Spec, note: NoteSpec) -> str:
 
 
 TRAILER_PREFIXES = ("Co-Authored-By:", "Claude-Session:", "🤖 Generated with")
+MIN_WORDS = 150
+
+
+def note_acceptable(
+    text: str,
+    golds: list[str],
+    min_words: int,
+    needs_clean_verdict: bool,
+    prior_verdict: str | None,
+) -> tuple[bool, str]:
+    """Decide whether an already-written note can be kept on a resumed build.
+
+    Returns (acceptable, reason) with reason in: ok, leak, em_dash, short, needs_judge,
+    not_clean. ``needs_judge`` means the text passes but the paraphrase-leak judge has not
+    given a CLEAN verdict yet (it never ran, typically because an earlier check failed first);
+    the caller runs the judge once and decides. ``not_clean`` means the judge already said
+    LEAK or errored on this exact text, so the note is regenerated.
+    """
+    if leaked_ngrams(text, golds):
+        return False, "leak"
+    if "\u2014" in text:
+        return False, "em_dash"
+    if len(text.split()) < min_words:
+        return False, "short"
+    if needs_clean_verdict:
+        if prior_verdict is None:
+            return False, "needs_judge"
+        if prior_verdict != "CLEAN":
+            return False, "not_clean"
+    return True, "ok"
 
 
 def clean_note(text: str) -> str:
@@ -107,10 +137,11 @@ def write_note(
     golds: list[str],
     max_tries: int = MAX_TRIES,
     leak_judge: tuple[Backend, str, str, dict[str, str]] | None = None,
+    min_words: int = MIN_WORDS,
 ) -> dict[str, Any]:
-    """Write one note, regenerating on a 6-gram leak, an em dash, or (bridge notes with a
-    judge) a LEAK verdict from the paraphrase-leak judge. ``leak_judge`` is
-    (backend, model, template, gold-for-this-bridge) or None."""
+    """Write one note, regenerating on a 6-gram leak, an em dash, a note under ``min_words``,
+    or (bridge notes with a judge) a LEAK verdict from the paraphrase-leak judge.
+    ``leak_judge`` is (backend, model, template, gold-for-this-bridge) or None."""
     prompt = render(template, spec, note)
     tries: list[dict[str, Any]] = []
     for attempt in range(1, max_tries + 1):
@@ -120,7 +151,7 @@ def write_note(
             text = "---\nname: " + note.note_id + "\n---\n" + text
         leaks = leaked_ngrams(text, golds)
         style = ["em_dash"] if "\u2014" in text else []
-        if len(text.split()) < 150:
+        if len(text.split()) < min_words:
             style.append("short")
         words = len(text.split())
         record: dict[str, Any] = {
@@ -151,8 +182,16 @@ def build_corpus(
     writers: list[Writer] | None = None,
     judge_model: str = "haiku",
     max_tries: int | None = None,
+    min_words: int = MIN_WORDS,
+    resume: bool = False,
 ) -> dict[str, Any]:
     """Write every note in the plan and freeze the corpus manifest.
+
+    With ``resume`` and an existing ``manifest.json`` in ``out_dir``, notes that already pass
+    every check (6-gram, em dash, ``min_words``, and a CLEAN leak-judge verdict for bridge notes
+    on oblique specs) are kept as they are; a bridge note that passes the text checks but was
+    never judged is judged once on its existing text; everything else is regenerated. Only new
+    model calls count toward ``cost_usd``; the previous build's cost is kept as ``cost_usd_prior``.
 
     v0.1 behaviour (single writer, 6-gram check, 3 tries) is unchanged when the spec has no
     obliqueness fields and no writers are given. Oblique specs add the paraphrase-leak judge on
@@ -168,26 +207,95 @@ def build_corpus(
     plan = assign_writers(plan, list(families))
     tries_cap = max_tries or (MAX_TRIES_OBLIQUE if spec.oblique else MAX_TRIES)
     judge_template, judge_sha = load_prompt("leak_judge") if spec.oblique else ("", "")
+    notes_dir = out_dir / "notes"
+    prior: dict[str, Any] = {}
+    prior_docs: dict[str, dict[str, Any]] = {}
+    if resume and (out_dir / "manifest.json").exists():
+        prior = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
+        prior_docs = {d["id"]: d for d in prior.get("docs", [])}
+
+    def _judge_for(n: NoteSpec) -> tuple[Backend, str, str, dict[str, str]] | None:
+        if spec.oblique and n.kind == "bridge" and n.bridge_id:
+            return (backend, judge_model, judge_template, gold[n.bridge_id])
+        return None
 
     def _write(n: NoteSpec) -> dict[str, Any]:
         w = families.get(n.writer_family or "")
         be, mo = (w.backend, w.model) if w else (backend, model)
-        lj = None
-        if spec.oblique and n.kind == "bridge" and n.bridge_id:
-            lj = (backend, judge_model, judge_template, gold[n.bridge_id])
-        return write_note(be, mo, template, spec, n, golds, max_tries=tries_cap, leak_judge=lj)
+        return write_note(
+            be,
+            mo,
+            template,
+            spec,
+            n,
+            golds,
+            max_tries=tries_cap,
+            leak_judge=_judge_for(n),
+            min_words=min_words,
+        )
 
-    results = pmap(_write, plan, concurrency)
-    notes_dir = out_dir / "notes"
+    def _process(n: NoteSpec) -> dict[str, Any]:
+        """Reuse an acceptable existing note, judge-then-reuse an unjudged one, else rewrite."""
+        note_path = notes_dir / f"{n.note_id}.md"
+        pd = prior_docs.get(n.note_id)
+        if pd is None or not note_path.exists():
+            return _write(n)
+        text = note_path.read_text(encoding="utf-8")
+        lj = _judge_for(n)
+        prior_verdict = (pd.get("leak_judge") or {}).get("final")
+        ok, reason = note_acceptable(text, golds, min_words, lj is not None, prior_verdict)
+        judged: dict[str, Any] | None = None
+        if reason == "needs_judge" and lj is not None:
+            jb, jm, jt, g = lj
+            judged = judge_leak(jb, jm, jt, text, g)
+            ok = judged["verdict"] == "CLEAN"
+            reason = "ok" if ok else "not_clean"
+        if not ok:
+            return _write(n)
+        return {
+            "note": n,
+            "text": text,
+            "tries": [],
+            "ok": True,
+            "reused": True,
+            "prior": pd,
+            "judge_now": judged,
+        }
+
+    results = pmap(_process if prior_docs else _write, plan, concurrency)
     notes_dir.mkdir(parents=True, exist_ok=True)
     manifest_docs = []
     cost = 0.0
-    model_ids: set[str] = set()
-    judge_ids: set[str] = set()
+    model_ids: set[str] = set(prior.get("writer_model_ids", []))
+    judge_ids: set[str] = set((prior.get("leak_judge") or {}).get("model_ids", []))
     failed = []
     leak_failed = []
+    reused_notes = 0
     for r in results:
         n: NoteSpec = r["note"]
+        if r.get("reused"):
+            reused_notes += 1
+            pd = r["prior"]
+            judged = r.get("judge_now")
+            doc = {
+                **pd,
+                "sha256": sha256_text(r["text"]),
+                "words": len(r["text"].split()),
+                "reused": True,
+                "tries": int(pd.get("tries", 0)) + (1 if judged else 0),
+            }
+            if judged:
+                if judged.get("usage"):
+                    cost += judged["usage"]["cost_usd"]
+                    judge_ids.add(judged["usage"]["model_id"])
+                prev = pd.get("leak_judge") or {}
+                doc["leak_judge"] = {
+                    "final": judged["verdict"],
+                    "evidence": judged.get("evidence"),
+                    "verdicts": list(prev.get("verdicts") or []) + [judged["verdict"]],
+                }
+            manifest_docs.append(doc)
+            continue
         (notes_dir / f"{n.note_id}.md").write_text(r["text"], encoding="utf-8")
         for t in r["tries"]:
             cost += t["usage"]["cost_usd"]
@@ -241,7 +349,15 @@ def build_corpus(
             "failures": leak_failed,
         },
         "max_tries": tries_cap,
+        "min_words": min_words,
         "cost_usd": round(cost, 4),
+        "cost_usd_prior": prior.get("cost_usd") if prior else None,
+        "resumed_from": (
+            {"generated_at": prior.get("generated_at"), "corpus_sha256": prior.get("corpus_sha256")}
+            if prior
+            else None
+        ),
+        "reused_notes": reused_notes,
         "corpus_sha256": sha256_text("\n".join(sorted(d["sha256"] for d in manifest_docs))),
         "docs": sorted(manifest_docs, key=lambda d: d["id"]),
     }

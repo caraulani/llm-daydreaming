@@ -334,3 +334,107 @@ def test_v01_decision_rule_unchanged_without_prereg_key(tmp_path: Path):
     assert "signal requires H1 and H2 both passing" in decision
     assert (run.path / "critic_haiku.jsonl").exists() and (run.path / "critic.jsonl").exists()
     assert run.read_meta()["models"]["critic"]["model_id"] == "fake-haiku"
+
+
+def test_note_acceptable_reasons():
+    from daydreamd.synth.generate import note_acceptable
+
+    golds = ["gold connection sentence one two three four five six"]
+    long_text = " ".join(f"fact {i} noted" for i in range(60))
+    assert note_acceptable(long_text, golds, 150, False, None) == (True, "ok")
+    assert (
+        note_acceptable(
+            long_text + " gold connection sentence one two three", golds, 150, False, None
+        )[1]
+        == "leak"
+    )
+    assert note_acceptable(long_text + " a—b", golds, 150, False, None)[1] == "em_dash"
+    assert note_acceptable("too short", golds, 150, False, None)[1] == "short"
+    assert note_acceptable(long_text, golds, 150, True, None) == (False, "needs_judge")
+    assert note_acceptable(long_text, golds, 150, True, "LEAK") == (False, "not_clean")
+    assert note_acceptable(long_text, golds, 150, True, "CLEAN") == (True, "ok")
+
+
+class CountingFake(FakeBackend):
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def complete(self, prompt: str, *, model: str) -> Completion:
+        self.calls += 1
+        return super().complete(prompt, model=model)
+
+
+def test_build_corpus_resume_reuses_acceptable_notes(tmp_path: Path):
+    from daydreamd.core.io import sha256_text
+
+    spec = _spec(True)
+    golds = ["gold connection sentence one two three four five six"]
+    plan = spec.note_plan()
+    notes_dir = tmp_path / "notes"
+    notes_dir.mkdir()
+
+    def words(n: int) -> str:
+        return " ".join(f"fact {i} noted" for i in range(n))
+
+    texts = {n.note_id: "---\nname: x\n---\n" + words(60) + "\n" for n in plan}  # 180 words
+    texts["br01-b"] = "---\nname: x\n---\n" + words(40) + "\n"  # 120 words: short under 150
+    texts["br01-a"] = texts["br01-a"] + golds[0] + "\n"  # a 6-gram leak
+    docs = []
+    for n in plan:
+        notes_dir.joinpath(f"{n.note_id}.md").write_text(texts[n.note_id], encoding="utf-8")
+        doc = {
+            "id": n.note_id,
+            "domain": n.domain,
+            "kind": n.kind,
+            "bridge_id": n.bridge_id,
+            "decoy_id": n.decoy_id,
+            "sha256": sha256_text(texts[n.note_id]),
+            "words": len(texts[n.note_id].split()),
+            "tries": 2,
+            "leaks_final": [],
+            "writer_family": None,
+            "writer_model_id": "fake-prior",
+        }
+        if n.kind == "bridge":
+            final = None if n.note_id in ("br01-b", "br02-a") else "CLEAN"
+            doc["leak_judge"] = {"final": final, "evidence": "", "verdicts": [final]}
+        docs.append(doc)
+    write_json(
+        tmp_path / "manifest.json",
+        {
+            "generated_at": "2026-09-13T00:00:00+00:00",
+            "corpus_sha256": "prior-sha",
+            "cost_usd": 1.23,
+            "writer_model_ids": ["fake-prior"],
+            "leak_judge": {"enabled": True, "model_ids": ["fake-prior"], "failures": []},
+            "docs": docs,
+        },
+    )
+    be = CountingFake()
+    manifest = build_corpus(spec, be, tmp_path, resume=True, min_words=100)
+    got = {d["id"]: d for d in manifest["docs"]}
+    # short-under-150 bridge note is fine under 100: judged once now, then reused
+    assert got["br01-b"]["reused"] is True and got["br01-b"]["tries"] == 3
+    assert got["br01-b"]["leak_judge"]["final"] == "CLEAN"
+    assert got["br01-b"]["writer_model_id"] == "fake-prior"
+    # unjudged bridge note: judged once, reused
+    assert got["br02-a"]["reused"] is True and got["br02-a"]["tries"] == 3
+    assert got["br02-a"]["leak_judge"]["verdicts"] == [None, "CLEAN"]
+    # leaky note is regenerated
+    assert not got["br01-a"].get("reused") and got["br01-a"]["writer_model_id"] == "fake-haiku"
+    assert not leaked_ngrams_in(notes_dir / "br01-a.md", golds)
+    # everything else reused untouched
+    assert got["fl01"]["reused"] is True and got["fl01"]["tries"] == 2
+    assert manifest["reused_notes"] == len(plan) - 1
+    # only new calls counted: 2 judge calls + 1 write + 1 judge for the rewrite
+    assert be.calls == 4
+    assert manifest["cost_usd_prior"] == 1.23 and manifest["cost_usd"] == 0.0
+    assert manifest["resumed_from"]["corpus_sha256"] == "prior-sha"
+    assert manifest["min_words"] == 100
+    assert "fake-prior" in manifest["writer_model_ids"]
+
+
+def leaked_ngrams_in(path: Path, golds: list[str]) -> list[str]:
+    from daydreamd.synth.leakage import leaked_ngrams
+
+    return leaked_ngrams(path.read_text(encoding="utf-8"), golds)

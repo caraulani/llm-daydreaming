@@ -19,8 +19,10 @@ typecheck:
 
 SPEC ?= data/synth/v0.1
 WRITERS ?=
+MIN_WORDS ?= 150
+RESUME ?=
 synth:
-	$(UV) run daydreamd synth --out $(SPEC) $(if $(WRITERS),--writers $(WRITERS),)
+	$(UV) run daydreamd synth --out $(SPEC) --min-words $(MIN_WORDS) $(if $(WRITERS),--writers $(WRITERS),) $(if $(RESUME),--resume,)
 
 # End-to-end on the committed synthetic corpus with tiny arms. Real model calls.
 smoke:
