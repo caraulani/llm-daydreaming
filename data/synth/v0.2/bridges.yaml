@@ -1,0 +1,596 @@
+# Planted bridges, corpus v0.2 (ground truth by construction). Authored by the experimenter
+# with Claude as a disclosed writing assistant, 2026-09-13, after the v0.1 review
+# (research/06-adversarial-review-v0.1-results-2026-09-13.md) and before any v0.2 note existed.
+#
+# What changed from v0.1: 24 bridges instead of 12, every one of the 15 domain pairs appears at
+# least once and the 9 pairs between {ecom, grants, iot} and {mleval, fraud, health} appear twice,
+# so every domain carries exactly 8 bridge notes. Ingredients are OBSERVATIONS only: no
+# conclusion, no mechanism name, no diagnostic verb. Two fields are new: `forbidden_phrases_a`
+# and `forbidden_phrases_b` (the builder must add them to the writer's forbidden list for that
+# side) and `one_side_test` (what a reader of one note alone can conclude; the leak judge in
+# prompts/leak_judge.md enforces it).
+persona: >
+  A solo builder who runs a small e-commerce store, evaluates LLM systems for clients, handles
+  payments fraud on a calling app, follows a personal health protocol, applies for EU grants,
+  and tinkers with IoT sensors in a workshop. Notes are terse working memory, not essays.
+domains:
+  ecom: e-commerce store operations
+  mleval: evaluation of LLM systems
+  fraud: payments fraud on a consumer app
+  health: personal health protocols and tracking
+  grants: EU grant fundraising
+  iot: hardware and IoT sensors in a workshop
+bridges:
+  - id: br01
+    domain_a: ecom
+    domain_b: fraud
+    hidden_mechanism: refund clusters right after promo launches are stolen-card validation runs
+    gold_connection: >-
+      Refund requests clustering within two days of a promo launch, on orders paid with newly
+      added cards, are stolen-card validation runs, so the refund queue is the earliest fraud
+      signal the store has.
+    gold_implication: >-
+      Pull refunds requested within 48 hours of each promo launch, filter to payment methods
+      under 7 days old, and check how many of those orders became chargebacks 30 to 60 days later.
+    ingredients_a:
+      - refund requests bunch up in the two days after each promo code goes live, three promos in a row
+      - most of those orders were small, under 15 euros, and paid with a card added at checkout
+      - support approves refunds from the queue without looking at anything about the payment method
+    ingredients_b:
+      - a batch of new accounts each made one purchase under 15 euros, paid with a card added the same day
+      - those charges came back as chargebacks five to seven weeks later
+      - the processor's note on the batch said the cards had been reported stolen
+    forbidden_phrases_a: [card testing, stolen, fraud, chargeback, validation, ring]
+    forbidden_phrases_b: [refund, promo, discount, card testing, validation run]
+    one_side_test: >-
+      A alone reads as buyer's remorse after promos; B alone reads as a chargeback batch. Neither
+      note says small purchases on new cards are a test of whether the card works.
+  - id: br02
+    domain_a: ecom
+    domain_b: fraud
+    hidden_mechanism: many customer names shipping to one address is a reshipping drop point for stolen-card goods
+    gold_connection: >-
+      One delivery address receiving orders under many different customer names is a reshipping
+      drop point for goods bought with stolen cards, the same pattern the processor flags as
+      freight-forwarder addresses.
+    gold_implication: >-
+      Count distinct customer names per shipping address over the last 90 days and hold any
+      address above five for manual review before dispatch.
+    ingredients_a:
+      - one apartment address received orders under 14 different customer names this month, all express shipping
+      - the items were all resellable electronics accessories
+      - the address is in a city the store rarely ships to
+    ingredients_b:
+      - the accounts the processor flagged last quarter shipped their orders to a handful of addresses
+      - three of those addresses appear on a public list of parcel-forwarding companies
+      - the cardholders who disputed the charges live in other countries
+    forbidden_phrases_a: [reship, mule, drop point, forwarder, fraud, stolen]
+    forbidden_phrases_b: [customer names, express, reship, drop point, one address]
+    one_side_test: >-
+      A alone reads as a bulk buyer or a shared building; B alone reads as a processor flag on
+      addresses. Neither says many-names-one-address is the forwarding signature.
+  - id: br03
+    domain_a: grants
+    domain_b: mleval
+    hidden_mechanism: showing an evaluator the previous score pulls the new score toward it
+    gold_connection: >-
+      An evaluator who sees a previous score moves the new score toward it, whether the
+      evaluator is a grant panel reading last round's number or an LLM judge whose prompt
+      echoes the last iteration's score.
+    gold_implication: >-
+      Re-run the internal self-scoring on last month's drafts with prior scores hidden and
+      compare the two sets of numbers.
+    ingredients_a:
+      - the resubmission that quoted last year's 4.2 in the cover letter came back 4.6
+      - the resubmission that did not quote its old score came back 3.9, reviewers called the two drafts similar in quality
+      - the internal self-scoring sheet shows last round's number in the first column before the criteria
+    ingredients_b:
+      - identical outputs scored 7.9 in the July run and 7.1 in the August run, same model snapshot
+      - the August prompt dropped one field, the one that carried the previous iteration's score
+      - nothing else in the prompt or the outputs changed between the runs
+    forbidden_phrases_a: [anchor, anchoring, bias, primed, influence]
+    forbidden_phrases_b: [anchor, anchoring, bias, primed, grant, reviewer]
+    one_side_test: >-
+      A alone reads as two resubmissions with different outcomes; B alone reads as a prompt
+      change that moved scores. Neither says a visible prior score drags the new one.
+  - id: br04
+    domain_a: grants
+    domain_b: mleval
+    hidden_mechanism: the criterion listed first gets the most weight from evaluators
+    gold_connection: >-
+      Evaluators weight the first-listed criterion most, so the order of a rubric changes the
+      ranking: grant panels write most about the first section and LLM judges spread scores
+      widest on the first criterion.
+    gold_implication: >-
+      Score the same ten outputs with the rubric criteria in two different orders and compare
+      which outputs rank top under each.
+    ingredients_a:
+      - the evaluation summary spent four paragraphs on the excellence section and two lines each on impact and implementation
+      - the call template lists excellence first, impact second, implementation third
+      - the score spread across applicants is largest on excellence
+    ingredients_b:
+      - the rubric lists accuracy, tone, brevity, in that order
+      - accuracy scores range from 3 to 9 across outputs; tone and brevity scores sit between 6 and 8 for almost everything
+      - the client wants tone to matter most
+    forbidden_phrases_a: [primacy, order effect, first-listed, weight]
+    forbidden_phrases_b: [primacy, order effect, first-listed, weight, panel]
+    one_side_test: >-
+      A alone reads as a reviewer who cares about excellence; B alone reads as accuracy being
+      the discriminating criterion. Neither says list position drives weight.
+  - id: br05
+    domain_a: iot
+    domain_b: health
+    hidden_mechanism: a fixed receiving window fails when the sending schedule is relative to the last event and drifts
+    gold_connection: >-
+      A schedule set relative to the previous event drifts later every cycle and falls out of a
+      fixed window, whether the window is a gateway's wake slot or a morning injection hour.
+    gold_implication: >-
+      Set the dose reminder to a fixed clock time for two weeks and count doses inside the
+      window against the previous two weeks.
+    ingredients_a:
+      - the gateway wakes at :00 and :30 for twenty seconds to receive packets
+      - each sensor sleeps for thirty minutes measured from its own last transmission
+      - missed packets climb through the day and reset to zero after the nightly reboot
+    ingredients_b:
+      - the protocol says the injection goes in between 07:00 and 08:00
+      - the reminder fires 24 hours after the last confirmed dose
+      - "confirmed dose times this week: 07:05, 07:20, 07:40, 08:05, 08:30"
+    forbidden_phrases_a: [drift, jitter, fixed clock, wall-clock, relative schedule]
+    forbidden_phrases_b: [drift, fixed clock, relative, schedule slips, window]
+    one_side_test: >-
+      A alone reads as packet loss with a nightly reset; B alone reads as doses getting later.
+      Neither names the relative-versus-fixed schedule mismatch.
+  - id: br06
+    domain_a: iot
+    domain_b: health
+    hidden_mechanism: a step change that coincides with an instrument change is the instrument, not the world
+    gold_connection: >-
+      A sudden step in a time series on the day the measuring device changed is a change in
+      the device, not in the thing measured; revert the device to check.
+    gold_implication: >-
+      Wear the old ring for three nights and compare the deep-sleep numbers to the new ring's
+      three nights.
+    ingredients_a:
+      - shed humidity readings jumped from 52 to 60 percent on 3 September and stayed there
+      - the sensor enclosure was swapped for the new vented one on 3 September
+      - the weather station two streets away shows no change that week
+    ingredients_b:
+      - deep sleep went from about 70 minutes a night to about 95 minutes on 8 September
+      - the ring was replaced with the newer model on 8 September
+      - bedtime, caffeine cutoff and supplements were unchanged that week
+    forbidden_phrases_a: [instrument, artefact, artifact, calibration, the sensor caused]
+    forbidden_phrases_b: [instrument, artefact, artifact, device change caused, measurement]
+    one_side_test: >-
+      A alone reads as a humidity change coinciding with maintenance; B alone reads as a
+      welcome sleep improvement. Neither says the step is the device.
+  - id: br07
+    domain_a: ecom
+    domain_b: mleval
+    hidden_mechanism: a number measured on the same data it was tuned against is inflated; measure on later data
+    gold_connection: >-
+      A lift or a score measured on the same week or the same items the system was tuned
+      against overstates the effect; the honest number comes from data that arrived afterwards.
+    gold_implication: >-
+      Recompute the landing page lift on the week after tuning stopped and recompute the eval
+      score on tickets from the following month.
+    ingredients_a:
+      - the landing variant was adjusted every day of week 36 against week 36 traffic
+      - the reported lift, 12 percent, is from week 36
+      - week 37, with no changes, showed a lift of 1 percent
+    ingredients_b:
+      - the eval set was assembled from the same client tickets the prompt was tuned on
+      - the score on that set is 91
+      - a fresh batch of tickets from the following month scored 74 with the same prompt
+    forbidden_phrases_a: [leakage, holdout, overfit, contamination, in-sample]
+    forbidden_phrases_b: [leakage, holdout, overfit, contamination, in-sample, temporal split]
+    one_side_test: >-
+      A alone reads as a lift that faded; B alone reads as a score that dropped on new data.
+      Neither states that tuning data cannot be the measurement data.
+  - id: br08
+    domain_a: ecom
+    domain_b: mleval
+    hidden_mechanism: a metric computed only on cases that completed excludes the failures and inflates itself
+    gold_connection: >-
+      Both metrics are computed only on cases that reached the end, so the failures never enter
+      the denominator: reviews are requested only after delivery, eval items come only from
+      conversations that resolved.
+    gold_implication: >-
+      Recompute the review average including undelivered orders as missing and recompute the
+      pass rate including abandoned conversations as failures.
+    ingredients_a:
+      - review requests are sent only after the carrier confirms delivery
+      - orders that were lost or returned by the carrier never get a review request
+      - the average rating is 4.6 and the lost-parcel rate last month was 6 percent
+    ingredients_b:
+      - the eval items are drawn from conversations that ended with a resolved flag
+      - conversations the user abandoned mid-way are not logged to the eval store
+      - the pass rate is 88 percent; the abandonment rate in production is 19 percent
+    forbidden_phrases_a: [survivorship, selection bias, denominator, sampling bias]
+    forbidden_phrases_b: [survivorship, selection bias, denominator, sampling bias, review]
+    one_side_test: >-
+      A alone reads as a review workflow with a lost-parcel figure; B alone reads as an eval
+      store with an abandonment figure. Neither says the metric excludes its own failures.
+  - id: br09
+    domain_a: grants
+    domain_b: fraud
+    hidden_mechanism: consecutive identifiers across entities that claim to be independent expose one operator
+    gold_connection: >-
+      Identifiers that run in sequence across supposedly independent parties expose a single
+      operator, whether the identifiers are company registration numbers on two proposals or
+      phone numbers across three accounts.
+    gold_implication: >-
+      Run an adjacency check on registration numbers across this call's applicants and on
+      phone numbers across new signups, and list any run of three or more consecutive values.
+    ingredients_a:
+      - two proposals from different companies contain the same typo in the budget table heading
+      - their company registration numbers are 2 apart
+      - both list an incorporation date in the same week
+    ingredients_b:
+      - the forty destination numbers from last week's incident differ only in the last two digits, ascending
+      - the three accounts that placed them were created within one hour
+      - each account used a different name and a different email provider
+    forbidden_phrases_a: [same operator, linked, collusion, sequential, adjacency]
+    forbidden_phrases_b: [same operator, linked, sequential, adjacency, one person]
+    one_side_test: >-
+      A alone reads as two similar proposals; B alone reads as an incident with odd numbers.
+      Neither says consecutive identifiers reveal one hand behind separate fronts.
+  - id: br10
+    domain_a: grants
+    domain_b: fraud
+    hidden_mechanism: work done in the last hour before a hard cutoff is measurably worse
+    gold_connection: >-
+      Decisions and submissions made in the final hour before a hard cutoff are measurably
+      worse: manual reviews closed at the SLA deadline get reversed on appeal more often, and
+      proposals submitted in the deadline hour score lower and contain more errors.
+    gold_implication: >-
+      Move the internal submission target 24 hours before the portal deadline and move the
+      review SLA alert to two hours before the cutoff, then compare error and reversal rates.
+    ingredients_a:
+      - "proposals we submitted inside the last hour before the portal closed: three of three had formatting errors flagged by the checker"
+      - the two submitted a day early had none
+      - the last-hour ones scored 0.7 lower on average
+    ingredients_b:
+      - manual review holds closed in the last hour before the 24-hour SLA are reversed on appeal three times as often as earlier decisions
+      - the queue backs up toward the SLA cutoff every afternoon
+      - reviewers say they clear whatever is left at 16:00
+    forbidden_phrases_a: [time pressure, rushed, deadline effect, quality drops]
+    forbidden_phrases_b: [time pressure, rushed, deadline effect, quality drops, proposal]
+    one_side_test: >-
+      A alone reads as a formatting problem; B alone reads as an appeals statistic. Neither
+      says work at the cutoff is systematically worse.
+  - id: br11
+    domain_a: mleval
+    domain_b: health
+    hidden_mechanism: improvement after selecting the worst cases is partly reversion to the average
+    gold_connection: >-
+      Improvement measured after picking the worst cases is partly reversion to the average,
+      whether the cases are the twenty lowest-scoring eval items or the week with the highest
+      resting heart rate of the year.
+    gold_implication: >-
+      Re-run the untouched items alongside the tuned ones, and compare the heart-rate change
+      against a start date chosen at random rather than the worst week.
+    ingredients_a:
+      - the twenty lowest-scoring items were picked out and the prompt was tuned for them
+      - on the re-run those twenty improved by 30 percent
+      - twenty other items that were not touched also moved, by 15 percent
+    ingredients_b:
+      - the protocol started in the week resting heart rate was highest all year, 68
+      - two weeks later it read 62
+      - the twelve-month average before the protocol was 63
+    forbidden_phrases_a: [regression to the mean, reversion, noise, random variation]
+    forbidden_phrases_b: [regression to the mean, reversion, noise, random variation, selected on]
+    one_side_test: >-
+      A alone reads as a tuning result with an odd control movement; B alone reads as a
+      protocol that worked. Neither says starting from an extreme guarantees apparent gain.
+  - id: br12
+    domain_a: ecom
+    domain_b: iot
+    hidden_mechanism: many senders acting in the same second overwhelm a receiver that handles the same total spread out
+    gold_connection: >-
+      A receiver that copes with the total load spread over a minute fails when every sender
+      acts in the same second, whether the senders are 200 sensors after a power restore or
+      38,000 subscribers opening one email.
+    gold_implication: >-
+      Send the next campaign in ten batches over thirty minutes and compare checkout errors
+      against the last single-send campaign.
+    ingredients_a:
+      - the flash-sale email went to all 38,000 subscribers at 14:00:00
+      - checkout returned errors from 14:00 to 14:20
+      - earlier that week the site handled twice the hourly average without errors
+    ingredients_b:
+      - after the power cut, all 200 sensors reconnected within the same second
+      - the gateway log shows 180 dropped packets in that second
+      - normal traffic is about 200 messages spread across each minute, no drops
+    forbidden_phrases_a: [thundering herd, stagger, batch the send, spread out, rate]
+    forbidden_phrases_b: [thundering herd, stagger, backoff, jitter, spread out, email]
+    one_side_test: >-
+      A alone reads as a checkout outage; B alone reads as reconnect drops. Neither says the
+      same-second concentration, not the total, is the cause.
+  - id: br13
+    domain_a: ecom
+    domain_b: grants
+    hidden_mechanism: cash gaps come from the lag between doing the work and receiving payment, not from margin
+    gold_connection: >-
+      Both cash squeezes come from receipt lag against expense cadence, not from
+      profitability: marketplace payouts land 14 days after sales while ad spend bills daily,
+      and the grant pays most of its money months after the costs are incurred.
+    gold_implication: >-
+      Build a week-by-week cash model that places each inflow at its actual receipt date and
+      see which weeks go negative under both schedules.
+    ingredients_a:
+      - marketplace payouts arrive 14 days after each sale
+      - ad spend is charged to the card every day
+      - the account went overdrawn twice this quarter in weeks when sales were up
+    ingredients_b:
+      - the grant pays 40 percent on signature and the remaining 60 percent three months after the final report is accepted
+      - salaries for the two project hires go out monthly from month one
+      - the project is profitable on paper over its full 18 months
+    forbidden_phrases_a: [cash flow, liquidity, lag, timing mismatch, working capital]
+    forbidden_phrases_b: [cash flow, liquidity, lag, timing mismatch, working capital, payout]
+    one_side_test: >-
+      A alone reads as an overdraft problem; B alone reads as a payment schedule. Neither
+      says the two are one problem of receipt timing.
+  - id: br14
+    domain_a: grants
+    domain_b: iot
+    hidden_mechanism: the absence of an expected event is never alerted, only errors are
+    gold_connection: >-
+      Nothing watches for things that should have happened and did not: a partner deliverable
+      six weeks late and a sensor that went silent both went unnoticed because only submitted
+      items and only error messages are tracked.
+    gold_implication: >-
+      Add a weekly check that lists every deliverable and every sensor with no event since its
+      expected date and sends that list even when it is empty.
+    ingredients_a:
+      - a partner's month-two deliverable was six weeks late before anyone asked about it
+      - the project tracker only shows items once they are submitted
+      - the partner's last message before the silence said everything was on track
+    ingredients_b:
+      - a sensor stopped sending on 20 August and the flat line was noticed on 29 August
+      - its last message reported status ok
+      - alerts are configured for error codes and out-of-range values only
+    forbidden_phrases_a: [heartbeat, dead man, missing event, absence, silence is not tracked]
+    forbidden_phrases_b: [heartbeat, dead man, missing event, absence, deliverable]
+    one_side_test: >-
+      A alone reads as a late partner; B alone reads as a sensor outage found late. Neither
+      says the monitoring only sees presence, never absence.
+  - id: br15
+    domain_a: mleval
+    domain_b: fraud
+    hidden_mechanism: once a scoring rule is disclosed, the people scored against it optimise for the rule instead of the goal
+    gold_connection: >-
+      A disclosed rule becomes the target: after the rubric was shared, prompts scored higher
+      without users seeing improvement, and after the velocity rule was explained, the rings
+      settled at exactly one purchase under the limit.
+    gold_implication: >-
+      Hold back one criterion from the shared rubric and one velocity rule from support, and
+      compare movement on the withheld and disclosed ones over the next month.
+    ingredients_a:
+      - the full rubric was shared with the client's prompt team in July
+      - their prompts score 15 points higher since July
+      - the user satisfaction survey for the same period is flat
+    ingredients_b:
+      - support was told in August that more than three purchases in ten minutes triggers a hold
+      - since then the flagged accounts make exactly two purchases every ten minutes
+      - the total spend per account per hour is unchanged
+    forbidden_phrases_a: [Goodhart, gaming, game the, teach to the test, optimise for the metric]
+    forbidden_phrases_b: [Goodhart, gaming, game the, adapted to the rule, rubric]
+    one_side_test: >-
+      A alone reads as scores rising without satisfaction; B alone reads as a behaviour change
+      after a briefing. Neither says disclosure turned the rule into a target.
+  - id: br16
+    domain_a: fraud
+    domain_b: health
+    hidden_mechanism: a total cap does not prevent bursts; a per-window limit does
+    gold_connection: >-
+      A limit on the total over a long period does not stop a burst inside it: the daily spend
+      cap missed nine purchases in six minutes, and the weekly dose maximum permits two doses
+      in one morning after a missed day.
+    gold_implication: >-
+      Add a rule of at most one dose per 20-hour window to the tracker and count how often it
+      would have fired over the last month.
+    ingredients_a:
+      - a card made nine purchases in six minutes and stayed under the daily spend cap
+      - the daily cap was the only rule on that account
+      - legitimate accounts almost never make more than two purchases in ten minutes
+    ingredients_b:
+      - the protocol states a maximum of seven doses per week and nothing about spacing
+      - skipped Tuesday, took two on Wednesday morning; skipped Friday, took two on Saturday morning
+      - both weeks ended at seven, the tracker shows a weekly total only
+    forbidden_phrases_a: [rate limit, velocity, per window, burst rule]
+    forbidden_phrases_b: [rate limit, velocity, per window, burst, spacing rule, flag]
+    one_side_test: >-
+      A alone reads as a cap that was not exceeded; B alone reads as a week that hit its
+      number. Neither says a total cap cannot see a burst.
+  - id: br17
+    domain_a: ecom
+    domain_b: health
+    hidden_mechanism: people quit at the point where effort has been paid but results have not yet appeared
+    gold_connection: >-
+      Churn at the third billing cycle and dropout around day twenty are the same point: the
+      effort has been paid and the visible result has not arrived yet, so people leave right
+      before they would have seen it.
+    gold_implication: >-
+      Send a "what to expect by week three" message on day ten to the next subscriber cohort
+      and compare cycle-three cancellations with the previous cohort.
+    ingredients_a:
+      - "cancellations by billing cycle: first 4 percent, second 6 percent, third 19 percent, fourth 5 percent"
+      - nothing is sent to subscribers between deliveries
+      - customers who cancel at cycle three rarely return
+    ingredients_b:
+      - most people on the forum report stopping around day 20
+      - the first visible change is usually reported between day 30 and day 35
+      - the protocol guide does not say when to expect anything
+    forbidden_phrases_a: [expectation, lag, quit before results, retention curve, pay-off]
+    forbidden_phrases_b: [expectation, lag, quit before results, churn, pay-off]
+    one_side_test: >-
+      A alone reads as a churn table; B alone reads as forum anecdotes. Neither says the
+      dropout point sits just before the result point.
+  - id: br18
+    domain_a: ecom
+    domain_b: health
+    hidden_mechanism: a new behaviour attached to an existing fixed routine is kept far more often than one scheduled on its own
+    gold_connection: >-
+      Behaviours tied to an existing fixed routine persist: subscribers whose delivery lands
+      on their grocery day cancel less, and the dose taken with the morning coffee is missed
+      far less than the evening one.
+    gold_implication: >-
+      Offer new subscribers a delivery day matched to their stated shopping day and compare
+      six-month retention with the default-day cohort.
+    ingredients_a:
+      - subscribers who chose a delivery day that matches the shopping day they gave at signup cancel about half as often
+      - the default delivery day is Wednesday for everyone who does not choose
+      - most people do not choose
+    ingredients_b:
+      - the morning dose is taken with coffee and has been missed twice in three months
+      - the evening dose has no fixed companion and has been missed eleven times
+      - both doses have the same phone reminder
+    forbidden_phrases_a: [habit, routine anchoring, piggyback, habit stacking]
+    forbidden_phrases_b: [habit, routine anchoring, piggyback, habit stacking, delivery day]
+    one_side_test: >-
+      A alone reads as a delivery-day preference; B alone reads as evening forgetfulness.
+      Neither says attachment to an existing fixed event is what keeps the behaviour.
+  - id: br19
+    domain_a: iot
+    domain_b: mleval
+    hidden_mechanism: a measuring instrument drifts slowly and silently; a fixed reference re-checked on a schedule catches it
+    gold_connection: >-
+      An LLM judge ages like a sensor: even with the snapshot pinned, the same fifty outputs
+      score differently three months apart, so it needs what the sensors get, a fixed reference
+      checked on a schedule with an alarm on divergence.
+    gold_implication: >-
+      Re-score the same fifty reference outputs every week and alert when the mean moves more
+      than two percent.
+    ingredients_a:
+      - the temperature sensors read about 0.3 degrees higher than they did a year ago against the lab thermometer
+      - the lab thermometer is checked against a certified one every month
+      - an alarm fires when any sensor diverges from the lab thermometer by more than half a degree
+    ingredients_b:
+      - the provider updated the judge model without notice and scores on the same fifty outputs shifted five percent
+      - the exact snapshot id is now pinned in every run
+      - the same fifty outputs scored under the same pinned id three months apart differ by two percent
+    forbidden_phrases_a: [judge, model, evaluation, LLM]
+    forbidden_phrases_b: [calibration, reference set, drift, sensor, re-score on a schedule]
+    one_side_test: >-
+      A alone reads as a calibration routine; B alone reads as unexplained score movement.
+      Neither says the judge needs the calibration routine.
+  - id: br20
+    domain_a: iot
+    domain_b: mleval
+    hidden_mechanism: a check that runs less often than the failures last will never see them
+    gold_connection: >-
+      A check that runs less often than the failure lasts never observes it: the nightly eval
+      cannot see twenty-minute mid-day outages, and a ten-minute sensor cannot see two-minute
+      pressure spikes.
+    gold_implication: >-
+      Run a small eval every fifteen minutes for a week and compare what it catches against
+      the nightly run.
+    ingredients_a:
+      - the pressure sensor reports every ten minutes
+      - the valve controller's own log shows spikes that last about two minutes
+      - the sensor chart has never shown a spike
+    ingredients_b:
+      - the full eval runs once a night and has passed every night this month
+      - users reported three failures this month, each lasting about twenty minutes in the afternoon
+      - the failures were confirmed from the request logs
+    forbidden_phrases_a: [sampling rate, Nyquist, aliasing, too infrequent, resolution]
+    forbidden_phrases_b: [sampling rate, Nyquist, aliasing, too infrequent, sensor]
+    one_side_test: >-
+      A alone reads as a sensor that does not show spikes; B alone reads as flaky production.
+      Neither says the check interval exceeds the event duration.
+  - id: br21
+    domain_a: grants
+    domain_b: health
+    hidden_mechanism: a cheap disqualifying check placed after the expensive step wastes the expensive step
+    gold_connection: >-
+      Both funnels spend the expensive step on people a five-question check would have
+      excluded: weeks of proposal writing before an eligibility rejection, and a purchase
+      before a contraindication questionnaire.
+    gold_implication: >-
+      Put a five-question eligibility check in front of the grant intake form and count how
+      many applicants it turns away in the first month.
+    ingredients_a:
+      - forty percent of applications in the last call were rejected at the eligibility stage
+      - eligibility depends on company age, headcount and technology maturity, five facts in total
+      - applicants typically spend three to four weeks writing before they hear the eligibility outcome
+    ingredients_b:
+      - the contraindication questionnaire is sent by email after checkout
+      - twelve percent of orders are refunded when the questionnaire result comes back
+      - the questionnaire is five questions and takes two minutes
+    forbidden_phrases_a: [funnel, screen first, gate, pre-screen, up front]
+    forbidden_phrases_b: [funnel, screen first, gate, pre-screen, up front, application]
+    one_side_test: >-
+      A alone reads as a high rejection rate; B alone reads as a refund rate. Neither says the
+      cheap check belongs before the expensive step.
+  - id: br22
+    domain_a: grants
+    domain_b: health
+    hidden_mechanism: the more often reporting is required, the less of it gets done
+    gold_connection: >-
+      Reporting frequency predicts non-compliance: partners on monthly timesheets are late
+      most months while the quarterly partner is never late, and logging every meal lasted
+      nine days while one weekly weigh-in has lasted five months.
+    gold_implication: >-
+      Switch the two monthly partners to quarterly submissions with a one-line monthly
+      confirmation and compare on-time rates over the next two quarters.
+    ingredients_a:
+      - the two partners on monthly timesheets submitted late in seven of the last twelve months
+      - the partner on quarterly submissions has never been late
+      - the monthly timesheet takes each partner about an hour
+    ingredients_b:
+      - logging every meal in the app lasted nine days
+      - a single weekly weigh-in has been recorded for five months without a gap
+      - both were set up with the same reminder app
+    forbidden_phrases_a: [burden, cadence, frequency predicts, compliance drops]
+    forbidden_phrases_b: [burden, cadence, frequency predicts, compliance, timesheet]
+    one_side_test: >-
+      A alone reads as two late partners; B alone reads as one habit that stuck. Neither says
+      the frequency of the ask is what decides.
+  - id: br23
+    domain_a: iot
+    domain_b: fraud
+    hidden_mechanism: accepting a message whose timestamp is far from now lets stale or replayed messages corrupt the system
+    gold_connection: >-
+      Both systems accept messages whose timestamp is nowhere near the current time: a sensor
+      with a reset clock corrupted the daily rollup with 2024 readings, and callers reuse a
+      signed ticket days after it was issued; both need a freshness window.
+    gold_implication: >-
+      Reject any signed call ticket older than five minutes and any sensor packet whose
+      timestamp is more than ten minutes from server time, then count rejections for a week.
+    ingredients_a:
+      - a sensor whose clock reset sent readings stamped with a date in 2024
+      - the server stored them and the daily rollup for that date changed
+      - the packets were otherwise well formed and signed correctly
+    ingredients_b:
+      - the same signed call ticket was presented for a new call three days after it was issued
+      - the server accepted it because the signature verified
+      - the ticket carries the time it was issued
+    forbidden_phrases_a: [replay, freshness, stale, expiry, reject old]
+    forbidden_phrases_b: [replay, freshness, stale, expiry, reject old, sensor]
+    one_side_test: >-
+      A alone reads as a clock bug; B alone reads as a ticket accepted on signature. Neither
+      says a valid message can still be too old to accept.
+  - id: br24
+    domain_a: iot
+    domain_b: fraud
+    hidden_mechanism: the accounts and devices still on factory defaults are the ones that get taken over
+    gold_connection: >-
+      The population still on the factory default is the one that gets compromised: the
+      camera on the default password showed up on a public scanner, and the accounts taken
+      over all had the default PIN; forcing a change at setup closes both.
+    gold_implication: >-
+      List every device and every account still on its default credential and force a change
+      on first use, then compare takeovers over the next quarter.
+    ingredients_a:
+      - half the workshop cameras still use the password printed on the box
+      - one of them appeared in a public device search engine last week
+      - the cameras that were renamed and reconfigured did not appear
+    ingredients_b:
+      - the fourteen accounts taken over last month all had the PIN left at 0000
+      - setup lets users skip choosing a PIN
+      - accounts with a chosen PIN had no takeovers in the same month
+    forbidden_phrases_a: [default credential, takeover, force change, weak password, exposed]
+    forbidden_phrases_b: [default credential, force change, weak password, camera, device]
+    one_side_test: >-
+      A alone reads as a camera exposure; B alone reads as PIN statistics. Neither says the
+      unchanged-default population is the target across both.

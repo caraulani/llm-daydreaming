@@ -1,0 +1,120 @@
+# Decoy pairs, corpus v0.2. Authored 2026-09-13 after the v0.1 review. Two kinds:
+# `shape`: the two notes share a failure shape or surface pattern with a real bridge but have
+#          different, unrelated causes, so a bridge-like synthesis between them is wrong;
+# `homonym`: the two notes share one word and nothing else (v0.1 style, kept for continuity).
+# `why_not` states the specific reason the tempting synthesis is false. `mirrors` names the
+# bridge whose shape the decoy imitates. Schema for note_a/note_b is unchanged from v0.1.
+decoys:
+  - id: dc01
+    kind: shape
+    shape: spike after an event
+    mirrors: br01
+    shared_term: spike
+    note_a: {domain: ecom, topic: the traffic spike after a TV mention that overloaded the image CDN for an hour}
+    note_b: {domain: fraud, topic: the spike in failed logins in the two days after the forced password-reset email}
+    why_not: >-
+      The ecom spike is a caching capacity problem from legitimate visitors; the login spike is
+      legitimate users mistyping new passwords after a forced reset. A synthesis such as "spikes
+      after announcements signal abuse" is false for both.
+  - id: dc02
+    kind: shape
+    shape: slow drift over time
+    mirrors: br19
+    shared_term: drift
+    note_a: {domain: health, topic: body weight trending down about 0.2 kg a week on a planned calorie deficit}
+    note_b: {domain: iot, topic: the gateway clock gaining about four seconds a day because time sync is disabled}
+    why_not: >-
+      One trend is an intended physiological outcome; the other is a missing time-sync setting.
+      There is no shared mechanism and no implication that transfers.
+  - id: dc03
+    kind: shape
+    shape: a fixed threshold that misbehaves
+    mirrors: br16
+    shared_term: threshold
+    note_a: {domain: mleval, topic: the client's pass/fail threshold at 70 hiding improvements from 40 to 69}
+    note_b: {domain: iot, topic: the 10 percent battery alert firing too late in the cold shed because cold cuts capacity}
+    why_not: >-
+      The eval threshold problem is information loss from binarising a score; the battery
+      problem is a physical capacity effect of temperature. "Thresholds are bad" explains
+      neither and the fixes have nothing in common.
+  - id: dc04
+    kind: shape
+    shape: dropout at a calendar point
+    mirrors: br17
+    shared_term: December
+    note_a: {domain: ecom, topic: subscription cancellations jumping in December during a competitor's discount campaign}
+    note_b: {domain: health, topic: the morning walks stopping in December because of the weather and dark mornings}
+    why_not: >-
+      Both stop in December for unrelated external reasons, a competitor promotion and the
+      weather. A synthesis about a shared December dropout mechanism is a calendar coincidence.
+  - id: dc05
+    kind: shape
+    shape: volume tripled after a change
+    mirrors: br12
+    shared_term: tripled
+    note_a: {domain: ecom, topic: support email volume tripling after switching parcel carriers}
+    note_b: {domain: iot, topic: log volume tripling after debug logging was left enabled on the gateway}
+    why_not: >-
+      One increase is customers reacting to a worse carrier; the other is a logging flag.
+      Nothing about capacity, senders or timing is shared.
+  - id: dc06
+    kind: shape
+    shape: duplicate entries
+    mirrors: br09
+    shared_term: duplicate
+    note_a: {domain: grants, topic: the consortium form listing the coordinator twice by design, once as coordinator and once as partner}
+    note_b: {domain: fraud, topic: duplicate transactions created by a client retry bug on slow networks}
+    why_not: >-
+      The grant duplicate is intended by the portal's data model; the transaction duplicate is
+      a client bug. Treating them as one identifier or integrity problem is wrong.
+  - id: dc07
+    kind: shape
+    shape: a metric improved after a change
+    mirrors: br11
+    shared_term: improved
+    note_a: {domain: health, topic: resting heart rate falling four beats over eight weeks of zone-two cycling}
+    note_b: {domain: ecom, topic: checkout conversion rising four percent after adding Apple Pay}
+    why_not: >-
+      A training adaptation and a payment-friction removal share nothing beyond "a number went
+      up after a change". Neither result is an artefact and no implication transfers.
+  - id: dc08
+    kind: shape
+    shape: an outage during a busy moment
+    mirrors: br14
+    shared_term: outage
+    note_a: {domain: iot, topic: the gateway losing power when the workshop breaker tripped from the space heater}
+    note_b: {domain: grants, topic: the funder's portal being slow in the final hour before a call deadline}
+    why_not: >-
+      A tripped breaker and a busy remote portal are unrelated failures with unrelated fixes.
+      A synthesis about shared load or monitoring is invention.
+  - id: dc09
+    kind: shape
+    shape: results differ by region
+    mirrors: br07
+    shared_term: region
+    note_a: {domain: mleval, topic: eval scores differing between the EU and US API endpoints because the EU endpoint served an older snapshot}
+    note_b: {domain: grants, topic: national contact point rules differing by member state for the same call}
+    why_not: >-
+      One difference is an infrastructure snapshot mismatch; the other is legal jurisdiction.
+      "Regional variation" is a label, not a mechanism.
+  - id: dc10
+    kind: homonym
+    shared_term: ring
+    note_a: {domain: fraud, topic: how a group of linked accounts was identified from shared device fingerprints}
+    note_b: {domain: health, topic: sleep-tracking ring firmware update and battery life}
+    why_not: >-
+      The word ring is a homonym here; the notes share no cause, no effect and no data.
+  - id: dc11
+    kind: homonym
+    shared_term: token
+    note_a: {domain: mleval, topic: output token budgets and truncation in long evaluations}
+    note_b: {domain: fraud, topic: payment tokenisation and why raw card numbers never touch the server}
+    why_not: >-
+      Token means a unit of text in one note and a card-number stand-in in the other.
+  - id: dc12
+    kind: homonym
+    shared_term: call
+    note_a: {domain: grants, topic: the open call deadlines and which calls to skip this year}
+    note_b: {domain: mleval, topic: tool-call logs and how they are counted in the eval report}
+    why_not: >-
+      A funding call and a function call share a word and nothing else.
