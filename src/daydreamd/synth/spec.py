@@ -21,6 +21,39 @@ class NoteSpec:
     forbidden: list[str] = field(default_factory=list)
     bridge_id: str | None = None
     decoy_id: str | None = None
+    writer_family: str | None = (
+        None  # set by assign_writers(); None means the single default writer
+    )
+
+
+def _numeric_suffix(ident: str) -> int:
+    digits = "".join(ch for ch in ident if ch.isdigit())
+    return int(digits) if digits else 0
+
+
+def assign_writers(plan: list[NoteSpec], families: list[str]) -> list[NoteSpec]:
+    """Assign each note to a writer family by parity.
+
+    Bridge notes follow the parity of the bridge id (odd -> families[0], even -> families[1]),
+    decoy notes the parity of the decoy id, fillers alternate by position (fl01 -> families[0]).
+    With one family every note gets it. The assignment is deterministic so it can be sealed.
+    """
+    if not families:
+        return plan
+    if len(families) == 1:
+        for n in plan:
+            n.writer_family = families[0]
+        return plan
+    a, b = families[0], families[1]
+    for n in plan:
+        if n.kind == "bridge" and n.bridge_id:
+            key = _numeric_suffix(n.bridge_id)
+        elif n.kind == "decoy" and n.decoy_id:
+            key = _numeric_suffix(n.decoy_id)
+        else:
+            key = _numeric_suffix(n.note_id)
+        n.writer_family = a if key % 2 == 1 else b
+    return plan
 
 
 @dataclass
@@ -31,12 +64,23 @@ class Spec:
     decoys: list[dict[str, Any]]
     fillers: list[dict[str, Any]]
 
+    @property
+    def oblique(self) -> bool:
+        """True when the spec carries the v0.2 obliqueness fields (per-side forbidden phrases
+        or a one-side test), which switches on the paraphrase-leak judge at build time."""
+        return any(
+            b.get("forbidden_phrases_a") or b.get("forbidden_phrases_b") or b.get("one_side_test")
+            for b in self.bridges
+        )
+
     def note_plan(self) -> list[NoteSpec]:
         plan: list[NoteSpec] = []
         for b in self.bridges:
             for side in ("a", "b"):
                 other = b["domain_b" if side == "a" else "domain_a"]
                 dom = b[f"domain_{side}"]
+                forbidden = [self.domains[other], other, b["hidden_mechanism"]]
+                forbidden += [str(x) for x in (b.get(f"forbidden_phrases_{side}") or [])]
                 plan.append(
                     NoteSpec(
                         note_id=f"{b['id']}-{side}",
@@ -44,7 +88,7 @@ class Spec:
                         kind="bridge",
                         topic=f"recent working notes on {self.domains[dom]}",
                         ingredients=list(b[f"ingredients_{side}"]),
-                        forbidden=[self.domains[other], other, b["hidden_mechanism"]],
+                        forbidden=forbidden,
                         bridge_id=b["id"],
                     )
                 )

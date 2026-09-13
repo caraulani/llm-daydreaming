@@ -13,9 +13,10 @@ import numpy as np
 
 from ..core.sampler import candidate_pairs, note_pair_key
 from .metrics import hypergeom_sf, wilson
-from .permutation_null import permutation_p_concentration
+from .permutation_null import permutation_p_concentration, permutation_p_gap
 
 PAIR_ARMS = ("S0", "B1", "B3", "B6")
+SAMPLER_ARMS = ("B1", "B3", "B6", "B7")
 
 
 def _index(rows: list[dict], key: str = "unit_id") -> dict[str, dict]:
@@ -50,8 +51,10 @@ def sampler_enrichment(
         "base_rate": successes / population if population else 0.0,
         "arms": {},
     }
-    for arm in ("B1", "B3", "B6"):
+    for arm in SAMPLER_ARMS:
         arm_units = [u for u in units if u["arm"] == arm and u["kind"] == "pair"]
+        if not arm_units:
+            continue
         draws = len(arm_units)
         hits = [u for u in arm_units if (u.get("label") or "").startswith("planted:")]
         distinct = {u["label"] for u in hits}
@@ -205,3 +208,84 @@ def exploratory_finds(generations: list[dict], critic: list[dict], dup: list[dic
         and not (g.get("label") or "").startswith("planted:")
         and g["kind"] == "pair"
     ]
+
+
+def sampler_gap_permutation(
+    units: list[dict], arm_a: str, arm_b: str, n_perm: int = 10_000, seed: int = 0
+) -> dict[str, Any]:
+    """Permutation test on arm labels: is the planted-pair rate in arm_a above arm_b?
+
+    Shuffles the arm label across the pooled card-pair units of the two arms and recomputes
+    the gap in planted rate. Used for H2(a) in the v0.2 rule (B7 vs B1)."""
+    pool = [u for u in units if u["arm"] in (arm_a, arm_b) and u["kind"] == "pair"]
+    if not pool:
+        return {"observed_gap": 0.0, "p": 1.0, "n_perm": n_perm}
+    labels = np.array([u["arm"] for u in pool])
+    planted = np.array([(u.get("label") or "").startswith("planted:") for u in pool])
+    gap, p = permutation_p_gap(labels, planted, arm_a, arm_b, n_perm=n_perm, seed=seed)
+    return {"observed_gap": round(float(gap), 5), "p": float(p), "n_perm": n_perm}
+
+
+def critic_comparison(
+    generations: list[dict], critics: dict[str, list[dict]], match: list[dict]
+) -> dict[str, dict[str, Any]]:
+    """Per critic: how many correct planted recoveries survive it, how many decoy answers
+    survive it, and its kill rate on random S0 pairs. Before the duplicate gate."""
+    midx = _index(match)
+    s0 = [g for g in generations if g["arm"] == "S0" and g["status"] == "ok"]
+    planted_ok = [
+        g
+        for g in s0
+        if (g.get("label") or "").startswith("planted:")
+        and g["unit_id"] in midx
+        and midx[g["unit_id"]]["match"]
+    ]
+    decoy_ok = [g for g in s0 if (g.get("label") or "").startswith("decoy:")]
+    random_ok = [g for g in s0 if (g.get("label") or "random") == "random"]
+    out: dict[str, dict[str, Any]] = {}
+    for alias, rows in critics.items():
+        cidx = _index(rows)
+
+        def keep(g: dict, idx: dict[str, dict] = cidx) -> bool:
+            return idx.get(g["unit_id"], {}).get("verdict") == "keep"
+
+        pl_surv = sum(1 for g in planted_ok if keep(g))
+        dc_surv = sum(1 for g in decoy_ok if keep(g))
+        rd_kill = sum(1 for g in random_ok if not keep(g))
+        out[alias] = {
+            "correct_recoveries": len(planted_ok),
+            "correct_recoveries_surviving": pl_surv,
+            "correct_recoveries_killed": len(planted_ok) - pl_surv,
+            "decoy_answers": len(decoy_ok),
+            "decoy_answers_surviving": dc_surv,
+            "random_answers": len(random_ok),
+            "random_kill_rate": wilson(rd_kill, len(random_ok)),
+            "model_id": next((r["usage"]["model_id"] for r in rows if r.get("usage")), None),
+        }
+    return out
+
+
+def recall_by_family(
+    generations: list[dict], match: list[dict], arm: str = "S0"
+) -> dict[str, dict[str, Any]]:
+    """Planted-bridge recall split by the writer family of the notes (v0.2 H5)."""
+    midx = _index(match)
+    by: dict[str, dict[str, set[str]]] = {}
+    for g in generations:
+        label = g.get("label") or ""
+        if g["arm"] != arm or not label.startswith("planted:"):
+            continue
+        fam = str(g.get("writer_family") or "unknown")
+        bid = label.split(":", 1)[1]
+        d = by.setdefault(fam, {"bridges": set(), "recovered": set()})
+        d["bridges"].add(bid)
+        if g["unit_id"] in midx and midx[g["unit_id"]]["match"]:
+            d["recovered"].add(bid)
+    return {
+        fam: {
+            "bridges": len(d["bridges"]),
+            "recovered": len(d["recovered"]),
+            "recall": wilson(len(d["recovered"]), len(d["bridges"])),
+        }
+        for fam, d in sorted(by.items())
+    }

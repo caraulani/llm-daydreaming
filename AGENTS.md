@@ -15,9 +15,11 @@ not the primary path.
 make setup          # uv sync --all-extras
 make test           # pytest, offline (fake backend + fake embedder)
 make lint           # ruff check + format --check
-make synth          # regenerate the synthetic corpus (do NOT do this after the prereg is sealed)
+make synth          # build the v0.1 corpus (do NOT do this after the prereg is sealed)
+make synth SPEC=data/synth/v0.2 WRITERS=experiments/micro-v0.2/writers.yaml   # v0.2, two writer families
 make smoke          # tiny end-to-end run with real model calls
-make micro          # the pre-registered run (only after PREREGISTRATION.md is sealed)
+make micro          # the pre-registered v0.1 run (only after PREREGISTRATION.md is sealed)
+make micro CONFIG=experiments/micro-v0.2/config.yaml   # the v0.2 run (after PREREGISTRATION-v0.2.md is sealed)
 make reproduce      # rebuild results/ from committed runs, no model calls
 uv run daydreamd --help
 ```
@@ -34,17 +36,17 @@ adapters → core.ingest (snapshot) → core.cards → core.embed → core.sampl
 |---|---|
 | `src/daydreamd/pipeline.py` | stage orchestration from a config; `run_all` |
 | `src/daydreamd/cli.py` | typer CLI; one command per stage |
-| `src/daydreamd/backends/` | `Completion` protocol; `claude_cli.py` is the default |
+| `src/daydreamd/backends/` | `Completion` protocol; `claude_cli.py` is the default; `openrouter.py` is the second writer family for v0.2 |
 | `src/daydreamd/core/run.py` | `RunDir`, `metadata.yaml`, prompt loading + hashing |
-| `src/daydreamd/core/sampler.py` | `Unit` records; arms S0/B1/B3/B6/B4; labels planted/decoy/random |
+| `src/daydreamd/core/sampler.py` | `Unit` records (with `writer_family`); arms S0/S1/B1/B3/B6/B7/B4; labels planted/decoy/random/partner |
 | `src/daydreamd/core/generator.py` | one prompt for every pair arm; `NONE` handling |
-| `src/daydreamd/core/critic.py` | binary keep/kill with reason |
+| `src/daydreamd/core/critic.py` | binary keep/kill with reason; `models.critic` may be a list, the first is primary (`critic.jsonl`), each writes `critic_<alias>.jsonl` |
 | `src/daydreamd/core/dupgate.py` | retrieval-based corpus-novelty gate (cosine > 0.85) |
 | `src/daydreamd/core/match.py` | grounded gold match + cosine to gold |
 | `src/daydreamd/core/blind.py` | owner-blind pack, sealed key, unseal |
-| `src/daydreamd/core/stats.py` | tables T1..T6 (synthetic) and H1..H4 (owner-blind) |
-| `src/daydreamd/synth/` | spec loader, 6-gram leakage check, note writer |
-| `src/daydreamd/eval/recovery.py` | enrichment, recall, specificity, exploratory finds |
+| `src/daydreamd/core/stats.py` | tables T1..T8 (synthetic), DECISION.md (v0.1 rule, or v0.2 rule when the config says `prereg: v0.2`), H1..H4 (owner-blind) |
+| `src/daydreamd/synth/` | spec loader (v0.2 fields: `forbidden_phrases_a/b`, `one_side_test`), 6-gram leakage check, paraphrase-leak judge (`prompts/leak_judge.md`, bridge notes, oblique specs only), note writer with writer families by parity |
+| `src/daydreamd/eval/recovery.py` | enrichment (B1/B3/B6/B7), recall, specificity, per-critic comparison, recall by writer family, exploratory finds |
 | `prompts/*.md` | versioned prompts; header comment carries version and role |
 | `experiments/*/config.yaml` | arm sizes, seed, models, backend |
 
@@ -58,8 +60,16 @@ adapters → core.ingest (snapshot) → core.cards → core.embed → core.sampl
 4. **Prompts are files.** Change a prompt by bumping the version header; the SHA is logged.
 5. **After the preregistration is sealed**, `experiments/micro/config.yaml`, `prompts/`, and
    `data/synth/v0.1/` are frozen. Changes go to a new experiment directory and a new prereg.
+   The same applies to `experiments/micro-v0.2/config.yaml`, `prompts/leak_judge.md` and
+   `data/synth/v0.2/` once `PREREGISTRATION-v0.2.md` is sealed.
 6. **Private runs stay private.** `experiments/runs/private/` and `data/private/` are gitignored.
 7. **No estimates in tables.** Cost and token columns come from logged usage only.
+8. **Writer families are fixed by parity, never by hand.** `assign_writers()` decides which
+   family writes which note; the exact model id per note is read back from the provider and
+   recorded in `manifest.json` (`writer_model_id`). A writers file with a `TBD` model is refused.
+9. **Several critics judge the same generations.** Only the first (primary) critic feeds dupgate
+   and the main tables; the others exist so T8 can compare them. Never swap the primary after
+   a run without a logged deviation.
 
 ## Conventions
 

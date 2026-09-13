@@ -1,0 +1,21 @@
+# v0.2 micro-experiment over the oblique synthetic corpus with planted bridges.
+# Sizes are the ones in PREREGISTRATION-v0.2.md section 7.2; do not change after it is sealed.
+prereg: v0.2
+corpus: {kind: synth, path: data/synth/v0.2}
+visibility: public
+slug: micro_v0_2
+seed: 20260920
+backend: claude-cli
+# critic is a LIST: the first is the primary (drives dupgate and H1); every critic also writes
+# critic_<alias>.jsonl and appears in table T8.
+models: {cards: haiku, generator: sonnet, critic: [haiku, sonnet], match: haiku}
+concurrency: 4
+arms:
+  S0: {random_pairs: 36}     # plus all 24 planted and all 12 decoy note pairs = 72 units
+  S1: {}                     # 48 units: each bridge note + a partner-domain filler (H4)
+  B1: {n: 300}               # random card pairs (H2 control)
+  B7: {n: 300, band: Q1}     # near-in-embedding, different-domain card pairs (H2)
+  B4: {notes: bridge}        # the 48 bridge notes, one at a time (H3)
+dupgate_threshold: 0.85
+blind: {enabled: false}
+stats: {n_perm: 10000}

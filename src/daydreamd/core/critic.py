@@ -51,19 +51,27 @@ def run_critic(
     generations: list[dict],
     model: str = "haiku",
     concurrency: int = 4,
+    outfile: str = "critic.jsonl",
+    role: str = "critic",
 ) -> list[dict]:
+    """Judge every non-NONE generation with one critic model.
+
+    ``outfile`` and ``role`` let several critics run on the same generations (v0.2): the primary
+    critic writes ``critic.jsonl`` under role ``critic``; every critic also writes
+    ``critic_<alias>.jsonl`` under role ``critic_<alias>``.
+    """
     template, sha = load_prompt("critic")
     run.record_prompt("critic", sha)
     todo = [g for g in generations if g["status"] == "ok"]
     rows = pmap(lambda g: judge_one(backend, model, template, g), todo, concurrency)
-    write_jsonl(run.path / "critic.jsonl", rows)
+    write_jsonl(run.path / outfile, rows)
     cost = sum((r["usage"] or {}).get("cost_usd", 0.0) for r in rows)
     ids: set[str] = {r["usage"]["model_id"] for r in rows if r["usage"]}
     if ids:
-        run.record_model("critic", model, sorted(ids)[0])
+        run.record_model(role, model, sorted(ids)[0])
     run.add_cost(cost)
     run.mark_stage(
-        "critic",
+        role,
         n_judged=len(rows),
         n_keep=sum(1 for r in rows if r["verdict"] == "keep"),
         cost_usd=round(cost, 4),

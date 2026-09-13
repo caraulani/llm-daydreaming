@@ -1,0 +1,10 @@
+# Note-writer families for the v0.2 corpus build:
+#   make synth SPEC=data/synth/v0.2 WRITERS=experiments/micro-v0.2/writers.yaml
+# Assignment is by parity (src/daydreamd/synth/spec.py: assign_writers): bridges with odd ids,
+# decoys with odd ids and fillers at odd positions go to family A; even to family B.
+# Family B must be a NON-Anthropic model so H5 (writer family) can bound shared priors.
+# Fill the exact dated model id before sealing PREREGISTRATION-v0.2.md; the builder refuses "TBD".
+# The exact id the provider reports is recorded per note in manifest.json (writer_model_id).
+families:
+  A: {backend: claude-cli, model: haiku}
+  B: {backend: openrouter, model: TBD}

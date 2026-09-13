@@ -11,7 +11,15 @@ import numpy as np
 
 from ..eval.metrics import cochran_armitage, cohen_kappa, fisher_one_sided, wilson
 from ..eval.permutation_null import permutation_p_gap
-from ..eval.recovery import arm_summary, exploratory_finds, oracle_specificity, sampler_enrichment
+from ..eval.recovery import (
+    arm_summary,
+    critic_comparison,
+    exploratory_finds,
+    oracle_specificity,
+    recall_by_family,
+    sampler_enrichment,
+    sampler_gap_permutation,
+)
 from .io import read_json, read_jsonl, write_jsonl
 from .run import RunDir
 
@@ -49,6 +57,10 @@ def load_run(run: RunDir) -> dict[str, Any]:
         "dup": list(read_jsonl(p / "dupgate.jsonl")),
         "match": list(read_jsonl(p / "match_gold.jsonl")),
         "verdicts": list(read_jsonl(p / "verdicts.jsonl")),
+        "critics": {
+            f.stem.removeprefix("critic_"): list(read_jsonl(f))
+            for f in sorted(p.glob("critic_*.jsonl"))
+        },
     }
     data["vecs"] = np.load(p / "embeddings.npy") if (p / "embeddings.npy").exists() else None  # type: ignore[assignment]
     gold_path = p / "gold.json"
@@ -63,7 +75,7 @@ def load_run(run: RunDir) -> dict[str, Any]:
 
 
 def synthetic_tables(
-    run: RunDir, out_dir: Path, n_perm: int = 10_000, seed: int = 0
+    run: RunDir, out_dir: Path, n_perm: int = 10_000, seed: int = 0, prereg: str = "v0.1"
 ) -> dict[str, Any]:
     d = load_run(run)
     gold = d["gold"]
@@ -274,11 +286,46 @@ def synthetic_tables(
             rows7,
             "Exploratory control (not preregistered): does the gold mechanism appear when the partner note is replaced by a mechanism-free filler from the same domain?",
         )
+    critics = critic_comparison(d["generations"], d["critics"], d["match"]) if d["critics"] else {}
+    if critics:
+        _write_table(
+            out_dir,
+            "T8",
+            [
+                "critic",
+                "model id",
+                "correct recoveries",
+                "surviving",
+                "killed",
+                "decoy answers",
+                "decoy surviving",
+                "kill rate on random",
+            ],
+            [
+                [
+                    alias,
+                    v["model_id"],
+                    v["correct_recoveries"],
+                    v["correct_recoveries_surviving"],
+                    v["correct_recoveries_killed"],
+                    v["decoy_answers"],
+                    v["decoy_answers_surviving"],
+                    _fmt_rate(v["random_kill_rate"]),
+                ]
+                for alias, v in critics.items()
+            ],
+            "Recall after critic, per critic (same generations, before the duplicate gate)",
+        )
     finds = exploratory_finds(d["generations"], d["critic"], d["dup"])
     write_jsonl(out_dir / "exploratory_finds.jsonl", finds)
-    decision = _decision(spec, enrich, arms)
+    if prereg == "v0.2":
+        decision = _decision_v02(spec, enrich, arms, d, n_perm=n_perm, seed=seed)
+    else:
+        decision = _decision(spec, enrich, arms)
     (out_dir / "DECISION.md").write_text(decision["md"], encoding="utf-8")
     summary = {
+        "prereg": prereg,
+        "critics": critics,
         "decision": {k: v for k, v in decision.items() if k != "md"},
         "enrichment": enrich,
         "oracle": spec,
@@ -438,6 +485,122 @@ def _decision(spec: dict[str, Any], enrich: dict[str, Any], arms: dict[str, Any]
         },
         "h2": {"p": h2_ps, "pass": h2},
         "h3": {"p": h3_p, "pass": h3},
+        "signal": signal,
+        "md": md,
+    }
+
+
+def _h1(spec: dict[str, Any], arms: dict[str, Any]) -> dict[str, Any]:
+    groups = spec.get("groups", {})
+    s0 = arms.get("S0")
+    n_pl = groups.get("planted", {}).get("units", 0)
+    n_dc = groups.get("decoy", {}).get("units", 0)
+    rec = s0["bridges_recovered"] if s0 else 0
+    dc_rate = groups.get("decoy", {}).get("survivor_rate", (0.0, 0.0, 0.0))[0]
+    fp = int(round(dc_rate * n_dc))
+    p = fisher_one_sided(rec, max(1, n_pl), fp, max(1, n_dc))
+    return {
+        "p": p,
+        "pass": p < 0.05,
+        "recovered": rec,
+        "planted": n_pl,
+        "decoy_fp": fp,
+        "decoys": n_dc,
+    }
+
+
+def _decision_v02(
+    spec: dict[str, Any],
+    enrich: dict[str, Any],
+    arms: dict[str, Any],
+    d: dict[str, Any],
+    n_perm: int = 10_000,
+    seed: int = 0,
+) -> dict[str, Any]:
+    """Apply the v0.2 decision rule (PREREGISTRATION-v0.2.md section 5): signal iff H1 and H4."""
+    s0, s1, b4 = arms.get("S0"), arms.get("S1"), arms.get("B4")
+    b1, b7 = arms.get("B1"), arms.get("B7")
+    h1 = _h1(spec, arms)
+    # H2(a): B7 planted enrichment, hypergeometric plus arm-label permutation vs B1
+    e7 = enrich.get("arms", {}).get("B7")
+    perm = sampler_gap_permutation(d["units"], "B7", "B1", n_perm=n_perm, seed=seed)
+    h2a_p = e7["p_hypergeom"] if e7 else None
+    h2a = h2a_p is not None and h2a_p < 0.05
+    # H2(b): non-NONE rate B7 > B1
+    h2b_p = None
+    h2b = False
+    if b1 and b7:
+        h2b_p = fisher_one_sided(b7["ok"], max(1, b7["units"]), b1["ok"], max(1, b1["units"]))
+        h2b = h2b_p < 0.05
+    h3_p = None
+    h3 = False
+    if s0 and b4:
+        h3_p = fisher_one_sided(
+            s0["bridges_recovered"],
+            max(1, s0["bridges_reachable"]),
+            b4["bridges_recovered"],
+            max(1, b4["bridges_reachable"]),
+        )
+        h3 = h3_p < 0.05
+    h4_p = None
+    h4 = False
+    h4_txt = "- H4: not computable (missing S0 or S1)"
+    if s0 and s1:
+        h4_p = fisher_one_sided(
+            s0["bridges_recovered"],
+            max(1, s0["bridges_reachable"]),
+            s1["bridges_recovered"],
+            max(1, s1["bridges_reachable"]),
+        )
+        h4 = h4_p < 0.05
+        h4_txt = (
+            f"- H4 (S0 recall {s0['bridges_recovered']}/{s0['bridges_reachable']} vs S1 "
+            f"partner-domain-filler recall {s1['bridges_recovered']}/{s1['bridges_reachable']}, "
+            f"Fisher one-sided): p = {h4_p:.4f} -> {'PASS' if h4 else 'FAIL'}"
+        )
+    h2b_txt = "- H2b: not computable (missing B1 or B7)"
+    if b1 and b7 and h2b_p is not None:
+        h2b_txt = (
+            f"- H2b (non-NONE rate B7 {b7['ok']}/{b7['units']} vs B1 {b1['ok']}/{b1['units']}, "
+            f"Fisher one-sided): p = {h2b_p:.4f} -> {'PASS' if h2b else 'FAIL'}"
+        )
+    fam = recall_by_family(d["generations"], d["match"])
+    signal = h1["pass"] and h4
+    fam_lines = [
+        f"  - {f}: {v['recovered']}/{v['bridges']} = {_fmt_rate(v['recall'])}"
+        for f, v in fam.items()
+    ]
+    md = "\n".join(
+        [
+            "# Preregistered decision rule, v0.2 (PREREGISTRATION-v0.2.md section 5)",
+            "",
+            f"- H1 (planted recall {h1['recovered']}/{h1['planted']} vs decoy false positives {h1['decoy_fp']}/{h1['decoys']}, Fisher one-sided): p = {h1['p']:.4f} -> {'PASS' if h1['pass'] else 'FAIL'}",
+            (
+                f"- H2a (B7 planted card pairs {e7['planted_hits']} in {e7['draws']} draws, expected {e7['expected']}, hypergeometric): p = {h2a_p:.4f}; arm-label permutation vs B1: gap = {perm['observed_gap']:+.4f}, p = {perm['p']:.4f} -> {'PASS' if h2a else 'FAIL'}"
+                if e7
+                else "- H2a: not computable (no B7 arm)"
+            ),
+            h2b_txt,
+            (
+                f"- H3 (S0 two-note recall vs B4 one-note recall, Fisher one-sided): p = {h3_p:.4f} -> {'PASS' if h3 else 'FAIL'}"
+                if h3_p is not None
+                else "- H3: not computable (missing S0 or B4)"
+            ),
+            h4_txt,
+            "- H5 (recall by writer family, estimation only, no pass/fail):",
+            *(fam_lines or ["  - no writer families recorded"]),
+            "",
+            f"**Decision: {'SIGNAL' if signal else 'NULL'}** (signal requires H1 and H4 both passing; H2, H3, H5 are reported and do not enter the rule).",
+            "",
+        ]
+    )
+    return {
+        "h1": h1,
+        "h2a": {"p": h2a_p, "permutation": perm, "pass": h2a},
+        "h2b": {"p": h2b_p, "pass": h2b},
+        "h3": {"p": h3_p, "pass": h3},
+        "h4": {"p": h4_p, "pass": h4},
+        "h5": fam,
         "signal": signal,
         "md": md,
     }

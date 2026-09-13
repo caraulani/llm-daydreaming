@@ -35,6 +35,8 @@ class FakeBackend:
                 for i in range(0, 12, 4)
             ]
             return json.dumps(cards)
+        if "LEAK|CLEAN" in prompt:
+            return json.dumps({"verdict": "CLEAN", "evidence": "fake judge: no leak"})
         if "verdict" in prompt and "kill" in prompt:
             keep = int(digest[0], 16) % 4 != 0
             return json.dumps(

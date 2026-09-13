@@ -17,8 +17,10 @@ lint:
 typecheck:
 	$(UV) run mypy src
 
+SPEC ?= data/synth/v0.1
+WRITERS ?=
 synth:
-	$(UV) run daydreamd synth --out data/synth/v0.1
+	$(UV) run daydreamd synth --out $(SPEC) $(if $(WRITERS),--writers $(WRITERS),)
 
 # End-to-end on the committed synthetic corpus with tiny arms. Real model calls.
 smoke:

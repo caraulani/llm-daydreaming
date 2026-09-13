@@ -75,3 +75,8 @@ def extract_json(text: str) -> Any:
             except json.JSONDecodeError:
                 continue
     raise ValueError(f"no JSON found in model output: {text[:120]!r}")
+
+
+def copy_jsonl(src: Path, dst: Path) -> None:
+    """Byte-for-byte copy of a JSONL file (used to mirror the primary critic's output)."""
+    dst.write_bytes(src.read_bytes())

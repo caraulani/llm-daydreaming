@@ -17,7 +17,7 @@ from .core.dupgate import dupgate
 from .core.embed import Embedder, FakeEmbedder, embed_cards
 from .core.generator import generate
 from .core.ingest import Doc, load_snapshot, snapshot
-from .core.io import read_json, read_jsonl, write_json, write_jsonl
+from .core.io import copy_jsonl, read_json, read_jsonl, write_json, write_jsonl
 from .core.match import match_gold
 from .core.run import RunDir
 from .core.sampler import (
@@ -81,6 +81,14 @@ def stage_snapshot(run: RunDir, cfg: dict[str, Any]) -> list[Doc]:
                 "corpus_sha256",
             )
         }
+        extra = {
+            d["id"]: {k: d.get(k) for k in ("kind", "bridge_id", "decoy_id", "writer_family")}
+            for d in src.get("docs", [])
+        }
+        for doc in manifest["docs"]:
+            doc.update(extra.get(doc["id"], {}))
+        manifest["synthetic"]["writers"] = src.get("writers", {})
+        manifest["synthetic"]["leak_judge"] = src.get("leak_judge", {})
         write_json(run.path / "snapshot" / "manifest.json", manifest)
         write_json(run.path / "gold.json", read_json(resolve(c["path"]) / "gold.json"))
         write_json(run.path / "domains.json", read_json(resolve(c["path"]) / "domains.json"))
@@ -173,6 +181,9 @@ def stage_sample(run: RunDir, cfg: dict[str, Any]) -> list[Unit]:
         limit = arms["B4"].get("limit")
         units += single_units(cards, notes[: limit or None], "B4")
     label_units(units, planted, decoys)
+    family = {d["id"]: d.get("writer_family") for d in manifest.get("docs", [])}
+    for u in units:
+        u.writer_family = family.get(u.note_a)
     write_jsonl(run.path / "units.jsonl", (u.to_row() for u in units))
     run.mark_stage(
         "sample",
@@ -196,11 +207,51 @@ def stage_generate(run: RunDir, cfg: dict[str, Any], backend: Backend) -> list[d
     )
 
 
+def critic_aliases(cfg: dict[str, Any]) -> list[str]:
+    """`models.critic` may be one alias or a list; the first is the primary critic."""
+    raw = cfg["models"]["critic"]
+    aliases = [str(x) for x in raw] if isinstance(raw, list) else [str(raw)]
+    if not aliases:
+        raise ValueError("models.critic must name at least one critic")
+    return aliases
+
+
 def stage_critic(run: RunDir, cfg: dict[str, Any], backend: Backend) -> list[dict]:
+    """Run one or more critics on the same generations.
+
+    The primary (first) critic writes ``critic.jsonl`` and drives dupgate and the main tables.
+    Every critic, including the primary, also writes ``critic_<alias>.jsonl`` and records its
+    exact model id under ``models.critic_<alias>`` so table T8 can compare them.
+    """
     gens = list(read_jsonl(run.path / "generations.jsonl"))
-    return run_critic(
-        run, backend, gens, model=cfg["models"]["critic"], concurrency=cfg.get("concurrency", 4)
-    )
+    aliases = critic_aliases(cfg)
+    conc = cfg.get("concurrency", 4)
+    primary: list[dict] = []
+    for i, alias in enumerate(aliases):
+        rows = run_critic(
+            run,
+            backend,
+            gens,
+            model=alias,
+            concurrency=conc,
+            outfile=f"critic_{alias}.jsonl",
+            role=f"critic_{alias}",
+        )
+        if i == 0:
+            primary = rows
+            copy_jsonl(run.path / f"critic_{alias}.jsonl", run.path / "critic.jsonl")
+            meta = run.read_meta()
+            run.record_model(
+                "critic", alias, meta["models"].get(f"critic_{alias}", {}).get("model_id", "")
+            )
+            run.mark_stage(
+                "critic",
+                primary=alias,
+                critics=aliases,
+                n_judged=len(rows),
+                n_keep=sum(1 for r in rows if r["verdict"] == "keep"),
+            )
+    return primary
 
 
 def stage_dupgate(run: RunDir, cfg: dict[str, Any]) -> list[dict]:
@@ -244,7 +295,13 @@ def stage_blind(run: RunDir, cfg: dict[str, Any]) -> Path:
 def stage_stats(run: RunDir, cfg: dict[str, Any], out_dir: Path | None = None) -> dict[str, Any]:
     out = out_dir or (run.path / "tables")
     n_perm = int(cfg.get("stats", {}).get("n_perm", 10_000))
-    summary = synthetic_tables(run, out, n_perm=n_perm, seed=int(cfg.get("seed", 0)))
+    summary = synthetic_tables(
+        run,
+        out,
+        n_perm=n_perm,
+        seed=int(cfg.get("seed", 0)),
+        prereg=str(cfg.get("prereg", "v0.1")),
+    )
     human = human_tables(run, out, n_perm=n_perm, seed=int(cfg.get("seed", 0)))
     run.mark_stage("stats", tables=str(out), human_track=bool(human))
     return summary

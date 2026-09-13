@@ -32,17 +32,31 @@ def synth(
     model: str = "haiku",
     backend: str = "claude-cli",
     concurrency: int = 4,
+    writers: Path | None = typer.Option(
+        None, help="writers.yaml with families: {A: {backend, model}, B: {backend, model}}"
+    ),
+    judge_model: str = typer.Option("haiku", help="Paraphrase-leak judge alias (oblique specs)"),
+    max_tries: int | None = typer.Option(None, help="Override the regeneration cap"),
 ) -> None:
     """Write the synthetic corpus from the hand-authored specs (bridges, decoys, fillers)."""
-    from .synth.generate import build_corpus
+    from .synth.generate import build_corpus, load_writers
     from .synth.spec import load_spec
 
     out = pipeline.resolve(out)
     manifest = build_corpus(
-        load_spec(out), get_backend(backend), out, model=model, concurrency=concurrency
+        load_spec(out),
+        get_backend(backend),
+        out,
+        model=model,
+        concurrency=concurrency,
+        writers=load_writers(pipeline.resolve(writers)) if writers else None,
+        judge_model=judge_model,
+        max_tries=max_tries,
     )
     typer.echo(
-        f"wrote {manifest['n_notes']} notes to {out} (writer {manifest['writer_model_ids']}, cost ${manifest['cost_usd']}, leakage failures {manifest['leakage_failures']})"
+        f"wrote {manifest['n_notes']} notes to {out} (writers {manifest['writer_model_ids']}, "
+        f"cost ${manifest['cost_usd']}, leakage failures {manifest['leakage_failures']}, "
+        f"leak-judge failures {manifest['leak_judge']['failures']})"
     )
 
 
