@@ -8,7 +8,7 @@ data/
 ├── DATASHEET_TEMPLATE.md   # fill one per released slice
 ├── synth/v0.1/             # the v0.1 synthetic corpus with planted ground truth (released, CC BY 4.0)
 │   ├── notes/              # 60 markdown notes of a fictional solo builder, written by a model
-│   ├── bridges.yaml        # 12 hand-authored cross-domain bridges (written BEFORE the notes)
+│   ├── bridges.yaml        # 12 cross-domain bridges, experimenter-authored with LLM assistance, sealed BEFORE the notes
 │   ├── decoys.yaml         # 6 note pairs that share vocabulary but have no bridge
 │   ├── gold.json           # planted pairs and decoy pairs in machine-readable form
 │   ├── manifest.json       # filename, byte length, SHA-256 per file, plus the manifest's own hash
