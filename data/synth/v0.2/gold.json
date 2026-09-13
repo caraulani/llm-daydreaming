@@ -1,0 +1,146 @@
+{
+  "br01": {
+    "domain_a": "ecom",
+    "domain_b": "fraud",
+    "gold_connection": "Refund requests clustering within two days of a promo launch, on orders paid with newly added cards, are stolen-card validation runs, so the refund queue is the earliest fraud signal the store has.",
+    "gold_implication": "Pull refunds requested within 48 hours of each promo launch, filter to payment methods under 7 days old, and check how many of those orders became chargebacks 30 to 60 days later.",
+    "hidden_mechanism": "refund clusters right after promo launches are stolen-card validation runs",
+    "note_a": "br01-a",
+    "note_b": "br01-b"
+  },
+  "br02": {
+    "domain_a": "ecom",
+    "domain_b": "fraud",
+    "gold_connection": "One delivery address receiving orders under many different customer names is a reshipping drop point for goods bought with stolen cards, the same pattern the processor flags as freight-forwarder addresses.",
+    "gold_implication": "Count distinct customer names per shipping address over the last 90 days and hold any address above five for manual review before dispatch.",
+    "hidden_mechanism": "many customer names shipping to one address is a reshipping drop point for stolen-card goods",
+    "note_a": "br02-a",
+    "note_b": "br02-b"
+  },
+  "br04": {
+    "domain_a": "grants",
+    "domain_b": "mleval",
+    "gold_connection": "Evaluators weight the first-listed criterion most, so the order of a rubric changes the ranking: grant panels write most about the first section and LLM judges spread scores widest on the first criterion.",
+    "gold_implication": "Score the same ten outputs with the rubric criteria in two different orders and compare which outputs rank top under each.",
+    "hidden_mechanism": "the criterion listed first gets the most weight from evaluators",
+    "note_a": "br04-a",
+    "note_b": "br04-b"
+  },
+  "br05": {
+    "domain_a": "iot",
+    "domain_b": "health",
+    "gold_connection": "A schedule set relative to the previous event drifts later every cycle and falls out of a fixed window, whether the window is a gateway's wake slot or a morning injection hour.",
+    "gold_implication": "Set the dose reminder to a fixed clock time for two weeks and count doses inside the window against the previous two weeks.",
+    "hidden_mechanism": "a fixed receiving window fails when the sending schedule is relative to the last event and drifts",
+    "note_a": "br05-a",
+    "note_b": "br05-b"
+  },
+  "br06": {
+    "domain_a": "iot",
+    "domain_b": "health",
+    "gold_connection": "A sudden step in a time series on the day the measuring device changed is a change in the device, not in the thing measured; revert the device to check.",
+    "gold_implication": "Wear the old ring for three nights and compare the deep-sleep numbers to the new ring's three nights.",
+    "hidden_mechanism": "a step change that coincides with an instrument change is the instrument, not the world",
+    "note_a": "br06-a",
+    "note_b": "br06-b"
+  },
+  "br07": {
+    "domain_a": "ecom",
+    "domain_b": "mleval",
+    "gold_connection": "A lift or a score measured on the same week or the same items the system was tuned against overstates the effect; the honest number comes from data that arrived afterwards.",
+    "gold_implication": "Recompute the landing page lift on the week after tuning stopped and recompute the eval score on tickets from the following month.",
+    "hidden_mechanism": "a number measured on the same data it was tuned against is inflated; measure on later data",
+    "note_a": "br07-a",
+    "note_b": "br07-b"
+  },
+  "br09": {
+    "domain_a": "grants",
+    "domain_b": "fraud",
+    "gold_connection": "Identifiers that run in sequence across supposedly independent parties expose a single operator, whether the identifiers are company registration numbers on two proposals or phone numbers across three accounts.",
+    "gold_implication": "Run an adjacency check on registration numbers across this call's applicants and on phone numbers across new signups, and list any run of three or more consecutive values.",
+    "hidden_mechanism": "consecutive identifiers across entities that claim to be independent expose one operator",
+    "note_a": "br09-a",
+    "note_b": "br09-b"
+  },
+  "br11": {
+    "domain_a": "mleval",
+    "domain_b": "health",
+    "gold_connection": "Improvement measured after picking the worst cases is partly reversion to the average, whether the cases are the twenty lowest-scoring eval items or the week with the highest resting heart rate of the year.",
+    "gold_implication": "Re-run the untouched items alongside the tuned ones, and compare the heart-rate change against a start date chosen at random rather than the worst week.",
+    "hidden_mechanism": "improvement after selecting the worst cases is partly reversion to the average",
+    "note_a": "br11-a",
+    "note_b": "br11-b"
+  },
+  "br13": {
+    "domain_a": "ecom",
+    "domain_b": "grants",
+    "gold_connection": "Both cash squeezes come from receipt lag against expense cadence, not from profitability: marketplace payouts land 14 days after sales while ad spend bills daily, and the grant pays most of its money months after the costs are incurred.",
+    "gold_implication": "Build a week-by-week cash model that places each inflow at its actual receipt date and see which weeks go negative under both schedules.",
+    "hidden_mechanism": "cash gaps come from the lag between doing the work and receiving payment, not from margin",
+    "note_a": "br13-a",
+    "note_b": "br13-b"
+  },
+  "br14": {
+    "domain_a": "grants",
+    "domain_b": "iot",
+    "gold_connection": "Nothing watches for things that should have happened and did not: a partner deliverable six weeks late and a sensor that went silent both went unnoticed because only submitted items and only error messages are tracked.",
+    "gold_implication": "Add a weekly check that lists every deliverable and every sensor with no event since its expected date and sends that list even when it is empty.",
+    "hidden_mechanism": "the absence of an expected event is never alerted, only errors are",
+    "note_a": "br14-a",
+    "note_b": "br14-b"
+  },
+  "br17": {
+    "domain_a": "ecom",
+    "domain_b": "health",
+    "gold_connection": "Churn at the third billing cycle and dropout around day twenty are the same point: the effort has been paid and the visible result has not arrived yet, so people leave right before they would have seen it.",
+    "gold_implication": "Send a \"what to expect by week three\" message on day ten to the next subscriber cohort and compare cycle-three cancellations with the previous cohort.",
+    "hidden_mechanism": "people quit at the point where effort has been paid but results have not yet appeared",
+    "note_a": "br17-a",
+    "note_b": "br17-b"
+  },
+  "br19": {
+    "domain_a": "iot",
+    "domain_b": "mleval",
+    "gold_connection": "An LLM judge ages like a sensor: even with the snapshot pinned, the same fifty outputs score differently three months apart, so it needs what the sensors get, a fixed reference checked on a schedule with an alarm on divergence.",
+    "gold_implication": "Re-score the same fifty reference outputs every week and alert when the mean moves more than two percent.",
+    "hidden_mechanism": "a measuring instrument drifts slowly and silently; a fixed reference re-checked on a schedule catches it",
+    "note_a": "br19-a",
+    "note_b": "br19-b"
+  },
+  "br20": {
+    "domain_a": "iot",
+    "domain_b": "mleval",
+    "gold_connection": "A check that runs less often than the failure lasts never observes it: the nightly eval cannot see twenty-minute mid-day outages, and a ten-minute sensor cannot see two-minute pressure spikes.",
+    "gold_implication": "Run a small eval every fifteen minutes for a week and compare what it catches against the nightly run.",
+    "hidden_mechanism": "a check that runs less often than the failures last will never see them",
+    "note_a": "br20-a",
+    "note_b": "br20-b"
+  },
+  "br21": {
+    "domain_a": "grants",
+    "domain_b": "health",
+    "gold_connection": "Both funnels spend the expensive step on people a five-question check would have excluded: weeks of proposal writing before an eligibility rejection, and a purchase before a contraindication questionnaire.",
+    "gold_implication": "Put a five-question eligibility check in front of the grant intake form and count how many applicants it turns away in the first month.",
+    "hidden_mechanism": "a cheap disqualifying check placed after the expensive step wastes the expensive step",
+    "note_a": "br21-a",
+    "note_b": "br21-b"
+  },
+  "br22": {
+    "domain_a": "grants",
+    "domain_b": "health",
+    "gold_connection": "Reporting frequency predicts non-compliance: partners on monthly timesheets are late most months while the quarterly partner is never late, and logging every meal lasted nine days while one weekly weigh-in has lasted five months.",
+    "gold_implication": "Switch the two monthly partners to quarterly submissions with a one-line monthly confirmation and compare on-time rates over the next two quarters.",
+    "hidden_mechanism": "the more often reporting is required, the less of it gets done",
+    "note_a": "br22-a",
+    "note_b": "br22-b"
+  },
+  "br23": {
+    "domain_a": "iot",
+    "domain_b": "fraud",
+    "gold_connection": "Both systems accept messages whose timestamp is nowhere near the current time: a sensor with a reset clock corrupted the daily rollup with 2024 readings, and callers reuse a signed ticket days after it was issued; both need a freshness window.",
+    "gold_implication": "Reject any signed call ticket older than five minutes and any sensor packet whose timestamp is more than ten minutes from server time, then count rejections for a week.",
+    "hidden_mechanism": "accepting a message whose timestamp is far from now lets stale or replayed messages corrupt the system",
+    "note_a": "br23-a",
+    "note_b": "br23-b"
+  }
+}

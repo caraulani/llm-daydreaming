@@ -1,0 +1,1946 @@
+{
+  "corpus_sha256": "f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a",
+  "cost_usd": 1.8476,
+  "cost_usd_prior": 1.3604,
+  "docs": [
+    {
+      "bridge_id": "br01",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br01-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes the suspicious pattern (timing, fresh card entry, small amounts) but does not name the mechanism—stolen-card validation runs for fraud testing. A reader would flag the pattern as concerning and recommend more verification, but would not infer the specific diagnosis that these are f",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f7b6389e5ceca76ab2e9323e465547d3ba789fe3dabbeae1b648b51a93b8883a",
+      "tries": 1,
+      "words": 155,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br01",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br01-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies low-value transactions from new cards and recommends velocity rules and fraud-ring monitoring, but does not mention refunds, promo launches, or the concept of validation runs—the core mechanism and diagnostic approach of the hidden connection.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "b3b7abaef054a6eaa13f4e3ae4474581e0da5cb9c130cf794b3d9dc07add8316",
+      "tries": 1,
+      "words": 182,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br02",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br02-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes the suspicious pattern explicitly (14 distinct customer names, electronics accessories, express shipping, small lots at one address) but never names the cause (stolen card fraud), the diagnosis (reshipping drop point), or the recommended check (hold addresses with 5+ names for manu",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3413c3b68f11781ab1e05aa6b218e475fc2de2262ea7298a312b7a82a6b2be2e",
+      "tries": 6,
+      "words": 119,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br02",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br02-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes symptoms (parcel-forwarding addresses, multiple shipments, international cardholders disputing within weeks) but does not explicitly state that multiple customer names ship to the same addresses, nor specify the detection method of counting distinct customer names per address with",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4c121b12a816d441a855cbb006e69dbc23995627995eef775439372a02613278",
+      "tries": 6,
+      "words": 119,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br03",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br03-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "Resubmission A quoted the prior 4.2 score and received 4.6; Resubmission B omitted it and scored 3.9; yet reviewers found both similar in quality. The note states 'last round's score is front-loaded' in the current system. A careful reader would directly infer that evaluators move scores toward visi",
+        "final": "LEAK",
+        "verdicts": [
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "597c2dac41761a000a34dc5bb01bc5dd5f62288250dd066f5ae5d041a6b07694",
+      "tries": 10,
+      "words": 139,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br03",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br03-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note explicitly states 'Can't yet tell if the variance came from the prompt modification, from drift in the eval environment itself, or something else entirely,' indicating the author has not diagnosed the mechanism driving the score change.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "LEAK",
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "11c8e4466fa0c49a3bc14d220dff3261e297412dbdd1016911561e77ded98d16",
+      "tries": 4,
+      "words": 180,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br04",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br04-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that excellence (listed first in the rubric) received the most evaluation focus and widest score spread, but it does not state or directly imply the causal rule that rubric ORDER determines evaluator weighting. A reader sees correlation but not the underlying mechanism that reorder",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "a9a37925604a8c3331fa64c2c17302ad135e4fd246cc4073202c477b28db8d78",
+      "tries": 1,
+      "words": 164,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br04",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br04-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions that the client emphasizes tone and discusses adjusting rubrics, but never suggests that the order or sequence of criteria in a rubric affects evaluation weighting—it treats 'importance' as an intrinsic property of tone, not as a function of rubric position.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "a63f7c05e3d19366440874c8d47bc5ba089a4e56c7b598e0ad55172ad309ea19",
+      "tries": 4,
+      "words": 156,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br05",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br05-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes sensors scheduled 'relative to their last transmission' and a fixed gateway window, and observes packet loss increasing through the day, but does not explicitly name the cause (schedule drift), diagnosis (drift out of window), or mechanism. While the components are present, a read",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7dac190468d96efd33d816e6ef16f5fe7f62a39153f4052333c961b602a26ecc",
+      "tries": 1,
+      "words": 175,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br05",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br05-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes increasing times (07:05→07:20→07:40→08:05→08:30) but explicitly attributes this to 'morning schedule changes rather than any systematic deviation,' preventing a reader from inferring the actual mechanism of event-relative drift or the fix of switching to fixed clock time.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "b085b9f0aa71b298a86f35826a37053da5d11f38c369f7f5ef37a818eb8de190",
+      "tries": 4,
+      "words": 150,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br06",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br06-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents the observations (humidity increase, device replacement, external reference stable) but concludes 'ambient conditions within the workshop have altered slightly,' accepting the measurement change as real rather than identifying it as a device artifact, and suggests no diagnostic che",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "2d313e7a984680982f43190304ca4a9cac0bb52c21a8cb2cc56d35f7b67b0f5f",
+      "tries": 10,
+      "words": 102,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br06",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br06-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note acknowledges the device change 'potentially influencing sleep metrics' and states 'no direct correlation between specific features of the new ring and improved sleep quality could be established,' but never states or implies the diagnostic principle that a step change coinciding with a devi",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "e62ee251efff194146c88375975a6a22dab24531f61fc892c023efeff6518d02",
+      "tries": 2,
+      "words": 125,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br07",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br07-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents the contrasting results (12% lift in week 36 vs. 1% in week 37) and mentions 'different cohort composition' as a difference, but does not name the principle that measuring on the same tuning period overstates effects, nor does it recommend recomputing on subsequent data.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4734d6dd925c40d095b7d7d9319738b46cf0dd524828c53f7b374d153d1de097",
+      "tries": 3,
+      "words": 154,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br07",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br07-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that evaluation occurred on the batch used for tuning (91 score) and that scores dropped on data from a later period (74 score), but does not explicitly state or diagnose the principle that measuring on the same data used for tuning inflates scores. It attributes the score drop to ",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "9194d3e678aca3c47bcd9a7b56fd4736983b7649f9ac7f8f1895ab088da6f7a5",
+      "tries": 3,
+      "words": 184,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br08",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br08-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "Review requests are sent post-carrier confirmation. Lost parcels do not trigger these. — This directly states that the review metric (and its 4.6 average) is calculated only on delivered cases, which embodies the hidden connection that both metrics are computed only on survivors.",
+        "final": "LEAK",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "0095a0b4febbd863bb91f5cec59760050f8df03e11e0d956e0e7501b89a06cc0",
+      "tries": 10,
+      "words": 67,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br08",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br08-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The phrase 'Abandoned discussions do not factor into this tally' directly states the mechanism: abandonments are excluded from the pass rate denominator, allowing a reader to infer that proper measurement would require including them as failures.",
+        "final": "LEAK",
+        "verdicts": [
+          null,
+          "LEAK",
+          "LEAK",
+          null,
+          null,
+          null,
+          null,
+          "LEAK",
+          "LEAK",
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "c8702709b628edf8ad09c1f30b4e66a552f7b109c770620cb249052b72152b7a",
+      "tries": 10,
+      "words": 121,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br09",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br09-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents specific observations (registration numbers 2847-XYZ and 2845-XYZ, same incorporation date, similar sector) and describes cautious file handling, but does not name the general principle that sequential identifiers across independent parties indicate a single operator, nor does it r",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "183780030f06d1cb88d90ab0f1d18ccdd9364e40bdf09a5b5d331ef19fc3cd18",
+      "tries": 2,
+      "words": 151,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br09",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br09-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes the sequential number pattern and multiple independent-appearing accounts but does not name the diagnostic principle (sequential identifiers exposing a single operator) or recommend the specific check (adjacency checking on identifiers). It suggests other follow-up signals (IP, de",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "LEAK",
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "1f1072ad8e1dd67cdc670ad9f9a851046aec20da21ee07af5e259f16cb775981",
+      "tries": 4,
+      "words": 163,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br10",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br10-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note directly correlates submission timing with outcomes: last-minute submissions 'all had minor formatting errors' while earlier submissions 'did not have any issues,' with last-hour submissions scoring '0.7 lower on average.' This enables a reader to infer the mechanism—deadline pressure degra",
+        "final": "LEAK",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "a5ca8191c4e8e0df53bab7205f5c5446c8681252cf64c0b4f4b2c1dcfd3f2652",
+      "tries": 10,
+      "words": 72,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br10",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br10-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note documents the symptom (3x higher reversals in the final hour, queue backups toward the deadline, reviewers clearing at 16:00) but does not explicitly state or directly name the causal mechanism (that hard cutoffs measurably degrade decision quality) or the recommended fix (moving submission",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "LEAK",
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "ca360767900906800a0bb90a380dafd997eec32c217eba75041e2ce4d07b0bb8",
+      "tries": 4,
+      "words": 102,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br11",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br11-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note documents that untouched items also improved (\"twenty different items that I hadn't touched also moved\"), which suggests something beyond the prompt changes is responsible, but it stops at observation—it never names regression to the mean, reversion to baseline, natural variance, or any mec",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "798fc403945fc0dc533809ad648ef188e7cab6cb10ff039f7f3bb8d529179fc3",
+      "tries": 4,
+      "words": 166,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br11",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br11-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents the data (highest HR of 68 bpm at protocol start, prior 12-month average of 63 bpm, subsequent reading of 62 bpm) but does not name or diagnose regression to the mean, or suggest that the improvement might be partly statistical rather than protocol-driven.",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "0e733ff72ae072d7b8f06094dc4a42710af96236310f805de9ccc072dc98936a",
+      "tries": 2,
+      "words": 167,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br12",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br12-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note correlates email send time (14:00) with error onset (14:00-14:20) and observes the site 'handled twice the hourly average without issues earlier,' but attributes problems to vague 'temporary server load balancing issues' without naming synchronization-of-load or batching as the mechanism. P",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "1381836d0c16c49e0bbe46092ff4271cf56a8a9bef0cf0bbb0ec7efbb7a70246",
+      "tries": 3,
+      "words": 105,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br12",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br12-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note directly contrasts 'All 200 sensors reconnected...within that second' producing 180 dropped packets against 'Typical traffic consists of around 200 messages per minute with no drops noted,' which explicitly reveals the mechanism: the receiver fails under simultaneous load concentration but ",
+        "final": "LEAK",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          "LEAK",
+          null,
+          "LEAK",
+          "LEAK",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "010c9d41b780d0f414fed3aef6a1902d5a448f316895040c90f1951e9696cbd4",
+      "tries": 10,
+      "words": 74,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br13",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br13-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents the 14-day marketplace settlement lag and daily ad charges as separate facts, and notes overdrafts occur in high-sales weeks, but does not explicitly state or name that the timing mismatch between these two cadences is the cause—a reader would need to infer the causal connection ra",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "59f8a0d76b3d0b3f5d03491426ea49d73e3430ac170e2f15f4ea74afb700c308",
+      "tries": 2,
+      "words": 153,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br13",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br13-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note raises timing concerns and mentions that financial math 'assumes timeline holds,' but does not identify that cash squeezes stem from receipt lag against expense cadence (monthly salaries, daily ad spend vs. delayed grant payments), nor does it suggest modeling actual receipt dates week-by-w",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "LEAK",
+          null,
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "82c1255c7b3d882ad7d0ac6dbfb0b7161dac38c7dc0c8b5253041628647e15ab",
+      "tries": 5,
+      "words": 183,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br14",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br14-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes the symptom (tracker only shows submitted items, making delays hard to spot) but does not state the general mechanism (\"nothing watches for things that should have happened and did not\") or recommend the specific fix (weekly check listing deliverables/sensors with no event since e",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "a5dca8a8d8b612bd932b63df358068e4836c7d2af58766455bd93ac9b112469b",
+      "tries": 2,
+      "words": 135,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br14",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br14-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes only a sensor-specific monitoring gap (alerts for errors only) but does not reveal the general pattern or its impact on other systems like deliverables, nor does it suggest the systemic weekly-check solution mentioned in the hidden connection.",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f418abf45c00e6357d9cbb78148978fa256d81a30be3930ef67b6f7944e723a3",
+      "tries": 2,
+      "words": 101,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br15",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br15-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note restates the factual gap (scores up 15 points, satisfaction flat after rubric disclosure) but does not name the mechanism (that disclosed rules become optimization targets) or propose the withheld-criterion test to detect it.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "561710cfad26e5477167a0f92ae0179e45ac0e55e4fdc28fce0520419ddfda1d",
+      "tries": 1,
+      "words": 137,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br15",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br15-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note directly states 'Told support in August: flag accounts making three or more purchases within ten minutes' and then observes 'accounts caught in holds are making exactly two purchases every ten minutes instead... always two. The constraint is precise.' This explicitly demonstrates the mechan",
+        "final": "LEAK",
+        "verdicts": [
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "3acf5695c03a2b1bb2272e30bd6c4d39aca246cf6ffa7f7c9cd88d8ef2a08c97",
+      "tries": 10,
+      "words": 168,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br16",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br16-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note states 'The account adheres to its daily spend cap but exceeds legitimate usage norms' (9 purchases in 6 minutes) and concludes 'Implementing per-window limits could help address these anomalies.' This directly names both the mechanism (long-period limits don't prevent bursts) and the fix (",
+        "final": "LEAK",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK",
+          null,
+          null,
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "2f9a0dd92394663f49aa393cd8609f5c4db71691630a0778f252c8599647c923",
+      "tries": 10,
+      "words": 76,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br16",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br16-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The final line 'Max of seven doses per week without mention of spacing' directly names the absence of spacing constraints as the enabling mechanism, allowing a reader to infer that adding a per-window spacing rule would be the corrective diagnosis—exactly the implication the hidden connection must c",
+        "final": "LEAK",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "c1a118f5e9df77fab57bf32731aa61381864962f270a14d09e1b2e04b40cea80",
+      "tries": 10,
+      "words": 65,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br17",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br17-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes the cycle-three churn spike (19%) and separately documents that deliveries occur only on scheduled drop dates, but does not state or imply the causal mechanism—that the delay until day twenty combined with sunk payment triggers the exit. The phrase 'Worth tracking whether this patt",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "e030d2bd49b34a05702448d1eae6bf169805aff8b1c0a0631abf7ab9ad946a78",
+      "tries": 2,
+      "words": 181,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br17",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br17-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies lack of timeline guidance as creating uncertainty during the early phase and correlates this with day-20 dropouts, but never mentions payment, billing cycles, or the mechanism that people leave because they've *paid* without seeing results yet, and never proposes any intervention",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "1b8888a0346e5715ae341c801f1b1e5a34b2a90dbba975d6d5eed8076fa49620",
+      "tries": 1,
+      "words": 168,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br18",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br18-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that matching delivery days reduces cancellation but does not explain the underlying mechanism (behaviors tied to existing routines persist) or specify the recommended intervention (offer matching shopping day to new subscribers, test six-month retention against default-day cohort)",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3c546520ef6330f39313823f8058b0a6a3ffbcad5ac21e330ca4e88392c55414",
+      "tries": 6,
+      "words": 104,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br18",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br18-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note directly contrasts the morning dose 'takes with coffee...Missed twice in three months' against the evening dose with 'no fixed companion...Missed eleven times,' providing the raw mechanism (routine pairing drives adherence) that a careful reader could use to design the recommended retention",
+        "final": "LEAK",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          "LEAK",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "d538ed9e09264fa07c312ce1d84d2e3e29d7883eb4c0a80d471afae8700b28cb",
+      "tries": 10,
+      "words": 78,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br19",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br19-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note discusses only workshop temperature sensors and their calibration; it contains no hint, analogy, or reference to LLM judges, scoring systems, or any methodology meant to generalize beyond physical sensor monitoring.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2316dc4e2d82060192ff41fa6e08746ad355119a6e4e823c8285c6fece970561",
+      "tries": 2,
+      "words": 176,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br19",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br19-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note documents the reproducibility problem (2% score drift three months later even with pinned snapshots) but does not propose periodic re-scoring with drift alarms as a solution; it only describes starting to pin snapshot IDs and add metadata, which are distinct mitigations.",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6de0949390b58b6489587c857cbba512fedfd205e976a8ac06e3fa8d0f40c025",
+      "tries": 2,
+      "words": 185,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br20",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br20-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that valve spikes (lasting ~2 minutes) do not correlate with pressure sensor reports (every 10 minutes), but it restates these facts without naming the cause—sampling frequency insufficient to detect sub-interval failures—or the fix. A reader would have to infer the sampling-rate m",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "446781ce2e5edd061631c0c5163efc60d964d9b935b9c6d06864470c58178856",
+      "tries": 1,
+      "words": 104,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br20",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br20-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that nightly evals report no issues while users report twenty-minute interruptions and logs show no correlation, but does not name the underlying mechanism (that checks running less frequently than failure duration cannot observe the failures) nor the specific fix (running evals ev",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "74c7fa3602968cf36c238f675eb5aabec62364a3b0eadebe3b0294a3bddbd73d",
+      "tries": 3,
+      "words": 106,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br21",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br21-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes the five assessment points and 3-4 week decision timeline, but never discusses moving the eligibility check earlier or creating a pre-screening mechanism. It states the current process (proposal submission → wait → eligibility decision) without naming the inefficiency or recommend",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "1eeaa04a641ceb3e0b17190feccf4344916ad6daff8baceb2d6898d249f84110",
+      "tries": 2,
+      "words": 185,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br21",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br21-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes only the purchase-then-questionnaire funnel and does not mention the grant-intake funnel that is central to the hidden connection; a reader cannot infer the pattern across both funnels or the specific recommendation about eligibility checks in grant intake.",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "b345169c7d1bcf4cb8491370518ace7223ec8f94f6c9809a0f01e231252c7805",
+      "tries": 2,
+      "words": 161,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br22",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br22-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note states the observations (monthly timesheets late 7/12 months, quarterly partner never late) but does not explicitly name the causal relationship (reporting frequency predicts compliance) or recommend the intervention (switching to quarterly submissions).",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "080f2d268fb4cb479565837cfa3386541eabeb963701ac637292913fa2992a3f",
+      "tries": 2,
+      "words": 178,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br22",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br22-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents the raw observations (daily meal logging lasted 9 days, weekly weigh-ins lasted 5 months) but does not state or name the causal mechanism—it does not claim that reporting frequency predicts compliance, and it closes by saying both practices 'aim to maintain a routine' without expla",
+        "final": "CLEAN",
+        "judged_after_build": true,
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "LEAK",
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "157720dd8d5153c3999ba2459117aa9a5756e2159670da0971ee6a74edb2fb56",
+      "tries": 10,
+      "words": 69,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br23",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br23-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies that old timestamps were accepted without rejection and corrupted the rollup, but stops at proposing investigation ('check what the packet handler does') without recommending or implying a freshness-window solution or connecting this to any other system's timestamp handling.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2fbfbdb7d7e81dcfe7e6c88d7305128ff0adc6b7c8b68eeb90ec9c01f9463614",
+      "tries": 1,
+      "words": 190,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br23",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br23-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "While the note hints that 'other systems have the same blind spot,' it does not identify which systems, their specific failure mode (a sensor with a reset clock producing 2024 readings), or the recommended remedy (reject messages older than a specified freshness window, with concrete intervals like ",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d99992f3daa5af9f46fdfe22b4cdb80e5acdc63ded3c7cf358ad39375f36717a",
+      "tries": 1,
+      "words": 188,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br24",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br24-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note directly connects default credentials ('passwords from the boxes') to compromise ('appeared on a public device search engine') and recovery ('Renamed and reconfigured ones didn't show up'), making the cause-and-fix obvious without the hidden note.",
+        "final": "LEAK",
+        "verdicts": [
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          null,
+          "LEAK",
+          null,
+          "LEAK"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "c391027637f15a22dd3b92b1e189371af349aaae674943c897b097fdc7422810",
+      "tries": 10,
+      "words": 105,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": "br24",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br24-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note restates observations (default PIN → compromise, custom PIN → secure) but does not name the mechanism (camera with default password on public scanner) or recommend the specific check (force change at setup, audit all defaults). It only recommends 'encourage users' and 'further research,' wh",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6b7e5252b0ed44aeda36f5ab5ec3eeab041e3cd771d2e6fc5353e370a46b11d5",
+      "tries": 3,
+      "words": 116,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc01",
+      "domain": "ecom",
+      "id": "dc01-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7762b597f6783f5730197fd7764a639e14f3b6180f9d04da5e2646083f149a8b",
+      "tries": 1,
+      "words": 201,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc01",
+      "domain": "fraud",
+      "id": "dc01-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "48c5005623dbc45a658f50f95f2488e8d7a54286b601c03ce3a877f0d415f954",
+      "tries": 1,
+      "words": 201,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc02",
+      "domain": "health",
+      "id": "dc02-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "83d9e4a91819523dd0769b849e36393147654080058289b21bd0fc3643f86017",
+      "tries": 5,
+      "words": 119,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc02",
+      "domain": "iot",
+      "id": "dc02-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3660823c15f5e2465653fa911780b1d7a3e749e456803b815f32e4ddc1307f68",
+      "tries": 5,
+      "words": 103,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc03",
+      "domain": "mleval",
+      "id": "dc03-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "84c9fcd8eba200e5123333b074d3a9d95500c8a3a288d7b9aa5a4e112219cdbd",
+      "tries": 1,
+      "words": 172,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc03",
+      "domain": "iot",
+      "id": "dc03-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "83e8044101ab28294f6cb7121f7ffc29bc1a7ffbcb4fcc429a437f8ee2e1a35e",
+      "tries": 1,
+      "words": 205,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc04",
+      "domain": "ecom",
+      "id": "dc04-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "149e71ca7059fb9bc7372cf2c0b3f21ded838b2cc543055bd0af7a389ca9f10f",
+      "tries": 1,
+      "words": 117,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc04",
+      "domain": "health",
+      "id": "dc04-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6fe5f0e783c5f5cdb78905c864b1d1f6e4b81ecf22fdbb513e40b12d29ec0291",
+      "tries": 1,
+      "words": 129,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc05",
+      "domain": "ecom",
+      "id": "dc05-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2546ba5e1732f2a3cdc6fb7d51e82442a3a8a6061db0cb9b016d879bdd26e09f",
+      "tries": 1,
+      "words": 223,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc05",
+      "domain": "iot",
+      "id": "dc05-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "73f8cb9921282c6f3ff08a56304adbf91fea12dd59aa29dcf7af976151ffa6d3",
+      "tries": 1,
+      "words": 156,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc06",
+      "domain": "grants",
+      "id": "dc06-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "91d5521b7b932b536b962e3cb1076c185979984d6359bfbaf5cd63c1605f085d",
+      "tries": 5,
+      "words": 107,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc06",
+      "domain": "fraud",
+      "id": "dc06-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6886245a8b2ead3936532109c56385acc45aea081de779fb49f9c841bde01e82",
+      "tries": 5,
+      "words": 124,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc07",
+      "domain": "health",
+      "id": "dc07-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ae0dd5bd8579a5671b5f6e801af3a0445e51772eb984c19497acb65450f614a0",
+      "tries": 1,
+      "words": 162,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc07",
+      "domain": "ecom",
+      "id": "dc07-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7ffaf4fe3f0f98d3ac1acbce04caf2bb7b89d466cf7d134d87658fd76579a202",
+      "tries": 2,
+      "words": 150,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc08",
+      "domain": "iot",
+      "id": "dc08-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "sha256": "73837ad3b38e966fb05d8dbb1d7d05380a6b956f9058105c723cbe936679ee43",
+      "tries": 10,
+      "words": 87,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc08",
+      "domain": "grants",
+      "id": "dc08-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "sha256": "8e2ad952592ae41119261b9a77c45bd71d5b42aaaf1446c75c63764f6bcf80b7",
+      "tries": 10,
+      "words": 88,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc09",
+      "domain": "mleval",
+      "id": "dc09-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "665ed491450643e59fa9a2ae185a276209f85d1c31da884416201fd6cdb85ef4",
+      "tries": 1,
+      "words": 159,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc09",
+      "domain": "grants",
+      "id": "dc09-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3356b8431782c840ec23ce8ff448096b1d1f5255f5a288369dbd4be169928e74",
+      "tries": 1,
+      "words": 209,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc10",
+      "domain": "fraud",
+      "id": "dc10-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4996b19324aeaefdfa602db4528d6acf27f506daedf2939a29d1c7803b01bc3c",
+      "tries": 4,
+      "words": 108,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc10",
+      "domain": "health",
+      "id": "dc10-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "e79c964ff0dd3e5fe0568a4d4083e9a965df355abab7651d48c16cf4318000e7",
+      "tries": 5,
+      "words": 108,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc11",
+      "domain": "mleval",
+      "id": "dc11-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "865d30b788e522a2dbe00a83e07a3942704b1aff17c8ab915c72cb403e8df379",
+      "tries": 1,
+      "words": 232,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc11",
+      "domain": "fraud",
+      "id": "dc11-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "1043aa6e5bbc7c0567899333bd4a0e4fbcfaec064923430895b423dd53c95075",
+      "tries": 1,
+      "words": 224,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc12",
+      "domain": "grants",
+      "id": "dc12-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2dc149803acd27783fde855b5a4e939ea9a4d5e6a09d310cc8664e8ca805da82",
+      "tries": 4,
+      "words": 103,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc12",
+      "domain": "mleval",
+      "id": "dc12-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "17bd247705a94a955832d9a887940bff4a363bc846404eff6b84cfa53f225649",
+      "tries": 2,
+      "words": 109,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl01",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "56286199ac5e90a30d150d8c1060f5be0c85406614a4adecf80a4ee5603e6d7d",
+      "tries": 1,
+      "words": 168,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl02",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "8850a56efed1f13b1b83e91911327be1ffc8d28c4e504913cc80fbc8ad35d4fc",
+      "tries": 3,
+      "words": 124,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl03",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "939ed481e60174a5c3e5d5200908230094940de1f547aefe164bd17bc0ad242c",
+      "tries": 1,
+      "words": 213,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl04",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "9539b942204f9406df25940caed11cfb77304def66bb40b8f39a2500291b8e04",
+      "tries": 5,
+      "words": 113,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl05",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "5eedb2027f23776de225f7478cefb934efacec2be7830cf9fa78daf884bbe6cf",
+      "tries": 1,
+      "words": 180,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl06",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f09105bc95470a846f86b70b6bad5b400bf75bd63acc3d4627c9fd4dd3c61109",
+      "tries": 2,
+      "words": 120,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl07",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "c7a422f56f59fb7cab13508a63e98fe8d9f351bdfb18c6752209bb392116494c",
+      "tries": 1,
+      "words": 223,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl08",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "edc99d228a52e3b863db72fe9152d62f21bf41d680d1a2da4bf48c15770019f6",
+      "tries": 2,
+      "words": 112,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl09",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3bf91e19040b5b02dd46f25dee2ea644615a3800f4f5174dd18fbb1d199e33e3",
+      "tries": 1,
+      "words": 228,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl10",
+      "kind": "filler",
+      "leaks_final": [],
+      "sha256": "f6b29a4d70d85f770c24b77301aa694d126349bef5aef128c02c566a08864918",
+      "tries": 8,
+      "words": 103,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl11",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "5523a90e32f0d1f1d46738aa802bd8a18d28c9d5f722237eb8a75501ba4381a4",
+      "tries": 1,
+      "words": 229,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl12",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4b91ec0611ea18a407f438e633efba8aab7decdfcf2827a1401d33227429318d",
+      "tries": 3,
+      "words": 116,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl13",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d6b3413029bc85b764eb20dbf60ae9133a29d435ee349548c341d31bcf560130",
+      "tries": 3,
+      "words": 167,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl14",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "bb17e3d5678676bf53cdbd52ce32aef96521ee81a05b5c8156e1d53bb6d07ad3",
+      "tries": 1,
+      "words": 123,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl15",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d510ace4d93c82e2cd4a0a5181ddc4570d980847601c77d166d3c26694ea1c8b",
+      "tries": 2,
+      "words": 164,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl16",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ad5adf2b3fe758f0401216df842f9c000733a8606e6e9cba5e548607eb5062fd",
+      "tries": 3,
+      "words": 100,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl17",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "383f2fe657444c83a72a0e0736a5e817261328299cead1200148fa9ea755923d",
+      "tries": 2,
+      "words": 185,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl18",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "00cd55565281603b977c26e31ec364d4732ae06c77a84bb6fab48162162ae808",
+      "tries": 1,
+      "words": 137,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl19",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7dece665ab385d861fdf3104345ed29633d7746e06d3cb5e9d54f88dd87ad3dd",
+      "tries": 1,
+      "words": 226,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl20",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7e64dad9769c8c52278d86f0bbcdc0a081ddc3cff44be7bd507b61427dda3801",
+      "tries": 1,
+      "words": 103,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl21",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3ae2819bf7d8a40b3027b954c9c9b22a10276a698f3230c557e974dac997bd2c",
+      "tries": 1,
+      "words": 167,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl22",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3a690ab92d9539a415080d2b193ec4e4c52c0b69c865da1000938da7d3be7bb2",
+      "tries": 5,
+      "words": 101,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl23",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "1081e576026b9895963e0dcb92e3b537009424a0811aafc42598eba1794053bb",
+      "tries": 1,
+      "words": 169,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl24",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "fb9931115de59e314eb8d134cc4de22b9155159869fe55c5dc97200a143dc783",
+      "tries": 5,
+      "words": 80,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    }
+  ],
+  "excluded_bridges": [
+    "br03",
+    "br08",
+    "br10",
+    "br12",
+    "br15",
+    "br16",
+    "br18",
+    "br24"
+  ],
+  "frozen_at": "2026-09-14",
+  "generated_at": "2026-09-13T22:23:28+00:00",
+  "leak_judge": {
+    "enabled": true,
+    "failures": [
+      "br03-a",
+      "br08-a",
+      "br08-b",
+      "br10-a",
+      "br12-b",
+      "br15-b",
+      "br16-a",
+      "br16-b",
+      "br18-b",
+      "br24-a"
+    ],
+    "judged_after_build": [
+      "br08-a",
+      "br10-a",
+      "br12-b",
+      "br16-a",
+      "br16-b",
+      "br18-b",
+      "br22-b"
+    ],
+    "model_ids": [
+      "claude-haiku-4-5-20251001"
+    ]
+  },
+  "leakage_failures": [
+    "br03-a",
+    "br08-a",
+    "br08-b",
+    "br10-a",
+    "br12-b",
+    "br15-b",
+    "br16-a",
+    "br16-b",
+    "br18-b",
+    "br22-b",
+    "br24-a",
+    "dc08-a",
+    "dc08-b"
+  ],
+  "leakage_ngram": 6,
+  "max_tries": 10,
+  "min_words": 100,
+  "n_bridges": 24,
+  "n_bridges_planted": 16,
+  "n_decoys": 12,
+  "n_notes": 96,
+  "prompt_sha256": {
+    "leak_judge": "41d4bf1df5a305e0a07f42fa637ceb75f19739ac31a46cadacda8be18c096295",
+    "synth_note": "4e814d7cc52e8f3baf5ab446a8875fe91fca7c74e0d1948e372e01d19a1af626"
+  },
+  "resumed_from": {
+    "corpus_sha256": "f7363ba80f55d0f5a60ab84eee041cac69bbc6699540e363b830338354370830",
+    "generated_at": "2026-09-13T22:06:16+00:00"
+  },
+  "reused_notes": 77,
+  "short_after_max_tries": [
+    "br08-a",
+    "br10-a",
+    "br12-b",
+    "br16-a",
+    "br16-b",
+    "br18-b",
+    "br22-b",
+    "dc08-a",
+    "dc08-b",
+    "fl24"
+  ],
+  "version": "v0.2",
+  "writer_model_ids": [
+    "claude-haiku-4-5-20251001",
+    "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+  ],
+  "writers": {
+    "A": {
+      "backend": "claude-cli",
+      "model": "haiku"
+    },
+    "B": {
+      "backend": "ollama",
+      "model": "hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M"
+    }
+  }
+}
