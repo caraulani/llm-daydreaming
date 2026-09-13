@@ -276,7 +276,10 @@ def synthetic_tables(
         )
     finds = exploratory_finds(d["generations"], d["critic"], d["dup"])
     write_jsonl(out_dir / "exploratory_finds.jsonl", finds)
+    decision = _decision(spec, enrich, arms)
+    (out_dir / "DECISION.md").write_text(decision["md"], encoding="utf-8")
     summary = {
+        "decision": {k: v for k, v in decision.items() if k != "md"},
         "enrichment": enrich,
         "oracle": spec,
         "arms": arms,
@@ -379,3 +382,62 @@ def human_tables(
             encoding="utf-8",
         )
     return {"arms": arms, "n": len(v)}
+
+
+def _decision(spec: dict[str, Any], enrich: dict[str, Any], arms: dict[str, Any]) -> dict[str, Any]:
+    """Apply the preregistered decision rule (PREREGISTRATION.md section 5) to the run."""
+    groups = spec.get("groups", {})
+    s0, b4 = arms.get("S0"), arms.get("B4")
+    n_pl = groups.get("planted", {}).get("units", 0)
+    n_dc = groups.get("decoy", {}).get("units", 0)
+    rec = s0["bridges_recovered"] if s0 else 0
+    # decoy false positives after critic and dupgate (survivor rate x units, rounded)
+    dc_rate = groups.get("decoy", {}).get("survivor_rate", (0.0, 0.0, 0.0))[0]
+    fp = int(round(dc_rate * n_dc))
+    h1_p = fisher_one_sided(rec, max(1, n_pl), fp, max(1, n_dc))
+    h1 = h1_p < 0.05
+    h2_ps = {a: v["p_hypergeom"] for a, v in enrich.get("arms", {}).items() if a in ("B3", "B6")}
+    h2 = any(p < 0.05 for p in h2_ps.values())
+    h3_p = None
+    h3 = False
+    if s0 and b4:
+        h3_p = fisher_one_sided(
+            s0["bridges_recovered"],
+            max(1, s0["bridges_reachable"]),
+            b4["bridges_recovered"],
+            max(1, b4["bridges_reachable"]),
+        )
+        h3 = h3_p < 0.05
+    signal = h1 and h2
+    md = "\n".join(
+        [
+            "# Preregistered decision rule (PREREGISTRATION.md section 5)",
+            "",
+            f"- H1 (planted recall {rec}/{n_pl} vs decoy false positives {fp}/{n_dc}, Fisher one-sided): p = {h1_p:.4f} -> {'PASS' if h1 else 'FAIL'}",
+            "- H2 (sampler enrichment, hypergeometric): "
+            + ", ".join(f"{a} p = {p:.3f}" for a, p in sorted(h2_ps.items()))
+            + f" -> {'PASS' if h2 else 'FAIL'}",
+            (
+                f"- H3 (S0 two-note recall vs B4 one-note recall, Fisher one-sided): p = {h3_p:.4f} -> {'PASS' if h3 else 'FAIL'}"
+                if h3_p is not None
+                else "- H3: not computable (missing S0 or B4)"
+            ),
+            "",
+            f"**Decision: {'SIGNAL' if signal else 'NULL'}** (signal requires H1 and H2 both passing).",
+            "",
+        ]
+    )
+    return {
+        "h1": {
+            "p": h1_p,
+            "pass": h1,
+            "recovered": rec,
+            "planted": n_pl,
+            "decoy_fp": fp,
+            "decoys": n_dc,
+        },
+        "h2": {"p": h2_ps, "pass": h2},
+        "h3": {"p": h3_p, "pass": h3},
+        "signal": signal,
+        "md": md,
+    }
