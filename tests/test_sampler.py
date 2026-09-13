@@ -51,3 +51,15 @@ def test_partner_domain_units_use_fillers_from_partner_domain(cards):
     assert [u.note_b for u in units] == ["fl01", "fl02"]
     assert all(u.label == "partner:br01" for u in units)
     assert all(u.arm == "S1" for u in units)
+
+
+def test_cross_domain_near_stays_in_band_and_crosses_domains(cards, vecs):
+    from daydreamd.core.sampler import band_edges, candidate_pairs, sample_cross_domain_near
+
+    notes = sorted({c["source_note"] for c in cards})
+    domains = {n: ("even" if i % 2 == 0 else "odd") for i, n in enumerate(notes)}
+    units = sample_cross_domain_near(cards, vecs, domains, n=5, seed=3)
+    _, dist = candidate_pairs(cards, vecs)
+    lo, hi = band_edges(dist)["Q1"]
+    assert units and all(lo <= u.distance < hi for u in units)
+    assert all(domains[u.note_a] != domains[u.note_b] for u in units)

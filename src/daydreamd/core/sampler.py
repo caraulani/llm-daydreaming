@@ -195,6 +195,45 @@ def single_units(cards: list[dict], notes: list[str], arm: str = "B4") -> list[U
     ]
 
 
+def sample_cross_domain_near(
+    cards: list[dict],
+    vecs: np.ndarray,
+    domains: dict[str, str],
+    n: int,
+    seed: int,
+    band: str = "Q1",
+    arm: str = "B7",
+) -> list[Unit]:
+    """Exploratory arm: pairs that are NEAR in embedding space but from DIFFERENT domains.
+
+    Post-hoc analysis of the sealed run's sampled units (before any generation result was read)
+    showed every planted bridge's closest card pair in the nearest distance band. This arm samples
+    from that band while forcing a domain boundary. When ``domains`` is empty (non-synthetic
+    corpora), it falls back to "different note" only.
+    """
+    rng = np.random.default_rng(seed)
+    pairs, dist = candidate_pairs(cards, vecs)
+    edges = band_edges(dist)
+    lo, hi = edges[band]
+    note = [c["source_note"] for c in cards]
+    in_band = np.where((dist >= lo) & (dist < hi))[0]
+    pool = [
+        int(t)
+        for t in in_band
+        if not domains or domains.get(note[pairs[t, 0]]) != domains.get(note[pairs[t, 1]])
+    ]
+    take = rng.choice(len(pool), size=min(n, len(pool)), replace=False)
+    units = []
+    for k, t in enumerate(take):
+        idx = pool[int(t)]
+        u = _unit_from_pair(
+            cards, int(pairs[idx, 0]), int(pairs[idx, 1]), float(dist[idx]), arm, k, edges
+        )
+        u.band = band
+        units.append(u)
+    return units
+
+
 def partner_domain_units(
     cards: list[dict],
     gold: dict,

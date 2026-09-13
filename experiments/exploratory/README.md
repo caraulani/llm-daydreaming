@@ -10,3 +10,4 @@ change the sealed decision rule.
 | X1_partner_control | does the gold mechanism appear when the partner note is replaced by a mechanism-free filler from the same domain? | 2026-09-13 | no |
 | X2_generator_haiku | does selection quality track generator size (smaller)? | 2026-09-13 | no |
 | X2_generator_opus | does selection quality track generator size (larger)? | 2026-09-13 | no |
+| X3_cross_domain_near | does sampling near-in-embedding, far-in-domain pairs (B7) enrich planted pairs and recall where far-band sampling cannot? | 2026-09-13 | sampled units and embeddings only; no generation output |

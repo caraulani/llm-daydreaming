@@ -29,6 +29,7 @@ from .core.sampler import (
     random_note_pairs,
     sample_anchor_remote,
     sample_banded,
+    sample_cross_domain_near,
     sample_random,
     single_units,
 )
@@ -147,6 +148,11 @@ def stage_sample(run: RunDir, cfg: dict[str, Any]) -> list[Unit]:
         units += sample_banded(cards, vecs, int(arms["B3"].get("per_band", 25)), seed + 3)
     if "B6" in arms:
         units += sample_anchor_remote(cards, vecs, int(arms["B6"].get("n", 50)), seed + 6)
+    if "B7" in arms:
+        b7 = arms["B7"]
+        units += sample_cross_domain_near(
+            cards, vecs, domains, int(b7.get("n", 100)), seed + 7, str(b7.get("band", "Q1"))
+        )
     if "B4" in arms:
         sel = arms["B4"].get("notes", "bridge")
         if sel == "bridge" and gold:
