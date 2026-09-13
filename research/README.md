@@ -14,3 +14,4 @@ The audit trail behind daydreamd. Nothing here is edited after the fact; correct
 Reading order for a newcomer: `BRIEF` (SETTLED POSITION only), then `02`, then `03`, then `../PREREGISTRATION.md`, then `../paper/paper.md`.
 
 The three 2026-09-13 reports were produced by parallel agent runs on Claude Fable 5.1 and are reproduced verbatim, including any typographic habits of the model. Documents authored for the repo itself follow the style rules in `../CONTRIBUTING.md`.
+- `05-prior-art-execution-verified-code-2026-09-13.md`: sweep on execution-verified daydreaming over a codebase (the v0.2 direction); component-by-component claimed/unclaimed verdict and a v0.2 eval design.
