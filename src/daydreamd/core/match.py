@@ -15,7 +15,7 @@ def bridge_for_unit(gen: dict, gold: dict, note_to_bridge: dict[str, str]) -> st
     if gen["kind"] == "single":
         return note_to_bridge.get(gen["note_a"])
     label = gen.get("label") or ""
-    if label.startswith("planted:"):
+    if label.startswith(("planted:", "partner:")):
         return label.split(":", 1)[1]
     key = note_pair_key(gen["note_a"], gen["note_b"])
     for bid, g in gold.items():

@@ -233,6 +233,47 @@ def synthetic_tables(
             ],
             "Recombination vs single-note reflection on the same bridge notes",
         )
+    s1 = arms.get("S1")
+    if s1 and s0:
+        p_s1 = fisher_one_sided(
+            s0["bridges_recovered"],
+            max(1, s0["bridges_reachable"]),
+            s1["bridges_recovered"],
+            max(1, s1["bridges_reachable"]),
+        )
+        rows7 = [
+            [
+                "S0 bridge note + true partner",
+                s0["bridges_reachable"],
+                s0["bridges_recovered"],
+                _fmt_rate(s0["recall"]),
+                f"{p_s1:.3g}",
+            ],
+            [
+                "S1 bridge note + partner-domain filler",
+                s1["bridges_reachable"],
+                s1["bridges_recovered"],
+                _fmt_rate(s1["recall"]),
+                "",
+            ],
+        ]
+        if b4:
+            rows7.append(
+                [
+                    "B4 bridge note alone",
+                    b4["bridges_reachable"],
+                    b4["bridges_recovered"],
+                    _fmt_rate(b4["recall"]),
+                    "",
+                ]
+            )
+        _write_table(
+            out_dir,
+            "T7",
+            ["arm", "bridges reachable", "recovered", "recall", "fisher p (S0 > S1)"],
+            rows7,
+            "Exploratory control (not preregistered): does the gold mechanism appear when the partner note is replaced by a mechanism-free filler from the same domain?",
+        )
     finds = exploratory_finds(d["generations"], d["critic"], d["dup"])
     write_jsonl(out_dir / "exploratory_finds.jsonl", finds)
     summary = {

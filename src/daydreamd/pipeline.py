@@ -25,6 +25,7 @@ from .core.sampler import (
     label_units,
     note_pair_key,
     note_units,
+    partner_domain_units,
     random_note_pairs,
     sample_anchor_remote,
     sample_banded,
@@ -137,6 +138,9 @@ def stage_sample(run: RunDir, cfg: dict[str, Any]) -> list[Unit]:
         )
         triples += [(a, b, "random") for a, b in rnd]
         units += note_units(cards, triples, "S0")
+    if "S1" in arms and gold:
+        notes = [d["id"] for d in manifest["docs"]]
+        units += partner_domain_units(cards, gold, domains, notes, seed + 11, "S1")
     if "B1" in arms:
         units += sample_random(cards, vecs, int(arms["B1"].get("n", 100)), seed + 1)
     if "B3" in arms:

@@ -195,6 +195,33 @@ def single_units(cards: list[dict], notes: list[str], arm: str = "B4") -> list[U
     ]
 
 
+def partner_domain_units(
+    cards: list[dict],
+    gold: dict,
+    domains: dict[str, str],
+    notes: list[str],
+    seed: int,
+    arm: str = "S1",
+) -> list[Unit]:
+    """Exploratory control: each bridge note paired with a FILLER note from its partner's domain.
+
+    The filler carries the partner domain's vocabulary but none of the mechanism's ingredients.
+    If the generator still produces the gold mechanism here, recovery in S0 is being driven by
+    one note plus domain cues rather than by reading both notes. Label: ``partner:<bridge>``.
+    """
+    rng = np.random.default_rng(seed)
+    triples: list[tuple[str, str, str]] = []
+    for bid, g in sorted(gold.items()):
+        for me, partner in ((g["note_a"], g["note_b"]), (g["note_b"], g["note_a"])):
+            pdom = domains.get(partner)
+            pool = sorted(n for n in notes if n.startswith("fl") and domains.get(n) == pdom)
+            if not pool:
+                continue
+            filler = pool[int(rng.integers(len(pool)))]
+            triples.append((me, filler, f"partner:{bid}"))
+    return note_units(cards, triples, arm)
+
+
 def random_note_pairs(
     notes: list[str], domains: dict[str, str], excluded: set[tuple[str, str]], n: int, seed: int
 ) -> list[tuple[str, str]]:

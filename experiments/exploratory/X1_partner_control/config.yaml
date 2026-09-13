@@ -1,0 +1,18 @@
+# EXPLORATORY, NOT PREREGISTERED. Written after the sealed run started (2026-09-13), before its
+# results were read. Adversarial control: S1 pairs each bridge note with a mechanism-free filler
+# from the partner's domain. If S1 recall approaches S0 recall, S0 recovery is driven by one note
+# plus domain cues, and H1 is weaker than it looks. Same corpus, same prompts, same models.
+corpus: {kind: synth, path: data/synth/v0.1}
+visibility: public
+slug: x1_partner_control
+seed: 20260914
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku, match: haiku}
+concurrency: 4
+arms:
+  S0: {random_pairs: 0}      # 12 planted + 6 decoys only, re-run for a within-run comparison
+  S1: {}                     # 24 units: each bridge note + a partner-domain filler
+  B4: {notes: bridge}        # 24 single-note units
+dupgate_threshold: 0.85
+blind: {enabled: false}
+stats: {n_perm: 10000}

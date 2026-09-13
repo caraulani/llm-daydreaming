@@ -39,3 +39,15 @@ def test_random_and_anchor_remote_sizes(cards, vecs):
     q75 = float(np.quantile(dist, 0.75))
     assert all(u.distance >= q75 - 1e-6 for u in ar)
     assert all(u.note_a != u.note_b for u in ar)
+
+
+def test_partner_domain_units_use_fillers_from_partner_domain(cards):
+    from daydreamd.core.sampler import partner_domain_units
+
+    gold = {"br01": {"note_a": "n1", "note_b": "n2"}}
+    domains = {"n1": "ecom", "n2": "fraud", "fl01": "fraud", "fl02": "ecom", "fl03": "iot"}
+    notes = list(domains)
+    units = partner_domain_units(cards, gold, domains, notes, seed=1)
+    assert [u.note_b for u in units] == ["fl01", "fl02"]
+    assert all(u.label == "partner:br01" for u in units)
+    assert all(u.arm == "S1" for u in units)

@@ -87,7 +87,9 @@ def arm_summary(
         n_dup = statuses.count("duplicate")
         n_surv = statuses.count("survivor")
         planted = [
-            g for g in gens if (g.get("label") or "").startswith("planted:") or (arm == "B4")
+            g
+            for g in gens
+            if (g.get("label") or "").startswith(("planted:", "partner:")) or (arm == "B4")
         ]
         planted_matched = {
             midx[g["unit_id"]]["bridge_id"]
@@ -97,7 +99,7 @@ def arm_summary(
         planted_bridges = {
             (g.get("label") or "").split(":", 1)[1]
             for g in planted
-            if (g.get("label") or "").startswith("planted:")
+            if (g.get("label") or "").startswith(("planted:", "partner:"))
         }
         if arm == "B4":
             planted_bridges = {
