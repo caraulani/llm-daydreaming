@@ -7,4 +7,4 @@
 # The exact id the provider reports is recorded per note in manifest.json (writer_model_id).
 families:
   A: {backend: claude-cli, model: haiku}
-  B: {backend: openrouter, model: TBD}
+  B: {backend: ollama, model: qwen2.5:7b-instruct}

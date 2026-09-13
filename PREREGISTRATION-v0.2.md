@@ -44,7 +44,7 @@ v0.2 rebuilds the corpus with oblique ingredients, a paraphrase-leak judge, shap
 
 **Filler notes (24).** Four per domain, no planted role.
 
-**Note writers (two families).** Bridges with odd ids, and decoys and fillers at odd positions, are written by `claude-haiku-4-5-20251001` (or the current Haiku snapshot, recorded from the run log). Bridges with even ids, and decoys and fillers at even positions, are written by a non-Anthropic model through the `openrouter` backend. Exact id to be fixed here before sealing: `WRITER_B_MODEL_ID = TBD` (candidate: an OpenAI GPT-class or Google Gemini-class snapshot with a dated id). Prompt `prompts/synth_note.md` version 2 for both. Provider default temperature, no seed control, both recorded.
+**Note writers (two families).** Bridges with odd ids, and decoys and fillers at odd positions, are written by `claude-haiku-4-5-20251001` (or the current Haiku snapshot, recorded from the run log). Bridges with even ids, and decoys and fillers at even positions, are written by a non-Anthropic open-weight model run locally through the `ollama` backend: `WRITER_B_MODEL_ID = ollama/qwen2.5:7b-instruct` (Qwen 2.5 7B Instruct, Alibaba; the exact model digest Ollama reports is recorded per note in the manifest). Prompt `prompts/synth_note.md` version 2 for both. Family A at the provider's default temperature; family B at temperature 0.7 (the Ollama backend default); no seed control; both recorded. Family B is a small open model on purpose: if a 7B model's notes are recovered at the same rate as Haiku's, shared frontier-lab priors cannot explain recovery.
 
 **Leakage check, two parts, both required for every bridge note.** (1) No 6-gram of any gold connection or gold implication appears in the note. (2) The leak judge (`prompts/leak_judge.md` version 1, Haiku-class) returns CLEAN when shown the note alone with its gold connection and implication. A note failing either check is regenerated, up to five attempts; a bridge whose note cannot pass in five attempts is excluded before sealing the manifest and listed in the datasheet. Both check outputs are committed with the corpus.
 
@@ -136,7 +136,7 @@ Claims not permitted in v0.2 text: "novel ideas", "discovers", "anticipates", an
 
 ## 15. Sealing
 
-1. Fill `WRITER_B_MODEL_ID` in Section 6. Write this file and the answer key (`data/synth/v0.2/bridges.yaml`, `decoys.yaml`, `fillers.yaml`). Do not run any model call for the experiment before step 5. Development smoke tests on a throwaway corpus are not the experiment; they are logged under `experiments/runs/public/*_smoke/` and never enter a table.
+1. `WRITER_B_MODEL_ID` is filled in Section 6. Write this file and the answer key (`data/synth/v0.2/bridges.yaml`, `decoys.yaml`, `fillers.yaml`). Do not run any model call for the experiment before step 5. Development smoke tests on a throwaway corpus are not the experiment; they are logged under `experiments/runs/public/*_smoke/` and never enter a table.
 2. Compute `shasum -a 256` of this file and of the three answer-key files, list the three answer-key hashes below, and commit the four files together.
 3. Stamp: `ots stamp PREREGISTRATION-v0.2.md data/synth/v0.2/bridges.yaml data/synth/v0.2/decoys.yaml data/synth/v0.2/fillers.yaml`; commit the `.ots` proofs. Tag the seal commit `v0.2.0-prereg`.
 4. Record the commit hash here after commit: `PREREG_COMMIT = TBD`.
