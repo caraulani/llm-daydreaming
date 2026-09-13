@@ -11,3 +11,4 @@ change the sealed decision rule.
 | X2_generator_haiku | does selection quality track generator size (smaller)? | 2026-09-13 | no |
 | X2_generator_opus | does selection quality track generator size (larger)? | 2026-09-13 | no |
 | X3_cross_domain_near | does sampling near-in-embedding, far-in-domain pairs (B7) enrich planted pairs and recall where far-band sampling cannot? | 2026-09-13 | sampled units and embeddings only; no generation output |
+| X4_critic_ablation | is the critic's recall loss a model-size effect? Same generations, critic alias sonnet | 2026-09-13 | yes (sealed results read) |

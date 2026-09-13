@@ -35,6 +35,10 @@ def get_backend(name: str) -> Backend:
         from .ollama import OllamaBackend
 
         return OllamaBackend()
+    if name == "openrouter":
+        from .openrouter import OpenRouterBackend
+
+        return OpenRouterBackend()
     if name == "fake":
         from .fake import FakeBackend
 

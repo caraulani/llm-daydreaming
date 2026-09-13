@@ -1,0 +1,15 @@
+# EXPLORATORY, NOT PREREGISTERED. Written 2026-09-13 after reading the sealed run's results.
+# Critic ablation on the SAME generations as the sealed run: the critic prompt is unchanged, the
+# critic model alias is 'sonnet' instead of 'haiku'. Question: is the recall loss (3 of 8 correct
+# recoveries killed) a model-size effect or a prompt effect?
+corpus: {kind: synth, path: data/synth/v0.1}
+visibility: public
+slug: x4_critic_sonnet
+seed: 20260913
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: sonnet, match: haiku}
+concurrency: 4
+arms: {}
+dupgate_threshold: 0.85
+blind: {enabled: false}
+stats: {n_perm: 10000}
