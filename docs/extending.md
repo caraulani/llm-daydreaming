@@ -65,7 +65,7 @@ class Backend(Protocol):
     def complete(self, prompt: str, *, model: str) -> Completion: ...
 ```
 
-Built-in backends, selected by the `backend` key in a config: `claude-cli` (default, runs `claude -p --output-format json` and reads the exact model id from the `modelUsage` envelope), `anthropic` (the Anthropic API, needs `ANTHROPIC_API_KEY`), `fake` (deterministic, used by the tests and CI), `ollama` (stub for v0.2).
+Built-in backends, selected by the `backend` key in a config: `claude-cli` (default, runs `claude -p --output-format json` and reads the exact model id from the `modelUsage` envelope), `anthropic` (the Anthropic API, needs `ANTHROPIC_API_KEY`), `openrouter` (OpenAI-compatible, needs `OPENROUTER_API_KEY`; the second model family for the v0.2 corpus), `fake` (deterministic, used by the tests and CI), `ollama` (stub).
 
 Rules:
 
