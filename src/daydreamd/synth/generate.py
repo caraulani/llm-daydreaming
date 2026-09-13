@@ -120,9 +120,26 @@ def note_acceptable(
     return True, "ok"
 
 
+META_PREFIXES = ("Note:", "(Note:", "(Note", "Note that the note", "This note ")
+
+
 def clean_note(text: str) -> str:
-    """Drop harness trailers (attribution lines) and trailing separators the writer may append."""
+    """Strip harness trailers and writer meta-commentary from the end of a generated note.
+
+    Small models often append lines such as "(Note: the note adheres to the constraints...)"
+    after the last section. Anything from the last such line to the end is removed, as are
+    trailing separators. Nothing inside the note body is touched.
+    """
     lines = [ln for ln in text.strip().splitlines() if not ln.strip().startswith(TRAILER_PREFIXES)]
+    # drop a trailing meta block: from the last line that starts with a meta prefix, if that
+    # line is within the last 6 lines and no section header follows it
+    for k in range(len(lines) - 1, max(-1, len(lines) - 7), -1):
+        stripped = lines[k].strip().lstrip("*_ ")
+        if stripped.startswith(META_PREFIXES) and not any(
+            ln.startswith("#") for ln in lines[k + 1 :]
+        ):
+            lines = lines[:k]
+            break
     while lines and lines[-1].strip() in {"", "---"}:
         lines.pop()
     return "\n".join(lines).strip() + "\n"
