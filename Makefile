@@ -40,6 +40,7 @@ stats:
 reproduce:
 	@for d in experiments/runs/public/*/; do \
 	  name=$$(basename $$d); cfg=$$(grep '^config:' $$d/metadata.yaml | sed 's/config: //'); \
+	  if [ ! -f $$d/match_gold.jsonl ] && [ ! -f $$d/blind/key.sha256 ]; then echo "== $$name (incomplete, skipped)"; continue; fi; \
 	  echo "== $$name ($$cfg)"; \
 	  $(UV) run daydreamd stats $$d $$cfg --out results/public/$$name; \
 	done
