@@ -1,0 +1,96 @@
+backend: claude-cli
+config: experiments/micro-v0.2/config.yaml
+corpus_sha256: f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a
+cost_usd_total: 85.038388
+created: '2026-09-13T22:27:02+00:00'
+models:
+  cards:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_haiku:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_sonnet:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  generator:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  match_gold:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+n_docs: 96
+prompts:
+  cards: f2a7ac1a733d6e0e1d85783c70fec47a8b6bb5e607d9186e4269507c18495f83
+  critic: 49ec635bc7728fd788fefbe89a9c950518d024e087a014a5c78be6a0b3e63232
+  generate_pair: feddedd87fb396dbc5a724189027844ae38afdf09d3fa132f3ea44654c784dc3
+  generate_single: 1547b9759c6bf811367f0455a35373aa570d47ced44250e830f8c74037f0d632
+  match_gold: 09d4576cca8726d24b2f74030fa7c9334d2b4a3284bd3482f9bf03958470a1fc
+run_id: 2026-09-14_micro_v0_2
+seed: 20260920
+stages:
+  cards:
+    cost_usd: 3.1869
+    finished: '2026-09-13T22:36:10+00:00'
+    n_cards: 483
+    n_docs: 96
+  critic:
+    critics:
+    - haiku
+    - sonnet
+    finished: '2026-09-13T23:22:08+00:00'
+    n_judged: 151
+    n_keep: 104
+    primary: haiku
+  critic_haiku:
+    cost_usd: 4.4925
+    finished: '2026-09-13T23:22:08+00:00'
+    n_judged: 151
+    n_keep: 104
+  critic_sonnet:
+    cost_usd: 13.2931
+    finished: '2026-09-13T23:29:19+00:00'
+    n_judged: 151
+    n_keep: 111
+  dupgate:
+    finished: '2026-09-13T23:29:24+00:00'
+    n_checked: 104
+    n_dup: 0
+    threshold: 0.85
+  embed:
+    finished: '2026-09-13T22:36:21+00:00'
+    model: sentence-transformers/all-MiniLM-L6-v2
+    n: 483
+  generate:
+    cost_usd: 62.9328
+    error: 2
+    finished: '2026-09-13T23:08:15+00:00'
+    malformed: 0
+    n_units: 728
+    none: 575
+    ok: 151
+  match_gold:
+    cost_usd: 1.133
+    finished: '2026-09-13T23:32:34+00:00'
+    n_judged: 42
+    n_match: 15
+  sample:
+    arms:
+      B1: 300
+      B4: 32
+      B7: 300
+      S0: 64
+      S1: 32
+    finished: '2026-09-13T22:36:21+00:00'
+    n_units: 728
+  snapshot:
+    finished: '2026-09-13T22:27:02+00:00'
+    n_docs: 96
+  stats:
+    finished: '2026-09-13T23:32:35+00:00'
+    human_track: false
+    tables: /Users/julian/Desktop/I/dreaming/repo/experiments/runs/public/2026-09-14_micro_v0_2/tables
+visibility: public

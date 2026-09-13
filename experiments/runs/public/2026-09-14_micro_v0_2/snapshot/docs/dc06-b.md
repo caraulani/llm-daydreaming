@@ -1,0 +1,1 @@
+This note captures the essence of the issue, actions taken, and planned steps without exceeding the word limit or expanding into an essay.

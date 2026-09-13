@@ -1,0 +1,3 @@
+critic,model id,correct recoveries,surviving,killed,decoy answers,decoy surviving,kill rate on random
+haiku,claude-haiku-4-5-20251001,6,3,3,2,0,"100.0% [34, 100]"
+sonnet,claude-sonnet-5,6,5,1,2,1,"100.0% [34, 100]"

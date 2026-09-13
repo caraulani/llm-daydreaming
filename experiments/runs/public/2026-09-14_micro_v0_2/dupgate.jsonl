@@ -1,0 +1,104 @@
+{"unit_id": "S0-0000", "max_cosine": 0.6548, "nearest": "Promo series refund spike ## Timing Three promos back-to-back starting mid-March. Refund requests jumped reliably two days after each code dropped. Same pattern", "already_in_corpus": false}
+{"unit_id": "S0-0001", "max_cosine": 0.5616, "nearest": "## Apartment Address Orders One apartment in a less-frequent shipping city received orders under 14 distinct customer names this month. All items were resellabl", "already_in_corpus": false}
+{"unit_id": "S0-0002", "max_cosine": 0.7177, "nearest": "Applicants show larger score spread in excellence ratings, making it the primary differentiator.", "already_in_corpus": false}
+{"unit_id": "S0-0005", "max_cosine": 0.4387, "nearest": "Tone varies widely among models that perform similarly on other metrics", "already_in_corpus": false}
+{"unit_id": "S0-0009", "max_cosine": 0.5349, "nearest": "Project tracker only shows submitted items, preventing early detection of delays.", "already_in_corpus": false}
+{"unit_id": "S1-0000", "max_cosine": 0.653, "nearest": "IP address validation checks were added to verify connections originate from allowed countries.", "already_in_corpus": false}
+{"unit_id": "B1-0006", "max_cosine": 0.56, "nearest": "Five accounts require manual review of flagged suspicious activity", "already_in_corpus": false}
+{"unit_id": "B1-0010", "max_cosine": 0.6783, "nearest": "Cart abandonment rate decreased 1.2 percentage points following Apple Pay implementation", "already_in_corpus": false}
+{"unit_id": "B1-0024", "max_cosine": 0.5264, "nearest": "Sensor firmware should be reviewed for faster reconnection capabilities after power events", "already_in_corpus": false}
+{"unit_id": "B1-0030", "max_cosine": 0.7358, "nearest": "Deep sleep increase was not attributable to supplement changes or pre-sleep activity modifications.", "already_in_corpus": false}
+{"unit_id": "B1-0031", "max_cosine": 0.6484, "nearest": "Unclear if ticket reuse is isolated incident or systematic validation failure.", "already_in_corpus": false}
+{"unit_id": "B1-0035", "max_cosine": 0.6301, "nearest": "Rewrote scoring prompt to handle edge cases; lowest 20 items improved 30% on retest.", "already_in_corpus": false}
+{"unit_id": "B1-0040", "max_cosine": 0.5053, "nearest": "Clients need stable monthly evaluation numbers to distinguish genuine system improvements from measurement noise.", "already_in_corpus": false}
+{"unit_id": "B1-0044", "max_cosine": 0.5467, "nearest": "Low-scoring predictions had consistent annotations, ruling out data quality drift as cause of drop.", "already_in_corpus": false}
+{"unit_id": "B1-0047", "max_cosine": 0.6232, "nearest": "Impact on conversion rates for purchases completed after hold since rule deployment is unknown.", "already_in_corpus": false}
+{"unit_id": "B1-0049", "max_cosine": 0.6197, "nearest": "Few repeat customers appear among refund requests compared to typical customer composition.", "already_in_corpus": false}
+{"unit_id": "B1-0053", "max_cosine": 0.628, "nearest": "Daily 2024-01-15 average shifted noticeably upward after processing packet backlog", "already_in_corpus": false}
+{"unit_id": "B1-0058", "max_cosine": 0.54, "nearest": "# Support volume spike after carrier switch ## Timeline and numbers Switched parcel carriers on Sept 1st. Email volume to support went from ~40/day baseline to ", "already_in_corpus": false}
+{"unit_id": "B1-0076", "max_cosine": 0.6492, "nearest": "Log review and comparative testing with known working setup are planned diagnostics.", "already_in_corpus": false}
+{"unit_id": "B1-0078", "max_cosine": 0.5012, "nearest": "40% of returns are caused by size issues; customers report unclear charts and images not showing true fit.", "already_in_corpus": false}
+{"unit_id": "B1-0079", "max_cosine": 0.6518, "nearest": "Queue backs up to 40-50 cases on high-traffic days, with holds lasting 2 to 72 hours and no hard SLA.", "already_in_corpus": false}
+{"unit_id": "B1-0085", "max_cosine": 0.7458, "nearest": "Log rotation settings (weekly, 10 files) couldn't keep pace with tripled debug log volume.", "already_in_corpus": false}
+{"unit_id": "B1-0088", "max_cosine": 0.6185, "nearest": "Model performance metrics artificially degraded on EU side for narrative generation tasks", "already_in_corpus": false}
+{"unit_id": "B1-0095", "max_cosine": 0.4442, "nearest": "Rubric wording changes reduced judge disagreement ## Initial rubric problems - Original \"factual accuracy\" definition too vague, judges interpreted differently ", "already_in_corpus": false}
+{"unit_id": "B1-0100", "max_cosine": 0.5768, "nearest": "what was purchased or merchant category. ## Chargeback Wave Same batch started chargebacks 5 to 7 weeks later. Processor's dispute notes flagged all cards as re", "already_in_corpus": false}
+{"unit_id": "B1-0110", "max_cosine": 0.5213, "nearest": "reading. If any sensor drifts that far, the alarm fires and I get a signal to investigate. Happens once a month or so, usually resets after a power cycle. ## Ne", "already_in_corpus": false}
+{"unit_id": "B1-0115", "max_cosine": 0.5746, "nearest": "reading. If any sensor drifts that far, the alarm fires and I get a signal to investigate. Happens once a month or so, usually resets after a power cycle. ## Ne", "already_in_corpus": false}
+{"unit_id": "B1-0123", "max_cosine": 0.6882, "nearest": "Old sensor topics retained as read-only in broker config after hardware changes to preserve subscriptions.", "already_in_corpus": false}
+{"unit_id": "B1-0132", "max_cosine": 0.5615, "nearest": "Legitimate transactions move to refund faster than fraud cases, which require longer manual review.", "already_in_corpus": false}
+{"unit_id": "B1-0146", "max_cosine": 0.6221, "nearest": "User feedback monitoring planned for 2 weeks post-update to validate firmware improvements.", "already_in_corpus": false}
+{"unit_id": "B1-0153", "max_cosine": 0.7465, "nearest": "Stolen cards sourced from different issuers and regions despite coordinated batch attack", "already_in_corpus": false}
+{"unit_id": "B1-0161", "max_cosine": 0.6931, "nearest": "Conversations with resolved flags have 88% pass rate; abandoned discussions create 19% effective abandonment rate.", "already_in_corpus": false}
+{"unit_id": "B1-0173", "max_cosine": 0.7796, "nearest": "Only deadline-proximal submissions had formatting errors; early ones had none.", "already_in_corpus": false}
+{"unit_id": "B1-0187", "max_cosine": 0.4322, "nearest": "Split vague 'accuracy' into three criteria: factual claims, numerical precision, date/source correctness.", "already_in_corpus": false}
+{"unit_id": "B1-0210", "max_cosine": 0.5354, "nearest": "Binary pass/fail at 70 hides progress in 40-69 band, all appear equally failed.", "already_in_corpus": false}
+{"unit_id": "B1-0213", "max_cosine": 0.5519, "nearest": "Eight transactions flagged as suspicious in the past week", "already_in_corpus": false}
+{"unit_id": "B1-0226", "max_cosine": 0.6703, "nearest": "Implemented exact snapshot ID pinning in all runs to detect unexpected model updates sooner.", "already_in_corpus": false}
+{"unit_id": "B1-0228", "max_cosine": 0.7698, "nearest": "Apple Pay users experienced zero disputes, suggesting strong payment reliability despite small sample size", "already_in_corpus": false}
+{"unit_id": "B1-0237", "max_cosine": 0.5184, "nearest": "IP address validation checks were added to verify connections originate from allowed countries.", "already_in_corpus": false}
+{"unit_id": "B1-0253", "max_cosine": 0.4762, "nearest": "Historical drift analysis will determine whether pattern is systematic or noise to guide corrective action.", "already_in_corpus": false}
+{"unit_id": "B1-0280", "max_cosine": 0.4363, "nearest": "Historical drift analysis will determine whether pattern is systematic or noise to guide corrective action.", "already_in_corpus": false}
+{"unit_id": "B1-0284", "max_cosine": 0.6146, "nearest": "## Resting HR: eight-week trend - Baseline (week 1, 2026-07-15): 62 bpm - Current (week 8, 2026-09-09): 58 bpm - Tracking method: HR strap, first reading after ", "already_in_corpus": false}
+{"unit_id": "B1-0288", "max_cosine": 0.4738, "nearest": "Expanding the evaluation rubric for tone and brevity will likely improve model selection", "already_in_corpus": false}
+{"unit_id": "B7-0000", "max_cosine": 0.7062, "nearest": "Legitimate accounts rarely exceed two purchases every ten minutes.", "already_in_corpus": false}
+{"unit_id": "B7-0005", "max_cosine": 0.762, "nearest": "Unclear if ticket reuse is isolated incident or systematic validation failure.", "already_in_corpus": false}
+{"unit_id": "B7-0030", "max_cosine": 0.6092, "nearest": "Order #4521 tags were placed on Order #4573 items but caught at final scan before shipping, preventing customer error.", "already_in_corpus": false}
+{"unit_id": "B7-0032", "max_cosine": 0.4888, "nearest": "Reviewer queues accumulate every afternoon, with all remaining items cleared by 16:00 daily.", "already_in_corpus": false}
+{"unit_id": "B7-0035", "max_cosine": 0.5634, "nearest": "No fraud detected, likely due to competitor promotions - Sent email reminders to existing customers on Dec 20th ## Next Steps - Monitor customer feedback for po", "already_in_corpus": false}
+{"unit_id": "B7-0037", "max_cosine": 0.7161, "nearest": "Space heater use during break time likely caused the main breaker trip.", "already_in_corpus": false}
+{"unit_id": "B7-0060", "max_cosine": 0.5289, "nearest": "v1.2.3 firmware contains a documented minor glitch affecting REM cycle detection accuracy.", "already_in_corpus": false}
+{"unit_id": "B7-0065", "max_cosine": 0.7043, "nearest": "Apple Pay users experienced zero disputes, suggesting strong payment reliability despite small sample size", "already_in_corpus": false}
+{"unit_id": "B7-0068", "max_cosine": 0.6452, "nearest": "After deployment, flagged accounts shifted to making exactly two purchases every ten minutes.", "already_in_corpus": false}
+{"unit_id": "B7-0073", "max_cosine": 0.7076, "nearest": "Flash sale drove 5% increase in sales compared to previous weeks.", "already_in_corpus": false}
+{"unit_id": "B7-0081", "max_cosine": 0.541, "nearest": "Week 36 and week 37 had similar visitor volumes but different cohort compositions.", "already_in_corpus": false}
+{"unit_id": "B7-0091", "max_cosine": 0.5409, "nearest": "Legitimate transactions move to refund faster than fraud cases, which require longer manual review.", "already_in_corpus": false}
+{"unit_id": "B7-0097", "max_cosine": 0.5767, "nearest": "Proposals should emphasize quantitative results and case studies demonstrating project excellence.", "already_in_corpus": false}
+{"unit_id": "B7-0118", "max_cosine": 0.6228, "nearest": "Quarterly token expiration forces periodic user card re-verification, preventing long-lived token abuse.", "already_in_corpus": false}
+{"unit_id": "B7-0122", "max_cosine": 0.6985, "nearest": "Evaluation summaries allocate substantially more space to excellence than impact or implementation.", "already_in_corpus": false}
+{"unit_id": "B7-0123", "max_cosine": 0.6608, "nearest": "Evaluation summaries allocate substantially more space to excellence than impact or implementation.", "already_in_corpus": false}
+{"unit_id": "B7-0132", "max_cosine": 0.749, "nearest": "v1.2.3 firmware contains a documented minor glitch affecting REM cycle detection accuracy.", "already_in_corpus": false}
+{"unit_id": "B7-0144", "max_cosine": 0.6467, "nearest": "Request logs show no immediate correlation between failure times and observed patterns.", "already_in_corpus": false}
+{"unit_id": "B7-0145", "max_cosine": 0.6317, "nearest": "Project tracker only shows submitted items, preventing early detection of delays.", "already_in_corpus": false}
+{"unit_id": "B7-0152", "max_cosine": 0.6722, "nearest": "Checkout errors occurred from 14:00 to 14:20 during peak flash-sale traffic.", "already_in_corpus": false}
+{"unit_id": "B7-0169", "max_cosine": 0.5869, "nearest": "Criteria with concrete examples showed tighter agreement clustering than those with vague language.", "already_in_corpus": false}
+{"unit_id": "B7-0176", "max_cosine": 0.6345, "nearest": "Apple Pay checkout lift ## Implementation Added Apple Pay to Stripe checkout on Sept 8. One-click flow, matching Google Pay placement. Tested on iOS and desktop", "already_in_corpus": false}
+{"unit_id": "B7-0181", "max_cosine": 0.5586, "nearest": "Rerunning same outputs with current settings needed to test if variance is reproducible.", "already_in_corpus": false}
+{"unit_id": "B7-0182", "max_cosine": 0.7349, "nearest": "Apple Pay added to Stripe checkout Sept 8 with one-click flow matching Google Pay placement", "already_in_corpus": false}
+{"unit_id": "B7-0193", "max_cosine": 0.7328, "nearest": "Skipping midday water intake causes focus drops by 4pm during client calls.", "already_in_corpus": false}
+{"unit_id": "B7-0200", "max_cosine": 0.6231, "nearest": "Few repeat customers appear among refund requests compared to typical customer composition.", "already_in_corpus": false}
+{"unit_id": "B7-0219", "max_cosine": 0.5532, "nearest": "reading. If any sensor drifts that far, the alarm fires and I get a signal to investigate. Happens once a month or so, usually resets after a power cycle. ## Ne", "already_in_corpus": false}
+{"unit_id": "B7-0228", "max_cosine": 0.6414, "nearest": "Legitimate transactions move to refund faster than fraud cases, which require longer manual review.", "already_in_corpus": false}
+{"unit_id": "B7-0233", "max_cosine": 0.6433, "nearest": "## Observations Today All 200 sensors reconnected swiftly after a power cut. Gateway logs show 180 dropped packets within that second, unusual. ## Normal Traffi", "already_in_corpus": false}
+{"unit_id": "B7-0250", "max_cosine": 0.6035, "nearest": "```yaml --- name: Payments fraud patterns, August onwards description: Monitoring changes in hold triggers and account behavior type: project --- ``` ## Hold tr", "already_in_corpus": false}
+{"unit_id": "B7-0258", "max_cosine": 0.5791, "nearest": "Despite reviewer feedback noting both drafts as similar in quality, they received different numeric scores (4.6 vs 3.9).", "already_in_corpus": false}
+{"unit_id": "B7-0263", "max_cosine": 0.507, "nearest": "Increased appeals occur during the final hour before 24-hour SLA cutoff.", "already_in_corpus": false}
+{"unit_id": "B7-0277", "max_cosine": 0.7264, "nearest": "Sensor RTC either lacks onboard battery or UTC offset configuration points to wrong timezone", "already_in_corpus": false}
+{"unit_id": "B7-0281", "max_cosine": 0.5325, "nearest": "Apple Pay captured 24% of successful orders with 18% adoption on mobile, 6% on desktop Safari", "already_in_corpus": false}
+{"unit_id": "B7-0284", "max_cosine": 0.6417, "nearest": "Support team approves refunds quickly without examining payment details or order context before approval decisions.", "already_in_corpus": false}
+{"unit_id": "B7-0288", "max_cosine": 0.5505, "nearest": "Support was contacted at 14:00 to address portal lag but reported no improvement.", "already_in_corpus": false}
+{"unit_id": "B7-0295", "max_cosine": 0.5232, "nearest": "Total hourly spend, daily volumes, user segments, and churn remained unchanged despite timing pattern shifts.", "already_in_corpus": false}
+{"unit_id": "B4-0000", "max_cosine": 0.6147, "nearest": "``` --- name: Fraud Pattern Q3 2024 description: Batch chargeback pattern from new accounts, recent spike type: project --- Batch of low-value transactions from", "already_in_corpus": false}
+{"unit_id": "B4-0001", "max_cosine": 0.6832, "nearest": "Stolen cards sourced from different issuers and regions despite coordinated batch attack", "already_in_corpus": false}
+{"unit_id": "B4-0003", "max_cosine": 0.6072, "nearest": "Three distinct addresses associated with parcel-forwarding services triggered multiple shipment alerts", "already_in_corpus": false}
+{"unit_id": "B4-0004", "max_cosine": 0.5111, "nearest": "Proposals should emphasize quantitative results and case studies demonstrating project excellence.", "already_in_corpus": false}
+{"unit_id": "B4-0005", "max_cosine": 0.6864, "nearest": "Tone varies widely among models that perform similarly on other metrics", "already_in_corpus": false}
+{"unit_id": "B4-0006", "max_cosine": 0.54, "nearest": "Evening RF band congestion suspected as partial cause of packet loss spike; testing via extended gateway listen window planned.", "already_in_corpus": false}
+{"unit_id": "B4-0008", "max_cosine": 0.5773, "nearest": "## Sept 3rd Update Humidity readings in the shed bumped up to 60% from 52%. The old enclosure was replaced by a new, vented one that day. ## Weather Station Com", "already_in_corpus": false}
+{"unit_id": "B4-0009", "max_cosine": 0.8079, "nearest": "potentially influencing sleep metrics. Observations suggest a positive change but no direct correlation between specific features of the new ring and improved s", "already_in_corpus": false}
+{"unit_id": "B4-0010", "max_cosine": 0.7251, "nearest": "Week 36 and week 37 had similar visitor volumes but different cohort compositions.", "already_in_corpus": false}
+{"unit_id": "B4-0011", "max_cosine": 0.6181, "nearest": "## Prompt tuning and initial scoring Assembled the evaluation set from early client tickets, the same batch I used to refine the prompt. Ran the full eval pass ", "already_in_corpus": false}
+{"unit_id": "B4-0014", "max_cosine": 0.526, "nearest": "Prompt changes unexpectedly improved 20 different untouched items by 15% average.", "already_in_corpus": false}
+{"unit_id": "B4-0015", "max_cosine": 0.5831, "nearest": "Two-week review planned to compare current readings against initial protocol baseline.", "already_in_corpus": false}
+{"unit_id": "B4-0016", "max_cosine": 0.5763, "nearest": "## Account tracking Marketplace settlements run 14 days out from each sale. Ad spend charges hit the card every day. Two overdraft events this quarter: one in w", "already_in_corpus": false}
+{"unit_id": "B4-0017", "max_cosine": 0.595, "nearest": "The funder has not defined exact criteria for 'final report acceptance,' blocking timing for the 60% payment release.", "already_in_corpus": false}
+{"unit_id": "B4-0018", "max_cosine": 0.5776, "nearest": "## Project Status The partner's month-two deliverable was six weeks late before anyone noticed. The project tracker only shows items once they are submitted, ma", "already_in_corpus": false}
+{"unit_id": "B4-0020", "max_cosine": 0.6645, "nearest": "product only on drop dates, no interim contact or shipping. Worth tracking whether this pattern correlates with the cycle-three spike. ## Return customer tracki", "already_in_corpus": false}
+{"unit_id": "B4-0023", "max_cosine": 0.6474, "nearest": "Reran same outputs three months later with pinned ID showed 2% score variance from original.", "already_in_corpus": false}
+{"unit_id": "B4-0024", "max_cosine": 0.6437, "nearest": "## Pressure Sensor Reports The pressure sensor continues to report every ten minutes as scheduled. The data stream has been consistent without any anomalies. ##", "already_in_corpus": false}
+{"unit_id": "B4-0025", "max_cosine": 0.5229, "nearest": "Evaluation runs have been consistent with nightly tests executing without issue this month.", "already_in_corpus": false}
+{"unit_id": "B4-0026", "max_cosine": 0.5952, "nearest": "Two of five eligibility criteria remain unidentified from rejection pattern data.", "already_in_corpus": false}
+{"unit_id": "B4-0027", "max_cosine": 0.6154, "nearest": "Checkout and Immediate Outreach Contraindication questionnaire goes out by email right after order completes. Five questions, roughly two minutes to answer base", "already_in_corpus": false}
+{"unit_id": "B4-0028", "max_cosine": 0.7184, "nearest": "## Recent Timesheet Submissions The monthly timesheets for our two partners have been submitted late in seven of the last twelve months. The partner who submits", "already_in_corpus": false}
+{"unit_id": "B4-0030", "max_cosine": 0.5572, "nearest": "## Sensor clock incident Replaced battery in the hallway temp sensor Thursday afternoon, around 14:30. After the power cycle, packets started arriving with time", "already_in_corpus": false}
+{"unit_id": "B4-0031", "max_cosine": 0.5515, "nearest": "## Tickets and timing Found a call ticket that was issued three days prior, then presented for a new call. The signature verified correctly on our end, so the s", "already_in_corpus": false}

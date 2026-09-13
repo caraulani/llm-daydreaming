@@ -1,0 +1,1029 @@
+{
+  "corpus_sha256": "f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a",
+  "docs": [
+    {
+      "bridge_id": "br01",
+      "decoy_id": null,
+      "id": "br01-a",
+      "kind": "bridge",
+      "name": "br01-a.md",
+      "sha256": "f7b6389e5ceca76ab2e9323e465547d3ba789fe3dabbeae1b648b51a93b8883a",
+      "words": 139,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br01",
+      "decoy_id": null,
+      "id": "br01-b",
+      "kind": "bridge",
+      "name": "br01-b.md",
+      "sha256": "b3b7abaef054a6eaa13f4e3ae4474581e0da5cb9c130cf794b3d9dc07add8316",
+      "words": 178,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br02",
+      "decoy_id": null,
+      "id": "br02-a",
+      "kind": "bridge",
+      "name": "br02-a.md",
+      "sha256": "3413c3b68f11781ab1e05aa6b218e475fc2de2262ea7298a312b7a82a6b2be2e",
+      "words": 101,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br02",
+      "decoy_id": null,
+      "id": "br02-b",
+      "kind": "bridge",
+      "name": "br02-b.md",
+      "sha256": "4c121b12a816d441a855cbb006e69dbc23995627995eef775439372a02613278",
+      "words": 104,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br03",
+      "decoy_id": null,
+      "id": "br03-a",
+      "kind": "bridge",
+      "name": "br03-a.md",
+      "sha256": "597c2dac41761a000a34dc5bb01bc5dd5f62288250dd066f5ae5d041a6b07694",
+      "words": 124,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br03",
+      "decoy_id": null,
+      "id": "br03-b",
+      "kind": "bridge",
+      "name": "br03-b.md",
+      "sha256": "11c8e4466fa0c49a3bc14d220dff3261e297412dbdd1016911561e77ded98d16",
+      "words": 176,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br04",
+      "decoy_id": null,
+      "id": "br04-a",
+      "kind": "bridge",
+      "name": "br04-a.md",
+      "sha256": "a9a37925604a8c3331fa64c2c17302ad135e4fd246cc4073202c477b28db8d78",
+      "words": 145,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br04",
+      "decoy_id": null,
+      "id": "br04-b",
+      "kind": "bridge",
+      "name": "br04-b.md",
+      "sha256": "a63f7c05e3d19366440874c8d47bc5ba089a4e56c7b598e0ad55172ad309ea19",
+      "words": 138,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br05",
+      "decoy_id": null,
+      "id": "br05-a",
+      "kind": "bridge",
+      "name": "br05-a.md",
+      "sha256": "7dac190468d96efd33d816e6ef16f5fe7f62a39153f4052333c961b602a26ecc",
+      "words": 171,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br05",
+      "decoy_id": null,
+      "id": "br05-b",
+      "kind": "bridge",
+      "name": "br05-b.md",
+      "sha256": "b085b9f0aa71b298a86f35826a37053da5d11f38c369f7f5ef37a818eb8de190",
+      "words": 134,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br06",
+      "decoy_id": null,
+      "id": "br06-a",
+      "kind": "bridge",
+      "name": "br06-a.md",
+      "sha256": "2d313e7a984680982f43190304ca4a9cac0bb52c21a8cb2cc56d35f7b67b0f5f",
+      "words": 82,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br06",
+      "decoy_id": null,
+      "id": "br06-b",
+      "kind": "bridge",
+      "name": "br06-b.md",
+      "sha256": "e62ee251efff194146c88375975a6a22dab24531f61fc892c023efeff6518d02",
+      "words": 107,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br07",
+      "decoy_id": null,
+      "id": "br07-a",
+      "kind": "bridge",
+      "name": "br07-a.md",
+      "sha256": "4734d6dd925c40d095b7d7d9319738b46cf0dd524828c53f7b374d153d1de097",
+      "words": 129,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br07",
+      "decoy_id": null,
+      "id": "br07-b",
+      "kind": "bridge",
+      "name": "br07-b.md",
+      "sha256": "9194d3e678aca3c47bcd9a7b56fd4736983b7649f9ac7f8f1895ab088da6f7a5",
+      "words": 167,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br08",
+      "decoy_id": null,
+      "id": "br08-a",
+      "kind": "bridge",
+      "name": "br08-a.md",
+      "sha256": "0095a0b4febbd863bb91f5cec59760050f8df03e11e0d956e0e7501b89a06cc0",
+      "words": 49,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br08",
+      "decoy_id": null,
+      "id": "br08-b",
+      "kind": "bridge",
+      "name": "br08-b.md",
+      "sha256": "c8702709b628edf8ad09c1f30b4e66a552f7b109c770620cb249052b72152b7a",
+      "words": 103,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br09",
+      "decoy_id": null,
+      "id": "br09-a",
+      "kind": "bridge",
+      "name": "br09-a.md",
+      "sha256": "183780030f06d1cb88d90ab0f1d18ccdd9364e40bdf09a5b5d331ef19fc3cd18",
+      "words": 134,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br09",
+      "decoy_id": null,
+      "id": "br09-b",
+      "kind": "bridge",
+      "name": "br09-b.md",
+      "sha256": "1f1072ad8e1dd67cdc670ad9f9a851046aec20da21ee07af5e259f16cb775981",
+      "words": 146,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br10",
+      "decoy_id": null,
+      "id": "br10-a",
+      "kind": "bridge",
+      "name": "br10-a.md",
+      "sha256": "a5ca8191c4e8e0df53bab7205f5c5446c8681252cf64c0b4f4b2c1dcfd3f2652",
+      "words": 55,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br10",
+      "decoy_id": null,
+      "id": "br10-b",
+      "kind": "bridge",
+      "name": "br10-b.md",
+      "sha256": "ca360767900906800a0bb90a380dafd997eec32c217eba75041e2ce4d07b0bb8",
+      "words": 102,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br11",
+      "decoy_id": null,
+      "id": "br11-a",
+      "kind": "bridge",
+      "name": "br11-a.md",
+      "sha256": "798fc403945fc0dc533809ad648ef188e7cab6cb10ff039f7f3bb8d529179fc3",
+      "words": 150,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br11",
+      "decoy_id": null,
+      "id": "br11-b",
+      "kind": "bridge",
+      "name": "br11-b.md",
+      "sha256": "0e733ff72ae072d7b8f06094dc4a42710af96236310f805de9ccc072dc98936a",
+      "words": 163,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br12",
+      "decoy_id": null,
+      "id": "br12-a",
+      "kind": "bridge",
+      "name": "br12-a.md",
+      "sha256": "1381836d0c16c49e0bbe46092ff4271cf56a8a9bef0cf0bbb0ec7efbb7a70246",
+      "words": 89,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br12",
+      "decoy_id": null,
+      "id": "br12-b",
+      "kind": "bridge",
+      "name": "br12-b.md",
+      "sha256": "010c9d41b780d0f414fed3aef6a1902d5a448f316895040c90f1951e9696cbd4",
+      "words": 57,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br13",
+      "decoy_id": null,
+      "id": "br13-a",
+      "kind": "bridge",
+      "name": "br13-a.md",
+      "sha256": "59f8a0d76b3d0b3f5d03491426ea49d73e3430ac170e2f15f4ea74afb700c308",
+      "words": 137,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br13",
+      "decoy_id": null,
+      "id": "br13-b",
+      "kind": "bridge",
+      "name": "br13-b.md",
+      "sha256": "82c1255c7b3d882ad7d0ac6dbfb0b7161dac38c7dc0c8b5253041628647e15ab",
+      "words": 161,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br14",
+      "decoy_id": null,
+      "id": "br14-a",
+      "kind": "bridge",
+      "name": "br14-a.md",
+      "sha256": "a5dca8a8d8b612bd932b63df358068e4836c7d2af58766455bd93ac9b112469b",
+      "words": 113,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br14",
+      "decoy_id": null,
+      "id": "br14-b",
+      "kind": "bridge",
+      "name": "br14-b.md",
+      "sha256": "f418abf45c00e6357d9cbb78148978fa256d81a30be3930ef67b6f7944e723a3",
+      "words": 84,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br15",
+      "decoy_id": null,
+      "id": "br15-a",
+      "kind": "bridge",
+      "name": "br15-a.md",
+      "sha256": "561710cfad26e5477167a0f92ae0179e45ac0e55e4fdc28fce0520419ddfda1d",
+      "words": 122,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br15",
+      "decoy_id": null,
+      "id": "br15-b",
+      "kind": "bridge",
+      "name": "br15-b.md",
+      "sha256": "3acf5695c03a2b1bb2272e30bd6c4d39aca246cf6ffa7f7c9cd88d8ef2a08c97",
+      "words": 164,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br16",
+      "decoy_id": null,
+      "id": "br16-a",
+      "kind": "bridge",
+      "name": "br16-a.md",
+      "sha256": "2f9a0dd92394663f49aa393cd8609f5c4db71691630a0778f252c8599647c923",
+      "words": 59,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br16",
+      "decoy_id": null,
+      "id": "br16-b",
+      "kind": "bridge",
+      "name": "br16-b.md",
+      "sha256": "c1a118f5e9df77fab57bf32731aa61381864962f270a14d09e1b2e04b40cea80",
+      "words": 48,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br17",
+      "decoy_id": null,
+      "id": "br17-a",
+      "kind": "bridge",
+      "name": "br17-a.md",
+      "sha256": "e030d2bd49b34a05702448d1eae6bf169805aff8b1c0a0631abf7ab9ad946a78",
+      "words": 161,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br17",
+      "decoy_id": null,
+      "id": "br17-b",
+      "kind": "bridge",
+      "name": "br17-b.md",
+      "sha256": "1b8888a0346e5715ae341c801f1b1e5a34b2a90dbba975d6d5eed8076fa49620",
+      "words": 151,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br18",
+      "decoy_id": null,
+      "id": "br18-a",
+      "kind": "bridge",
+      "name": "br18-a.md",
+      "sha256": "3c546520ef6330f39313823f8058b0a6a3ffbcad5ac21e330ca4e88392c55414",
+      "words": 84,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br18",
+      "decoy_id": null,
+      "id": "br18-b",
+      "kind": "bridge",
+      "name": "br18-b.md",
+      "sha256": "d538ed9e09264fa07c312ce1d84d2e3e29d7883eb4c0a80d471afae8700b28cb",
+      "words": 61,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br19",
+      "decoy_id": null,
+      "id": "br19-a",
+      "kind": "bridge",
+      "name": "br19-a.md",
+      "sha256": "2316dc4e2d82060192ff41fa6e08746ad355119a6e4e823c8285c6fece970561",
+      "words": 157,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br19",
+      "decoy_id": null,
+      "id": "br19-b",
+      "kind": "bridge",
+      "name": "br19-b.md",
+      "sha256": "6de0949390b58b6489587c857cbba512fedfd205e976a8ac06e3fa8d0f40c025",
+      "words": 181,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br20",
+      "decoy_id": null,
+      "id": "br20-a",
+      "kind": "bridge",
+      "name": "br20-a.md",
+      "sha256": "446781ce2e5edd061631c0c5163efc60d964d9b935b9c6d06864470c58178856",
+      "words": 85,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br20",
+      "decoy_id": null,
+      "id": "br20-b",
+      "kind": "bridge",
+      "name": "br20-b.md",
+      "sha256": "74c7fa3602968cf36c238f675eb5aabec62364a3b0eadebe3b0294a3bddbd73d",
+      "words": 85,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br21",
+      "decoy_id": null,
+      "id": "br21-a",
+      "kind": "bridge",
+      "name": "br21-a.md",
+      "sha256": "1eeaa04a641ceb3e0b17190feccf4344916ad6daff8baceb2d6898d249f84110",
+      "words": 181,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br21",
+      "decoy_id": null,
+      "id": "br21-b",
+      "kind": "bridge",
+      "name": "br21-b.md",
+      "sha256": "b345169c7d1bcf4cb8491370518ace7223ec8f94f6c9809a0f01e231252c7805",
+      "words": 145,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br22",
+      "decoy_id": null,
+      "id": "br22-a",
+      "kind": "bridge",
+      "name": "br22-a.md",
+      "sha256": "080f2d268fb4cb479565837cfa3386541eabeb963701ac637292913fa2992a3f",
+      "words": 154,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br22",
+      "decoy_id": null,
+      "id": "br22-b",
+      "kind": "bridge",
+      "name": "br22-b.md",
+      "sha256": "157720dd8d5153c3999ba2459117aa9a5756e2159670da0971ee6a74edb2fb56",
+      "words": 52,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br23",
+      "decoy_id": null,
+      "id": "br23-a",
+      "kind": "bridge",
+      "name": "br23-a.md",
+      "sha256": "2fbfbdb7d7e81dcfe7e6c88d7305128ff0adc6b7c8b68eeb90ec9c01f9463614",
+      "words": 167,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br23",
+      "decoy_id": null,
+      "id": "br23-b",
+      "kind": "bridge",
+      "name": "br23-b.md",
+      "sha256": "d99992f3daa5af9f46fdfe22b4cdb80e5acdc63ded3c7cf358ad39375f36717a",
+      "words": 169,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": "br24",
+      "decoy_id": null,
+      "id": "br24-a",
+      "kind": "bridge",
+      "name": "br24-a.md",
+      "sha256": "c391027637f15a22dd3b92b1e189371af349aaae674943c897b097fdc7422810",
+      "words": 88,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": "br24",
+      "decoy_id": null,
+      "id": "br24-b",
+      "kind": "bridge",
+      "name": "br24-b.md",
+      "sha256": "6b7e5252b0ed44aeda36f5ab5ec3eeab041e3cd771d2e6fc5353e370a46b11d5",
+      "words": 96,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc01",
+      "id": "dc01-a",
+      "kind": "decoy",
+      "name": "dc01-a.md",
+      "sha256": "7762b597f6783f5730197fd7764a639e14f3b6180f9d04da5e2646083f149a8b",
+      "words": 181,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc01",
+      "id": "dc01-b",
+      "kind": "decoy",
+      "name": "dc01-b.md",
+      "sha256": "48c5005623dbc45a658f50f95f2488e8d7a54286b601c03ce3a877f0d415f954",
+      "words": 177,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc02",
+      "id": "dc02-a",
+      "kind": "decoy",
+      "name": "dc02-a.md",
+      "sha256": "83d9e4a91819523dd0769b849e36393147654080058289b21bd0fc3643f86017",
+      "words": 20,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc02",
+      "id": "dc02-b",
+      "kind": "decoy",
+      "name": "dc02-b.md",
+      "sha256": "3660823c15f5e2465653fa911780b1d7a3e749e456803b815f32e4ddc1307f68",
+      "words": 22,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc03",
+      "id": "dc03-a",
+      "kind": "decoy",
+      "name": "dc03-a.md",
+      "sha256": "84c9fcd8eba200e5123333b074d3a9d95500c8a3a288d7b9aa5a4e112219cdbd",
+      "words": 154,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc03",
+      "id": "dc03-b",
+      "kind": "decoy",
+      "name": "dc03-b.md",
+      "sha256": "83e8044101ab28294f6cb7121f7ffc29bc1a7ffbcb4fcc429a437f8ee2e1a35e",
+      "words": 201,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc04",
+      "id": "dc04-a",
+      "kind": "decoy",
+      "name": "dc04-a.md",
+      "sha256": "149e71ca7059fb9bc7372cf2c0b3f21ded838b2cc543055bd0af7a389ca9f10f",
+      "words": 117,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc04",
+      "id": "dc04-b",
+      "kind": "decoy",
+      "name": "dc04-b.md",
+      "sha256": "6fe5f0e783c5f5cdb78905c864b1d1f6e4b81ecf22fdbb513e40b12d29ec0291",
+      "words": 114,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc05",
+      "id": "dc05-a",
+      "kind": "decoy",
+      "name": "dc05-a.md",
+      "sha256": "2546ba5e1732f2a3cdc6fb7d51e82442a3a8a6061db0cb9b016d879bdd26e09f",
+      "words": 207,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc05",
+      "id": "dc05-b",
+      "kind": "decoy",
+      "name": "dc05-b.md",
+      "sha256": "73f8cb9921282c6f3ff08a56304adbf91fea12dd59aa29dcf7af976151ffa6d3",
+      "words": 134,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc06",
+      "id": "dc06-a",
+      "kind": "decoy",
+      "name": "dc06-a.md",
+      "sha256": "91d5521b7b932b536b962e3cb1076c185979984d6359bfbaf5cd63c1605f085d",
+      "words": 93,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc06",
+      "id": "dc06-b",
+      "kind": "decoy",
+      "name": "dc06-b.md",
+      "sha256": "6886245a8b2ead3936532109c56385acc45aea081de779fb49f9c841bde01e82",
+      "words": 23,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc07",
+      "id": "dc07-a",
+      "kind": "decoy",
+      "name": "dc07-a.md",
+      "sha256": "ae0dd5bd8579a5671b5f6e801af3a0445e51772eb984c19497acb65450f614a0",
+      "words": 137,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc07",
+      "id": "dc07-b",
+      "kind": "decoy",
+      "name": "dc07-b.md",
+      "sha256": "7ffaf4fe3f0f98d3ac1acbce04caf2bb7b89d466cf7d134d87658fd76579a202",
+      "words": 130,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc08",
+      "id": "dc08-a",
+      "kind": "decoy",
+      "name": "dc08-a.md",
+      "sha256": "73837ad3b38e966fb05d8dbb1d7d05380a6b956f9058105c723cbe936679ee43",
+      "words": 70,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc08",
+      "id": "dc08-b",
+      "kind": "decoy",
+      "name": "dc08-b.md",
+      "sha256": "8e2ad952592ae41119261b9a77c45bd71d5b42aaaf1446c75c63764f6bcf80b7",
+      "words": 74,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc09",
+      "id": "dc09-a",
+      "kind": "decoy",
+      "name": "dc09-a.md",
+      "sha256": "665ed491450643e59fa9a2ae185a276209f85d1c31da884416201fd6cdb85ef4",
+      "words": 139,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc09",
+      "id": "dc09-b",
+      "kind": "decoy",
+      "name": "dc09-b.md",
+      "sha256": "3356b8431782c840ec23ce8ff448096b1d1f5255f5a288369dbd4be169928e74",
+      "words": 205,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc10",
+      "id": "dc10-a",
+      "kind": "decoy",
+      "name": "dc10-a.md",
+      "sha256": "4996b19324aeaefdfa602db4528d6acf27f506daedf2939a29d1c7803b01bc3c",
+      "words": 92,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc10",
+      "id": "dc10-b",
+      "kind": "decoy",
+      "name": "dc10-b.md",
+      "sha256": "e79c964ff0dd3e5fe0568a4d4083e9a965df355abab7651d48c16cf4318000e7",
+      "words": 108,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc11",
+      "id": "dc11-a",
+      "kind": "decoy",
+      "name": "dc11-a.md",
+      "sha256": "865d30b788e522a2dbe00a83e07a3942704b1aff17c8ab915c72cb403e8df379",
+      "words": 215,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc11",
+      "id": "dc11-b",
+      "kind": "decoy",
+      "name": "dc11-b.md",
+      "sha256": "1043aa6e5bbc7c0567899333bd4a0e4fbcfaec064923430895b423dd53c95075",
+      "words": 208,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc12",
+      "id": "dc12-a",
+      "kind": "decoy",
+      "name": "dc12-a.md",
+      "sha256": "2dc149803acd27783fde855b5a4e939ea9a4d5e6a09d310cc8664e8ca805da82",
+      "words": 82,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc12",
+      "id": "dc12-b",
+      "kind": "decoy",
+      "name": "dc12-b.md",
+      "sha256": "17bd247705a94a955832d9a887940bff4a363bc846404eff6b84cfa53f225649",
+      "words": 41,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl01",
+      "kind": "filler",
+      "name": "fl01.md",
+      "sha256": "56286199ac5e90a30d150d8c1060f5be0c85406614a4adecf80a4ee5603e6d7d",
+      "words": 150,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl02",
+      "kind": "filler",
+      "name": "fl02.md",
+      "sha256": "8850a56efed1f13b1b83e91911327be1ffc8d28c4e504913cc80fbc8ad35d4fc",
+      "words": 124,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl03",
+      "kind": "filler",
+      "name": "fl03.md",
+      "sha256": "939ed481e60174a5c3e5d5200908230094940de1f547aefe164bd17bc0ad242c",
+      "words": 209,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl04",
+      "kind": "filler",
+      "name": "fl04.md",
+      "sha256": "9539b942204f9406df25940caed11cfb77304def66bb40b8f39a2500291b8e04",
+      "words": 25,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl05",
+      "kind": "filler",
+      "name": "fl05.md",
+      "sha256": "5eedb2027f23776de225f7478cefb934efacec2be7830cf9fa78daf884bbe6cf",
+      "words": 160,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl06",
+      "kind": "filler",
+      "name": "fl06.md",
+      "sha256": "f09105bc95470a846f86b70b6bad5b400bf75bd63acc3d4627c9fd4dd3c61109",
+      "words": 97,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl07",
+      "kind": "filler",
+      "name": "fl07.md",
+      "sha256": "c7a422f56f59fb7cab13508a63e98fe8d9f351bdfb18c6752209bb392116494c",
+      "words": 219,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl08",
+      "kind": "filler",
+      "name": "fl08.md",
+      "sha256": "edc99d228a52e3b863db72fe9152d62f21bf41d680d1a2da4bf48c15770019f6",
+      "words": 24,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl09",
+      "kind": "filler",
+      "name": "fl09.md",
+      "sha256": "3bf91e19040b5b02dd46f25dee2ea644615a3800f4f5174dd18fbb1d199e33e3",
+      "words": 200,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl10",
+      "kind": "filler",
+      "name": "fl10.md",
+      "sha256": "f6b29a4d70d85f770c24b77301aa694d126349bef5aef128c02c566a08864918",
+      "words": 103,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl11",
+      "kind": "filler",
+      "name": "fl11.md",
+      "sha256": "5523a90e32f0d1f1d46738aa802bd8a18d28c9d5f722237eb8a75501ba4381a4",
+      "words": 208,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl12",
+      "kind": "filler",
+      "name": "fl12.md",
+      "sha256": "4b91ec0611ea18a407f438e633efba8aab7decdfcf2827a1401d33227429318d",
+      "words": 116,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl13",
+      "kind": "filler",
+      "name": "fl13.md",
+      "sha256": "d6b3413029bc85b764eb20dbf60ae9133a29d435ee349548c341d31bcf560130",
+      "words": 146,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl14",
+      "kind": "filler",
+      "name": "fl14.md",
+      "sha256": "bb17e3d5678676bf53cdbd52ce32aef96521ee81a05b5c8156e1d53bb6d07ad3",
+      "words": 123,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl15",
+      "kind": "filler",
+      "name": "fl15.md",
+      "sha256": "d510ace4d93c82e2cd4a0a5181ddc4570d980847601c77d166d3c26694ea1c8b",
+      "words": 144,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl16",
+      "kind": "filler",
+      "name": "fl16.md",
+      "sha256": "ad5adf2b3fe758f0401216df842f9c000733a8606e6e9cba5e548607eb5062fd",
+      "words": 100,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl17",
+      "kind": "filler",
+      "name": "fl17.md",
+      "sha256": "383f2fe657444c83a72a0e0736a5e817261328299cead1200148fa9ea755923d",
+      "words": 166,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl18",
+      "kind": "filler",
+      "name": "fl18.md",
+      "sha256": "00cd55565281603b977c26e31ec364d4732ae06c77a84bb6fab48162162ae808",
+      "words": 116,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl19",
+      "kind": "filler",
+      "name": "fl19.md",
+      "sha256": "7dece665ab385d861fdf3104345ed29633d7746e06d3cb5e9d54f88dd87ad3dd",
+      "words": 206,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl20",
+      "kind": "filler",
+      "name": "fl20.md",
+      "sha256": "7e64dad9769c8c52278d86f0bbcdc0a081ddc3cff44be7bd507b61427dda3801",
+      "words": 84,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl21",
+      "kind": "filler",
+      "name": "fl21.md",
+      "sha256": "3ae2819bf7d8a40b3027b954c9c9b22a10276a698f3230c557e974dac997bd2c",
+      "words": 148,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl22",
+      "kind": "filler",
+      "name": "fl22.md",
+      "sha256": "3a690ab92d9539a415080d2b193ec4e4c52c0b69c865da1000938da7d3be7bb2",
+      "words": 101,
+      "writer_family": "B"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl23",
+      "kind": "filler",
+      "name": "fl23.md",
+      "sha256": "1081e576026b9895963e0dcb92e3b537009424a0811aafc42598eba1794053bb",
+      "words": 151,
+      "writer_family": "A"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "id": "fl24",
+      "kind": "filler",
+      "name": "fl24.md",
+      "sha256": "fb9931115de59e314eb8d134cc4de22b9155159869fe55c5dc97200a143dc783",
+      "words": 80,
+      "writer_family": "B"
+    }
+  ],
+  "frozen_at": "2026-09-13T22:27:02+00:00",
+  "n_docs": 96,
+  "source": "data/synth/v0.2",
+  "synthetic": {
+    "corpus_sha256": "f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a",
+    "leak_judge": {
+      "enabled": true,
+      "failures": [
+        "br03-a",
+        "br08-a",
+        "br08-b",
+        "br10-a",
+        "br12-b",
+        "br15-b",
+        "br16-a",
+        "br16-b",
+        "br18-b",
+        "br24-a"
+      ],
+      "judged_after_build": [
+        "br08-a",
+        "br10-a",
+        "br12-b",
+        "br16-a",
+        "br16-b",
+        "br18-b",
+        "br22-b"
+      ],
+      "model_ids": [
+        "claude-haiku-4-5-20251001"
+      ]
+    },
+    "leakage_failures": [
+      "br03-a",
+      "br08-a",
+      "br08-b",
+      "br10-a",
+      "br12-b",
+      "br15-b",
+      "br16-a",
+      "br16-b",
+      "br18-b",
+      "br22-b",
+      "br24-a",
+      "dc08-a",
+      "dc08-b"
+    ],
+    "n_bridges": 24,
+    "n_decoys": 12,
+    "writer_model_ids": [
+      "claude-haiku-4-5-20251001",
+      "ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336"
+    ],
+    "writers": {
+      "A": {
+        "backend": "claude-cli",
+        "model": "haiku"
+      },
+      "B": {
+        "backend": "ollama",
+        "model": "hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M"
+      }
+    }
+  }
+}
