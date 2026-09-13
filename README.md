@@ -211,6 +211,12 @@ See [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button uses it
 Code: MIT ([LICENSE](LICENSE)). Paper, prompts, synthetic corpus and results: CC BY 4.0
 ([LICENSE-CC-BY-4.0](LICENSE-CC-BY-4.0)). See [LICENSING.md](LICENSING.md).
 
+## Verifying the seal
+
+The preregistration precedes the data three ways: git ancestry (checked in CI), OpenTimestamps
+proofs anchored in Bitcoin (v0.1 attests in block 966837), and signed commits. Recipe in
+[docs/verify-seal.md](docs/verify-seal.md).
+
 ## Read next
 
 [paper/paper.md](paper/paper.md) · [PREREGISTRATION.md](PREREGISTRATION.md) ·
