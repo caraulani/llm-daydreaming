@@ -36,7 +36,7 @@ adapters → core.ingest (snapshot) → core.cards → core.embed → core.sampl
 |---|---|
 | `src/daydreamd/pipeline.py` | stage orchestration from a config; `run_all` |
 | `src/daydreamd/cli.py` | typer CLI; one command per stage |
-| `src/daydreamd/backends/` | `Completion` protocol; `claude_cli.py` is the default; `openrouter.py` is the second writer family for v0.2 |
+| `src/daydreamd/backends/` | `Completion` protocol; `claude_cli.py` is the default (with a usage-window circuit breaker); `ollama.py` and `openrouter.py` are the non-Anthropic writer families for v0.2 |
 | `src/daydreamd/core/run.py` | `RunDir`, `metadata.yaml`, prompt loading + hashing |
 | `src/daydreamd/core/sampler.py` | `Unit` records (with `writer_family`); arms S0/S1/B1/B3/B6/B7/B4; labels planted/decoy/random/partner |
 | `src/daydreamd/core/generator.py` | one prompt for every pair arm; `NONE` handling |
