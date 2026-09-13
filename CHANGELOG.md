@@ -10,7 +10,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Sealed v0.1 run `2026-09-13_micro` with raw outputs, tables T1 to T6 and DECISION.md (H1 pass, H2 fail, H3 fail; NULL by the preregistered rule).
 - Exploratory arms S1 (partner-domain filler control), B7 (cross-domain-near sampler), configs X1 to X4, and the planted-distance post-hoc analysis; X1 results committed.
 - v0.2 corpus specs (24 oblique bridges, 12 decoys, 96 notes), paraphrase-leak judge, two writer families, multi-critic pipeline, table T8, v0.2 decision rule, PREREGISTRATION-v0.2.md draft (unsealed).
-- OpenRouter backend.
+- Corpus v0.2 built and frozen (96 notes, two writer families, 8 bridges excluded by the leak rule); preregistration v0.2 sealed with proofs; sealed v0.2 run `2026-09-14_micro_v0_2` (H1 pass, H4 pass, H2 fail, H3 inverted; SIGNAL by rule, recombination not claimed).
+- Exploratory runs X3 (cross-domain-near sampler) and X4 (critic ablation) committed.
+- OpenRouter and Ollama backends; usage-window circuit breaker; per-stage error-rate abort; synth builder resume mode.
+- v0.1 OpenTimestamps proofs upgraded (Bitcoin block 966837); seal verification recipe.
 - Research notes 04 (first-publish and history discipline), 05 (execution-verified code sweep), 06 (adversarial review of v0.1 results).
 
 ## [0.1.0] - 2026-09-13
