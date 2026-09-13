@@ -1,0 +1,4 @@
+arm,bridges reachable,recovered,recall,fisher p (S0 > S1)
+S0 bridge note + true partner,12,9,"75.0% [47, 91]",0.00138
+S1 bridge note + partner-domain filler,12,1,"8.3% [1, 35]",
+B4 bridge note alone,12,3,"25.0% [9, 53]",

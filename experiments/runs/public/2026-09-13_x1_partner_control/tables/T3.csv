@@ -1,0 +1,4 @@
+S0 group,units,NONE rate,non-NONE rate,survivor rate (post critic + dupgate)
+planted,12,"8.3% [1, 35]","91.7% [65, 99]","58.3% [32, 81]"
+decoy,6,"100.0% [61, 100]","0.0% [0, 39]","0.0% [0, 39]"
+recall on planted (gold match),12,,,"75.0% [47, 91]"
