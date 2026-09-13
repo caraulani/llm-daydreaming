@@ -1,6 +1,6 @@
 # Preregistration: daydreamd v0.2 planted-bridge recovery experiment (DRAFT, NOT SEALED)
 
-**Status: DRAFT.** Written 2026-09-13 after the v0.1 sealed run and its adversarial review. This file becomes frozen when its SHA-256 and the SHA-256 of the three v0.2 answer-key files are committed together and stamped with OpenTimestamps (see "Sealing"). Until then it may be edited freely. After sealing, any edit above "DEVIATIONS" is a deviation and must be logged there.
+**Status (sealed 2026-09-13, tag v0.2.0-prereg): DRAFT.** Written 2026-09-13 after the v0.1 sealed run and its adversarial review. This file becomes frozen when its SHA-256 and the SHA-256 of the three v0.2 answer-key files are committed together and stamped with OpenTimestamps (see "Sealing"). Until then it may be edited freely. After sealing, any edit above "DEVIATIONS" is a deviation and must be logged there.
 
 Template: OSF Preregistration, open-ended form. Supersedes nothing: the v0.1 preregistration (`PREREGISTRATION.md`) stays as the record of the v0.1 run.
 
@@ -146,6 +146,19 @@ Claims not permitted in v0.2 text: "novel ideas", "discovers", "anticipates", an
 **Answer-key hashes at seal time (SHA-256):** TBD, filled at step 2.
 
 ---
+
+**Sealed-file hashes at seal time (SHA-256):**
+
+```
+dcb4e4b639a308e90885ca5a82714b704d70411b10e5d3ea207142885b393145  data/synth/v0.2/bridges.yaml
+fb7abfecc2a6a5250b60db9cde5e418dd4619a38fd055b20b82af59b036ef2da  data/synth/v0.2/decoys.yaml
+c8a613d27987b5f10d06b388ac9e522f1e34d7bbccd2d5eb106eeb9f3e575d25  data/synth/v0.2/fillers.yaml
+41d4bf1df5a305e0a07f42fa637ceb75f19739ac31a46cadacda8be18c096295  prompts/leak_judge.md
+9555386b1075e4c53fe64a80a563310480f88723c40ef861bab83daeac9684a3  experiments/micro-v0.2/config.yaml
+7a896ab471a954ac3ad1e43c789ce2c61b4d25c971b2872c0338d76d5ce6f903  experiments/micro-v0.2/writers.yaml
+```
+
+The hash of this file itself is the git blob recorded by the sealed commit and by its `.ots` proof.
 
 ## DEVIATIONS
 
