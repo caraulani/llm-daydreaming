@@ -57,6 +57,13 @@ def extract_cards(
     cached = {row["doc_sha"]: row for row in read_jsonl(cache_path)}
     todo = [d for d in docs if d.sha not in cached]
     results = pmap(lambda d: cards_for_doc(backend, model, prompt, d), todo, concurrency)
+    # A note that yields zero cards (a parse failure or a refusal) is retried once; a note that
+    # still has none is recorded that way and excluded from note-level arms by the sampler.
+    retry = [d for d, row in zip(todo, results, strict=True) if not row["cards"]]
+    if retry:
+        again = pmap(lambda d: cards_for_doc(backend, model, prompt, d), retry, concurrency)
+        fixed = {d.sha: row for d, row in zip(retry, again, strict=True)}
+        results = [fixed.get(row["doc_sha"], row) if not row["cards"] else row for row in results]
     cost = 0.0
     model_id = None
     for row in results:

@@ -1,0 +1,18 @@
+# EXPLORATORY, NOT PREREGISTERED. Written 2026-09-14 after reading the v0.2 results and review.
+# The single-note prompt (generate_single v1) already permits NONE, yet B4 answered on 31 of 32
+# bridge notes. Control: run the same prompt over EVERY note in the v0.2 corpus (bridge, decoy,
+# filler). If fillers and decoy notes get "implications" at the same rate, the single-note arm
+# measures the model's willingness to state a principle from any note, and the S1-vs-B4 contrast
+# in the sealed run is a prompt-contract artifact. Match against gold runs only on bridge notes.
+corpus: {kind: synth, path: data/synth/v0.2}
+visibility: public
+slug: x5_single_note_all
+seed: 20260914
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku, match: haiku}
+concurrency: 4
+arms:
+  B4: {notes: all}
+dupgate_threshold: 0.85
+blind: {enabled: false}
+stats: {n_perm: 2000}

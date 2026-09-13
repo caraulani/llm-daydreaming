@@ -167,6 +167,8 @@ def stage_sample(run: RunDir, cfg: dict[str, Any]) -> list[Unit]:
             notes = sorted(
                 {g["note_a"] for g in gold.values()} | {g["note_b"] for g in gold.values()}
             )
+        elif sel == "all":
+            notes = sorted({c["source_note"] for c in cards})
         else:
             rng = np.random.default_rng(seed + 4)
             all_notes = sorted({c["source_note"] for c in cards})

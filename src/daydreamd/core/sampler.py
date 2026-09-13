@@ -183,6 +183,7 @@ def note_units(cards: list[dict], note_pairs: list[tuple[str, str, str]], arm: s
 
 def single_units(cards: list[dict], notes: list[str], arm: str = "B4") -> list[Unit]:
     by_note = cards_by_note(cards)
+    notes = [n for n in notes if by_note.get(n)]  # a note with zero cards has nothing to reflect on
     return [
         Unit(
             unit_id=f"{arm}-{k:04d}",
