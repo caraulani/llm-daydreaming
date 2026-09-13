@@ -166,6 +166,8 @@ def note_units(cards: list[dict], note_pairs: list[tuple[str, str, str]], arm: s
     by_note = cards_by_note(cards)
     units = []
     for k, (a, b, label) in enumerate(note_pairs):
+        if not by_note.get(a) or not by_note.get(b):
+            continue  # a note with zero cards (refusal or parse failure) cannot be paired
         units.append(
             Unit(
                 unit_id=f"{arm}-{k:04d}",

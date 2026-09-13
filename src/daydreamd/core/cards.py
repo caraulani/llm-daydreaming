@@ -39,7 +39,14 @@ def cards_for_doc(backend: Backend, model: str, prompt: str, doc: Doc) -> dict[s
     filled = prompt.replace("{{note_id}}", doc.id).replace(
         "{{note_text}}", doc.text[:MAX_NOTE_CHARS]
     )
-    parsed, comp = complete_json(backend, filled, model)
+    error = None
+    try:
+        parsed, comp = complete_json(backend, filled, model)
+    except ValueError as exc:  # no JSON in the output: usually a refusal; keep the text
+        parsed, comp = None, None
+        error = str(exc)[:200]
+    if comp is None:
+        return {"doc": doc.id, "doc_sha": doc.sha, "cards": [], "error": error, "usage": None}
     items = parsed if isinstance(parsed, list) else []
     cards = [c for c in (validate_card(x) for x in items if isinstance(x, dict)) if c]
     out = []
@@ -69,12 +76,16 @@ def extract_cards(
     for row in results:
         append_jsonl(cache_path, row)
         cached[row["doc_sha"]] = row
-        cost += row["usage"]["cost_usd"]
-        model_id = row["usage"]["model_id"]
+        if row.get("usage"):
+            cost += row["usage"]["cost_usd"]
+            model_id = row["usage"]["model_id"]
     cards = [c for d in docs for c in cached[d.sha]["cards"]]
     write_jsonl(run.path / "cards.jsonl", cards)
     if model_id:
         run.record_model("cards", model, model_id)
     run.add_cost(cost)
-    run.mark_stage("cards", n_cards=len(cards), n_docs=len(docs), cost_usd=round(cost, 4))
+    zero = sorted(d.id for d in docs if not cached[d.sha]["cards"])
+    run.mark_stage(
+        "cards", n_cards=len(cards), n_docs=len(docs), cost_usd=round(cost, 4), zero_card_docs=zero
+    )
     return cards
