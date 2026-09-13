@@ -162,4 +162,6 @@ The hash of this file itself is the git blob recorded by the sealed commit and b
 
 ## DEVIATIONS
 
-None yet. Format for entries: date, section, what changed, why, who decided.
+Format: date, section, what changed, why, who decided.
+
+1. 2026-09-13, Section 6 (writer family B) and `experiments/micro-v0.2/writers.yaml`. The sealed tag `ollama/qwen2.5:7b-instruct` could not be pulled: the Ollama registry's blob host (a Cloudflare R2 endpoint) timed out from this network on two attempts. The same model and quantization, Qwen 2.5 7B Instruct Q4_K_M, was pulled as a single-file GGUF from Hugging Face (`hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M`, Ollama digest recorded per note in the manifest). The writers file was edited to that tag before the build; no note had been written. Decided by the experimenter.
