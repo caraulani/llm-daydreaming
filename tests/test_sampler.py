@@ -47,6 +47,9 @@ def test_partner_domain_units_use_fillers_from_partner_domain(cards):
     gold = {"br01": {"note_a": "n1", "note_b": "n2"}}
     domains = {"n1": "ecom", "n2": "fraud", "fl01": "fraud", "fl02": "ecom", "fl03": "iot"}
     notes = list(domains)
+    cards = [
+        {"id": f"{n}-c1", "source_note": n, "claim": f"claim of {n}"} for n in notes
+    ]  # every note needs at least one card; zero-card notes are skipped by design
     units = partner_domain_units(cards, gold, domains, notes, seed=1)
     assert [u.note_b for u in units] == ["fl01", "fl02"]
     assert all(u.label == "partner:br01" for u in units)
