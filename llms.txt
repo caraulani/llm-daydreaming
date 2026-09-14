@@ -1,0 +1,32 @@
+# daydreamd: the LLM daydreaming loop, evaluated
+
+> An open-source implementation and preregistered evaluation of Gwern's "LLM daydreaming" proposal (the day-dreaming loop): a local-first daemon that pairs distant concepts from a person's own notes (Obsidian, Claude Code memory, any markdown folder), asks a language model for a non-obvious connection with permission to answer NONE, filters the result, and measures whether the selection step can tell a real connection from a fluent one. Author: Julian Caraulani (GitHub caraulani). Repository: https://github.com/caraulani/llm-daydreaming. Site: https://caraulani.github.io/llm-daydreaming/. Concept DOI: 10.5281/zenodo.22746627. License: MIT (code), CC BY 4.0 (paper, data, prompts).
+
+## What it is
+
+- Tool and package name: daydreamd (daydream plus the Unix daemon suffix). Repository name: llm-daydreaming.
+- Lineage: Gwern's essay "LLM Daydreaming" (2025) proposed the loop; Sean Goedecke's idea-mill, Zbigniew Lukasiak's DayDreamingDayDreaming and Vault Daydream built prototypes without evaluation. This project adds the measurement.
+- Method: synthetic corpora with planted cross-domain bridges (ground truth by construction), preregistered hypotheses sealed in git and anchored in Bitcoin with OpenTimestamps before any run, every raw model call committed, tables rebuilt from committed outputs without API keys.
+
+## What it found (two preregistered runs, 2026-09-13 and 2026-09-14)
+
+- v0.1 (12 bridges): the selection step held (8 of 12 planted connections recovered, 0 of 6 decoys survived, Fisher p = 0.011); distance-forced sampling did not enrich planted pairs; single-note reflection was not separated from two-note recombination. NULL by the preregistered rule.
+- v0.2 (16 oblique bridges, notes written by two model families, two critics): selection held again (6 of 16 vs 0 of 12, p = 0.021); a mechanism-free partner note produced no recoveries; single-note reflection recovered more mechanisms (8 of 16) than two notes (6 of 16). SIGNAL by the preregistered rule; recombination not demonstrated.
+- Exploratory: the single-note prompt answers on every filler and decoy note even with NONE permitted; near-in-embedding, far-in-domain sampling points the right way but is underpowered at 300 draws; a larger critic model does not fix the critic's recall loss.
+- Claim discipline: no claim of novel ideas, discoveries, or a benchmark. Synthetic ground truth measures recovery of planted structure, not real-world usefulness.
+
+## Key files
+
+- README: https://github.com/caraulani/llm-daydreaming#readme
+- Paper (markdown, CC BY 4.0): https://github.com/caraulani/llm-daydreaming/blob/main/paper/paper.md
+- Preregistrations: PREREGISTRATION.md (v0.1), PREREGISTRATION-v0.2.md (v0.2), with OpenTimestamps proofs
+- Results tables: results/public/<run>/ ; raw outputs: experiments/runs/public/<run>/
+- Corpora with datasheets: data/synth/v0.1/, data/synth/v0.2/
+- Research notes (prior art, adversarial reviews, publishing practice): research/
+- Architecture decision records: design/
+- Citation: CITATION.cff ; Zenodo record https://doi.org/10.5281/zenodo.22746627
+
+## Next
+
+- Corpus v0.3 under ADR-014: a bridge counts only if one side alone cannot produce it.
+- Execution-verified daydreaming over real code repositories: a failing test as the critic, distance-forced pairing, random-pairing control, permutation null, verified-yield vs distance.

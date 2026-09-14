@@ -49,3 +49,12 @@ reproduce:
 
 clean:
 	rm -rf .pytest_cache .ruff_cache
+
+# Build the documentation site (paper, preregistrations, results, research notes) into site/.
+docs:
+	$(UV) run python scripts/build_docs.py
+	$(UV) run mkdocs build --strict
+
+docs-serve:
+	$(UV) run python scripts/build_docs.py
+	$(UV) run mkdocs serve

@@ -11,3 +11,8 @@ results/private/
 *.egg-info/
 dist/
 .DS_Store
+site/
+docs/paper.md
+docs/preregistration/
+docs/research/
+docs/results/

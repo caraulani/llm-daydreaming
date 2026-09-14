@@ -1,8 +1,13 @@
 # daydreamd: the LLM daydreaming loop, evaluated
 
+*By [Julian Caraulani](https://github.com/caraulani), September 2026. An open implementation and
+preregistered test of Gwern's LLM daydreaming proposal (the day-dreaming loop) over your own notes:
+Obsidian vaults, Claude Code memory, any markdown folder.*
+
 **Your notes are full of connections you never made.** daydreamd looks for them while you sleep.
 
 Repo: `llm-daydreaming`. Tool and package: `daydreamd` (daydream + the Unix daemon suffix).
+Site: [caraulani.github.io/llm-daydreaming](https://caraulani.github.io/llm-daydreaming/).
 
 It is a local-first daemon that collides far-apart concepts from your own corpus, asks a model
 whether a genuine connection exists (with permission to say no), kills most of what comes back,

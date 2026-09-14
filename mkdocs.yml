@@ -1,0 +1,95 @@
+site_name: "daydreamd: the LLM daydreaming loop, evaluated"
+site_url: https://caraulani.github.io/llm-daydreaming/
+site_description: "daydreamd: an LLM daydreaming loop over your own notes. Gwern's day-dreaming loop as a local-first daemon, with a preregistered evaluation of whether the selection step works."
+site_author: Julian Caraulani
+repo_url: https://github.com/caraulani/llm-daydreaming
+repo_name: caraulani/llm-daydreaming
+edit_uri: ""
+copyright: "Code MIT, paper and data CC BY 4.0. Julian Caraulani, 2026."
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  language: en
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+
+extra:
+  doi_concept: 10.5281/zenodo.22746627
+  doi_v020: 10.5281/zenodo.22746628
+  paper_title: "daydreamd: A Selection Engine for Machine-Generated Connections over a Private Corpus, Evaluated by Planted-Bridge Recovery"
+  author_name: Julian Caraulani
+  author_url: https://github.com/caraulani
+  version: 0.2.0
+
+markdown_extensions:
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.snippets
+
+exclude_docs: |
+  overrides/
+
+plugins:
+  - search
+
+validation:
+  links:
+    not_found: warn
+    anchors: info
+    absolute_links: ignore
+    unrecognized_links: ignore
+
+nav:
+  - Home: index.md
+  - Paper: paper.md
+  - Results:
+      - Index: results/index.md
+      - v0.1 sealed run: results/2026-09-13_micro/index.md
+      - X1 partner-domain control: results/2026-09-13_x1_partner_control/index.md
+      - X3 cross-domain-near sampler: results/2026-09-13_x3_cross_domain_near/index.md
+      - X4 critic ablation: results/2026-09-13_x4_critic_sonnet/index.md
+      - v0.2 sealed run: results/2026-09-14_micro_v0_2/index.md
+      - X5 single-note prompt over every note: results/2026-09-14_x5_single_note_all/index.md
+  - Preregistration:
+      - Overview: preregistration/index.md
+      - v0.1: preregistration/v0.1.md
+      - v0.2: preregistration/v0.2.md
+  - Research notes:
+      - Index: research/index.md
+      - 00 Reference, dojo.md: research/00-reference-dojo-md.md
+      - 01 Publishing practice: research/01-publishing-practice.md
+      - 02 Sanity review (pre-build): research/02-sanity-review-2026-09-13.md
+      - 03 Prior-art refresh, Sept 2026: research/03-prior-art-refresh-2026-09-13.md
+      - 04 First publish and history: research/04-first-publish-and-history-2026-09-13.md
+      - 05 Prior art, execution-verified code: research/05-prior-art-execution-verified-code-2026-09-13.md
+      - 06 Adversarial review, v0.1 results: research/06-adversarial-review-v0.1-results-2026-09-13.md
+      - 07 Adversarial review, v0.2 results: research/07-adversarial-review-v0.2-results-2026-09-14.md
+      - Founding brief v3 (July 2026): research/BRIEF-v3-2026-07-25.md
+      - Research lineage (July 2026): research/DREAMING-lineage-2026-07-24.md
+  - Verify the seal: verify-seal.md
+  - Extending: extending.md
+  - Human-eval protocol: human-eval-protocol.md
+  - Contamination: contamination.md
+  - Publishing checklist: publishing-checklist.md
+  - Cite: cite.md
