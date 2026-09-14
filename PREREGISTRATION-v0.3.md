@@ -1,6 +1,6 @@
 # Preregistration v0.3: bridges that need both sides
 
-**Status: DRAFT, unsealed.** Written 2026-09-14 after the v0.2 review (`research/07-adversarial-review-v0.2-results-2026-09-14.md`) and ADR-014, before any v0.3 note or experiment call exists. When sealed, the SHA-256 of this file and of the sealed files listed in Section 15 are committed to git and stamped with OpenTimestamps before the first model call of the build; any later edit above "DEVIATIONS" is a deviation and is logged there.
+**Status (sealed 2026-09-14, tag v0.3.0-prereg): DRAFT, unsealed.** Written 2026-09-14 after the v0.2 review (`research/07-adversarial-review-v0.2-results-2026-09-14.md`) and ADR-014, before any v0.3 note or experiment call exists. When sealed, the SHA-256 of this file and of the sealed files listed in Section 15 are committed to git and stamped with OpenTimestamps before the first model call of the build; any later edit above "DEVIATIONS" is a deviation and is logged there.
 
 Template: OSF Preregistration, open-ended form.
 
@@ -139,7 +139,20 @@ Claims not permitted in v0.3 text: "novel ideas", "discovers", "anticipates", an
 5. Build the notes from the sealed specs with both writer families and the gate (`make synth SPEC=data/synth/v0.3 WRITERS=experiments/micro-v0.3/writers.yaml MIN_WORDS=100` with `--one-side-gate --gate-model sonnet`), apply the rewrite-once rule, run the gate again, drop second failures, freeze the manifest and record `CORPUS_MANIFEST_SHA256 = TBD` and the accepted bridge list here.
 6. Only then run `make micro CONFIG=experiments/micro-v0.3/config.yaml` and `make reproduce`.
 
-Note on the builder: the config assumes two pipeline options that do not exist at the time of writing (`arms.B4.notes: bridge+filler` and `arms.B4.prompt: generate_single_strict`) and a v0.3 decision rule in stats; they are implemented before the seal, and the seal covers the code state through the commit hash.
+Note on the builder: the pipeline options this config uses (`arms.B4.notes: bridge+filler`, `arms.B4.prompt: generate_single_strict`, the v0.3 decision rule, `stats.match_votes`) were implemented before the seal; the seal covers the code state through the commit hash.
+**Sealed-file hashes at seal time (SHA-256):**
+
+```
+c1010f044a3db1e3914a7ef0ea1207058961a31e13741e258c7496e5ddb5d768  data/synth/v0.3/bridges.yaml
+c3a4eacadf4c308180908d9788f5bb5be042e4137892bd21db609f13bcffdc9d  data/synth/v0.3/decoys.yaml
+f0e15f92c3f54c4a66fead760e206ea24d93120a4279f6975feb844aee9117a9  data/synth/v0.3/fillers.yaml
+109a4b1f30c304776568362211cbc8603dde0407e303f2fe8caa22598e64f553  prompts/generate_single_strict.md
+f64f130fca3902517069059cbbad4a5bee0bba8fd740982e2cab049361075722  experiments/micro-v0.3/config.yaml
+ed48d36eee4dbd54cc8bec0e798463d60ac4e7e2ac50ec47996d3b79e1c8b898  experiments/micro-v0.3/writers.yaml
+```
+
+The hash of this file itself is the git blob recorded by the sealed commit and by its `.ots` proof.
+
 
 ---
 
