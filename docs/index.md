@@ -44,7 +44,7 @@ The loop is old. What changed in 2025 is that the generator became cheap enough 
 | 2025 | [Zbigniew Lukasiak, DayDreamingDayDreaming](https://github.com/zby/DayDreamingDayDreaming) | first temporal-novelty pilot with pre-cutoff models | "I manually selected combinations"; "a domain-agnostic novelty verifier is the fundamental research bottleneck" |
 | 2026 | [Vault Daydream](https://github.com/glebis/claude-skills) | Obsidian skill: vault pairs, generator plus critic, threshold, writeback | run on demand, no distance control, no evaluation |
 | 2026 | [Oliver Zahn, James Evans and David Eagleman, "Discovery by Dreaming"](https://arxiv.org/abs/2607.16256) | recombination over public corpora, validated against 50,000 cross-field pairs and a 2026 holdout | no critic, no distance control, no private corpus; the holdout is not leakage-safe by the authors' own account |
-| 2026 | this project | the selection step under a preregistered test with planted ground truth | real-corpus usefulness (Track C) and temporal validation (Track A) are still open |
+| 2026 | [Julian Caraulani, "daydreamd: the LLM daydreaming loop, evaluated"](https://github.com/caraulani/llm-daydreaming) | selective daydreaming: the loop with an abstention gate, tested against planted ground truth under a sealed preregistration, every raw output published | real-corpus usefulness (Track C), temporal validation (Track A) and a critic that is not an opinion are still open |
 
 *Sources verified 2026-09-14: DOIs resolved through Crossref, books through archive.org or Open Library, preprints through arXiv.*
 
