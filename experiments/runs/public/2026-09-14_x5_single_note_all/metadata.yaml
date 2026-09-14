@@ -1,0 +1,88 @@
+backend: claude-cli
+config: experiments/exploratory/X5_single_note_all/config.yaml
+corpus_sha256: f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a
+cost_usd_total: 15.046427
+created: '2026-09-13T23:43:05+00:00'
+models:
+  cards:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_haiku:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  generator:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  match_gold:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+n_docs: 96
+prompts:
+  cards: f2a7ac1a733d6e0e1d85783c70fec47a8b6bb5e607d9186e4269507c18495f83
+  critic: 49ec635bc7728fd788fefbe89a9c950518d024e087a014a5c78be6a0b3e63232
+  generate_pair: feddedd87fb396dbc5a724189027844ae38afdf09d3fa132f3ea44654c784dc3
+  generate_single: 1547b9759c6bf811367f0455a35373aa570d47ced44250e830f8c74037f0d632
+  match_gold: 09d4576cca8726d24b2f74030fa7c9334d2b4a3284bd3482f9bf03958470a1fc
+run_id: 2026-09-14_x5_single_note_all
+seed: 20260914
+stages:
+  cards:
+    cost_usd: 2.7051
+    finished: '2026-09-13T23:51:57+00:00'
+    n_cards: 484
+    n_docs: 96
+    zero_card_docs:
+    - dc02-a
+    - dc02-b
+    - dc06-b
+    - fl04
+  critic:
+    critics:
+    - haiku
+    finished: '2026-09-14T00:08:56+00:00'
+    n_judged: 91
+    n_keep: 69
+    primary: haiku
+  critic_haiku:
+    cost_usd: 2.7828
+    finished: '2026-09-14T00:08:56+00:00'
+    n_judged: 91
+    n_keep: 69
+  dupgate:
+    finished: '2026-09-14T00:09:00+00:00'
+    n_checked: 69
+    n_dup: 0
+    threshold: 0.85
+  embed:
+    finished: '2026-09-13T23:52:09+00:00'
+    model: sentence-transformers/all-MiniLM-L6-v2
+    n: 484
+  generate:
+    cost_usd: 8.7311
+    error: 0
+    finished: '2026-09-13T23:59:41+00:00'
+    malformed: 0
+    n_units: 92
+    none: 1
+    ok: 91
+  match_gold:
+    cost_usd: 0.8275
+    finished: '2026-09-14T00:11:16+00:00'
+    n_judged: 31
+    n_match: 8
+  sample:
+    arms:
+      B4: 92
+    finished: '2026-09-13T23:52:09+00:00'
+    n_units: 92
+  snapshot:
+    finished: '2026-09-13T23:43:05+00:00'
+    n_docs: 96
+  stats:
+    finished: '2026-09-14T00:11:17+00:00'
+    human_track: false
+    tables: /Users/julian/Desktop/I/dreaming/repo/experiments/runs/public/2026-09-14_x5_single_note_all/tables
+visibility: public

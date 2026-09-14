@@ -1,0 +1,1 @@
+This note captures the observation of a clock drift in a hardware setup, focusing on the specifics and actions to correct it.
