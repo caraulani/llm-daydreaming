@@ -1,0 +1,10 @@
+# Note-writer families for the v0.3 corpus build:
+#   make synth SPEC=data/synth/v0.3 WRITERS=experiments/micro-v0.3/writers.yaml MIN_WORDS=100
+# Assignment is by parity (src/daydreamd/synth/spec.py: assign_writers): bridges with odd ids,
+# decoys with odd ids and fillers at odd positions go to family A; even to family B.
+# Family B is a NON-Anthropic open-weight model run locally through Ollama (the 14B Instruct
+# replaces the 7B used in v0.2, which wrote too tersely; see PREREGISTRATION-v0.2.md deviations).
+# The exact id and digest Ollama reports are recorded per note in manifest.json (writer_model_id).
+families:
+  A: {backend: claude-cli, model: haiku}
+  B: {backend: ollama, model: hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M}

@@ -41,6 +41,19 @@ class FakeBackend:
                 "---\nname: fake-note\ndescription: fake\ntype: project\n---\n"
                 "## Section\n\n" + body + "\n"
             )
+        if "STRICT SINGLE-NOTE TASK" in prompt:
+            if "GATE-RECOVER" in prompt:
+                return json.dumps(
+                    {
+                        "connection": "fake recovered mechanism",
+                        "mechanism": "fake",
+                        "testable_implication": "fake check",
+                        "needs": "fake",
+                    }
+                )
+            return "NONE"
+        if '"match": true|false' in prompt:
+            return json.dumps({"match": "fake recovered mechanism" in prompt, "reason": "fake"})
         if "LEAK|CLEAN" in prompt:
             return json.dumps({"verdict": "CLEAN", "evidence": "fake judge: no leak"})
         if "verdict" in prompt and "kill" in prompt:

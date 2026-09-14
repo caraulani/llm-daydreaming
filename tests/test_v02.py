@@ -438,3 +438,149 @@ def leaked_ngrams_in(path: Path, golds: list[str]) -> list[str]:
     from daydreamd.synth.leakage import leaked_ngrams
 
     return leaked_ngrams(path.read_text(encoding="utf-8"), golds)
+
+
+def test_one_side_gate_clean_and_recovered():
+    from daydreamd.backends.fake import FakeBackend
+    from daydreamd.synth.oneside import gate_bridges, gate_one_side
+
+    be = FakeBackend()
+    gold = {"gold_connection": "x", "gold_implication": "y", "note_a": "n1", "note_b": "n2"}
+    clean = gate_one_side(be, "sonnet", "haiku", "a plain note with facts only", gold)
+    assert clean["status"] == "clean" and clean["output"] is None
+    rec = gate_one_side(be, "sonnet", "haiku", "note that cues GATE-RECOVER", gold)
+    assert rec["status"] == "recovered" and len(rec["votes"]) == 2
+    res = gate_bridges(
+        be,
+        "sonnet",
+        "haiku",
+        {"n1": "plain", "n2": "GATE-RECOVER here"},
+        {"br01": gold},
+    )
+    assert res["failures"] == ["br01"] and res["bridges"]["br01"]["passed"] is False
+    assert res["prompt_sha256"]["generate_single_strict"]
+
+
+def test_run_all_v03_strict_single_note_and_decision(tmp_path: Path):
+    corpus = _corpus_with_families(tmp_path / "corpus")
+    cfg = {
+        "prereg": "v0.3",
+        "corpus": {"kind": "synth", "path": str(corpus)},
+        "visibility": "public",
+        "slug": "v03",
+        "seed": 5,
+        "backend": "fake",
+        "models": {
+            "cards": "haiku",
+            "generator": "sonnet",
+            "critic": ["haiku", "sonnet"],
+            "match": "haiku",
+        },
+        "concurrency": 2,
+        "arms": {
+            "S0": {"random_pairs": 3},
+            "S1": {},
+            "B1": {"n": 8},
+            "B7": {"n": 8, "band": "Q1"},
+            "B4": {"notes": "bridge+filler", "prompt": "generate_single_strict"},
+        },
+        "blind": {"enabled": False},
+        "stats": {"n_perm": 200, "filler_abstention_max": 0.10},
+    }
+    cfg_path = tmp_path / "config.yaml"
+    cfg_path.write_text(yaml.safe_dump(cfg))
+    run = pipeline.run_all(pipeline.load_config(cfg_path), run_root=tmp_path / "runs")
+    units = [json.loads(line) for line in (run.path / "units.jsonl").open()]
+    b4 = [u for u in units if u["arm"] == "B4"]
+    # 8 bridge notes + 4 fillers, each labelled with its note kind
+    assert len(b4) == 12
+    assert {u["note_kind"] for u in b4} == {"bridge", "filler"}
+    assert sum(1 for u in b4 if u["note_kind"] == "filler") == 4
+    assert all(
+        u["note_kind"] == "bridge"
+        for u in units
+        if u["arm"] == "S0" and u["label"].startswith("planted")
+    )
+    # the strict prompt was selected for single units and its SHA recorded under its own name
+    meta = run.read_meta()
+    assert "generate_single_strict" in meta["prompts"]
+    assert "generate_single" not in meta["prompts"]
+    gens = [json.loads(line) for line in (run.path / "generations.jsonl").open()]
+    # the fake backend answers NONE to the strict prompt on every note (no GATE-RECOVER cue)
+    assert all(g["status"] == "none" for g in gens if g["arm"] == "B4")
+    tables = run.path / "tables"
+    t9 = (tables / "T9.md").read_text()
+    assert "filler" in t9 and "bridge" in t9 and "| 4 |" in t9
+    decision = (tables / "DECISION.md").read_text()
+    assert decision.splitlines()[0].endswith("v0.3 (PREREGISTRATION-v0.3.md section 5)")
+    assert decision.splitlines()[2].startswith("- Validity precondition")
+    assert "answered on 0/4 filler notes" in decision and "PASS" in decision.splitlines()[2]
+    for key in ("H1", "H2a", "H2b", "H3-strict", "H4", "H5", "Decision:"):
+        assert key in decision
+    assert "signal requires the validity precondition, H1 and H3-strict" in decision
+    summary = json.loads(json.dumps(run.read_meta().get("stages", {}).get("stats", {})))
+    assert summary  # stats stage recorded
+
+
+def test_single_note_abstention_split_and_b4_recall_excludes_fillers():
+    from daydreamd.eval.recovery import arm_summary, single_note_abstention
+
+    units = [
+        {"unit_id": "B4-0000", "arm": "B4", "note_kind": "bridge"},
+        {"unit_id": "B4-0001", "arm": "B4", "note_kind": "bridge"},
+        {"unit_id": "B4-0002", "arm": "B4", "note_kind": "filler"},
+        {"unit_id": "B4-0003", "arm": "B4", "note_kind": "filler"},
+    ]
+    gens = [
+        {
+            "unit_id": "B4-0000",
+            "arm": "B4",
+            "note_kind": "bridge",
+            "status": "ok",
+            "usage": None,
+            "label": None,
+            "output": {},
+        },
+        {
+            "unit_id": "B4-0001",
+            "arm": "B4",
+            "note_kind": "bridge",
+            "status": "none",
+            "usage": None,
+            "label": None,
+            "output": None,
+        },
+        {
+            "unit_id": "B4-0002",
+            "arm": "B4",
+            "note_kind": "filler",
+            "status": "ok",
+            "usage": None,
+            "label": None,
+            "output": {},
+        },
+        {
+            "unit_id": "B4-0003",
+            "arm": "B4",
+            "note_kind": "filler",
+            "status": "none",
+            "usage": None,
+            "label": None,
+            "output": None,
+        },
+    ]
+    abst = single_note_abstention(units, gens)
+    assert abst["filler"]["units"] == 2 and abst["filler"]["answered"] == 1
+    assert abst["bridge"]["units"] == 2 and abst["bridge"]["none"] == 1
+    critic = [
+        {"unit_id": "B4-0000", "verdict": "keep", "reason": "ok", "usage": None},
+        {"unit_id": "B4-0002", "verdict": "keep", "reason": "ok", "usage": None},
+    ]
+    match = [
+        {"unit_id": "B4-0000", "bridge_id": "br01", "match": True, "reason": "", "usage": None}
+    ]
+    arms = arm_summary(units, gens, critic, [], match)
+    b4 = arms["B4"]
+    # the filler answer never enters recall; only bridge notes are reachable
+    assert b4["bridge_units"] == 2 and b4["filler_units"] == 2
+    assert b4["bridges_reachable"] == 1 and b4["bridges_recovered"] == 1

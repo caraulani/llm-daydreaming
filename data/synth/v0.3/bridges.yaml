@@ -1,0 +1,634 @@
+# Planted bridges, corpus v0.3 (ground truth by construction). Authored by the experimenter with
+# Claude as a disclosed writing assistant, 2026-09-14, after the v0.2 review
+# (research/07-adversarial-review-v0.2-results-2026-09-14.md) and ADR-014, before any v0.3 note
+# existed.
+#
+# What changed from v0.2: every ingredient is a SPECIFIC FACT about this builder's situation
+# (an identifier pattern, a date coincidence, a measured number, a named vendor quirk, a place,
+# an order of events), never an instance of a named principle. The mechanism is only stateable
+# from the CONJUNCTION of the two notes; a reader of one side, even an expert, gets a local
+# observation and nothing more. Templates: v0.2 br09 (sequential identifiers) and br17
+# (expectation-lag dropout), the only two v0.2 bridges that needed both sides. New field
+# `fact_type` (identifier | date | number | vendor | location | sequence). `one_side_test` is
+# two sentences: what side A alone supports; what side B alone supports. The build runs the
+# ADR-014 one-side gate (`daydreamd synth --one-side-gate`) on every bridge note.
+#
+# Pair balance as in v0.2: every one of the 15 domain pairs appears at least once and the 9 pairs
+# between {ecom, grants, iot} and {mleval, fraud, health} appear twice, so every domain carries
+# exactly 8 bridge notes.
+persona: >
+  A solo builder who runs a small e-commerce store, evaluates LLM systems for clients, handles
+  payments fraud on a calling app, follows a personal health protocol, applies for EU grants,
+  and tinkers with IoT sensors in a workshop. Notes are terse working memory, not essays.
+domains:
+  ecom: e-commerce store operations
+  mleval: evaluation of LLM systems
+  fraud: payments fraud on a consumer app
+  health: personal health protocols and tracking
+  grants: EU grant fundraising
+  iot: hardware and IoT sensors in a workshop
+bridges:
+  - id: br01
+    domain_a: ecom
+    domain_b: fraud
+    fact_type: identifier
+    hidden_mechanism: the numbered postbin.io mailbox batch that redeemed the store promo is the same scripted account batch that signed up on the app
+    gold_connection: >-
+      The 41 promo redemptions and the 44 app signups on 3 May came from one scripted batch of
+      postbin.io mailboxes numbered 0408 to 0451, so the two products were hit by the same
+      operator and the store's promo log is a ready-made blocklist for the app.
+    gold_implication: >-
+      Join the store's SPRING24 customer emails with the app's 3 May signups on the local part,
+      confirm the overlap, and block the postbin.io four-digit-suffix pattern at both signups.
+    ingredients_a:
+      - SPRING24 was redeemed 41 times on 3 May, all between 02:05 and 02:45
+      - every one of the 41 customer emails is at postbin.io with a four-digit number before the at sign, 0410 through 0451
+      - all 41 orders picked the cheapest shipping and the cheapest item in the category
+    ingredients_b:
+      - 44 accounts signed up on 3 May between 02:10 and 02:40, each topped up exactly 5 euros
+      - the emails are all at postbin.io and end in four digits from 0408 to 0451
+      - none of the 44 has made a call since the top-up
+    forbidden_phrases_a: [fraud, bot, script, batch, app, signup, same operator]
+    forbidden_phrases_b: [promo, store, order, shipping, discount, same operator, script]
+    one_side_test: >-
+      A alone supports "a promo got farmed by throwaway mailboxes". B alone supports "a burst of
+      dormant top-up accounts from one mail host". Only both notes put the same numbered batch
+      on the same night across two unrelated products.
+  - id: br02
+    domain_a: ecom
+    domain_b: fraud
+    fact_type: number
+    hidden_mechanism: the 30-euro low-value exemption switched on for the store applies to the whole merchant account, so the app's 29.90 top-ups ride the same exemption
+    gold_connection: >-
+      The store's 30-euro low-value authentication exemption enabled on 12 June covers the shared
+      merchant account, which is why the app's 29.90 top-ups from new accounts exploded on the
+      same day: attackers price just under the threshold that skips the extra check.
+    gold_implication: >-
+      Ask the processor whether the exemption is scoped per merchant account or per storefront,
+      and compare app chargebacks on 29.90 top-ups before and after 12 June.
+    ingredients_a:
+      - low-value exemption turned on at 30 euros on 12 June to cut checkout friction
+      - since then the only chargebacks are on orders between 27.00 and 29.99
+      - the processor account is the same one the calling app bills through
+    ingredients_b:
+      - top-ups of exactly 29.90 went from 2 percent of volume to 31 percent starting 12 June
+      - almost all 29.90 top-ups are first transactions on accounts under a day old
+      - the 29.90 amount is not one of the app's four suggested top-up buttons
+    forbidden_phrases_a: [threshold attack, exemption abuse, top-up, fraud, just under]
+    forbidden_phrases_b: [exemption, 3DS, authentication, store, checkout, just under, threshold]
+    one_side_test: >-
+      A alone supports "chargebacks cluster near the exemption limit". B alone supports "an odd
+      amount became popular with new accounts". Only both connect the store's setting date to
+      the app's amount through the shared processor account.
+  - id: br03
+    domain_a: ecom
+    domain_b: mleval
+    fact_type: identifier
+    hidden_mechanism: the description generator is evaluated on SKUs 1000 to 1199 and used only on SKUs 1200 and up, so the 4.6 score never touches the products that get returned
+    gold_connection: >-
+      The description generator's 4.6 score was measured on SKUs 1000 to 1199, the merchandiser's
+      hand-picked set, while every generated description in production is for SKUs 1200 and up,
+      the range where "not as described" returns tripled; the score and the returns never
+      overlap.
+    gold_implication: >-
+      Re-run the description eval on a random 100 SKUs from 1200 upward and compare the score
+      with the 4.6.
+    ingredients_a:
+      - 'returns tagged "not as described" for SKUs 1200 to 1399 run at 9 percent against 3 percent for older SKUs' 
+      - SKUs 1200 and up were added after 3 July and their descriptions come from the generator
+      - older SKUs kept their hand-written descriptions
+    ingredients_b:
+      - the description generator scores 4.6 out of 5 on the eval set
+      - the eval set is the 200 SKUs 1000 to 1199 the merchandiser picked on 2 July
+      - the eval set has not changed since it was built
+    forbidden_phrases_a: [eval, evaluation, score, test set, generator quality, coverage]
+    forbidden_phrases_b: [returns, not as described, production, coverage, disjoint, leakage]
+    one_side_test: >-
+      A alone supports "new SKUs get returned more". B alone supports "the generator scores
+      well". Only both show the SKU ranges do not overlap.
+  - id: br04
+    domain_a: ecom
+    domain_b: mleval
+    fact_type: date
+    hidden_mechanism: the vendor dashboard's quality score dropped on 19 August because the vendor swapped its judge snapshot that day, not because the store's reply model changed
+    gold_connection: >-
+      The 0.6 drop in the support-reply quality score on 19 August is the eval vendor's judge
+      snapshot change of the same date, which moved reference-set scores by a similar amount;
+      nothing about the store's replies changed.
+    gold_implication: >-
+      Re-score last week's replies with the previous judge snapshot pinned and check whether the
+      0.6 gap disappears.
+    ingredients_a:
+      - the support-reply quality score on the vendor dashboard fell from 4.3 to 3.7 on 19 August
+      - no deploy, prompt change or template change happened between 12 and 26 August
+      - customer satisfaction on the same replies stayed at 91 percent
+    ingredients_b:
+      - the eval vendor's changelog says the default judge snapshot changed on 19 August
+      - on the fixed 50-item reference set the new snapshot scores 0.5 lower on average
+      - the vendor does not pin the snapshot unless asked
+    forbidden_phrases_a: [judge, snapshot, eval vendor, artifact, measurement change]
+    forbidden_phrases_b: [store, support replies, dashboard, artifact, the drop]
+    one_side_test: >-
+      A alone supports "quality fell with no known cause". B alone supports "the judge changed
+      and scores shifted". Only both put the two on the same date.
+  - id: br05
+    domain_a: ecom
+    domain_b: health
+    fact_type: sequence
+    hidden_mechanism: the Tuesday 06:30 dispatch cutoff introduced on 2 August is why every missed morning dose since then falls on a Tuesday
+    gold_connection: >-
+      The four missed morning doses since August all fall on Tuesdays because the new carrier
+      contract from 2 August moved dispatch to a 06:30 cutoff, and the dose is scheduled at
+      07:00, inside the packing rush.
+    gold_implication: >-
+      Move the dose to 06:00 on Tuesdays for four weeks and check whether the tracker shows any
+      Tuesday miss.
+    ingredients_a:
+      - the new carrier contract from 2 August has a Tuesday 06:30 dispatch cutoff
+      - Tuesday mornings are now packing from 05:45 to 06:30 without a break
+      - the other weekdays keep the old 11:00 cutoff
+    ingredients_b:
+      - the tracker shows 4 missed morning doses in the 6 weeks since early August
+      - all 4 misses are on Tuesdays
+      - the dose reminder fires at 07:00 every day
+    forbidden_phrases_a: [dose, protocol, tracker, health, reminder, missed]
+    forbidden_phrases_b: [dispatch, carrier, store, packing, cutoff, orders]
+    one_side_test: >-
+      A alone supports "Tuesday mornings are busy now". B alone supports "doses get missed on
+      Tuesdays". Only both put the packing window on top of the reminder time.
+  - id: br06
+    domain_a: ecom
+    domain_b: health
+    fact_type: vendor
+    hidden_mechanism: FrostLine's 14:00 pickup runs on the van with the failing reefer, so both the store's cold-chain excursions and the cloudy vials trace to that slot
+    gold_connection: >-
+      The store's temperature excursions and the cloudy vials share one cause: FrostLine's 14:00
+      pickup, which is the van whose reefer logs show warm periods; the 09:00 pickup on the same
+      contract has none.
+    gold_implication: >-
+      Move both the store's cold-chain shipments and the vial deliveries to the 09:00 FrostLine
+      slot for a month and compare excursion logs and vial condition.
+    ingredients_a:
+      - FrostLine handles the store's chilled shipments on two daily pickups, 09:00 and 14:00
+      - the temperature loggers show excursions above 8 degrees only on parcels from the 14:00 pickup, four times in August
+      - FrostLine says the 14:00 pickup uses their older van
+    ingredients_b:
+      - the last two vial deliveries arrived cloudy and were replaced
+      - both were delivered by FrostLine and both were collected from the pharmacy in the afternoon
+      - the earlier three deliveries, collected in the morning, were clear
+    forbidden_phrases_a: [vial, pharmacy, health, protocol, cloudy, same van]
+    forbidden_phrases_b: [store, shipment, excursion, logger, reefer, same van, 14:00]
+    one_side_test: >-
+      A alone supports "the afternoon pickup runs warm". B alone supports "afternoon vial
+      deliveries arrive cloudy". Only both name the same courier slot as the shared cause.
+  - id: br07
+    domain_a: ecom
+    domain_b: grants
+    fact_type: identifier
+    hidden_mechanism: the VAT number changed on 1 April, so the grant portal's SME check against the 2025 financials fails on an identifier mismatch, not on eligibility
+    gold_connection: >-
+      The grant portal rejects the SME declaration because the VAT number entered is the new one
+      issued on 1 April while the 2025 financial statements it validates against carry the old
+      number; the rejection is an identifier mismatch, not an eligibility problem.
+    gold_implication: >-
+      Resubmit the declaration with the old VAT number that appears on the 2025 accounts and
+      attach the change notice, then check whether the validation passes.
+    ingredients_a:
+      - the store's VAT number changed on 1 April after the legal form change
+      - invoices before April carry the old number ending 771, after April the new one ending 402
+      - the 2025 annual accounts were filed under the old number
+    ingredients_b:
+      - the portal rejects the SME self-declaration with "financial data could not be validated"
+      - the declaration was filled with the current VAT number ending 402
+      - the same rejection appeared three times on three days
+    forbidden_phrases_a: [grant, portal, declaration, SME, validation, mismatch]
+    forbidden_phrases_b: [store, legal form change, old number, '771', mismatch, invoices]
+    one_side_test: >-
+      A alone supports "the company has a new VAT number". B alone supports "the portal will not
+      validate the financials". Only both show the portal is checking the new number against
+      accounts filed under the old one.
+  - id: br08
+    domain_a: ecom
+    domain_b: iot
+    fact_type: location
+    hidden_mechanism: shelf C in the workshop overflow reads 78 percent humidity every night, and every warped board returned came from stock held on shelf C
+    gold_connection: >-
+      The warped boards all came from stock staged on shelf C of the workshop overflow, the
+      shelf where the humidity sensor reads 78 percent every night, so the warping is storage,
+      not a supplier defect.
+    gold_implication: >-
+      Move the remaining board stock off shelf C, keep the sensor there, and check whether the
+      next 30 board orders produce any warping return.
+    ingredients_a:
+      - six boards came back as warped in August, all from the same supplier batch
+      - the supplier's other batch, sold in July, had no returns
+      - the August batch was staged in the workshop overflow area, shelf C, before shipping
+    ingredients_b:
+      - the humidity sensor on shelf C of the overflow area reads 76 to 79 percent between 23:00 and 06:00
+      - shelves A and B stay under 60 percent all night
+      - shelf C is against the outside wall next to the downpipe
+    forbidden_phrases_a: [humidity, sensor, damp, moisture, wall, storage caused]
+    forbidden_phrases_b: [boards, warped, returns, supplier, store, stock]
+    one_side_test: >-
+      A alone supports "one supplier batch warped". B alone supports "shelf C is damp at night".
+      Only both place the warped batch on the damp shelf.
+  - id: br09
+    domain_a: grants
+    domain_b: mleval
+    fact_type: number
+    hidden_mechanism: the agency's automated pre-screen scores every criterion 3.5 when the proposal exceeds its input limit, which the two 61-page proposals did
+    gold_connection: >-
+      The identical 3.5 scores on every criterion of both proposals are the flat output the
+      screening judge produces on inputs past its length limit, and both proposals were 61
+      pages; the scores say nothing about the content.
+    gold_implication: >-
+      Ask the agency for the page or token limit of the pre-screen, and resubmit the shorter
+      proposal at 40 pages to see whether the flat 3.5 pattern disappears.
+    ingredients_a:
+      - both evaluation summary reports arrived on 14 September with 3.5 on all three criteria
+      - the two proposals differ a lot in content and both are 61 pages
+      - the summaries contain no criterion-specific comments
+    ingredients_b:
+      - the client's judge model returns 3.5 on every criterion when an item exceeds about 12,000 tokens
+      - a 61-page PDF is roughly 40,000 tokens
+      - the flat 3.5 rows have empty rationale fields
+    forbidden_phrases_a: [judge, token, context limit, automated, screening artifact, flat output]
+    forbidden_phrases_b: [grant, proposal, agency, evaluation summary, 61 pages, flat scores]
+    one_side_test: >-
+      A alone supports "two proposals got oddly identical scores". B alone supports "a judge
+      goes flat past a length limit". Only both connect the proposals' length to the flat scores.
+  - id: br10
+    domain_a: grants
+    domain_b: mleval
+    fact_type: vendor
+    hidden_mechanism: EvalBench Pro re-normalises its scores across snapshots, so a 24-month deliverable defined as an EvalBench Pro score cannot be met or missed on its own terms
+    gold_connection: >-
+      The consortium deliverable "EvalBench Pro score above 70 at month 24" is undefined because
+      EvalBench Pro re-normalised its scale between its 1 June and 1 September snapshots, moving
+      the same unchanged model from 71 to 64; the deliverable must pin a snapshot.
+    gold_implication: >-
+      Amend the deliverable to name the 1 June 2026 EvalBench Pro snapshot and re-check the
+      baseline number against that snapshot before submission.
+    ingredients_a:
+      - the coordinator wrote deliverable D3.2 as "EvalBench Pro score above 70 at month 24"
+      - the baseline in the proposal is the current EvalBench Pro score of 71
+      - the reviewer asked for a measurable target and this was the answer
+    ingredients_b:
+      - the same client model scored 71 on EvalBench Pro's 1 June snapshot and 64 on the 1 September snapshot
+      - the model was not retrained or changed between the two dates
+      - EvalBench Pro's notes say scores are re-normalised against the current model pool
+    forbidden_phrases_a: [re-normalised, unstable, snapshot, pin the version, moving target]
+    forbidden_phrases_b: [grant, deliverable, consortium, D3.2, target, moving target]
+    one_side_test: >-
+      A alone supports "a deliverable uses a vendor score". B alone supports "the vendor's scale
+      moves". Only both show the deliverable is written on a scale that moves.
+  - id: br11
+    domain_a: grants
+    domain_b: fraud
+    fact_type: identifier
+    hidden_mechanism: consecutive identifiers across entities that claim to be independent expose one operator
+    gold_connection: >-
+      Identifiers that run in sequence across supposedly independent parties expose a single
+      operator, whether the identifiers are company registration numbers on two proposals or
+      phone numbers across three accounts.
+    gold_implication: >-
+      Run an adjacency check on registration numbers across this call's applicants and on phone
+      numbers across new signups, and list any run of three or more consecutive values.
+    ingredients_a:
+      - two proposals from different companies contain the same typo in the budget table heading
+      - their company registration numbers are 2 apart
+      - both list an incorporation date in the same week
+    ingredients_b:
+      - the forty destination numbers from last week's incident differ only in the last two digits, ascending
+      - the three accounts that placed them were created within one hour
+      - each account used a different name and a different email provider
+    forbidden_phrases_a: [same operator, linked, collusion, sequential, adjacency]
+    forbidden_phrases_b: [same operator, linked, sequential, adjacency, one person]
+    one_side_test: >-
+      A alone supports "two proposals look alike". B alone supports "an incident with odd
+      numbers". Only both say consecutive identifiers reveal one hand behind separate fronts.
+  - id: br12
+    domain_a: grants
+    domain_b: fraud
+    fact_type: date
+    hidden_mechanism: the consortium Slack export leaked on 22 July, and both the portal login attempt and the app's credential-stuffing burst at 03:10 that night came from the same network
+    gold_connection: >-
+      The unknown-device login on the grant portal at 03:12 on 22 July and the credential burst
+      on the app at 03:10 the same night came from the same network block, two minutes apart,
+      right after the consortium Slack export with both credentials was shared publicly.
+    gold_implication: >-
+      Rotate the portal password and the app admin token, and match the portal alert's network
+      block against the app's fraud log for 22 July.
+    ingredients_a:
+      - the EU portal sent an unknown-device login alert for 22 July at 03:12 from network block 185.220.101
+      - on 21 July a partner pasted the consortium Slack export, including a portal login, into a public channel
+      - nobody in the consortium was awake at 03:12
+    ingredients_b:
+      - the app logged a credential-stuffing burst on 22 July starting 03:10, 1,200 attempts in nine minutes
+      - the source network block was 185.220.101
+      - the burst used the admin username from the internal Slack workspace
+    forbidden_phrases_a: [same attacker, app, credential stuffing, fraud, both systems]
+    forbidden_phrases_b: [grant, portal, EU, consortium, both systems, same attacker]
+    one_side_test: >-
+      A alone supports "a portal login attempt after a leak". B alone supports "a stuffing burst
+      from one network". Only both put the same block at the same minute on two systems.
+  - id: br13
+    domain_a: grants
+    domain_b: health
+    fact_type: date
+    hidden_mechanism: the interview in Brussels on 6 November collides with the fasting blood draw booked for the same morning
+    gold_connection: >-
+      The grant interview in Brussels on 6 November at 09:00 falls on the morning of the fasting
+      blood draw booked for 08:00 the same day, which means either a 05:40 flight while fasting
+      or moving one of the two.
+    gold_implication: >-
+      Move the blood draw to 4 November and confirm the new slot before booking the flight.
+    ingredients_a:
+      - the interview slot came through for 6 November at 09:00 in Brussels
+      - the only morning flight that makes it leaves at 05:40
+      - the slot cannot be changed once accepted
+    ingredients_b:
+      - the fasting blood panel is booked for 6 November at 08:00 at the usual lab
+      - the panel needs 12 hours without food and no travel stress
+      - it was booked in June for the quarterly cadence
+    forbidden_phrases_a: [blood, fasting, lab, health, clash, same day]
+    forbidden_phrases_b: [interview, grant, Brussels, flight, clash, same day]
+    one_side_test: >-
+      A alone supports "an early interview needs an early flight". B alone supports "a fasting
+      draw is booked". Only both show they are on the same morning.
+  - id: br14
+    domain_a: grants
+    domain_b: health
+    fact_type: vendor
+    hidden_mechanism: Eurofins changed reporting units between March and June, and the clinical substudy subcontracted to Eurofins over 24 months would inherit the same unit switch mid-series
+    gold_connection: >-
+      The lab subcontracted for the grant's 24-month substudy is the same Eurofins whose personal
+      panel switched from mg/dL to mmol/L between March and June without notice; the substudy's
+      longitudinal data would suffer the same mid-series unit change unless the contract fixes
+      units.
+    gold_implication: >-
+      Add a fixed-units clause naming mmol/L to the Eurofins subcontract before the consortium
+      agreement is signed.
+    ingredients_a:
+      - the clinical substudy in work package 4 is subcontracted to Eurofins for 24 monthly panels
+      - the subcontract template has no clause on reporting format
+      - the data management plan assumes one consistent unit per marker
+    ingredients_b:
+      - the March personal panel from Eurofins reports glucose in mg/dL, the June one in mmol/L
+      - no notice of the change came with the June report
+      - the tracker chart shows a fake drop because it read both as the same unit
+    forbidden_phrases_a: [units, mg/dL, mmol/L, unit switch, personal panel, inconsistent]
+    forbidden_phrases_b: [grant, substudy, subcontract, work package, contract, inconsistent]
+    one_side_test: >-
+      A alone supports "a subcontract lacks a format clause". B alone supports "one lab changed
+      units on me". Only both name the same lab on both sides.
+  - id: br15
+    domain_a: iot
+    domain_b: mleval
+    fact_type: location
+    hidden_mechanism: the shed hits 41 degrees between 13:00 and 15:00 since the AC schedule changed on 1 August, and the eval GPU box in the shed throttles in that window
+    gold_connection: >-
+      The judge latency doubling and the 3 percent error rate between 13:00 and 15:00 since
+      early August come from the eval GPU box sitting in the shed, which the temperature logger
+      shows at 41 degrees in that window since the AC schedule changed on 1 August.
+    gold_implication: >-
+      Restore the 12:00 to 16:00 AC cycle in the shed for a week and compare judge latency and
+      error rate by hour.
+    ingredients_a:
+      - the shed temperature logger reads 39 to 41 degrees between 13:00 and 15:00 since 1 August
+      - the shed AC schedule was changed on 1 August to save power in the afternoon
+      - the black server box on the shed bench is warm to the touch after lunch
+    ingredients_b:
+      - local judge latency doubles between 13:00 and 15:00 since early August
+      - about 3 percent of runs in that window end in a timeout error
+      - the judge runs on the GPU box kept in the workshop shed
+    forbidden_phrases_a: [judge, eval, GPU throttling, latency, thermal throttling, errors]
+    forbidden_phrases_b: [temperature, AC schedule, 41 degrees, shed heat, thermal throttling]
+    one_side_test: >-
+      A alone supports "the shed is hot after lunch". B alone supports "the judge is slow after
+      lunch". Only both put the judge's box in the hot shed since the same date.
+  - id: br16
+    domain_a: iot
+    domain_b: mleval
+    fact_type: number
+    hidden_mechanism: the reference weight is 970 grams, the workshop scale was calibrated to it, and the eval's weight gold answers were produced with that scale
+    gold_connection: >-
+      The 3 percent systematic error in the unit-conversion eval's gold answers comes from the
+      workshop scale, which reads 3 percent low since it was calibrated against the 1 kg
+      reference weight that the receipt shows is a 970-gram class M3 weight.
+    gold_implication: >-
+      Re-weigh the five reference objects on the pharmacy scale, regenerate the gold answers, and
+      re-score the conversion items.
+    ingredients_a:
+      - the workshop scale was recalibrated on 5 July using the stamped 1 kg reference weight
+      - the receipt for the reference weight says class M3, nominal 1 kg, actual 970 grams
+      - since 5 July the scale reads a 500 gram bag of rice as 485 grams
+    ingredients_b:
+      - the unit-conversion items' gold answers were built by weighing five household objects on the workshop scale on 6 July
+      - the top models all miss the conversion items by about 3 percent in the same direction
+      - the same models score 99 percent on the conversion items from the public set
+    forbidden_phrases_a: [eval, gold answers, conversion items, models miss, systematic error]
+    forbidden_phrases_b: [reference weight, 970, calibration, class M3, systematic error, the scale is wrong]
+    one_side_test: >-
+      A alone supports "the scale reads low". B alone supports "the models miss by 3 percent in
+      one direction". Only both say the gold was weighed on the low-reading scale.
+  - id: br17
+    domain_a: iot
+    domain_b: fraud
+    fact_type: location
+    hidden_mechanism: the twelve stops the van made in one courtyard on 3 September and the twelve app accounts geolocated in that courtyard the same day are one phone-farm delivery
+    gold_connection: >-
+      The van's twelve stops in the Calle Ruiz courtyard on 3 September delivered the twelve
+      phones that signed up to the app that afternoon from within 30 metres of each other; the
+      delivery log is the phone farm's address.
+    gold_implication: >-
+      Match the van's 3 September stop coordinates against the app's signup coordinates and put
+      the courtyard's 200-metre radius on the manual-review list.
+    ingredients_a:
+      - the GPS tracker on the delivery van logged twelve separate stops in the Calle Ruiz courtyard on 3 September between 11:00 and 12:30
+      - the courier said the parcels were twelve refurbished phones sold through the marketplace
+      - the van never stopped there before or since
+    ingredients_b:
+      - twelve accounts were created on 3 September between 14:00 and 15:00 with location permission granted
+      - their signup coordinates are all within 30 metres of each other, near Calle Ruiz
+      - each account bought the maximum first top-up
+    forbidden_phrases_a: [fraud, app, accounts, phone farm, signup, same address]
+    forbidden_phrases_b: [van, delivery, courier, parcels, phone farm, same address]
+    one_side_test: >-
+      A alone supports "the van made many stops in one courtyard". B alone supports "a cluster
+      of signups from one spot". Only both put the phone delivery and the signups at the same
+      place on the same day.
+  - id: br18
+    domain_a: iot
+    domain_b: fraud
+    fact_type: identifier
+    hidden_mechanism: the fraud signups' phone numbers sit in the Telsim M2M range that the workshop's own sensor SIMs come from, so they are data-only SIMs that cannot receive a voice call
+    gold_connection: >-
+      The signup numbers that pass SMS verification but never answer a call belong to Telsim's
+      machine-to-machine range 6 22 34 xx, the same range printed on the workshop's sensor SIMs,
+      which are data-only and cannot take a voice call by design.
+    gold_implication: >-
+      Block the Telsim M2M number range at signup and re-check the last month's unanswered
+      verification calls against it.
+    ingredients_a:
+      - the workshop's six LTE sensor SIMs are from Telsim, numbers starting 6 22 34
+      - the Telsim pack says the SIMs are machine-to-machine, data and SMS only
+      - a voice call to one of them returns "number not in service"
+    ingredients_b:
+      - about 60 signups last month passed SMS verification and then never answered the voice check
+      - their numbers all start with 6 22 34
+      - the numbers were bought in bulk according to the carrier lookup
+    forbidden_phrases_a: [fraud, signup, verification, app, same range, bulk]
+    forbidden_phrases_b: [Telsim, M2M, machine-to-machine, sensor, data-only, workshop]
+    one_side_test: >-
+      A alone supports "sensor SIMs cannot take calls". B alone supports "some signups never
+      answer calls". Only both match the number prefix to the data-only range.
+  - id: br19
+    domain_a: iot
+    domain_b: health
+    fact_type: date
+    hidden_mechanism: the bedroom window has been sealed since the 20 August sensor cable install, night CO2 rose to 1,900 ppm, and deep sleep fell by a third from the same date
+    gold_connection: >-
+      Deep sleep dropped 35 percent from 20 August, the night the bedroom window was sealed to
+      route the new sensor cable; the CO2 sensor on the same cable shows 1,900 ppm from 02:00 to
+      06:00 since that night.
+    gold_implication: >-
+      Reopen the window gap for a week, keep the CO2 sensor running, and compare deep-sleep
+      minutes with the sealed week.
+    ingredients_a:
+      - the bedroom CO2 sensor went live on 20 August and reads 1,800 to 1,950 ppm from 02:00 to 06:00 every night
+      - the sensor cable runs through the window frame, which was sealed with foam on 20 August
+      - the living room sensor never goes above 900 ppm
+    ingredients_b:
+      - the sleep tracker shows deep sleep down about 35 percent since 20 August
+      - bedtime, caffeine cutoff and the protocol have not changed
+      - the drop is on weekdays and weekends alike
+    forbidden_phrases_a: [sleep, deep sleep, tracker, health, air quality caused, ventilation]
+    forbidden_phrases_b: [CO2, sensor, window, sealed, ventilation, foam]
+    one_side_test: >-
+      A alone supports "the bedroom CO2 is high at night". B alone supports "deep sleep fell".
+      Only both start on the night the window was sealed.
+  - id: br20
+    domain_a: iot
+    domain_b: health
+    fact_type: sequence
+    hidden_mechanism: the laser cutter runs Monday and Thursday evenings and pushes PM2.5 to 90, and resting heart rate is up 6 bpm on Tuesday and Friday mornings
+    gold_connection: >-
+      Resting heart rate is 6 bpm higher on Tuesday and Friday mornings because the laser cutter
+      runs on Monday and Thursday evenings and the workshop monitor logs PM2.5 spikes to 90
+      micrograms per cubic metre each time, the evening before each raised morning.
+    gold_implication: >-
+      Run the extractor during the next four laser sessions and compare the following mornings'
+      resting heart rate with the previous four.
+    ingredients_a:
+      - the workshop air monitor logs PM2.5 spikes to about 90 micrograms per cubic metre on Monday and Thursday evenings
+      - those are the two evenings the laser cutter runs
+      - the extractor fan is not connected yet
+    ingredients_b:
+      - resting heart rate is about 6 bpm higher on Tuesday and Friday mornings than on other days
+      - the pattern has held for five weeks
+      - sleep length and alcohol are the same across the week
+    forbidden_phrases_a: [heart rate, health, tracker, next morning, exposure effect, protocol]
+    forbidden_phrases_b: [laser, PM2.5, particulate, workshop, extractor, exposure effect]
+    one_side_test: >-
+      A alone supports "the laser evenings are dusty". B alone supports "two mornings a week are
+      worse". Only both line up the evenings with the mornings that follow them.
+  - id: br21
+    domain_a: mleval
+    domain_b: fraud
+    fact_type: identifier
+    hidden_mechanism: the eval's fraud items all use test BIN 411111, and the production model whitelists BIN 411111 as a test card, so the eval cannot see the whitelist hole
+    gold_connection: >-
+      The fraud model's eval passes because its 40 fraud items use the test BIN 411111, the same
+      BIN the production rule whitelists as a test card, so any real card with a 411111 prefix
+      sails through and the eval can never show it.
+    gold_implication: >-
+      Replace the 40 eval items' BINs with real issuer BINs and re-run the eval, then remove the
+      411111 whitelist from production.
+    ingredients_a:
+      - the client's fraud eval set has 40 fraud transactions, all with card numbers starting 411111
+      - the model scores 98 percent on that set
+      - the set was built from the sandbox test cards
+    ingredients_b:
+      - the production rule list whitelists any card starting 411111 as a test card
+      - a chargeback last month was on a real card starting 411111
+      - the rule was added during sandbox testing and never removed
+    forbidden_phrases_a: [whitelist, production rule, test card leaked, blind spot, chargeback]
+    forbidden_phrases_b: [eval, eval set, 98 percent, blind spot, the model cannot see]
+    one_side_test: >-
+      A alone supports "an eval built from sandbox cards". B alone supports "a leftover whitelist
+      rule". Only both share the 411111 prefix between the eval and the hole.
+  - id: br22
+    domain_a: mleval
+    domain_b: health
+    fact_type: date
+    hidden_mechanism: the eval gold labels were written on 3 to 5 July, the three days of the 38.5 degree fever, and those are the only labels the models disagree with
+    gold_connection: >-
+      The gold labels the models keep disagreeing with are the 120 written on 3 to 5 July, the
+      three days the health log shows a 38.5 degree fever and ibuprofen; the labels from the
+      surrounding days have no such disagreement.
+    gold_implication: >-
+      Re-label the 120 items from 3 to 5 July blind and compare model agreement before and after.
+    ingredients_a:
+      - the gold labels were written by hand between 1 and 8 July, about 40 a day
+      - the models disagree with the gold on 31 percent of the items from 3, 4 and 5 July and on 6 percent of the rest
+      - the disagreement is concentrated in the borderline categories
+    ingredients_b:
+      - the health log shows 38.5 degrees on 3, 4 and 5 July with ibuprofen every eight hours
+      - work continued at the desk on those days
+      - the fever broke on the evening of 5 July
+    forbidden_phrases_a: [fever, ill, sick, health, ibuprofen, labeller condition]
+    forbidden_phrases_b: [labels, gold, eval, models, disagreement, labeller condition]
+    one_side_test: >-
+      A alone supports "three days of labels are worse". B alone supports "three days of fever".
+      Only both are the same three days.
+  - id: br23
+    domain_a: fraud
+    domain_b: health
+    fact_type: vendor
+    hidden_mechanism: the Twilio route to Yoigo numbers has been failing since 15 August, which explains both the app's verification failures for Yoigo users and the pharmacy's missing pickup SMS
+    gold_connection: >-
+      The app's SMS verification failures for Yoigo numbers and the pharmacy's pickup message
+      that never arrived on 16 August share one cause: the Twilio route to Yoigo has been
+      failing since 15 August, and the pharmacy also sends through Twilio.
+    gold_implication: >-
+      Open a Twilio ticket for the Yoigo route with the 15 August start date and switch Yoigo
+      numbers to the backup provider until it is fixed.
+    ingredients_a:
+      - SMS verification delivery to Yoigo numbers fell from 97 percent to 12 percent starting 15 August
+      - other carriers are unaffected
+      - the app sends verification codes through Twilio
+    ingredients_b:
+      - the pharmacy's pickup-ready message for the 16 August order never arrived and the order was returned
+      - the pharmacy said their messages go out through Twilio
+      - the personal number is on Yoigo
+    forbidden_phrases_a: [pharmacy, health, pickup, personal number, same route, outage]
+    forbidden_phrases_b: [app, verification, fraud, delivery rate, same route, outage]
+    one_side_test: >-
+      A alone supports "one carrier stopped receiving our codes". B alone supports "one pharmacy
+      message went missing". Only both share the sender and the carrier and the dates.
+  - id: br24
+    domain_a: grants
+    domain_b: iot
+    fact_type: number
+    hidden_mechanism: the equipment budget prices the LoRa gateways at 1,190 euros from a 2 May quote, but the supplier discontinued that model on 1 June and the replacement is 1,490
+    gold_connection: >-
+      The equipment line for eight LoRa gateways at 1,190 euros rests on a 2 May quote for a
+      model the supplier discontinued on 1 June; the replacement costs 1,490, so the line is
+      2,400 euros short before submission.
+    gold_implication: >-
+      Get a dated quote for the replacement gateway and update the equipment line and the
+      co-financing table before the 30 September deadline.
+    ingredients_a:
+      - the equipment budget lists eight LoRa gateways at 1,190 euros each from a quote dated 2 May
+      - the co-financing table is built on that total
+      - the submission deadline is 30 September
+    ingredients_b:
+      - the workshop's gateway supplier discontinued the 1,190 euro model on 1 June
+      - the replacement model is 1,490 euros and needs a different antenna
+      - the supplier will not honour quotes on discontinued models
+    forbidden_phrases_a: [discontinued, replacement, '1,490', price rise, supplier note, short]
+    forbidden_phrases_b: [grant, budget, proposal, co-financing, submission, short]
+    one_side_test: >-
+      A alone supports "a budget line from a spring quote". B alone supports "a supplier
+      discontinued a model". Only both show the budgeted model is the discontinued one.

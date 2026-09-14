@@ -31,6 +31,9 @@ class Unit:
     distance: float | None = None
     label: str | None = None  # "planted:<bridge>" | "decoy:<id>" | "random" | None
     writer_family: str | None = None  # note_a's writer family from the corpus manifest (v0.2)
+    note_kind: str | None = (
+        None  # note_a's kind from the corpus manifest: bridge|filler|decoy (v0.3)
+    )
 
     def to_row(self) -> dict[str, Any]:
         return self.__dict__.copy()

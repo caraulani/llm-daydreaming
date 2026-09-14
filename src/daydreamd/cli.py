@@ -38,6 +38,12 @@ def synth(
     judge_model: str = typer.Option("haiku", help="Paraphrase-leak judge alias (oblique specs)"),
     max_tries: int | None = typer.Option(None, help="Override the regeneration cap"),
     min_words: int = typer.Option(150, help="Notes shorter than this are regenerated"),
+    one_side_gate: bool = typer.Option(
+        False,
+        "--one-side-gate",
+        help="ADR-014: run the generator on each bridge note alone; list bridges it recovers",
+    ),
+    gate_model: str = typer.Option("sonnet", help="Generator alias for the one-side gate"),
     resume: bool = typer.Option(
         False, "--resume", help="Keep notes that already pass every check; rebuild the rest"
     ),
@@ -55,6 +61,7 @@ def synth(
         concurrency=concurrency,
         writers=load_writers(pipeline.resolve(writers)) if writers else None,
         judge_model=judge_model,
+        one_side=(gate_model, judge_model) if one_side_gate else None,
         max_tries=max_tries,
         min_words=min_words,
         resume=resume,
@@ -207,6 +214,31 @@ def dream(
         f"{r.morning}: {c['survivors']} survivors of {c['asked']} pairs "
         f"(NONE {c['none']}, killed {c['killed']}, cached cards {c['cached_cards']}/{c['notes']} notes); "
         f"measured cost ${r.cost_usd:.4f}; run {r.run}"
+    )
+
+
+@app.command()
+def gate(
+    corpus: Path = typer.Argument(..., help="A synthetic corpus dir with notes/ and gold.json"),
+    backend: str = typer.Option("claude-cli", help="claude-cli | anthropic | ollama"),
+    gen_model: str = typer.Option("sonnet", help="Generator alias or id for the one-side gate"),
+    judge_model: str = typer.Option("haiku", help="Match judge alias or id"),
+    votes: int = typer.Option(2, help="Judge votes per side; a tie fails closed"),
+) -> None:
+    """ADR-014 one-side gate over an existing corpus: which planted bridges does one note alone give away?"""
+    import json
+
+    from .backends import get_backend
+    from .synth.oneside import gate_bridges
+
+    gold = json.loads((corpus / "gold.json").read_text(encoding="utf-8"))
+    notes = {p.stem: p.read_text(encoding="utf-8") for p in sorted((corpus / "notes").glob("*.md"))}
+    res = gate_bridges(get_backend(backend), gen_model, judge_model, notes, gold, votes=votes)
+    out = corpus / f"one_side_gate.{gen_model.replace('/', '_').replace(':', '_')}.json"
+    out.write_text(json.dumps(res, indent=2), encoding="utf-8")
+    typer.echo(
+        f"gate: {len(res['failures'])} of {len(gold)} bridges recovered from one side "
+        f"({', '.join(res['failures']) or 'none'}); measured cost ${res['cost_usd']}; written {out}"
     )
 
 

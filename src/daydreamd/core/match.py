@@ -59,7 +59,10 @@ def match_gold(
     gold: dict,
     model: str = "haiku",
     concurrency: int = 4,
+    votes: int = 1,
 ) -> list[dict]:
+    """Grounded gold match. With ``votes`` > 1 the judge is asked that many times and the unit
+    counts as a match only on a strict majority; a tie counts as NO_MATCH (preregistration v0.3)."""
     template, sha = load_prompt("match_gold")
     run.record_prompt("match_gold", sha)
     note_to_bridge = {g["note_a"]: bid for bid, g in gold.items()} | {
@@ -72,11 +75,25 @@ def match_gold(
         bid = bridge_for_unit(gen, gold, note_to_bridge)
         if bid:
             todo.append((gen, bid))
-    rows = pmap(
-        lambda t: {**match_one(backend, model, template, t[0], gold[t[1]]), "bridge_id": t[1]},
-        todo,
-        concurrency,
-    )
+
+    def _judge(t: tuple[dict, str]) -> dict:
+        gen, bid = t
+        if votes <= 1:
+            return {**match_one(backend, model, template, gen, gold[bid]), "bridge_id": bid}
+        rounds = [match_one(backend, model, template, gen, gold[bid]) for _ in range(votes)]
+        yes = sum(1 for r in rounds if r["match"])
+        usage = [r["usage"] for r in rounds if r.get("usage")]
+        return {
+            "unit_id": gen["unit_id"],
+            "bridge_id": bid,
+            "match": yes * 2 > votes,
+            "votes": [{"match": r["match"], "reason": r["reason"]} for r in rounds],
+            "reason": f"{yes}/{votes} votes MATCH; tie counts as NO_MATCH",
+            "usage": usage[0] if usage else None,
+            "usage_all": usage,
+        }
+
+    rows = pmap(_judge, todo, concurrency)
     if todo:
         gvecs = embedder.encode([gold[bid]["gold_connection"] for _, bid in todo])
         cvecs = embedder.encode([gen["output"]["connection"] for gen, _ in todo])

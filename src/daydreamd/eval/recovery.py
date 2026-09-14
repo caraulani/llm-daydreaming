@@ -104,9 +104,27 @@ def arm_summary(
             for g in planted
             if (g.get("label") or "").startswith(("planted:", "partner:"))
         }
+        bridge_units = 0
+        filler_units = 0
         if arm == "B4":
+            # single-note arm: recall counts bridge notes only; fillers (v0.3 B4-strict) are the
+            # abstention check and never enter recall. Older runs carry no note_kind; there the
+            # match stage only judged bridge notes, so units with a match row are the bridge units.
+            bridge_gens = [
+                g
+                for g in gens
+                if g.get("note_kind") == "bridge"
+                or (g.get("note_kind") is None and g["unit_id"] in midx)
+            ]
+            filler_units = sum(1 for g in gens if g.get("note_kind") == "filler")
+            bridge_units = len(bridge_gens)
             planted_bridges = {
-                midx[g["unit_id"]]["bridge_id"] for g in gens if g["unit_id"] in midx
+                midx[g["unit_id"]]["bridge_id"] for g in bridge_gens if g["unit_id"] in midx
+            }
+            planted_matched = {
+                midx[g["unit_id"]]["bridge_id"]
+                for g in bridge_gens
+                if g["unit_id"] in midx and midx[g["unit_id"]]["match"]
             }
         cost = sum((g["usage"] or {}).get("cost_usd", 0.0) for g in gens)
         cost += sum(
@@ -126,6 +144,8 @@ def arm_summary(
             "duplicates": n_dup,
             "survivors": n_surv,
             "planted_units": len(planted) if arm != "B4" else n,
+            "bridge_units": bridge_units if arm == "B4" else None,
+            "filler_units": filler_units if arm == "B4" else None,
             "bridges_reachable": len(planted_bridges),
             "bridges_recovered": len(planted_matched),
             "recall": wilson(len(planted_matched), len(planted_bridges)),
@@ -289,3 +309,34 @@ def recall_by_family(
         }
         for fam, d in sorted(by.items())
     }
+
+
+def single_note_abstention(
+    units: list[dict], generations: list[dict], arm: str = "B4"
+) -> dict[str, dict[str, Any]]:
+    """Answer and NONE counts of a single-note arm split by the note's kind (v0.3 T9).
+
+    The v0.3 validity precondition reads the ``filler`` row: the strict single-note prompt must
+    abstain on notes that carry no mechanism. Units without ``note_kind`` (older runs) are
+    reported under ``unknown``.
+    """
+    gidx = _index(generations)
+    out: dict[str, dict[str, Any]] = {}
+    for u in units:
+        if u["arm"] != arm:
+            continue
+        g = gidx.get(u["unit_id"])
+        if g is None:
+            continue
+        kind = str(u.get("note_kind") or "unknown")
+        d = out.setdefault(kind, {"units": 0, "answered": 0, "none": 0, "error": 0})
+        d["units"] += 1
+        if g["status"] == "ok":
+            d["answered"] += 1
+        elif g["status"] == "none":
+            d["none"] += 1
+        else:
+            d["error"] += 1
+    for d in out.values():
+        d["answer_rate"] = wilson(d["answered"], d["units"])
+    return dict(sorted(out.items()))

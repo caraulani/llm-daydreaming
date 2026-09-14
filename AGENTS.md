@@ -43,13 +43,13 @@ adapters → core.ingest (snapshot) → core.cards → core.embed → core.sampl
 | `src/daydreamd/cli.py` | typer CLI; one command per stage |
 | `src/daydreamd/backends/` | `Completion` protocol; `claude_cli.py` is the default (with a usage-window circuit breaker); `ollama.py` and `openrouter.py` are the non-Anthropic writer families for v0.2 |
 | `src/daydreamd/core/run.py` | `RunDir`, `metadata.yaml`, prompt loading + hashing |
-| `src/daydreamd/core/sampler.py` | `Unit` records (with `writer_family`); arms S0/S1/B1/B3/B6/B7/B4; labels planted/decoy/random/partner |
-| `src/daydreamd/core/generator.py` | one prompt for every pair arm; `NONE` handling |
+| `src/daydreamd/core/sampler.py` | `Unit` records (with `writer_family` and `note_kind`); arms S0/S1/B1/B3/B6/B7/B4; B4 selects `bridge`, `all`, `bridge+filler` (v0.3) or a random n; labels planted/decoy/random/partner |
+| `src/daydreamd/core/generator.py` | one frozen prompt for every pair arm; single units use `generate_single` or the file named by `arms.B4.prompt` (v0.3: `generate_single_strict`), SHA recorded under that name; `NONE` handling |
 | `src/daydreamd/core/critic.py` | binary keep/kill with reason; `models.critic` may be a list, the first is primary (`critic.jsonl`), each writes `critic_<alias>.jsonl` |
 | `src/daydreamd/core/dupgate.py` | retrieval-based corpus-novelty gate (cosine > 0.85) |
 | `src/daydreamd/core/match.py` | grounded gold match + cosine to gold |
 | `src/daydreamd/core/blind.py` | owner-blind pack, sealed key, unseal |
-| `src/daydreamd/core/stats.py` | tables T1..T8 (synthetic), DECISION.md (v0.1 rule, or v0.2 rule when the config says `prereg: v0.2`), H1..H4 (owner-blind) |
+| `src/daydreamd/core/stats.py` | tables T1..T9 (synthetic; T9 = single-note abstention by note kind), DECISION.md (v0.1 rule, v0.2 rule, or the v0.3 rule with the filler-abstention precondition when the config says `prereg: v0.3`), H1..H4 (owner-blind) |
 | `src/daydreamd/synth/` | spec loader (v0.2 fields: `forbidden_phrases_a/b`, `one_side_test`), 6-gram leakage check, paraphrase-leak judge (`prompts/leak_judge.md`, bridge notes, oblique specs only), note writer with writer families by parity |
 | `src/daydreamd/eval/recovery.py` | enrichment (B1/B3/B6/B7), recall, specificity, per-critic comparison, recall by writer family, exploratory finds |
 | `src/daydreamd/product/` | the product front door: `dream.py` (cache, sampler policy, critic with learnings, morning.md), `morning.py` (render and parse), `review.py`, `skill.py`, `schedule.py`, `mcp_server.py`, `paths.py` (`~/.daydreamd`, override `DAYDREAMD_HOME`) |

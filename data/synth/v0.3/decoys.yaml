@@ -1,0 +1,145 @@
+# Decoy pairs, corpus v0.3. Authored 2026-09-14 after the v0.2 review and ADR-014. Every decoy
+# is shape-matched to a v0.3 bridge: same `fact_type` and the same surface pattern (a number
+# adjacency, a date coincidence, a shared vendor, a shared place, an evening-morning sequence),
+# but the two notes have different or absent mechanisms, so a bridge-like synthesis is wrong.
+# `mirrors` names the bridge whose shape the decoy imitates; `why_not` states the specific
+# reason the tempting synthesis is false. Schema for note_a/note_b is unchanged from v0.1.
+decoys:
+  - id: dc01
+    kind: shape
+    shape: numbered identifiers on the same day
+    fact_type: identifier
+    mirrors: br01
+    shared_term: numbered
+    note_a: {domain: ecom, topic: the 38 gift-card orders on 12 May whose codes run GC-2201 to GC-2238 because the card system numbers them in issue order}
+    note_b: {domain: mleval, topic: the 38 eval items imported on 12 May whose ids run item-2201 to item-2238 because the importer numbers rows}
+    why_not: >-
+      Both numberings are produced by ordinary sequential id generators in unrelated systems;
+      the shared range and date are coincidence. A synthesis such as "the same batch hit both"
+      is false: nothing links a gift-card issue counter to an eval importer.
+  - id: dc02
+    kind: shape
+    shape: an amount just under a round number
+    fact_type: number
+    mirrors: br02
+    shared_term: 29.90
+    note_a: {domain: ecom, topic: pricing the starter bundle at 29.90 because the A/B test beat 32.00 by 11 percent}
+    note_b: {domain: health, topic: the 29.90 monthly price of the tracking app subscription and whether the annual plan is worth it}
+    why_not: >-
+      One is a deliberate psychological price point set by the builder; the other is a vendor's
+      list price. There is no shared threshold, rule or actor, and nothing about either implies
+      anything about the other.
+  - id: dc03
+    kind: shape
+    shape: non-overlapping id ranges
+    fact_type: identifier
+    mirrors: br03
+    shared_term: ranges
+    note_a: {domain: mleval, topic: eval item ids 5000 to 5099 reserved for the adversarial set so they never mix with the regular items}
+    note_b: {domain: fraud, topic: rule ids R-300 to R-399 reserved for the velocity rules so the dashboard groups them}
+    why_not: >-
+      Reserved id ranges in two unrelated registries. No evaluation covers the other system and
+      no data flows between them; "ranges that do not overlap hide a problem" has no referent
+      here.
+  - id: dc04
+    kind: shape
+    shape: a change on the same date
+    fact_type: date
+    mirrors: br04
+    shared_term: 19 August
+    note_a: {domain: fraud, topic: the 19 August switch to the new device-fingerprint library and the small rise in false positives that week}
+    note_b: {domain: health, topic: starting the new magnesium brand on 19 August and the sleep tracker showing no change}
+    why_not: >-
+      Two unrelated changes on one calendar day. The false-positive rise has a stated cause in
+      the fraud note (the library); the health note reports no effect at all. There is no shared
+      system, vendor or metric.
+  - id: dc05
+    kind: shape
+    shape: a weekday pattern
+    fact_type: sequence
+    mirrors: br05
+    shared_term: Tuesdays
+    note_a: {domain: grants, topic: the portal's helpdesk answering fastest on Tuesdays because that is their full-staff day}
+    note_b: {domain: iot, topic: the workshop's power meter showing the lowest draw on Tuesdays because the CNC is booked out that day}
+    why_not: >-
+      Two Tuesday patterns with separate, fully stated causes (staffing at an agency; a machine
+      booked elsewhere). No shared mechanism and no implication crosses between them.
+  - id: dc06
+    kind: shape
+    shape: the same vendor on both sides
+    fact_type: vendor
+    mirrors: br10
+    shared_term: EvalBench
+    note_a: {domain: grants, topic: a reviewer mentioning EvalBench Pro in the feedback as an example of an independent benchmark}
+    note_b: {domain: mleval, topic: the EvalBench Pro dashboard export format and the column that holds the run id}
+    why_not: >-
+      The same vendor name appears in a passing reviewer remark and in a note about an export
+      format. No deliverable, score or scale is tied between them, so nothing about the vendor
+      transfers from one note to the other.
+  - id: dc07
+    kind: shape
+    shape: a rejected submission and a changed identifier
+    fact_type: identifier
+    mirrors: br07
+    shared_term: rejected
+    note_a: {domain: grants, topic: the abstract rejected by the portal for exceeding 2,000 characters and the trimmed version that went through}
+    note_b: {domain: fraud, topic: changing the app's merchant descriptor text so it shows the brand name on card statements}
+    why_not: >-
+      The rejection has its stated cause (a character limit) and the descriptor change is a
+      cosmetic setting. No identifier is checked across the two systems; the synthesis "a
+      changed identifier caused the rejection" points at nothing.
+  - id: dc08
+    kind: shape
+    shape: the same place on both sides
+    fact_type: location
+    mirrors: br08
+    shared_term: shelf C
+    note_a: {domain: iot, topic: labelling shelf C of the parts wall for connectors and shelf D for sensors}
+    note_b: {domain: health, topic: keeping the supplement boxes on shelf C of the kitchen cupboard so they are at eye level}
+    why_not: >-
+      Two different shelves in two different rooms happen to carry the same letter. Nothing is
+      stored, measured or damaged across them.
+  - id: dc09
+    kind: shape
+    shape: identical scores across items
+    fact_type: number
+    mirrors: br09
+    shared_term: identical
+    note_a: {domain: mleval, topic: the calibration set where every item is scored 4 on purpose to test the judge's anchoring}
+    note_b: {domain: health, topic: the five identical 7.2 readings on the glucose meter because the test strips from one vial read the same}
+    why_not: >-
+      The identical eval scores are a deliberate design of the calibration set; the identical
+      meter readings are a strip-lot property with its cause stated. No shared limit or artifact.
+  - id: dc10
+    kind: shape
+    shape: a service that failed for one carrier
+    fact_type: vendor
+    mirrors: br23
+    shared_term: carrier
+    note_a: {domain: ecom, topic: the parcel carrier that lost two packages in a month and the switch to a second carrier for fragile items}
+    note_b: {domain: fraud, topic: blocking signups from one mobile carrier known for disposable numbers}
+    why_not: >-
+      "Carrier" means a parcel company in one note and a mobile network in the other. Different
+      industries, different failures, different remedies; nothing transfers.
+  - id: dc11
+    kind: shape
+    shape: an evening event and a next-morning reading
+    fact_type: sequence
+    mirrors: br20
+    shared_term: next morning
+    note_a: {domain: ecom, topic: the Thursday evening newsletter and the Friday morning order bump it produces}
+    note_b: {domain: iot, topic: the Thursday evening firmware flash and the Friday morning reboot loop it caused on two sensors}
+    why_not: >-
+      Two evening-to-morning sequences with their own stated causes (a newsletter; a firmware
+      bug). No shared substance, exposure or channel links them.
+  - id: dc12
+    kind: shape
+    shape: a budget line and a supplier
+    fact_type: number
+    mirrors: br24
+    shared_term: quote
+    note_a: {domain: grants, topic: the travel budget line based on the 2 May airline quote and the agency's per-diem cap}
+    note_b: {domain: iot, topic: the supplier's 2 May quote for 50 metres of shielded cable, accepted and delivered}
+    why_not: >-
+      Two quotes dated the same day from unrelated suppliers; the cable was delivered as quoted.
+      Nothing is discontinued, repriced or short, so the "budget is stale" synthesis is false.

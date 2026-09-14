@@ -174,6 +174,14 @@ def stage_sample(run: RunDir, cfg: dict[str, Any]) -> list[Unit]:
             )
         elif sel == "all":
             notes = sorted({c["source_note"] for c in cards})
+        elif sel == "bridge+filler" and gold:
+            # v0.3 B4-strict: every accepted bridge note plus every filler note, so the strict
+            # single-note prompt's abstention can be checked on notes that carry no mechanism
+            bridge_notes = {g["note_a"] for g in gold.values()} | {
+                g["note_b"] for g in gold.values()
+            }
+            fillers = {d["id"] for d in manifest.get("docs", []) if d.get("kind") == "filler"}
+            notes = sorted(bridge_notes) + sorted(fillers)
         else:
             rng = np.random.default_rng(seed + 4)
             all_notes = sorted({c["source_note"] for c in cards})
@@ -189,8 +197,10 @@ def stage_sample(run: RunDir, cfg: dict[str, Any]) -> list[Unit]:
         units += single_units(cards, notes[: limit or None], "B4")
     label_units(units, planted, decoys)
     family = {d["id"]: d.get("writer_family") for d in manifest.get("docs", [])}
+    kinds = {d["id"]: d.get("kind") for d in manifest.get("docs", [])}
     for u in units:
         u.writer_family = family.get(u.note_a)
+        u.note_kind = kinds.get(u.note_a)
     write_jsonl(run.path / "units.jsonl", (u.to_row() for u in units))
     run.mark_stage(
         "sample",
@@ -205,12 +215,14 @@ def _units_from_disk(run: RunDir) -> list[Unit]:
 
 
 def stage_generate(run: RunDir, cfg: dict[str, Any], backend: Backend) -> list[dict]:
+    single_prompt = str(cfg.get("arms", {}).get("B4", {}).get("prompt", "generate_single"))
     return generate(
         run,
         backend,
         _units_from_disk(run),
         model=cfg["models"]["generator"],
         concurrency=cfg.get("concurrency", 4),
+        single_prompt_name=single_prompt,
     )
 
 
@@ -291,6 +303,7 @@ def stage_match(run: RunDir, cfg: dict[str, Any], backend: Backend) -> list[dict
         gold,
         model=cfg["models"].get("match", "haiku"),
         concurrency=cfg.get("concurrency", 4),
+        votes=int(cfg.get("stats", {}).get("match_votes", 1)),
     )
 
 
@@ -308,6 +321,7 @@ def stage_stats(run: RunDir, cfg: dict[str, Any], out_dir: Path | None = None) -
         n_perm=n_perm,
         seed=int(cfg.get("seed", 0)),
         prereg=str(cfg.get("prereg", "v0.1")),
+        filler_abstention_max=float(cfg.get("stats", {}).get("filler_abstention_max", 0.10)),
     )
     human = human_tables(run, out, n_perm=n_perm, seed=int(cfg.get("seed", 0)))
     if out_dir is None:

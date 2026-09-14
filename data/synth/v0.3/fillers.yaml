@@ -1,0 +1,28 @@
+# Filler note topics, corpus v0.3 (24, four per domain). Ordinary working notes with no planted
+# bridge and no decoy role. With 48 bridge notes and 24 decoy notes this makes 96 notes, 16 per
+# domain. Authored 2026-09-14. Topics are new relative to v0.2 so the corpora do not share notes.
+fillers:
+  - {domain: ecom, topic: the packaging insert redesign and the QR code that links to care instructions}
+  - {domain: ecom, topic: reconciling the marketplace payout report against the store ledger}
+  - {domain: ecom, topic: the wholesale enquiry from a shop in Lisbon and the minimum order question}
+  - {domain: ecom, topic: rewriting the size guide after the three most common exchange reasons}
+  - {domain: mleval, topic: the inter-rater agreement numbers for the two human labellers}
+  - {domain: mleval, topic: caching judge calls by item hash to cut re-run cost}
+  - {domain: mleval, topic: the client's request for per-category score breakdowns}
+  - {domain: mleval, topic: the choice between pairwise and absolute scoring for the next round}
+  - {domain: fraud, topic: the weekly review of manual-hold outcomes and the two rules to retire}
+  - {domain: fraud, topic: the velocity limit on top-ups per device and how it was tuned}
+  - {domain: fraud, topic: writing the chargeback representment template}
+  - {domain: fraud, topic: the vendor demo for a device-intelligence product and its price}
+  - {domain: health, topic: the quarterly plan for the resistance training block}
+  - {domain: health, topic: the pharmacy's new ordering portal and the pickup window}
+  - {domain: health, topic: electrolyte timing on long ride days}
+  - {domain: health, topic: the annual eye exam and the prescription change}
+  - {domain: grants, topic: the ethics self-assessment section and the two questions it raised}
+  - {domain: grants, topic: partner letters of intent and who still owes one}
+  - {domain: grants, topic: the reviewer's feedback on the impact section from last year's attempt}
+  - {domain: grants, topic: the consortium kick-off meeting agenda draft}
+  - {domain: iot, topic: the enclosure 3D print that warped and the reprint at a lower bed temperature}
+  - {domain: iot, topic: the LoRa antenna placement test on the roof and the RSSI table}
+  - {domain: iot, topic: labelling and colour-coding the cable drawer}
+  - {domain: iot, topic: the spare-parts reorder list and the two connectors on backorder}

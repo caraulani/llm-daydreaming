@@ -19,6 +19,7 @@ from ..eval.recovery import (
     recall_by_family,
     sampler_enrichment,
     sampler_gap_permutation,
+    single_note_abstention,
 )
 from .io import read_json, read_jsonl, write_jsonl
 from .run import RunDir
@@ -75,7 +76,12 @@ def load_run(run: RunDir) -> dict[str, Any]:
 
 
 def synthetic_tables(
-    run: RunDir, out_dir: Path, n_perm: int = 10_000, seed: int = 0, prereg: str = "v0.1"
+    run: RunDir,
+    out_dir: Path,
+    n_perm: int = 10_000,
+    seed: int = 0,
+    prereg: str = "v0.1",
+    filler_abstention_max: float = 0.10,
 ) -> dict[str, Any]:
     d = load_run(run)
     gold = d["gold"]
@@ -318,7 +324,30 @@ def synthetic_tables(
         )
     finds = exploratory_finds(d["generations"], d["critic"], d["dup"])
     write_jsonl(out_dir / "exploratory_finds.jsonl", finds)
-    if prereg == "v0.2":
+    abstention = single_note_abstention(d["units"], d["generations"])
+    if abstention and any(k in abstention for k in ("filler", "bridge", "decoy")):
+        _write_table(
+            out_dir,
+            "T9",
+            ["note kind", "units", "answered", "NONE", "errors", "answer rate"],
+            [
+                [k, v["units"], v["answered"], v["none"], v["error"], _fmt_rate(v["answer_rate"])]
+                for k, v in abstention.items()
+            ],
+            "Filler abstention under the strict single-note prompt: the single-note arm split by note kind. The filler row is the v0.3 validity precondition; bridge and decoy rows for comparison",
+        )
+    if prereg == "v0.3":
+        decision = _decision_v03(
+            spec,
+            enrich,
+            arms,
+            d,
+            abstention,
+            n_perm=n_perm,
+            seed=seed,
+            max_rate=filler_abstention_max,
+        )
+    elif prereg == "v0.2":
         decision = _decision_v02(spec, enrich, arms, d, n_perm=n_perm, seed=seed)
     else:
         decision = _decision(spec, enrich, arms)
@@ -326,6 +355,7 @@ def synthetic_tables(
     summary = {
         "prereg": prereg,
         "critics": critics,
+        "abstention": abstention,
         "decision": {k: v for k, v in decision.items() if k != "md"},
         "enrichment": enrich,
         "oracle": spec,
@@ -600,6 +630,123 @@ def _decision_v02(
         "h2b": {"p": h2b_p, "pass": h2b},
         "h3": {"p": h3_p, "pass": h3},
         "h4": {"p": h4_p, "pass": h4},
+        "h5": fam,
+        "signal": signal,
+        "md": md,
+    }
+
+
+def _decision_v03(
+    spec: dict[str, Any],
+    enrich: dict[str, Any],
+    arms: dict[str, Any],
+    d: dict[str, Any],
+    abstention: dict[str, dict[str, Any]],
+    n_perm: int = 10_000,
+    seed: int = 0,
+    max_rate: float = 0.10,
+) -> dict[str, Any]:
+    """Apply the v0.3 decision rule (PREREGISTRATION-v0.3.md section 5).
+
+    Signal iff the validity precondition holds (B4-strict answers on fewer than ``max_rate`` of
+    the filler notes) and H1 and H3-strict pass. H2a, H2b, H4 and H5 are reported and do not
+    enter the rule; H4 and H5 are estimation only (intervals, no test).
+    """
+    s0, s1, b4 = arms.get("S0"), arms.get("S1"), arms.get("B4")
+    b1, b7 = arms.get("B1"), arms.get("B7")
+    # validity precondition: filler abstention under the strict single-note prompt
+    fl = abstention.get("filler")
+    pre_ok = False
+    if fl and fl["units"] > 0:
+        pre_ok = fl["answered"] / fl["units"] < max_rate
+    pre_txt = (
+        f"- Validity precondition (B4-strict answered on {fl['answered']}/{fl['units']} filler notes, "
+        f"rate {_fmt_rate(fl['answer_rate'])}, must be below {max_rate:.0%}): "
+        f"{'PASS' if pre_ok else 'FAIL'}"
+        if fl and fl["units"] > 0
+        else "- Validity precondition: not computable (no filler units in B4-strict) -> FAIL"
+    )
+    h1 = _h1(spec, arms)
+    e7 = enrich.get("arms", {}).get("B7")
+    perm = sampler_gap_permutation(d["units"], "B7", "B1", n_perm=n_perm, seed=seed)
+    h2a_p = e7["p_hypergeom"] if e7 else None
+    h2a = h2a_p is not None and h2a_p < 0.05
+    h2b_p = None
+    h2b = False
+    if b1 and b7:
+        h2b_p = fisher_one_sided(b7["ok"], max(1, b7["units"]), b1["ok"], max(1, b1["units"]))
+        h2b = h2b_p < 0.05
+    h3_p = None
+    h3 = False
+    h3_txt = "- H3-strict: not computable (missing S0 or B4-strict)"
+    if s0 and b4:
+        h3_p = fisher_one_sided(
+            s0["bridges_recovered"],
+            max(1, s0["bridges_reachable"]),
+            b4["bridges_recovered"],
+            max(1, b4["bridges_reachable"]),
+        )
+        h3 = h3_p < 0.05
+        h3_txt = (
+            f"- H3-strict (S0 two-note recall {s0['bridges_recovered']}/{s0['bridges_reachable']} vs "
+            f"B4-strict one-note recall {b4['bridges_recovered']}/{b4['bridges_reachable']} on bridge "
+            f"notes, Fisher one-sided): p = {h3_p:.4f} -> {'PASS' if h3 else 'FAIL'}"
+        )
+    h4_txt = "- H4 (estimation only): not computable (missing S0 or S1)"
+    h4: dict[str, Any] = {}
+    if s0 and s1:
+        h4 = {
+            "s0_recall": s0["recall"],
+            "s1_recall": s1["recall"],
+            "s0": f"{s0['bridges_recovered']}/{s0['bridges_reachable']}",
+            "s1": f"{s1['bridges_recovered']}/{s1['bridges_reachable']}",
+        }
+        h4_txt = (
+            f"- H4 (partner-domain filler, estimation only, not a recombination test): S0 recall "
+            f"{h4['s0']} = {_fmt_rate(s0['recall'])} vs S1 recall {h4['s1']} = {_fmt_rate(s1['recall'])}"
+        )
+    fam = recall_by_family(d["generations"], d["match"])
+    fam_lines = [
+        f"  - {f}: {v['recovered']}/{v['bridges']} = {_fmt_rate(v['recall'])}"
+        for f, v in fam.items()
+    ]
+    signal = pre_ok and h1["pass"] and h3
+    md = "\n".join(
+        [
+            "# Preregistered decision rule, v0.3 (PREREGISTRATION-v0.3.md section 5)",
+            "",
+            pre_txt,
+            f"- H1 (planted recall {h1['recovered']}/{h1['planted']} vs decoy false positives {h1['decoy_fp']}/{h1['decoys']}, Fisher one-sided): p = {h1['p']:.4f} -> {'PASS' if h1['pass'] else 'FAIL'}",
+            (
+                f"- H2a (B7 planted card pairs {e7['planted_hits']} in {e7['draws']} draws, expected {e7['expected']}, hypergeometric): p = {h2a_p:.4f}; arm-label permutation vs B1: gap = {perm['observed_gap']:+.4f}, p = {perm['p']:.4f} -> {'PASS' if h2a else 'FAIL'}"
+                if e7
+                else "- H2a: not computable (no B7 arm)"
+            ),
+            (
+                f"- H2b (non-NONE rate B7 {b7['ok']}/{b7['units']} vs B1 {b1['ok']}/{b1['units']}, Fisher one-sided): p = {h2b_p:.4f} -> {'PASS' if h2b else 'FAIL'}"
+                if b1 and b7 and h2b_p is not None
+                else "- H2b: not computable (missing B1 or B7)"
+            ),
+            h3_txt + ("" if pre_ok else " (not interpretable: the validity precondition failed)"),
+            h4_txt,
+            "- H5 (recall by writer family, estimation only, no pass/fail):",
+            *(fam_lines or ["  - no writer families recorded"]),
+            "",
+            f"**Decision: {'SIGNAL' if signal else 'NULL'}** (signal requires the validity precondition, H1 and H3-strict all passing; H2, H4, H5 are reported and do not enter the rule).",
+            "",
+        ]
+    )
+    return {
+        "precondition": {
+            "pass": pre_ok,
+            "filler": fl,
+            "max_rate": max_rate,
+        },
+        "h1": h1,
+        "h2a": {"p": h2a_p, "permutation": perm, "pass": h2a},
+        "h2b": {"p": h2b_p, "pass": h2b},
+        "h3_strict": {"p": h3_p, "pass": h3},
+        "h4": h4,
         "h5": fam,
         "signal": signal,
         "md": md,

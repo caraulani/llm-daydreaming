@@ -1,0 +1,25 @@
+# v0.3 preregistered run over the synthetic corpus v0.3 (bridges that need both sides, ADR-014).
+# Sizes here are the preregistered ones; do not change after PREREGISTRATION-v0.3.md is sealed.
+#
+# Pipeline options used here (implemented 2026-09-14 on branch v0.3-corpus): arms.B4.notes
+# "bridge+filler", arms.B4.prompt generate_single_strict, prereg v0.3 decision rule with the
+# filler-abstention precondition, stats.match_votes (two votes, tie = NO_MATCH).
+prereg: v0.3 decision rule in stats (H1, H2a/b, H3-strict, H4 estimation, H5 estimation,
+#                                    filler abstention precondition; today stats knows v0.1 and v0.2)
+prereg: v0.3
+corpus: {kind: synth, path: data/synth/v0.3}
+visibility: public
+slug: micro_v0_3
+seed: 20260930
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: [haiku, sonnet], match: haiku}
+concurrency: 4
+arms:
+  S0: {random_pairs: 36}           # accepted planted pairs + 12 decoys + 36 random cross-domain pairs
+  S1: {}                           # partner-domain filler control; secondary, NOT a recombination test
+  B4: {notes: bridge+filler, prompt: generate_single_strict}   # B4-strict: bridge notes + 24 fillers
+  B1: {n: 300}
+  B7: {n: 300, band: Q1}
+dupgate_threshold: 0.85
+blind: {enabled: false}
+stats: {n_perm: 10000, filler_abstention_max: 0.10, match_votes: 2}

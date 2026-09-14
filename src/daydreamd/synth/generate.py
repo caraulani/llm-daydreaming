@@ -201,6 +201,7 @@ def build_corpus(
     max_tries: int | None = None,
     min_words: int = MIN_WORDS,
     resume: bool = False,
+    one_side: tuple[str, str] | None = None,
 ) -> dict[str, Any]:
     """Write every note in the plan and freeze the corpus manifest.
 
@@ -346,6 +347,16 @@ def build_corpus(
                 "verdicts": [(t.get("leak_judge") or {}).get("verdict") for t in r["tries"]],
             }
         manifest_docs.append(doc)
+    one_side_result: dict[str, Any] | None = None
+    if one_side is not None and gold:
+        from .oneside import gate_bridges
+
+        gen_model, gate_judge = one_side
+        texts = {
+            n.note_id: (notes_dir / f"{n.note_id}.md").read_text(encoding="utf-8") for n in plan
+        }
+        one_side_result = gate_bridges(backend, gen_model, gate_judge, texts, gold)
+        cost += one_side_result["cost_usd"]
     manifest = {
         "version": out_dir.name,
         "generated_at": now_iso(),
@@ -367,6 +378,8 @@ def build_corpus(
         },
         "max_tries": tries_cap,
         "min_words": min_words,
+        "one_side_gate": one_side_result,
+        "one_side_failures": (one_side_result or {}).get("failures", []),
         "cost_usd": round(cost, 4),
         "cost_usd_prior": prior.get("cost_usd") if prior else None,
         "resumed_from": (

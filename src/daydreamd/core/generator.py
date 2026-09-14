@@ -56,12 +56,20 @@ def generate_one(
 
 
 def generate(
-    run: RunDir, backend: Backend, units: list[Unit], model: str = "sonnet", concurrency: int = 4
+    run: RunDir,
+    backend: Backend,
+    units: list[Unit],
+    model: str = "sonnet",
+    concurrency: int = 4,
+    single_prompt_name: str = "generate_single",
 ) -> list[dict]:
+    """Pair units always use the frozen pair prompt. Single units use ``single_prompt_name``
+    (the frozen ``generate_single`` by default; v0.3 configs select ``generate_single_strict``);
+    the chosen file's SHA is recorded under its own name in the run metadata."""
     pair_prompt, pair_sha = load_prompt("generate_pair")
-    single_prompt, single_sha = load_prompt("generate_single")
+    single_prompt, single_sha = load_prompt(single_prompt_name)
     run.record_prompt("generate_pair", pair_sha)
-    run.record_prompt("generate_single", single_sha)
+    run.record_prompt(single_prompt_name, single_sha)
     rows = pmap(
         lambda u: generate_one(backend, model, u, pair_prompt, single_prompt), units, concurrency
     )
