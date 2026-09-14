@@ -23,6 +23,7 @@ authors:
     given-names: Julian
     email: caraulani@gmail.com
     alias: caraulani
+    orcid: "https://orcid.org/0009-0006-3889-3563"
 keywords:
   - idea generation
   - computational creativity
@@ -88,6 +89,7 @@ references:
 #   authors:
 #     - family-names: Caraulani
 #       given-names: Julian
+#       orcid: "https://orcid.org/0009-0006-3889-3563"
 #   journal: "arXiv preprint"
 #   year: 2026
 #   identifiers:

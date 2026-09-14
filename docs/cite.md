@@ -30,3 +30,5 @@ Paper title, for reference lists: "daydreamd: A Selection Engine for Machine-Gen
 - Zbigniew Lukasiak, DayDreamingDayDreaming, 2025, https://github.com/zby/DayDreamingDayDreaming
 - Vault Daydream (glebis/claude-skills), 2026, https://github.com/glebis/claude-skills
 - Oliver Zahn, James Evans and David Eagleman, "Discovery by Dreaming: Cross-Domain Recombination in Artificial Memory", arXiv:2607.16256, 2026
+
+Author ORCID: [0009-0006-3889-3563](https://orcid.org/0009-0006-3889-3563).

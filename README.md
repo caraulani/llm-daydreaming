@@ -4,7 +4,7 @@
   <img src="hero.png" alt="LLM Daydreaming v01. Give your LLM the power to dream new ideas, based on your actual work. Sample, connect, abstain, critique, filter, morning." width="100%"/>
 </p>
 
-*By [Julian Caraulani](https://github.com/caraulani), September 2026. An open implementation and
+*By [Julian Caraulani](https://github.com/caraulani) ([ORCID 0009-0006-3889-3563](https://orcid.org/0009-0006-3889-3563)), September 2026. An open implementation and
 preregistered test of Gwern's LLM daydreaming proposal (the day-dreaming loop) over your own notes:
 Obsidian vaults, Claude Code memory, any markdown folder.*
 
