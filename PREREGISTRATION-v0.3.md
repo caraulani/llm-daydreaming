@@ -135,8 +135,8 @@ Claims not permitted in v0.3 text: "novel ideas", "discovers", "anticipates", an
 1. Write this file and the answer key (`data/synth/v0.3/bridges.yaml`, `decoys.yaml`, `fillers.yaml`). Do not run any model call for the experiment before step 5. Development smoke tests on a throwaway corpus are not the experiment.
 2. Compute `shasum -a 256` of the sealed files: this file, `data/synth/v0.3/bridges.yaml`, `data/synth/v0.3/decoys.yaml`, `data/synth/v0.3/fillers.yaml`, `prompts/generate_single_strict.md`, `experiments/micro-v0.3/config.yaml`, `experiments/micro-v0.3/writers.yaml`; list the hashes here; commit the files together; tag `v0.3.0-prereg`.
 3. Stamp: `ots stamp PREREGISTRATION-v0.3.md data/synth/v0.3/bridges.yaml data/synth/v0.3/decoys.yaml prompts/generate_single_strict.md`; commit the proofs; upgrade later with `ots upgrade`.
-4. Record `PREREG_COMMIT = TBD`.
-5. Build the notes from the sealed specs with both writer families and the gate (`make synth SPEC=data/synth/v0.3 WRITERS=experiments/micro-v0.3/writers.yaml MIN_WORDS=100` with `--one-side-gate --gate-model sonnet`), apply the rewrite-once rule, run the gate again, drop second failures, freeze the manifest and record `CORPUS_MANIFEST_SHA256 = TBD` and the accepted bridge list here.
+4. Record `PREREG_COMMIT = b700d927924be0f324cac6c257256d49c99265fb` (tag `v0.3.0-prereg`).
+5. Build the notes from the sealed specs with both writer families and the gate (`make synth SPEC=data/synth/v0.3 WRITERS=experiments/micro-v0.3/writers.yaml MIN_WORDS=100` with `--one-side-gate --gate-model sonnet`), apply the rewrite-once rule, run the gate again, drop second failures, freeze the manifest and record `CORPUS_MANIFEST_SHA256 = 6ba2d3ac49ca` (full value in `data/synth/v0.3/MANIFEST.sha256`; corpus sha256 d044765e9dff...) and the accepted bridge list here: 22 bridges, br01 to br24 except br09 and br11.
 6. Only then run `make micro CONFIG=experiments/micro-v0.3/config.yaml` and `make reproduce`.
 
 Note on the builder: the pipeline options this config uses (`arms.B4.notes: bridge+filler`, `arms.B4.prompt: generate_single_strict`, the v0.3 decision rule, `stats.match_votes`) were implemented before the seal; the seal covers the code state through the commit hash.
@@ -158,4 +158,9 @@ The hash of this file itself is the git blob recorded by the sealed commit and b
 
 ## DEVIATIONS
 
-None yet. Format for entries: date, section, what changed, why, who decided.
+Format: date, section, what changed, why, who decided.
+
+1. 2026-09-14, Section 6 (checks at build). The first build pass used five attempts per note (the builder's default for oblique specs) rather than the ten stated here; the resume pass gave every failing note its remaining attempts up to ten, after which no note was short and no note failed the leak judge. Seven bridge notes that were short after the first pass were judged by the leak judge after the build (all CLEAN except one that was then regenerated). Decided by the experimenter, before any experiment call.
+2. 2026-09-14, Section 6 (acceptance, rewrite-once). Side-A specs of br02, br06, br15 and br11 were rewritten once each after a gate flag, as the rule allows; the rewritten `data/synth/v0.3/bridges.yaml` has sha256 d039c061778c072b8a14b119700dd61007ee307201d00e389d447128416cecb3 (the sealed hash is in Section 15). br02, br06 and br15 passed the gate after their rewrite; br11 was recovered again (2 of 2 votes) and dropped.
+3. 2026-09-14, Section 6 (gate stochasticity). The gate is not deterministic: across four passes the flags were br02 (pass 1), br06 and br15 (pass 2), br11 (pass 3), br09 and br11 (pass 4), and all flags except br11's second were judge ties (one MATCH, one NO_MATCH), which the rule counts as recoveries. Reported in the paper as a property of the instrument.
+4. 2026-09-14, Section 6 (cap). To bound gate cost and stop the rewrite loop, gating stopped after four passes; br09, first flagged (a tie) on the final pass, was dropped without its rewrite. Accepted answer key: 22 bridges (10 family A, 12 family B). Decided by the experimenter, before any experiment call.

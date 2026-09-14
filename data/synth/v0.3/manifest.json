@@ -1,0 +1,2429 @@
+{
+  "corpus_sha256": "d044765e9dff6c49d042fcbc7adc98d6cfaf18d8210787e9ec64f04c90f9d749",
+  "cost_usd": 3.5954,
+  "cost_usd_all_passes": 17.6939,
+  "cost_usd_prior": 2.5532,
+  "docs": [
+    {
+      "bridge_id": "br01",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br01-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes suspicious observations (sequential postbin.io emails 0410–0451, timing, uniform choices) but never mentions app signups, and thus cannot reveal that the same batch of mailboxes hit both the promo system and a separate product on the same date.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2c9305e12b42b1416d3ac6aa041d7ba03c51432769420341811deafa5c03c65a",
+      "tries": 1,
+      "words": 156,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br01",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br01-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes the attack pattern and suspicious indicators on the calling app in isolation (sequential postbin emails, uniform payment, tight clustering) but contains no reference to, mention of, or implication about a separate product (the store's promo system) or that the same mailbox batch w",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "5d402212630d4e3865f9857138f0dd8b23041d258c473c1c83f9a853d97ebed8",
+      "tries": 1,
+      "words": 175,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br02",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br02-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies that fraudsters exploit the small-order bypass (evidenced by increased small-order disputes and customers claiming they didn't place orders), but never specifies the threshold amounts (30 euros, 29.90 pricing), the top-up pattern, or the recommended check (ask processor about exe",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "c8a32b4d4efa1173709fae94ab7d7126c7e052f5aa5dc57748e754843498bccd",
+      "tries": 1,
+      "words": 102,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br02",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br02-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that 29.90 top-ups spiked on June 12 and come from new accounts, but never explains why this specific amount is exploited (no mention of any 30-euro threshold, authentication exemption, or processor rule). A reader would see suspicious activity and investigate bots, but could not d",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "50607a355535c2f0c417153a8e32ce5e47a67b7fd7e30d91567aa1ac934cb939",
+      "tries": 1,
+      "words": 100,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br03",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br03-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies that descriptions come from 'a different workflow' and correlates this with the returns spike in 1200+ SKUs, but does not name the mechanism (a generator with a measured score, or the mismatch between evaluation set SKUs 1000–1199 and production set SKUs 1200+), nor does it imply",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "5704aaff03950ba9249f9dd583f92a9078b4d9c537f459a5b7e387afade2ea3e",
+      "tries": 1,
+      "words": 145,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br03",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br03-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes only the 1000–1199 eval set and its 4.6 score; it does not mention production's SKU range, any difference between eval and production ranges, or the 3× return rate disparity that reveals the mismatch.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "b57e9fcf3a4a67b392bd47766e6945cac39ba3a7c7bc6ef3ada74e69a3d7124d",
+      "tries": 1,
+      "words": 159,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br04",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br04-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note only states the observation 'scoring lower than previous weeks' without revealing the cause—that a judge snapshot change by the eval vendor on the same date accounts for the score movement independent of any change in reply quality.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2aeb90ed2124f293192b957f935a845b5699ea3ea4187241a45c18731d2c9852",
+      "tries": 1,
+      "words": 102,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br04",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br04-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note speculates about snapshots ('possibly altered without pinning') and describes general best practices (requesting pinning, tracking dates), but does not state that the Aug 19 snapshot change caused the 0.6-point drop or recommend re-scoring with the previous snapshot pinned—the specific diag",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "LEAK",
+          null,
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "90e174fefa657a49a6b3dcd0bfb31e3ed3193098a73a515034a3b1b79dd30cf3",
+      "tries": 7,
+      "words": 109,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br05",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br05-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note contains only operational details about the carrier contract and Tuesday packing window (05:45–06:30) but makes no reference to any personal medication dose, a 07:00 schedule, or missed doses. The connection between the packing rush and missing a 07:00 dose is entirely absent and cannot be ",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7323b0679d34187dda4486ab3cb6f862ea18a02a6dfb55a1b419cfda7c963443",
+      "tries": 1,
+      "words": 149,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br05",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br05-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The author explicitly states 'Pattern is real but reason unclear' and rules out fatigue, calendar conflict, and memory lapse without naming any cause, diagnosis, or mechanism. A reader cannot infer the carrier dispatch timing issue, the packing rush, or the 06:00 adjustment without that information.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "30c4bccad0607c4b81b7e4b437fa70d4071c8c77ff09e1a2ad6eff9822df7954",
+      "tries": 1,
+      "words": 149,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br06",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br06-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note addresses only the store's temperature excursions and identifies 'late afternoon pick-up' as correlated, but does not mention the cloudy vials or compare the performance of the 09:00 vs 14:00 FrostLine pickups, so a reader cannot infer the shared root cause or the recommended switch to the ",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "LEAK",
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f6bbc13913374da1ed14ef93539cff65842f47209f7c0d43b90bd691451987dd",
+      "tries": 5,
+      "words": 110,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br06",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br06-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that morning vials are clear and afternoon collections are cloudy, establishing a time-of-day pattern, but does not name, imply, or directly suggest a storage temperature issue, a specific carrier service, a refrigeration problem, or the 14:00 pickup mechanism—only the symptom is v",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "17a190781228290b885858d63a18237b99fbd96c335e13f092e786e73b0db4c3",
+      "tries": 7,
+      "words": 101,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br07",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br07-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note discusses reconciliation friction and backend systems caching the old identifier, but does not identify the specific grant portal validation failure, the mechanism (new VAT entered vs. old VAT on 2025 statements), or the remedy (resubmit with old VAT + change notice).",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "bf001bb1b4a0908ac44f247ed18a06cec2b4292eefbfec12b75dc6b2ad729680",
+      "tries": 1,
+      "words": 176,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br07",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br07-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "While the note mentions submitting a 'current VAT number' and encountering 'financial data could not be validated' error, it does not suggest that the validation failure stems from a mismatch between the new VAT (issued April 1) and the VAT on the 2025 financial statements, nor does it imply that re",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2dd3ca12ef2e9ac6096de2b1889e1e3978975dac39ca9bcab800cd478a5d4397",
+      "tries": 1,
+      "words": 153,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br08",
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "br08-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note attributes warping to 'supplier A batch' and says the company 'Contacted supplier A about quality control,' implying a supplier defect. It never mentions the workshop storage location, humidity conditions, shelf C, or any storage-related cause—a careful reader would not infer that the actua",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "043c87657f4778cf79d69064b5439958a0d3fe95b142a7e38f9ba8f617e2247e",
+      "tries": 1,
+      "words": 111,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br08",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br08-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note documents sensor maintenance and humidity observations on workshop shelves, but does not mention board warping, identify a specific humidity threshold, diagnose humidity as a cause of damage, or propose moving stock as a remediation test.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4562a7475048caec8f6c3dbd3c43d6ec9c1fe1154c7a17b95537b780389bb818",
+      "tries": 2,
+      "words": 105,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br09",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br09-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes the identical 3.5 scores despite different proposals and notes that feedback is unhelpfully generic ('no signal on what to fix'), but does not diagnose or imply the length-limit mechanism. The phrase 'Scores give no signal' confirms the author hasn't inferred the root cause.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6211669709530f804c90dbccec4ceae4e15faf7d18ee402679f94ca0f72380d7",
+      "tries": 1,
+      "words": 171,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br09",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br09-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies a clear pattern (3.5 scores consistently on content exceeding ~12k tokens with empty rationale) but explicitly does not name the cause, stating instead 'Need to figure out if it's architectural or configurable' — the diagnosis remains under investigation, not stated.",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f1915343af378dd20bc08b639854840ea23ba604cfeda6253154e35d5b49bbdf",
+      "tries": 5,
+      "words": 160,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br10",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br10-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions 'Deliverable D3.2 score baseline at 71' but does not name EvalBench Pro, describe any re-normalization of scales, reference different snapshots, or suggest that the same measurement could yield different results at different times. A reader of this note alone would see only a gener",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "8f8598dfc9ebff44a1a11b3d9219cb0916c5bf7e59f2eaea33bf4e876345414e",
+      "tries": 1,
+      "words": 109,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br10",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br10-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions scores influenced by 'the evolving pool of models EvalBench benchmarks against' but does not state or imply that EvalBench Pro specifically re-normalized its scoring scale, the exact drop (71→64), or that the deliverable is now undefined.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ca41c9c0a4d9e960423eb0cc4e56b0158f781c298ae9c5b1c5f3ff954e5bd226",
+      "tries": 3,
+      "words": 118,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br11",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br11-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions the sequential registration numbers (427891, 427893) as bare facts but does not highlight their proximity, does not suggest they are unusual, and explicitly states 'Nothing unusual in the paperwork'—a careful reader would not infer from this note alone that sequential identifiers w",
+        "final": "CLEAN",
+        "verdicts": [
+          "LEAK",
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "sha256": "11f544b209d986d0d8ffef20d34d0b0cd63cf7673da67adda4ca63756361e70e",
+      "tries": 2,
+      "words": 178,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br11",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br11-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes sequential destination numbers (01-40) paired with multiple independent accounts, but does not state the principle that sequential identifiers across independent parties indicate a single operator, nor does it recommend an adjacency check on phone numbers or registration numbers.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "45c2561cad91e39cb342869148927f20e06a628d9d4815955cf56690e507cfaa",
+      "tries": 1,
+      "words": 184,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br12",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br12-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions an unknown-device alert and a Slack export with portal info, but explicitly concludes 'Confirmed no suspicious activity post-check' and 'all clear' after review, which would prevent a reader from inferring the credential compromise, network-block connection, or the need to rotate c",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "a1cad8b9be46ef99cb08b76c88676dace59f36a3d26cb87d413cba0183062565",
+      "tries": 1,
+      "words": 105,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br12",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br12-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes only the app attack at 03:10 on 22 July and does not mention the grant portal incident, the Slack credential leak, or any connection between two simultaneous attacks. A reader could not infer that a second system (the portal) was compromised minutes later from the same network blo",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "262486a98cdd25b7503b0d66ec9c95940859aa471cbc5dff328aa397a1f63d09",
+      "tries": 1,
+      "words": 115,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br13",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br13-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions the 05:40 flight and fixed timing constraints but does not mention any blood draw, fasting appointment, or conflict with medical procedures on 6 November.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "54a20cb3f661b65b84489ee77598142375d4df7761ddc48f4651323b6e55a9ba",
+      "tries": 1,
+      "words": 178,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br13",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br13-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions the 6 November 08:00 blood draw appointment and preparation protocol but contains no reference to any competing engagement, travel plans, or scheduling conflict that would require moving the appointment.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "899261a18d2fae3464f4ee4924ec97ec84ce31bbc55a0d19f26f3aa63c29fa50",
+      "tries": 1,
+      "words": 152,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br14",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br14-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions 'no reporting format stipulated' and 'one consistent marker per unit' as a general concern about data standards, but does not state or imply Eurofins' specific history of switching units without notice, nor does it specify that the fix requires naming mmol/L in a contract clause. A",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2367e4352fa5c427533ac86412702347bef366b5abd8406f90d59afd882fad93",
+      "tries": 1,
+      "words": 120,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br14",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br14-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies that some laboratory changed measurement units between March and June without notice, but does not name Eurofins, mention a grant substudy, or reference any subcontract that requires a fixed-units clause.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7e7f98db47cf83ea5efd8594ba4a12525f00b85419c63aa124899c08395f78ec",
+      "tries": 2,
+      "words": 136,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br15",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br15-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions a server box in the shed and temperature readings in the 13:00-15:00 window, but does not identify what the server box does, does not mention any performance issues (judge latency or error rate), and does not state or imply a causal link between temperature and system performance d",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2d68bd9c665c7227a15a6589416ae24b2ca97b049447555b5b290e253ded2bde",
+      "tries": 1,
+      "words": 183,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br15",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br15-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note identifies that something is degrading the local compute box during 13:00-15:00 but never specifies the cause (thermal), location (shed), relevant parameter (temperature/41°C), the trigger (AC schedule change on Aug 1), or the recommended check (restore the AC cycle). A reader could only hy",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "80b432f81179729658827571a8ffb2b1f8e1eb114ecab89ac6c9509e4a82e002",
+      "tries": 4,
+      "words": 168,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br16",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br16-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note records observations ('recalibrated scale using 1 kg reference weight' and 'noted discrepancies') but never identifies that the reference weight itself is misspecified (970g vs. 1000g), does not diagnose the 3% systematic error, and does not suggest re-weighing on alternative equipment or r",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6c1661408fa0bb2ff5725b509de3cd25e42c967fafa9a38ff373f1e20b02a135",
+      "tries": 3,
+      "words": 105,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br16",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br16-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions weighing items to create gold answers and observes a consistent ~3% error in weight-based queries, but never states the cause (miscalibrated scale with a faulty reference weight), diagnosis (scale reads 3% low), or recommended fix (re-weigh on pharmacy scale and regenerate answers)",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "a8ddd725aaacd611c7cfcd8e90abd6f009045e605317f0fddebc8da2fb904209",
+      "tries": 2,
+      "words": 108,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br17",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br17-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes suspicious delivery patterns (12 stops, 12 phones, unusual van behavior) and declines the task, but never mentions app signups, coordinates, location matching, or the mechanism linking the delivery van to the phone farm signup cluster. A reader cannot infer the recommended check—m",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "e172605887c0ab026a171e099364df4fc7094d875469fc1f5cb5590d7adc9498",
+      "tries": 1,
+      "words": 217,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br17",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br17-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes the symptoms (twelve accounts clustered at Calle Ruiz, same-hour signup, maximum immediate spend) and suggests general preventive measures (velocity checks, location-based signup restrictions, device fingerprinting), but does not state or imply the specific mechanism (van delivery",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "41e545a866454d723558613d8aa54381332569268820a8328bbad5a691458a46",
+      "tries": 1,
+      "words": 167,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br18",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br18-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that a SIM starting 622345 received a 'Number not in service' message when calling, but never explains that this range is Telsim's data-only machine-to-machine range that cannot accept voice calls by design—the diagnosis and mechanism remain hidden.",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "5a01b87e9698b2bfb10ba1eb9e59f6870928c5b20214fd027b8f48c5ef05542a",
+      "tries": 2,
+      "words": 110,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br18",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br18-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note speculates these are 'pre-purchased SIMs used exclusively for verification bypass attempts' but never identifies Telsim's M2M range designation, the data-only design constraint that prevents voice calls, or the specific remediation of blocking this range.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "a3a3c24fa7d4357c62c577bd0c0647cd0d09229f04bf72eefc0368e1d22b99d5",
+      "tries": 1,
+      "words": 119,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br19",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br19-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note presents the window seal (20 August) and high bedroom CO2 (1,800–1,950 ppm) as separate observational facts, with CO2 framed as 'expected accumulation' and the overall system as satisfactory ('logging looks clean'). Sleep is never mentioned; no causal link between the seal and any problem i",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "5c42fa57130affbb32deab93dbeb9aa470aa5716a50d7d6ce54ef448f470fc15",
+      "tries": 1,
+      "words": 174,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br19",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br19-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note acknowledges 'something environmental or external' changed around August 20 but names no specific cause—not the sealed window, not CO2 levels, not the sensor cable. The author misdirects toward work stress (grants applications) rather than indoor air quality, and explicitly states the envir",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ea7dc3b7715f0c28d28c9fef5abe1644537163cf1f7f98abaf3e183c27d22ab9",
+      "tries": 1,
+      "words": 169,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br20",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br20-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note restates observations (PM2.5 spikes Monday/Thursday, extractor fan pending, laser cutter operational) but does not state or imply the causal mechanism connecting laser cutter operation to PM2.5 spikes, nor any health correlation with resting heart rate, nor the specific testing procedure.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "0b1d04b430eb2b79afec510629e776c25aabebc8e80809af7cbce9f6bd325b1c",
+      "tries": 1,
+      "words": 112,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br20",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br20-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes the 6 bpm increase on Tuesdays and Fridays and rules out sleep and alcohol as confounders, but does not name, suggest, or imply an environmental cause (such as the laser cutter or air quality) or the recommended diagnostic intervention (extractor test).",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d89300e028fcaf1559f20aba188f7841be372f198c80fb2b4309d6b817b392ce",
+      "tries": 4,
+      "words": 112,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br21",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br21-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note states 'Single card pattern maintained for consistent eval signal' and that cards 'follow 411xxx pattern, all from standard sandbox test card set,' which raises a red flag but never names the production whitelist of 411111, the mechanism by which this BIN avoids fraud detection, or the fix ",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f676951a424b201bb8fd4eaeef757382e7124ea17ce398857d1da7184404bab3",
+      "tries": 1,
+      "words": 113,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br21",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br21-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note describes the 411111 production whitelist and a real chargeback, but does not mention that the fraud model's eval itself uses 411111 as test BINs, which is essential to the hidden connection. A reader would see the whitelist as a problem to remove, but would not infer that the eval is also ",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3fb46934da8ac40639e39fa513c39d81cc254ebbd8f8b5211b846ab50d90b25e",
+      "tries": 1,
+      "words": 142,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br22",
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "br22-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note shows a correlation (31% vs 6% disagreement rates for different date ranges) but does not state or imply the cause (fever during July 3–5) or the recommended action (re-label those 120 items blind). A careful reader would notice the pattern but cannot infer the mechanism without access to t",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4cd82bf36323e6f1e5a83562aee95b75fc4236089f7073af132958229c30ebdd",
+      "tries": 1,
+      "words": 108,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br22",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br22-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note documents personal health observations and medication timing but contains no reference to labeling tasks, model evaluation, disagreement, or any systematic comparison of work quality—a careful reader could not infer the hidden connection about model disagreement on 120 items or the proposed",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "eebb59ebc86da3b9235c8172f6595aa456fb93e64ac39154cc01dcf29960f4b2",
+      "tries": 3,
+      "words": 107,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br23",
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "br23-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note attributes the problem to carrier-side issues ('Already escalated with carrier support team') and does not mention Twilio or identify the SMS routing provider; a reader cannot infer that Twilio's route to Yoigo is the root cause without information from the other note.",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "02579f1ef640eff8f1fa94b2b20658e64122761348f9e7f54b071cf55f3486f0",
+      "tries": 1,
+      "words": 166,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br23",
+      "decoy_id": null,
+      "domain": "health",
+      "id": "br23-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note observes that a pickup notification 'never arrived on 16 August' and records that the pharmacy 'processes messages through Twilio' and the contact is 'registered on Yoigo,' but does not state or imply the root cause (a Twilio route failure since 15 August) or diagnose that this is why the m",
+        "final": "CLEAN",
+        "verdicts": [
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "aa2da36eb561ef33b2aca68210c9ab171d5be4648dbde21e5d99f93e307f3355",
+      "tries": 1,
+      "words": 153,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": "br24",
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "br24-a",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note mentions that 'Equipment cost lines validated by external audit' and 'Adjusted co-financing table based on confirmed figures' without disclosing which equipment item, why adjustment was needed, what cost change triggered it, or any supplier/model substitution—leaving the discontinued-model ",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "93c8121b402174425e1f7db820cb21c0439078a088a8ad59b2a4ce02f7fb63b0",
+      "tries": 4,
+      "words": 102,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": "br24",
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "br24-b",
+      "kind": "bridge",
+      "leak_judge": {
+        "evidence": "The note states the old price (1,190 euros) and new price (1,490 euros) but omits the critical quantity—eight gateways—making it impossible for a reader to calculate the 2,400-euro shortfall. The September 30 deadline and co-financing table are also not mentioned, leaving the specific mechanism and ",
+        "final": "CLEAN",
+        "verdicts": [
+          null,
+          null,
+          null,
+          "CLEAN"
+        ]
+      },
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4d701a8dceacfecaef9b20e46a3eb69720cc51c988041145c3672e3ce02854d3",
+      "tries": 4,
+      "words": 105,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc01",
+      "domain": "ecom",
+      "id": "dc01-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "43b2940881287df018fb2cb447d9a30d8e874792d6e5b4b54377bbe7caa62f75",
+      "tries": 1,
+      "words": 204,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc01",
+      "domain": "mleval",
+      "id": "dc01-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "564f425df054c53813b86a563b021940dd4bfa62e923f810c1ce3647b1550a04",
+      "tries": 1,
+      "words": 136,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc02",
+      "domain": "ecom",
+      "id": "dc02-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "a0a65ff040df642ce3366c5a60be3f99688c3411d767b8be3586a0af5ff2c93d",
+      "tries": 4,
+      "words": 108,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc02",
+      "domain": "health",
+      "id": "dc02-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "514f1c1e5f59de5a9a822c27e3babb4961919ea7d74dcbca8a2273fe5f33b24b",
+      "tries": 1,
+      "words": 110,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc03",
+      "domain": "mleval",
+      "id": "dc03-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "6b7c5cb72c1f4081c46e602f64685ad1d70da64e06c1aa2221026546fcc07d20",
+      "tries": 1,
+      "words": 164,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc03",
+      "domain": "fraud",
+      "id": "dc03-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "9562e9e04d904f02329fb101f202d247bb37d2fe34a977590c31563aacea7ab6",
+      "tries": 1,
+      "words": 211,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc04",
+      "domain": "fraud",
+      "id": "dc04-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7235f6e6412ee34b6bf194ce3bc25a2d9e8385e255e0f07a3dc1a85a64bb40a6",
+      "tries": 1,
+      "words": 113,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc04",
+      "domain": "health",
+      "id": "dc04-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "736451c250bd7f8d63234087e67fc5ff18d927fd59d0610ffbf946477e7b9822",
+      "tries": 1,
+      "words": 115,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc05",
+      "domain": "grants",
+      "id": "dc05-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "7f8aa3f83d6e19d04f625ff8b13c7a292b177d25e47795f459e41b7ee758dffb",
+      "tries": 1,
+      "words": 164,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc05",
+      "domain": "iot",
+      "id": "dc05-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "dc897e88664937353f64e80c363e6f6fd07d77a1284b92eaf9628e01faafe9ce",
+      "tries": 1,
+      "words": 159,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc06",
+      "domain": "grants",
+      "id": "dc06-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ce0dcaf55266c56bd97bc93d4b6260c9bcc8086f82a8d9884986df4c2250b0d9",
+      "tries": 1,
+      "words": 117,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc06",
+      "domain": "mleval",
+      "id": "dc06-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "2966923b70d09bae0a8209c92282d1d98d61e001c0def7f1ebf169068bf84992",
+      "tries": 1,
+      "words": 139,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc07",
+      "domain": "grants",
+      "id": "dc07-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "14423fd1b252f43bdce1c35ee40ff9485a5a959787dc2bcea270eebff78beb5a",
+      "tries": 1,
+      "words": 169,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc07",
+      "domain": "fraud",
+      "id": "dc07-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "75f21c3ea7baad1398e85ed4a79d0e61a0d98cf13e3a22766fdab8c99b1409ab",
+      "tries": 1,
+      "words": 204,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc08",
+      "domain": "iot",
+      "id": "dc08-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "122416f06d37ff7d57b994fc66bf30c755410b879de76d590d74334a1318a872",
+      "tries": 3,
+      "words": 112,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc08",
+      "domain": "health",
+      "id": "dc08-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "14807b5721623035ef7e1c1cae6d9a3c34ef9ece4008769a7aed15af0ed8a02f",
+      "tries": 3,
+      "words": 109,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc09",
+      "domain": "mleval",
+      "id": "dc09-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "8ff3827355cd776e62c16dd8969bd5c4662282b1c716b7b564232ca057939897",
+      "tries": 1,
+      "words": 178,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc09",
+      "domain": "health",
+      "id": "dc09-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d61842e2f120c138bb7580ec399fc2d6505a2c137b4ab658d6515ee0780ee88c",
+      "tries": 1,
+      "words": 164,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc10",
+      "domain": "ecom",
+      "id": "dc10-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "e37fa65a8d41d071623e5ffbd4580fb6975a5ebe2cdf410d4248589061101159",
+      "tries": 1,
+      "words": 111,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc10",
+      "domain": "fraud",
+      "id": "dc10-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "59791e3704c167c3a4876b5770c4e9b083f77b2a523f986ce59d6f0008653ed4",
+      "tries": 1,
+      "words": 140,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc11",
+      "domain": "ecom",
+      "id": "dc11-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d0c680a0c903434643f567c128d51f2ae0a5ce5d49762a8abf4aa03392cabc16",
+      "tries": 1,
+      "words": 200,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc11",
+      "domain": "iot",
+      "id": "dc11-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "44af8df0a3fc3412eeec92492c3e052ae672d5d5082a0d10242e997775277262",
+      "tries": 1,
+      "words": 206,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc12",
+      "domain": "grants",
+      "id": "dc12-a",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "77de432120b9a8241e1f6714ddbb308efafa8c06ecb90a93777fc642876ed999",
+      "tries": 1,
+      "words": 114,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": "dc12",
+      "domain": "iot",
+      "id": "dc12-b",
+      "kind": "decoy",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "c7e9c1eb756ed3abdb96669a23ede36e2aed5c2bbce3c1b291d2e95618c44e15",
+      "tries": 1,
+      "words": 111,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl01",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "490256b950e0a10e8774ff948d2ece402fe0e23305aba0984befa2ff4f980bcb",
+      "tries": 1,
+      "words": 217,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl02",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "68a6e301f107f1e24f2339b05efafb3d248cbf224dff794080d7e9deb4e67d9a",
+      "tries": 1,
+      "words": 133,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl03",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "45f8b9fb9af63517baa747bbf27bf8f56c0f44c3ad9f6ddcf02d23775ae5f06b",
+      "tries": 1,
+      "words": 185,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "ecom",
+      "id": "fl04",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "9e84bb0eb908def9e8bcf1a7ca8a1cc7623c84919c40b2e3d8ef7507d060822c",
+      "tries": 2,
+      "words": 142,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl05",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "f554052eff569fd481bdf42112d85ef47273fe90c537f29ad1652d94fa683565",
+      "tries": 1,
+      "words": 165,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl06",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ef53cf89f349d77238b1328df443faed02de2db2c2396149fefe3db3f65c840a",
+      "tries": 1,
+      "words": 115,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl07",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "b73dfbe219d1cc0cb54191b5c962177ffbc8c9f8e068146caa0303c632109d46",
+      "tries": 1,
+      "words": 162,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "mleval",
+      "id": "fl08",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "903f21aacf64b7c35ef9bae80c15b60ddb9c7e9dfb17a5a5c8821bf8f19a9af7",
+      "tries": 1,
+      "words": 109,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl09",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "d2becf2bdc22191a03a8ac5f99f42fc76e26a6368459ff0de35d7884b17c4d93",
+      "tries": 1,
+      "words": 194,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl10",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "186d048ba25d540c4fa5aa3cddd594300869271a5fa5eec0f040437f354e710a",
+      "tries": 2,
+      "words": 112,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl11",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "32f88fa2a3551d7da1e8f31952a14d05e7fb8c7b60ab942bec868a4bd4f5c0d2",
+      "tries": 1,
+      "words": 207,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "fraud",
+      "id": "fl12",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "ff4a4650f1e4849ad656bb6c50d38e930d41dc732d9f43a1de9498e10f1ffe4d",
+      "tries": 1,
+      "words": 135,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl13",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "0e0da72a5fc41d12a07e7700b6fc43547c313e0f02bbc224e79a1ec76512796f",
+      "tries": 1,
+      "words": 162,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl14",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "89c80c07e000cb1f434b06cc90e0e02f255b16762e8b48055ae390962b9552e2",
+      "tries": 1,
+      "words": 122,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl15",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "8741797165f8e435b574cbd162debfa5e6d05dc91f7c62aec62179051e52db4c",
+      "tries": 1,
+      "words": 220,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "health",
+      "id": "fl16",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "4c3c3603972c1d910cae5752f2e665abead8f71853cce8dcd4b97c6c2a4d7058",
+      "tries": 2,
+      "words": 110,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl17",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "06ce3df82f3e85880fd1eb7a77bcd25f759dab3e6f604b887840ca572cf9a8c0",
+      "tries": 1,
+      "words": 221,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl18",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "789279e1634e6a5ef40d6eac69d94f25c5c5aafe57cecc004cf82d3202399439",
+      "tries": 4,
+      "words": 103,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl19",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "31ca41784c1d3593b4df1daf24a42f8b546fe94e5533bb3d57875e9e0248f254",
+      "tries": 1,
+      "words": 184,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "grants",
+      "id": "fl20",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "53002d0c0823d3d1db7213ff169a650de0107ecf4946927d65099d23c3225346",
+      "tries": 1,
+      "words": 121,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl21",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "c02c1e983c56154abda1443dc7b290d8255a01fec70e59eda6b83adeead52087",
+      "tries": 1,
+      "words": 181,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl22",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "74b57164b397da9427910e4f6a957abfd4a4395c14ce0a9d17c6dfed2765b87f",
+      "tries": 1,
+      "words": 112,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl23",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "597c1cacdec8fc815955747b82012cd0ff8807ebc1ab5cbd0ea61aa5467733bb",
+      "tries": 1,
+      "words": 162,
+      "writer_family": "A",
+      "writer_model_id": "claude-haiku-4-5-20251001"
+    },
+    {
+      "bridge_id": null,
+      "decoy_id": null,
+      "domain": "iot",
+      "id": "fl24",
+      "kind": "filler",
+      "leaks_final": [],
+      "reused": true,
+      "sha256": "3622b2d53eb95829c85bbe53607d7a909598bc40a403c8609ccfaa7ceb02a9af",
+      "tries": 1,
+      "words": 111,
+      "writer_family": "B",
+      "writer_model_id": "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+    }
+  ],
+  "excluded_bridges": [
+    "br09",
+    "br11"
+  ],
+  "excluded_reasons": {
+    "br09": "one-side gate: first flag (tie, side b) on the final pass; dropped without rewrite under the four-pass cap (deviation 4)",
+    "br11": "one-side gate: recovered on pass 3 (tie) and again on pass 4 (2 of 2 votes) after its single rewrite"
+  },
+  "frozen_at": "2026-09-14",
+  "gate_passes": [
+    {
+      "flags": [
+        "br02"
+      ],
+      "max_tries": 5,
+      "pass": 1
+    },
+    {
+      "flags": [
+        "br06",
+        "br15"
+      ],
+      "max_tries": 10,
+      "pass": 2
+    },
+    {
+      "flags": [
+        "br11"
+      ],
+      "max_tries": 10,
+      "pass": 3
+    },
+    {
+      "flags": [
+        "br09",
+        "br11"
+      ],
+      "max_tries": 10,
+      "pass": 4
+    }
+  ],
+  "generated_at": "2026-09-14T15:49:42+00:00",
+  "leak_judge": {
+    "enabled": true,
+    "failures": [],
+    "model_ids": [
+      "claude-haiku-4-5-20251001"
+    ]
+  },
+  "leakage_failures": [],
+  "leakage_ngram": 6,
+  "max_tries": 10,
+  "min_words": 100,
+  "n_bridges": 24,
+  "n_bridges_planted": 22,
+  "n_decoys": 12,
+  "n_notes": 96,
+  "one_side_failures": [
+    "br09",
+    "br11"
+  ],
+  "one_side_gate": {
+    "bridges": {
+      "br01": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The 41 SPRING24 orders are likely a bot/fraud cluster, not real customers: sequential disposable postbin.io emails plus uniform cheapest-shipping and cheapest-item picks in one 40-minute window signal scripted account creation.",
+              "mechanism": "Independent human shoppers don't produce perfectly sequential four-digit email prefixes on a disposable-email domain with no gaps, nor identical lowest-price selections across every order, within a 40-minute span; that combination is a scripted signup pattern.",
+              "testable_implication": "Pull these 41 orders and check chargeback/return rate, shipping address reuse, and whether postbin.io addresses ever verify or engage post-purchase; block or flag postbin.io at checkout if the rate is high."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Generated describes fraud indicators in orders alone; GOLD requires cross-product connection—same postbin emails hit both store promo and app signups."
+              },
+              {
+                "match": false,
+                "reason": "GENERATED identifies bot fraud signals in the 41 orders but misses GOLD's core mechanism: the specific numbered batch (0408-0451) as the common cause linking promo redemptions AND app signups across t"
+              }
+            ]
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br02": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br03": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br04": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br05": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br06": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": {
+              "connection": "Vial cloudiness tracks afternoon collection timing, not defective vials: every clear vial was a morning collection, every cloudy one an afternoon collection, so replacing vials may not fix it.",
+              "mechanism": "The note pairs batch outcome with time of day as a perfect confound: 3/3 clear vials were morning collections, and the recent cloudy ones are all afternoon collections. Since clarity co-varies exactly with collection time, the cause implicated by these specifics is time-of-day (e.g. hydration/concentration state), not the vial batch that was replaced.",
+              "testable_implication": "Collect one vial from the newly replaced batch in the morning and one in the afternoon this week; if the afternoon one turns cloudy again, the issue is timing-related, not the vials."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GENERATED identifies afternoon correlation but attributes it to hydration/concentration timing, not FrostLine's warm-reefer cause on the 14:00 van."
+              },
+              {
+                "match": false,
+                "reason": "Generated attributes cloudiness to time-of-day physiology; GOLD implicates the 14:00 van's broken reefer as the shared root cause of both excursions and cloudiness."
+              }
+            ]
+          }
+        }
+      },
+      "br07": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br08": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br09": {
+        "passed": false,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": {
+              "connection": "The exact 3.5 repeating on every criterion with a blank rationale looks like a caught-exception fallback value, not the model actually scoring long content.",
+              "mechanism": "Genuine model degradation from content length would vary by document and criterion; an identical score across all criteria with zero rationale text matches a code path that catches an error (timeout, truncation, token-limit) and substitutes a hardcoded default instead of a real completion.",
+              "testable_implication": "Grep the eval framework's request/scoring code for a catch or except block around the judge call and check whether it returns a fixed default score like 3.5 when the call fails or times out."
+            },
+            "status": "recovered",
+            "votes": [
+              {
+                "match": true,
+                "reason": "Both identify identical 3.5 scores caused by length/token limits. GENERATED explains the code-level mechanism (exception handler returning default) that produces GOLD's observed behavior at the judge "
+              },
+              {
+                "match": false,
+                "reason": "GOLD describes the judge's length-limit behavior producing flat 3.5; GENERATED describes code exception handling catching errors and returning a default. Different causal mechanisms, though related."
+              }
+            ]
+          }
+        }
+      },
+      "br10": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br11": {
+        "passed": false,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "ComX (427891, inc. 2024-02-13) and TrainHub (427893, inc. 2024-02-10) have near-sequential registration numbers and incorporation dates 3 days apart, suggesting common ownership or filing agent despite being treated as unrelated.",
+              "mechanism": "Company registrars assign numbers sequentially by filing order; two numbers only 2 apart plus incorporation within days of each other strongly implies the same filer or agent set up both entities, which the note's 'different sectors, different value props' framing overlooks.",
+              "testable_implication": "Pull beneficial-ownership or director registry records for both companies this week and check for shared directors, shareholders, or a common registered address."
+            },
+            "status": "recovered",
+            "votes": [
+              {
+                "match": true,
+                "reason": "Sequential registration numbers indicate single operator/filer, matching gold's causal link between sequential identifiers and unified control across independent entities."
+              },
+              {
+                "match": true,
+                "reason": "Both link sequential identifiers to single operator behind multiple entities."
+              }
+            ]
+          },
+          "b": {
+            "output": {
+              "connection": "The block list covers only destination numbers ending 01-40; since those endings run sequentially, the attacker likely holds a contiguous block extending past 40 that remains unblocked.",
+              "mechanism": "Sequential 01-40 endings indicate an auto-generated number range rather than curated targets; generators of this kind rarely stop exactly at the first-observed count, so the range plausibly continues beyond 40.",
+              "testable_implication": "Search gateway and transaction logs this week for attempted charges to destination numbers ending 41-80."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GENERATED uses sequential patterns to infer continuation within one block; GOLD uses sequences across independent parties to expose single operator—different causal chains."
+              },
+              {
+                "match": false,
+                "reason": "GENERATED uses sequence to infer range continuation; GOLD uses sequences across independent parties to identify single operator."
+              }
+            ]
+          }
+        }
+      },
+      "br12": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The unknown-device portal alert on the 22nd may stem from the portal login info that was in the partner's Slack export received the 21st.",
+              "mechanism": "If that Slack export contained actual login credentials or access details, anyone with export access could authenticate, producing a new-device alert the following day.",
+              "testable_implication": "Compare the unknown-device alert's IP/location/timestamp against the partner's, confirm whether the export contained live credentials, and rotate the portal password and enable 2FA if it did."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Misses the app credential burst and coordinated access from same network block; treats as generic auth alert, not cross-system compromise."
+              },
+              {
+                "match": false,
+                "reason": "GENERATED identifies Slack-export cause but misses the core finding: the same network block simultaneously attacking both portal and app within two minutes, indicating coordinated breach."
+              }
+            ]
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br13": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The mid-November Digital Tools status check reminder falls after the 6 Nov Brussels interview, so it can't inform the pre-Brussels pivot decision the risk note itself calls for.",
+              "mechanism": "The risk note requires knowing about a Digital Tools rejection before Brussels to pivot the narrative in time, but the only scheduled check on Digital Tools status is set for mid-November, which is after the 6 November interview date.",
+              "testable_implication": "Move the Digital Tools status check reminder to before 6 November, or otherwise confirm reviewer feedback timing this week so the pivot decision isn't made blind at the interview."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GOLD involves logistical conflict (fasting + flight timing), GENERATED involves information dependency (feedback needed before decision). Different causal mechanisms."
+              },
+              {
+                "match": false,
+                "reason": "Different causal links. GOLD is a same-day scheduling conflict with fasting constraint; GENERATED is an information-timing problem for decision-making."
+              }
+            ]
+          },
+          "b": {
+            "output": {
+              "connection": "The panel-prep protocol guards against travel stress in the 48h before the draw but says nothing about the weekly intensity session, which could fall in that window and skew inflammation markers.",
+              "mechanism": "Intense exercise transiently raises inflammatory markers for roughly 24-48 hours; the note already tracks 'recovery markers' after the session, showing awareness of its physiological load, yet the prep checklist only names travel stress, not training timing.",
+              "testable_implication": "Check whether the weekly intensity session normally lands within 48 hours of 6 November; if so, move or skip that session so the inflammation panel isn't confounded by recent training."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Different mechanism. Gold is scheduling conflict (interview vs. fasting); Generated is physiological confound (exercise markers)."
+              },
+              {
+                "match": false,
+                "reason": "GOLD addresses scheduling conflict between interview and fasting requirement; GENERATED addresses physiological confounding from exercise timing. Different causal mechanisms."
+              }
+            ]
+          }
+        }
+      },
+      "br14": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "Eurofins' W4 data may not follow the one-marker-per-unit convention, since that convention was agreed internally but not yet written into Eurofins' reporting template.",
+              "mechanism": "The note says the marker consistency rule was agreed 'across all samples' but also that Eurofins has no reporting format stipulated yet, so the subcontractor has no documented instruction to follow that same marker rule.",
+              "testable_implication": "This week, send Eurofins the marker convention explicitly and confirm their reporting template will use it before the first monthly panel from them arrives."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Generated text describes an internal agreement not communicated to Eurofins, not the GOLD mechanism: Eurofins' prior unit-switching history necessitating contractual protection."
+              },
+              {
+                "match": false,
+                "reason": "GOLD identifies unit-switching risk from historical incident; GENERATED addresses marker convention documentation. Different causal mechanisms."
+              }
+            ]
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br15": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The 39-41 degree afternoon readings may be partly driven by heat from the server box sitting right next to the logger, not just ambient shed temperature.",
+              "mechanism": "Server hardware dissipates heat during operation, and the box shares the same bench space directly beside the sensor, so its heat output could bias readings, especially if the 13:00-15:00 spike tracks server activity rather than outdoor/shed conditions alone.",
+              "testable_implication": "Relocate the logger a few feet away from the server box for a few days and compare the afternoon readings to the current baseline."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Generated text addresses sensor bias, not the causal link between GPU box temperature and performance degradation (latency/errors)."
+              },
+              {
+                "match": false,
+                "reason": "Generated text attributes readings to sensor proximity bias, not GPU overheating degrading system performance metrics."
+              }
+            ]
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br16": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": {
+              "connection": "The ~3% shortfall models show on custom weight queries may be an artifact of imprecise gold answers from hand-weighing, not a real model deficit.",
+              "mechanism": "Gold answers for the private weight-based queries came from physically weighing five household items rather than a verified reference; a typical kitchen/household scale has resolution and calibration error in that same few-percent range, which would show up as a uniform gap across all models regardless of model quality.",
+              "testable_implication": "Reweigh the same five household items on a calibrated lab-grade scale and compare to the 6 Jul gold values; if they differ by roughly 3%, the scoring gold standard, not the models, explains the shortfall."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GENERATED identifies scale-based gold error but misses the specific cause: calibrated against wrong reference weight (970g vs 1kg)."
+              },
+              {
+                "match": false,
+                "reason": "GOLD's mechanism: wrong reference weight caused scale miscalibration. GENERATED's mechanism: inherent household scale measurement error. Different causal chains."
+              }
+            ]
+          }
+        }
+      },
+      "br17": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br18": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The SIM slot blinking red is likely the 622345 SIM reporting 'not in service', so that sensor's SMS error alerts will silently fail to send.",
+              "mechanism": "A SIM returning 'number not in service' cannot send or receive SMS; since sensors are configured to alert via SMS on error, an error on that specific sensor produces no alert.",
+              "testable_implication": "Send a test SMS to or from the SIM starting 622345 (the blinking-red slot) to confirm it cannot deliver alerts, then swap that SIM before trusting error alerts from that sensor."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Different mechanisms: GOLD links M2M data-only design to signup voice-call failures; GENERATED links 'not in service' status to SMS alert failures."
+              },
+              {
+                "match": false,
+                "reason": "Different mechanisms: GOLD is M2M range design preventing voice calls; GENERATED is SIM 'not in service' status preventing SMS delivery."
+              }
+            ]
+          },
+          "b": {
+            "output": {
+              "connection": "The shared '62234' prefix suggests a purchased contiguous number block, so other unused numbers in that same block are likely pre-loaded fraud SIMs not yet seen at signup.",
+              "mechanism": "Bulk SIM purchases from a single source are typically allocated as a contiguous or near-contiguous block by the carrier, not scattered numbers, so the prefix match points to a specific reservable range rather than a coincidence.",
+              "testable_implication": "Query the carrier for the full number range covering the '62234' prefix and check whether any numbers in that range have signed up but not yet failed a voice check."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Generated proposes carrier bulk allocation as cause; gold identifies M2M technical design (data-only, no voice). Different mechanisms."
+              },
+              {
+                "match": false,
+                "reason": "Generated attributes pattern to fraud bulk-SIM strategy; GOLD shows legitimate M2M design constraint. Different causal roots despite similar prefix pattern."
+              }
+            ]
+          }
+        }
+      },
+      "br19": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": {
+              "connection": "The weekday/weekend uniformity in the decline argues against the planned work-intensity (grants) hypothesis, since workload from grant applications would plausibly concentrate on weekdays.",
+              "mechanism": "If deep sleep loss tracked grant-related stress, weekends with less grant work should show partial recovery; the note reports no weekday/weekend distinction, so the timing pattern itself is evidence against the correlation the note proposes testing.",
+              "testable_implication": "Before running weeks of new correlation tracking, check the existing calendar: did any grant-intensive days fall only on weekdays since 20 August, and did those weeks still show equally low deep sleep on the surrounding weekends?"
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Generated text argues against grant-related stress via weekday patterns; GOLD mechanism is CO2 accumulation from sealed window causing sleep loss. Different causal links entirely."
+              },
+              {
+                "match": false,
+                "reason": "Generated text argues against grant stress via temporal patterns, not the CO2→sleep mechanism in GOLD."
+              }
+            ]
+          }
+        }
+      },
+      "br20": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br21": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The reported 98% accuracy may be an artifact of testing on a single card number pattern rather than genuine transaction-risk discrimination.",
+              "mechanism": "All 40 records deliberately share one BIN pattern (411xxx) 'for consistent eval signal,' so the model's scores could be keying on features correlated with that fixed pattern instead of the underlying fraud/risk signal, making the accuracy figure non-generalizable.",
+              "testable_implication": "Rerun the eval on sandbox transactions spanning several different card BIN patterns and see whether accuracy holds at 98%."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GOLD: whitelist bypass disables eval. GENERATED: model overfits to BIN-correlated features. Related but distinct."
+              },
+              {
+                "match": false,
+                "reason": "GENERATED describes model overfitting to BIN patterns; GOLD identifies production whitelist letting test cards pass through unchanged."
+              }
+            ]
+          },
+          "b": {
+            "output": {
+              "connection": "The card's 'normal' transaction history is not evidence of legitimacy: the whitelist rule means those transactions never underwent secondary fraud verification to begin with.",
+              "mechanism": "The note treats clean records as reassuring, but also reveals that any 411111-prefix card skips secondary checks entirely, so an absence of flags there reflects the bypass, not a clean check.",
+              "testable_implication": "Re-run all 411111-prefix transactions since the rule's start date through the secondary verification they were exempted from, rather than relying on their unflagged status as proof of legitimacy."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GENERATED identifies the verification bypass and its consequence (unflagged doesn't mean clean), but misses GOLD's core mechanism: eval blindness due to eval items and production rule both using the s"
+              },
+              {
+                "match": false,
+                "reason": "GENERATED identifies the 411111 whitelist and false safety signals, but misses GOLD's core mechanism: eval blindness created because test items use the same whitelisted BIN as production, preventing d"
+              }
+            ]
+          }
+        }
+      },
+      "br22": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": {
+              "connection": "The high-disagreement window (July 3-5) exactly brackets the July 4 holiday, a plausible cause of the quality dip separate from the grey-area-category explanation already given.",
+              "mechanism": "July 3-5 sits right around a US holiday; if labeling that stretch was covered by substitute or fewer senior staff, disagreement with gold would spike for a staffing reason, not just because of ambiguous categories, and the note only checks the category explanation.",
+              "testable_implication": "Pull the labeler roster for July 3-5 and compare it to the rest of the July 1-8 window to see if different or fewer people were labeling."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "GENERATED proposes holiday staffing as the cause; GOLD specifies the experimenter's fever/ibuprofen use. Different causal mechanisms."
+              },
+              {
+                "match": false,
+                "reason": "GENERATED proposes holiday/staffing as cause of July 3-5 disagreement; GOLD links it to annotator fever/ibuprofen use. Different causal mechanisms."
+              }
+            ]
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      },
+      "br23": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": {
+              "connection": "The August 16 pharmacy pickup notification may never have been delivered because Twilio SMS to Yoigo-registered numbers is prone to silent carrier-side filtering, not because the order status is actually unclear.",
+              "mechanism": "The contact number is on Yoigo (a Spanish MVNO) and the pharmacy sends notifications via Twilio; Twilio-to-MVNO SMS delivery is known to fail silently on some routes, so a missing notification does not mean no message was sent, which matches the note's own detail that the order was 'returned' with no notification received.",
+              "testable_implication": "Check Twilio's message delivery/status logs (or ask the pharmacy) for the August 16 notification to see if it was sent but undelivered, rather than assuming it was never sent."
+            },
+            "status": "clean",
+            "votes": [
+              {
+                "match": false,
+                "reason": "Generated addresses only pharmacy notification failure, omitting SMS verification failures from the shared cause; frames the issue as general Twilio-MVNO susceptibility rather than a specific route fa"
+              },
+              {
+                "match": false,
+                "reason": "GENERATED identifies Twilio-MVNO tendency but misses the specific route failure with August 15 start date that explains both incidents' timing."
+              }
+            ]
+          }
+        }
+      },
+      "br24": {
+        "passed": true,
+        "sides": {
+          "a": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          },
+          "b": {
+            "output": null,
+            "status": "clean",
+            "votes": []
+          }
+        }
+      }
+    },
+    "cost_usd": 3.488,
+    "failures": [
+      "br09",
+      "br11"
+    ],
+    "prompt_sha256": {
+      "generate_single_strict": "109a4b1f30c304776568362211cbc8603dde0407e303f2fe8caa22598e64f553",
+      "match_gold": "09d4576cca8726d24b2f74030fa7c9334d2b4a3284bd3482f9bf03958470a1fc"
+    },
+    "votes": 2
+  },
+  "prompt_sha256": {
+    "leak_judge": "41d4bf1df5a305e0a07f42fa637ceb75f19739ac31a46cadacda8be18c096295",
+    "synth_note": "4e814d7cc52e8f3baf5ab446a8875fe91fca7c74e0d1948e372e01d19a1af626"
+  },
+  "resumed_from": {
+    "corpus_sha256": "7071c71966c07454a03d8dad96f8efa8736f0a2709344aaaf00674ad17e048a3",
+    "generated_at": "2026-09-14T15:25:34+00:00"
+  },
+  "reused_notes": 95,
+  "spec_rewrites": [
+    "br02-a",
+    "br06-a",
+    "br15-a",
+    "br11-a"
+  ],
+  "version": "v0.3",
+  "writer_model_ids": [
+    "claude-haiku-4-5-20251001",
+    "ollama/hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M@1d373ff5643f"
+  ],
+  "writers": {
+    "A": {
+      "backend": "claude-cli",
+      "model": "haiku"
+    },
+    "B": {
+      "backend": "ollama",
+      "model": "hf.co/bartowski/Qwen2.5-14B-Instruct-GGUF:Q4_K_M"
+    }
+  }
+}

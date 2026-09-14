@@ -67,19 +67,20 @@ bridges:
       Ask the processor whether the exemption is scoped per merchant account or per storefront,
       and compare app chargebacks on 29.90 top-ups before and after 12 June.
     ingredients_a:
-      - low-value exemption turned on at 30 euros on 12 June to cut checkout friction
-      - since then the only chargebacks are on orders between 27.00 and 29.99
+      - on 12 June a checkout setting was changed so that small orders skip one verification step, to cut abandonment
+      - since that week, disputes have come in almost only on small orders, from customers who say they never ordered
       - the processor account is the same one the calling app bills through
     ingredients_b:
       - top-ups of exactly 29.90 went from 2 percent of volume to 31 percent starting 12 June
       - almost all 29.90 top-ups are first transactions on accounts under a day old
       - the 29.90 amount is not one of the app's four suggested top-up buttons
-    forbidden_phrases_a: [threshold attack, exemption abuse, top-up, fraud, just under]
+    forbidden_phrases_a: [threshold attack, exemption abuse, top-up, fraud, just under, 30 euro, EUR 30, exemption, 29.90, low-value]
     forbidden_phrases_b: [exemption, 3DS, authentication, store, checkout, just under, threshold]
     one_side_test: >-
-      A alone supports "chargebacks cluster near the exemption limit". B alone supports "an odd
-      amount became popular with new accounts". Only both connect the store's setting date to
-      the app's amount through the shared processor account.
+      A alone supports "a checkout change was followed by small-order disputes". B alone
+      supports "an odd amount became popular with new accounts". Only both connect the store's
+      setting date and the shared processor account to the app's 29.90 amount and the
+      authentication cutoff.
   - id: br03
     domain_a: ecom
     domain_b: mleval
@@ -171,7 +172,7 @@ bridges:
     ingredients_a:
       - FrostLine handles the store's chilled shipments on two daily pickups, 09:00 and 14:00
       - the temperature loggers show excursions above 8 degrees only on parcels from the 14:00 pickup, four times in August
-      - FrostLine says the 14:00 pickup uses their older van
+      - the FrostLine contract lists the same driver and the same rate for both daily pickups
     ingredients_b:
       - the last two vial deliveries arrived cloudy and were replaced
       - both were delivered by FrostLine and both were collected from the pharmacy in the afternoon
@@ -295,7 +296,7 @@ bridges:
       Run an adjacency check on registration numbers across this call's applicants and on phone
       numbers across new signups, and list any run of three or more consecutive values.
     ingredients_a:
-      - two proposals from different companies contain the same typo in the budget table heading
+      - two proposals from different companies arrived in the same call, one for a sensor product and one for a training platform
       - their company registration numbers are 2 apart
       - both list an incorporation date in the same week
     ingredients_b:
@@ -397,7 +398,7 @@ bridges:
     ingredients_a:
       - the shed temperature logger reads 39 to 41 degrees between 13:00 and 15:00 since 1 August
       - the shed AC schedule was changed on 1 August to save power in the afternoon
-      - the black server box on the shed bench is warm to the touch after lunch
+      - a black server box belonging to the eval setup sits on the shed bench next to the logger
     ingredients_b:
       - local judge latency doubles between 13:00 and 15:00 since early August
       - about 3 percent of runs in that window end in a timeout error
