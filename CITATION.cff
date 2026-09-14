@@ -6,8 +6,8 @@ type: software
 message: "If you use daydreamd, its evaluation protocol, or its results, please cite it as below. Once the paper is on arXiv, cite the preferred-citation entry instead."
 title: "daydreamd: a selection engine for machine-generated ideas over a private corpus"
 abstract: "A local-first daemon that recombines distant concepts from a corpus, filters the recombinations through a binary critic and a retrieval-grounded duplicate check, and evaluates the survivors against planted ground truth, a random-pairing control and a label-permutation null. v0.1 ships a synthetic corpus with hand-authored bridges so the protocol is reproducible without private data."
-version: 0.2.0
-date-released: 2026-09-13
+version: 0.3.0
+date-released: 2026-09-14
 license: MIT
 identifiers:
   - type: doi

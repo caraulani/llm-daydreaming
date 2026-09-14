@@ -7,6 +7,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
+- Nothing yet.
+
+## [0.3.0] - 2026-09-14
+
+### Added
+- Product front door: `daydreamd dream`, `review`, `skill`, `mcp`, `schedule`; Obsidian adapter with wikilinks; static embedder (model2vec potion-base-8M) as the default, MiniLM behind the `research` extra.
+- Discoverability: byline, `llms.txt`, GitHub Pages site with schema.org JSON-LD, Open Graph and sitemap; hero image; lineage table from Poincaré 1908 to 2026 with verified links; author ORCID.
+- Zenodo DOIs in CITATION.cff and README.
 - Sealed v0.1 run `2026-09-13_micro` with raw outputs, tables T1 to T6 and DECISION.md (H1 pass, H2 fail, H3 fail; NULL by the preregistered rule).
 - Exploratory arms S1 (partner-domain filler control), B7 (cross-domain-near sampler), configs X1 to X4, and the planted-distance post-hoc analysis; X1 results committed.
 - v0.2 corpus specs (24 oblique bridges, 12 decoys, 96 notes), paraphrase-leak judge, two writer families, multi-critic pipeline, table T8, v0.2 decision rule, PREREGISTRATION-v0.2.md draft (unsealed).
@@ -34,5 +42,5 @@ Preregistered synthetic micro-experiment scaffold.
 ### Results
 - None yet. The first run over the synthetic corpus has not completed. Numbers appear here only after they are read from logs.
 
-[Unreleased]: https://github.com/caraulani/llm-daydreaming/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/caraulani/llm-daydreaming/compare/v0.3.0...HEAD
 [0.1.0]: https://github.com/caraulani/llm-daydreaming/releases/tag/v0.1.0
