@@ -8,10 +8,11 @@
 - Lineage: Gwern's essay "LLM Daydreaming" (2025) proposed the loop; Sean Goedecke's idea-mill, Zbigniew Lukasiak's DayDreamingDayDreaming and Vault Daydream built prototypes without evaluation. This project adds the measurement.
 - Method: synthetic corpora with planted cross-domain bridges (ground truth by construction), preregistered hypotheses sealed in git and anchored in Bitcoin with OpenTimestamps before any run, every raw model call committed, tables rebuilt from committed outputs without API keys.
 
-## What it found (two preregistered runs, 2026-09-13 and 2026-09-14)
+## What it found (three preregistered runs, 2026-09-13 and 2026-09-14)
 
 - v0.1 (12 bridges): the selection step held (8 of 12 planted connections recovered, 0 of 6 decoys survived, Fisher p = 0.011); distance-forced sampling did not enrich planted pairs; single-note reflection was not separated from two-note recombination. NULL by the preregistered rule.
 - v0.2 (16 oblique bridges, notes written by two model families, two critics): selection held again (6 of 16 vs 0 of 12, p = 0.021); a mechanism-free partner note produced no recoveries; single-note reflection recovered more mechanisms (8 of 16) than two notes (6 of 16). SIGNAL by the preregistered rule; recombination not demonstrated.
+- v0.3 (22 fact-type bridges certified by the generator itself to need both sides): two notes recovered 8 of 22 planted mechanisms, one note under a strict abstention prompt recovered 2 of 22 (against 8 of 16 in v0.2); selection missed its bar (p = 0.083) and the preregistered abstention precondition failed because the strict prompt answered on 12 of 24 filler notes with genuine local inferences. NULL by the preregistered rule. Recovery differed by note-writer family (6 of 10 Haiku-written, 2 of 12 Qwen-written), confounded with note length.
 - Exploratory: the single-note prompt answers on every filler and decoy note even with NONE permitted; near-in-embedding, far-in-domain sampling points the right way but is underpowered at 300 draws; a larger critic model does not fix the critic's recall loss.
 - Claim discipline: no claim of novel ideas, discoveries, or a benchmark. Synthetic ground truth measures recovery of planted structure, not real-world usefulness.
 

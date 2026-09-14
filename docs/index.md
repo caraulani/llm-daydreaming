@@ -70,6 +70,15 @@ The consolidation branch (Letta's sleep-time compute, Google's "Language Models 
 - **Decision.** SIGNAL by the preregistered rule (H1 and H4), for a reason the rule did not test. Recombination is not demonstrated. We report both sentences together.
 - **Exploratory X5.** The single-note prompt, run over every note, answered on 23 of 23 fillers, 21 of 21 decoy notes and 31 of 32 bridge notes: its NONE permission is inert.
 
+**v0.3.** Sealed run 2026-09-14 over 24 fact-type bridges, 22 of which the generator itself certified, reading one side under a strict abstention prompt, to need both sides; notes by Claude Haiku and a local Qwen 2.5 14B; two critics.
+
+- **The gate worked.** One-note recovery fell to 2 of 22 (9 percent) from 8 of 16 (50 percent) in v0.2, while two-note recovery held at 8 of 22 (36 percent); Fisher p = 0.034.
+- **The precondition failed, and it was the precondition's fault.** The strict prompt answered on 12 of 24 fillers (bar: under 10 percent), and all twelve answers are genuine inferences from specifics the fillers contain. H3-strict is therefore not interpretable under the rule.
+- **H1, selection: missed its bar.** 8 of 22 planted recovered against 1 of 12 decoy answers surviving, p = 0.083; three judge rejections a human reverses would make it 11 of 22.
+- **H2, sampling: null a third time.** B7 3 planted pairs in 300 against 1.4 expected, p = 0.17.
+- **Writer-family effect.** Haiku-written bridges 6 of 10, Qwen-written 2 of 12; the Qwen notes are 35 percent shorter, so length and priors cannot be separated.
+- **Decision.** NULL by the preregistered rule. The gate is stochastic (6 flags in 192 side-gates, 5 ties) and the match judge is now the dominant noise; see `research/08`. Cost $87.86.
+
 Full tables per run are under [Results](results/index.md); the protocols are under [Preregistration](preregistration/index.md); the reviewer's reading of each run is under [Research notes](research/index.md).
 
 ## Try it in 60 seconds

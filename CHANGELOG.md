@@ -7,7 +7,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
-- Nothing yet.
+- Corpus v0.3 (24 fact-type bridges, 12 shape-matched decoys, 96 notes; family B written by a local Qwen 2.5 14B), the ADR-014 one-side gate (`prompts/generate_single_strict.md`, two-vote judge, `daydreamd gate`, `synth --one-side-gate`), four gate passes, 22 accepted bridges.
+- PREREGISTRATION-v0.3.md sealed (tag `v0.3.0-prereg`) with five deviations; sealed run `2026-09-14_micro_v0_3` (precondition fail, H1 fail, H3-strict 8/22 vs 2/22; NULL) with raw outputs and tables T1 to T9; adversarial review `research/08`.
+- Pipeline: B4 over bridge plus filler notes, strict single prompt selection, v0.3 decision rule with the filler-abstention precondition, `stats.match_votes`, table T9.
+
+### Fixed
+- Single-note recall denominator: every planted bridge the arm showed the generator, not only answered notes (v0.3 B4 recall 2 of 22, not 2 of 12).
+- Exploratory X6 (strict prompt over the v0.2 corpus) and X7 (five-vote re-judge) configs added; runs pending.
 
 ## [0.3.0] - 2026-09-14
 

@@ -171,6 +171,31 @@ paraphrase-leak judge, two critics. Eight bridges failed the leak rule and were 
   23 of 23 fillers, 21 of 21 decoy notes and 31 of 32 bridge notes: its NONE permission is inert,
   so the single-note arm measures compliance, not knowledge. Cost $15.05.
 
+**v0.3.** Sealed run 2026-09-14 over a corpus built for the recombination question: 24 bridges made
+of specific facts (identifiers, dates, numbers, vendor quirks, locations, sequences), each certified
+by the generator itself, reading one side alone under a strict abstention prompt with a two-vote
+judge, to need both sides. 22 of 24 passed the gate (four passes; br11 recovered twice and br09
+flagged on the last pass were dropped). Notes by Claude Haiku and a local Qwen 2.5 14B; two critics.
+
+- **The gate worked.** One-note recovery fell to 2 of 22 (9 percent) from 8 of 16 (50 percent) in
+  v0.2, while two-note recovery held at 8 of 22 (36 percent, against 38). The gap between two notes
+  and one note moved from minus 12 to plus 27 points (Fisher p = 0.034).
+- **The precondition failed, and it was the precondition's fault.** The strict prompt was required
+  to answer on under 10 percent of filler notes; it answered on 12 of 24, and all twelve answers are
+  genuine inferences from specifics the fillers contain. The bar measured filler richness, not
+  abstention. So H3-strict is not interpretable under the rule.
+- **H1, selection: missed its bar.** 8 of 22 planted recovered against 1 of 12 decoy answers
+  surviving both critics, p = 0.083. Three judge rejections a human reverses (S0-0002, S0-0004,
+  S0-0015) would make it 11 of 22; we report 8.
+- **H2, sampling: null a third time.** B7 drew 3 planted card pairs in 300, random drew 1
+  (expected 1.4), p = 0.17.
+- **Writer-family effect.** Bridges written by Claude Haiku were recovered 6 of 10, by Qwen 14B
+  2 of 12. The Qwen notes are 35 percent shorter with thinner cards; length and priors cannot be
+  separated in this design.
+- **Decision.** NULL by the preregistered rule. The gate is stochastic (6 flags in 192 side-gates,
+  5 of them judge ties), the match judge is now the dominant noise, and two rewrite-once edits
+  removed ingredients the gold needed. All of it is in `research/08`. Cost $87.86.
+
 ```
 $ daydreamd run-all experiments/micro/config.yaml
 
@@ -251,9 +276,10 @@ bridge. Non-planted survivors are saved as exploratory finds for manual review a
 
 ## Results
 
-Pre-registered in [PREREGISTRATION.md](PREREGISTRATION.md) (v0.1) and
-[PREREGISTRATION-v0.2.md](PREREGISTRATION-v0.2.md) (v0.2). Sealed runs `2026-09-13_micro` and
-`2026-09-14_micro_v0_2`; every value below is read from `results/public/<run>/` and the command
+Pre-registered in [PREREGISTRATION.md](PREREGISTRATION.md) (v0.1),
+[PREREGISTRATION-v0.2.md](PREREGISTRATION-v0.2.md) (v0.2) and
+[PREREGISTRATION-v0.3.md](PREREGISTRATION-v0.3.md) (v0.3). Sealed runs `2026-09-13_micro`,
+`2026-09-14_micro_v0_2` and `2026-09-14_micro_v0_3`; every value below is read from `results/public/<run>/` and the command
 that produces it is listed so nobody has to trust us.
 
 **v0.1 (`results/public/2026-09-13_micro/`)**
@@ -280,6 +306,20 @@ that produces it is listed so nobody has to trust us.
 | T7 | bridge note + partner-domain filler (H4) | 0 of 16, p = 0.009; not a recombination test | `make reproduce` |
 | T8 | two critics on the same generations | Haiku keeps 3 of 6 correct and 0 decoys; Sonnet keeps 5 of 6 and 1 decoy | `make reproduce` |
 
+**v0.3 (`results/public/2026-09-14_micro_v0_3/`)**
+
+| Table | Question | Result | Command |
+|---|---|---|---|
+| T1 | corpus | 96 notes, 521 cards, 22 planted bridges (2 dropped by the gate), 12 decoys, 134,289 cross-note card pairs | `make reproduce` |
+| T2 | does near, cross-domain sampling draw planted pairs above base rate? | no at 300 draws: B7 3, B1 1 (expected 1.4), p = 0.17 | `make reproduce` |
+| T3 | given the right two notes, does generator + critic recover the bridge and reject decoys? | 8 of 22 recovered [20, 57]; 1 of 12 decoy answers survives; Fisher p = 0.083 | `make reproduce` |
+| T4 | per arm: NONE, kill, survivors, bridges recovered, cost | NONE 69 to 89% on pair arms, 63% on single notes under the strict prompt; 47 exploratory survivors; $87.86 list price | `make reproduce` |
+| T5 | permutation null over the oracle set | 16 planted survivors vs 5.7 expected, p = 0.0001 | `make reproduce` |
+| T6 | two notes vs one note on the same bridges | 8 of 22 vs 2 of 22, Fisher p = 0.034 (not interpretable: precondition failed) | `make reproduce` |
+| T7 | bridge note + partner-domain filler | 0 of 22, p = 0.0018; not a recombination test | `make reproduce` |
+| T8 | two critics on the same generations | Haiku keeps 8 of 8 correct and 1 decoy; Sonnet keeps 7 of 8 and the same decoy | `make reproduce` |
+| T9 | filler abstention under the strict single-note prompt | fillers answered 12 of 24 (50%); bridge notes 13 of 44 (30%) | `make reproduce` |
+
 **Exploratory runs (not preregistered)**
 
 | Run | Question | Result | Command |
@@ -288,16 +328,20 @@ that produces it is listed so nobody has to trust us.
 | X3 | near, cross-domain sampler on v0.1 | 2 planted in 100 (0.6 expected, p = 0.13); far bands NONE on 50 of 50 | `make reproduce` |
 | X4 | Sonnet critic on the v0.1 generations | kills 3 of 8 correct recoveries and keeps the decoy | `make reproduce` |
 | X5 | single-note prompt over every v0.2 note | answers on 23/23 fillers, 21/21 decoy notes, 31/32 bridge notes; 6 of 16 mechanisms from one note | `make reproduce` |
+| X6 | strict single-note prompt over the v0.2 corpus (prompt effect, corpus fixed) | in progress | `make reproduce` |
+| X7 | five-vote re-judge of every answered v0.3 unit (judge consistency) | in progress | `make reproduce` |
 
 `make reproduce` rebuilds every table from the committed run outputs with no model call.
 
-**What we claim after two runs, and no more.** Sentences of the form "on a synthetic corpus with
+**What we claim after three runs, and no more.** Sentences of the form "on a synthetic corpus with
 12 planted bridges, the oracle arm recovered 8 of 12 (Wilson 39 to 86 percent), against 0 of 6
 decoy false positives, Fisher p = 0.011", and "on 16 oblique bridges, 6 of 16 against 0 of 12,
 p = 0.021, while single-note reflection recovered 8 of 16". Not "novel ideas", not "discovers",
 not a lead-time number, not a cost headline that was not read from logs, not anything about human
 insight, not recombination. v0.1 was null by its rule and ships as a null; v0.2 was signal by its
-rule and ships with the sentence that the rule's recombination test was not one.
+rule and ships with the sentence that the rule's recombination test was not one; v0.3 was null by
+its rule and ships with the sentence that on bridges certified to need both sides, two notes
+recovered 8 of 22 and one note 2 of 22.
 
 ## Privacy
 
