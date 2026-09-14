@@ -75,6 +75,7 @@ def arm_summary(
     critic: list[dict],
     dup: list[dict],
     match: list[dict],
+    gold: dict[str, dict] | None = None,
 ) -> dict[str, dict[str, Any]]:
     cidx, didx, midx = _index(critic), _index(dup), _index(match)
     gidx = _index(generations)
@@ -118,9 +119,21 @@ def arm_summary(
             ]
             filler_units = sum(1 for g in gens if g.get("note_kind") == "filler")
             bridge_units = len(bridge_gens)
-            planted_bridges = {
-                midx[g["unit_id"]]["bridge_id"] for g in bridge_gens if g["unit_id"] in midx
-            }
+            # Denominator: every planted bridge the arm actually showed the generator, whether or
+            # not the generator answered. Counting only units with a match row (answered ones)
+            # overstated single-note recall (research/08). Falls back to match rows when no
+            # gold is available.
+            note_to_bridge = (
+                {g_["note_a"]: bid for bid, g_ in gold.items()}
+                | {g_["note_b"]: bid for bid, g_ in gold.items()}
+                if gold
+                else {}
+            )
+            planted_bridges = (
+                {note_to_bridge[g["note_a"]] for g in bridge_gens if g["note_a"] in note_to_bridge}
+                if note_to_bridge
+                else {midx[g["unit_id"]]["bridge_id"] for g in bridge_gens if g["unit_id"] in midx}
+            )
             planted_matched = {
                 midx[g["unit_id"]]["bridge_id"]
                 for g in bridge_gens

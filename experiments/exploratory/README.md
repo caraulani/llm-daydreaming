@@ -13,3 +13,5 @@ change the sealed decision rule.
 | X3_cross_domain_near | does sampling near-in-embedding, far-in-domain pairs (B7) enrich planted pairs and recall where far-band sampling cannot? | 2026-09-13 | sampled units and embeddings only; no generation output |
 | X4_critic_ablation | is the critic's recall loss a model-size effect? Same generations, critic alias sonnet | 2026-09-13 | yes (sealed results read) |
 | X5_single_note_all | does the single-note prompt answer on fillers and decoy notes as readily as on bridge notes? (v0.2 corpus) | 2026-09-14 | yes (v0.2 results and review read) |
+| X6_strict_prompt_v02 | strict single-note prompt over the v0.2 corpus (bridge and filler notes): prompt effect with the corpus held fixed | 2026-09-14 | yes (v0.3 results and review read) |
+| X7_rejudge_votes5 | re-judge the v0.3 answered units with five match votes: judge consistency | 2026-09-14 | yes |

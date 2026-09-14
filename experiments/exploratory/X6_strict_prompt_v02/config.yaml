@@ -1,0 +1,17 @@
+# EXPLORATORY, NOT PREREGISTERED. Written 2026-09-14 after reading the v0.3 results and review.
+# Separates prompt from corpus: the strict single-note prompt (generate_single_strict) over the
+# v0.2 corpus's bridge and filler notes. v0.2 used the inert generate_single (B4 8/16, fillers
+# answered 100 percent in X5); v0.3 used the strict prompt on a harder corpus (2/22, fillers 50
+# percent). This run holds the corpus fixed and changes only the prompt.
+corpus: {kind: synth, path: data/synth/v0.2}
+visibility: public
+slug: x6_strict_prompt_v02
+seed: 20260914
+backend: claude-cli
+models: {cards: haiku, generator: sonnet, critic: haiku, match: haiku}
+concurrency: 4
+arms:
+  B4: {notes: bridge+filler, prompt: generate_single_strict}
+dupgate_threshold: 0.85
+blind: {enabled: false}
+stats: {n_perm: 2000, match_votes: 2}

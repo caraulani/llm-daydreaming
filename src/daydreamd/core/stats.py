@@ -170,7 +170,7 @@ def synthetic_tables(
         rows,
         f"Oracle set: generator and critic without the sampler; mean cosine to gold on planted = {spec['mean_cosine_to_gold']:.3f}",
     )
-    arms = arm_summary(d["units"], d["generations"], d["critic"], d["dup"], d["match"])
+    arms = arm_summary(d["units"], d["generations"], d["critic"], d["dup"], d["match"], gold)
     _write_table(
         out_dir,
         "T4",
