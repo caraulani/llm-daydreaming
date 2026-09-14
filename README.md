@@ -34,9 +34,9 @@ The consolidation branch (Letta's sleep-time compute, Google's "Language Models 
 Anthropic's Dreams, OpenClaw's dreaming mode) reorganises memory. It does not generate. We build
 none of it. See [paper/paper.md](paper/paper.md) for the full map.
 
-## What v0.1 found
+## What we found
 
-Sealed run over the synthetic corpus, 2026-09-13, generator `claude-sonnet-5`:
+**v0.1.** Sealed run over the synthetic corpus, 2026-09-13, generator `claude-sonnet-5`:
 
 - **H1, selection: supported.** Given the right two notes, the generator answered on 11 of 12
   planted pairs and named the planted mechanism on 8 of 12; it stayed silent on 5 of 6 decoys and
@@ -61,6 +61,27 @@ Sealed run over the synthetic corpus, 2026-09-13, generator `claude-sonnet-5`:
   domain-far but embedding-near, so far-band sampling aims at the wrong band. And the generator's
   abstention rises steeply with distance (non-NONE per 25 in the banded arm: 12, 5, 0, 2). The
   critic killed 3 of the 8 correct recoveries; as configured it costs more than it saves.
+
+**v0.2.** Sealed run 2026-09-14 over a harder corpus: 96 notes, bridges written obliquely on both
+sides by two model families (Claude Haiku and a local Qwen 2.5 7B), shape-matched decoys, a
+paraphrase-leak judge, two critics. Eight bridges failed the leak rule and were excluded; 16 remain.
+
+- **H1, selection: supported again.** 6 of 16 planted recovered, 0 of 12 decoys survive, Fisher
+  p = 0.021; the generator abstained on 10 of 12 decoys and 33 of 36 random pairs.
+- **H4, partner-domain filler control: passed, and it is not a recombination test.** 0 of 16 with
+  a mechanism-free filler (p = 0.009). Asked to connect a note to an unrelated note, the model
+  correctly says NONE; that says nothing about whether the second note was needed.
+- **H3, two notes beat one note: inverted.** Single-note reflection recovered 8 of 16, the two-note
+  oracle 6 of 16 (p = 0.86), including five bridges the oracle had marked NONE. The planted
+  mechanisms are principles a capable model reads off one note's ingredients.
+- **H2, near-in-embedding sampling: null at 300 draws.** 2 planted card pairs against 1.09
+  expected (p = 0.30). The pool it samples from is enriched 2.7-fold; detecting that needs about
+  1,500 draws per arm.
+- **Decision.** SIGNAL by the preregistered rule (H1 and H4), for a reason the rule did not test.
+  Recombination is not demonstrated. We report both sentences together.
+- **Exploratory X5, not preregistered.** The single-note prompt, run over every note, answered on
+  23 of 23 fillers, 21 of 21 decoy notes and 31 of 32 bridge notes: its NONE permission is inert,
+  so the single-note arm measures compliance, not knowledge. Cost $15.05.
 
 ```
 $ daydreamd run-all experiments/micro/config.yaml
@@ -142,9 +163,12 @@ bridge. Non-planted survivors are saved as exploratory finds for manual review a
 
 ## Results
 
-Pre-registered in [PREREGISTRATION.md](PREREGISTRATION.md). Sealed run `2026-09-13_micro`; every
-value below is read from `results/public/2026-09-13_micro/` and the command that produces it is
-listed so nobody has to trust us.
+Pre-registered in [PREREGISTRATION.md](PREREGISTRATION.md) (v0.1) and
+[PREREGISTRATION-v0.2.md](PREREGISTRATION-v0.2.md) (v0.2). Sealed runs `2026-09-13_micro` and
+`2026-09-14_micro_v0_2`; every value below is read from `results/public/<run>/` and the command
+that produces it is listed so nobody has to trust us.
+
+**v0.1 (`results/public/2026-09-13_micro/`)**
 
 | Table | Question | Result | Command |
 |---|---|---|---|
@@ -155,13 +179,37 @@ listed so nobody has to trust us.
 | T5 | permutation null over the oracle set | 5 planted survivors vs 2.2 expected, p = 0.032 | `make reproduce` |
 | T6 | two notes vs one note on the same bridges | 8 of 12 vs 4 of 12, Fisher p = 0.11, not significant | `make reproduce` |
 
+**v0.2 (`results/public/2026-09-14_micro_v0_2/`)**
+
+| Table | Question | Result | Command |
+|---|---|---|---|
+| T1 | corpus | 96 notes, 483 cards, 16 planted bridges (8 excluded), 12 decoys, 115,345 cross-note card pairs | `make reproduce` |
+| T2 | does near, cross-domain sampling draw planted pairs above base rate? | no at 300 draws: B7 2, B1 2 (expected 1.09), p = 0.30 | `make reproduce` |
+| T3 | given the right two notes, does generator + critic recover the bridge and reject decoys? | 6 of 16 recovered [18, 61]; 0 of 12 decoys survive; Fisher p = 0.021 | `make reproduce` |
+| T4 | per arm: NONE, kill, survivors, bridges recovered, cost | NONE 78 to 91% on pair arms, 3% on single notes; 75 exploratory survivors; $85.04 list price | `make reproduce` |
+| T5 | permutation null over the oracle set | 5 planted survivors vs 1.26 expected, p = 0.0002 | `make reproduce` |
+| T6 | two notes vs one note on the same bridges | 6 of 16 vs 8 of 16, inverted, p = 0.86 | `make reproduce` |
+| T7 | bridge note + partner-domain filler (H4) | 0 of 16, p = 0.009; not a recombination test | `make reproduce` |
+| T8 | two critics on the same generations | Haiku keeps 3 of 6 correct and 0 decoys; Sonnet keeps 5 of 6 and 1 decoy | `make reproduce` |
+
+**Exploratory runs (not preregistered)**
+
+| Run | Question | Result | Command |
+|---|---|---|---|
+| X1 | partner-domain filler control on v0.1 | 9 of 12 with the true pair, 1 of 12 with the filler, p = 0.0014 | `make reproduce` |
+| X3 | near, cross-domain sampler on v0.1 | 2 planted in 100 (0.6 expected, p = 0.13); far bands NONE on 50 of 50 | `make reproduce` |
+| X4 | Sonnet critic on the v0.1 generations | kills 3 of 8 correct recoveries and keeps the decoy | `make reproduce` |
+| X5 | single-note prompt over every v0.2 note | answers on 23/23 fillers, 21/21 decoy notes, 31/32 bridge notes; 6 of 16 mechanisms from one note | `make reproduce` |
+
 `make reproduce` rebuilds every table from the committed run outputs with no model call.
 
-**What we claim after v0.1, and no more.** Sentences of the form "on a synthetic corpus with 12
-planted bridges, the oracle arm recovered 8 of 12 (Wilson 39 to 86 percent), against 0 of 6 decoy
-false positives, Fisher p = 0.011". Not "novel ideas", not "discovers", not a lead-time number,
-not a cost headline that was not read from logs, not anything about human insight. The result was
-null by the preregistered rule, and it ships as a null, in the same tables.
+**What we claim after two runs, and no more.** Sentences of the form "on a synthetic corpus with
+12 planted bridges, the oracle arm recovered 8 of 12 (Wilson 39 to 86 percent), against 0 of 6
+decoy false positives, Fisher p = 0.011", and "on 16 oblique bridges, 6 of 16 against 0 of 12,
+p = 0.021, while single-note reflection recovered 8 of 16". Not "novel ideas", not "discovers",
+not a lead-time number, not a cost headline that was not read from logs, not anything about human
+insight, not recombination. v0.1 was null by its rule and ships as a null; v0.2 was signal by its
+rule and ships with the sentence that the rule's recombination test was not one.
 
 ## Privacy
 

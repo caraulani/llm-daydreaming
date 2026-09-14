@@ -9,7 +9,7 @@ caraulani@gmail.com
 
 ## Abstract
 
-We plant 12 cross-domain connections in a 60-note synthetic corpus written in the style of one builder's private notes, and measure whether a generate-then-select pipeline recovers them. On the oracle set, the generator produced a non-NONE answer on 11 of 12 planted pairs and the grounded judge accepted 8 of 12 as the planted mechanism (Wilson 95 percent interval 39 to 86 percent); it abstained on 5 of 6 decoy pairs and 34 of 42 random cross-domain pairs, and no decoy answer survived the critic (Fisher one-sided p = 0.011; label-permutation p = 0.032 on post-critic survivors). Distance-forced sampling did not enrich planted pairs: banded sampling drew 1 planted pair in 100 draws and anchor-plus-remote drew 0 in 50, against a random-pairing expectation of 0.65 (hypergeometric p = 0.48); this hypothesis was underpowered by design, and a post-hoc analysis shows every planted bridge's closest card pair lies in the nearest distance band. Single-note reflection recovered 4 of 12 mechanisms, against 8 of 12 for two notes (Fisher p = 0.11, not significant); reading the four single-note recoveries shows the corpus states those mechanisms on one side. By the preregistered decision rule (H1 and H2 both required) the run reports no signal. The binary critic killed 3 of the 8 correct recoveries. Synthetic ground truth measures recovery of planted structure, not real-world novelty or usefulness; we release the corpus, answer key, prompts, raw outputs and a reproduction script. Measured list-price cost of the run was $33.62.
+Two preregistered runs test whether a generate-then-select pipeline recovers cross-domain connections planted in a synthetic corpus written in the style of one builder's private notes. v0.1 (60 notes, 12 bridges): given the right two notes, the generator answered on 11 of 12 planted pairs and the grounded judge accepted 8 of 12 (Wilson 39 to 86 percent); it abstained on 5 of 6 decoys and 34 of 42 random pairs, and no decoy answer survived the critic (Fisher p = 0.011). Distance-forced sampling drew 1 planted pair in 100 against 0.65 expected (p = 0.48), and single-note reflection recovered 4 of 12 against 8 of 12 for two notes (p = 0.11); by the preregistered rule the run reports no signal. v0.2 (96 notes, 16 bridges written obliquely on both sides by one of two model families, shape-matched decoys, two critics): the generator answered on 9 of 16 planted pairs and the judge accepted 6 (Wilson 18 to 61 percent); it abstained on 10 of 12 decoys and 33 of 36 random pairs, and no decoy answer survived the primary critic (p = 0.021). Pairing a bridge note with a mechanism-free filler from the partner domain produced 0 recoveries in 16 (p = 0.009), the preregistered H4, and the run reports SIGNAL by the preregistered rule. That rule's recombination test was not one: single-note reflection recovered 8 of 16 mechanisms, including five the two-note oracle had marked NONE (H3 inverted, p = 0.86), and a follow-up over every note in the corpus found the single-note prompt answers on 23 of 23 fillers and 21 of 21 decoy notes. The planted mechanisms are recoverable from one note, and recombination is not demonstrated. Near-in-embedding, far-in-domain sampling drew 2 planted card pairs in 300 against 1.09 expected (p = 0.30). Recovery did not differ by writer family (3 of 10 Haiku-written, 3 of 6 Qwen-written), with the caveat that the exclusion rule removed 6 of 12 Qwen bridges. Both critics removed correct recoveries (3 of 6 and 1 of 6). Measured list-price costs: $33.62 and $85.04 for the runs, $15.05 for the follow-up, $1.54 and about $7.0 for the corpus builds. Synthetic ground truth measures recovery of planted structure, not real-world novelty or usefulness; the corpora, answer keys, prompts, raw outputs and a reproduction script are released.
 
 ---
 
@@ -236,11 +236,121 @@ Everything in this subsection was decided after the seal. The post-hoc distance 
 
 **X3, cross-domain-near sampler (run `2026-09-13_x3_cross_domain_near`; same corpus, prompts and models; measured list-price cost $29.51; a first attempt was lost to a spent subscription usage window and discarded, and the pipeline now aborts a stage above 20 percent errors).** Arm B7 samples card pairs from the nearest distance band (Q1) whose notes belong to different domains, the policy the post-hoc analysis suggested. Against B1 (random) and B3 (banded) at 100 draws each: B7 drew 2 planted card pairs (2 distinct bridges) against a hypergeometric expectation of 0.61 (p = 0.126); B1 drew 1, B3 drew 0. The generator answered on 31 of 100 B7 pairs, 16 of 100 B1 pairs and 9 of 100 B3 pairs; within B3 the far band and the top 5 percent drew NONE on all 50 units, replicating the sealed run's gradient. B7 recovered 1 of its 2 planted pairs. Reading: the direction matches the post-hoc finding and the effect is not significant at this size, which is the power problem the review identified (section 2(f) of `research/06`). v0.2 tests B7 against B1 at 300 draws each (H2 in `PREREGISTRATION-v0.2.md`).
 
+
+### 6.2 v0.2: oblique bridges, two writer families, two critics (preregistered)
+
+Every number below is read from `results/public/2026-09-14_micro_v0_2/`, regenerated by `make reproduce` from the committed run `experiments/runs/public/2026-09-14_micro_v0_2/` without API access. The protocol is `PREREGISTRATION-v0.2.md`, sealed at commit ad88f4314b2875330b194d6b435d6b7a118f261c (tag `v0.2.0-prereg`) before any note of the corpus existed.
+
+**Corpus.** 96 notes, six domains, 16 per domain: 24 bridges as specified, 12 decoy pairs (9 shape-matched, 3 homonym) and 24 fillers. Half the notes were written by `claude-haiku-4-5-20251001` and half by Qwen 2.5 7B Instruct Q4_K_M run locally (`hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M`), assigned by id parity. Every bridge note passed a 6-gram check and was judged by a paraphrase-leak judge with the gold in context; eight bridges (br03, br08, br10, br12, br15, br16, br18, br24; two Haiku-written, six Qwen-written) had a note that ended LEAK after the allowed attempts and were removed from the answer key under the preregistered exclusion rule, leaving 16 planted bridges, 10 written by family A and 6 by family B. Family B writes about half as much under the identical prompt (median 107 words against 176), and 10 of its notes stayed under the 100-word floor. Measured build cost about $7.0 at list price for the Haiku and judge calls; family B was local. Datasheet: `data/synth/v0.2/datasheet.md`.
+
+**Deviations.** Five are logged in `PREREGISTRATION-v0.2.md`: the family-B model was pulled from Hugging Face under a different tag because the Ollama registry's blob host was unreachable; the length floor was lowered from 150 to 100 words for both families after the small model failed the floor systematically; failing notes were given ten attempts instead of five; unjudged short bridge notes were judged after the build and the exclusion applied; and the outcome entry records the rule's result next to the experimenter's reading. None changed a hypothesis, a test or a threshold.
+
+**T1. Corpus.** Filled by `make reproduce` (T1.md).
+
+| Notes | Cards | Planted bridges | Decoy pairs | Cross-note card pairs | Notes failing a builder check after the allowed attempts |
+|---|---|---|---|---|---|
+| 96 | 483 (5.03 per note) | 16 | 12 | 115,345 | 13 |
+
+**T2. Sampler enrichment of planted card pairs.** Filled by `make reproduce` (T2.md). Base rate: 0.36 percent of the 115,345 cross-note card pairs are planted.
+
+| Arm | Pairs drawn | Planted included | Distinct bridges | Hypergeometric expectation | P(at least observed) |
+|---|---|---|---|---|---|
+| B1 random | 300 | 2 | 2 | 1.09 | 0.297 |
+| B7 near, cross-domain | 300 | 2 | 2 | 1.09 | 0.297 |
+
+**T3. Oracle set S0: recall and specificity.** Filled by `make reproduce` (T3.md). Mean cosine between generated connection and gold on planted pairs: 0.547.
+
+| Pair type | N | NONE rate (Wilson 95%) | Non-NONE rate | Survived critic and dup gate | MATCH to gold |
+|---|---|---|---|---|---|
+| Planted | 16 | 43.8% [23, 67] | 56.2% [33, 77] | 31.2% [14, 56] | 6 of 16, 37.5% [18, 61] |
+| Decoy | 12 | 83.3% [55, 95] | 16.7% [5, 45] | 0.0% [0, 24] | n/a |
+| Random non-planted | 36 | 91.7% [78, 97] | 5.6% [2, 18] | 0.0% [0, 10] | n/a |
+
+Fisher exact (6 of 16 planted recovered vs 0 of 12 decoy false positives after the primary critic), one-sided: p = 0.0213.
+
+**T4. Per-arm NONE rate, kill rate, survivors, recovery and measured cost.** Filled by `make reproduce` (T4.md). 728 units; two generator calls errored (units whose partner note had no cards, see 7.1).
+
+| Arm | Units | NONE % (Wilson 95%) | Critic kill % of non-NONE | Dup-gate kills | Survivors | Bridges reachable | Bridges recovered | Recall | USD | USD per recovered bridge |
+|---|---|---|---|---|---|---|---|---|---|---|
+| S0 | 64 | 78.1 [67, 86] | 61.5 [36, 82] | 0 | 5 | 16 | 6 | 37.5% [18, 61] | 6.26 | 1.04 |
+| S1 | 32 | 90.6 [76, 97] | 50.0 [9, 91] | 0 | 1 | 16 | 0 | 0.0% [0, 19] | 2.73 | n/a |
+| B1 | 300 | 84.3 [80, 88] | 21.3 [12, 35] | 0 | 37 | 2 | 0 | 0.0% [0, 66] | 26.93 | n/a |
+| B7 | 300 | 80.7 [76, 85] | 36.2 [25, 49] | 0 | 37 | 2 | 0 | 0.0% [0, 66] | 27.60 | n/a |
+| B4 | 32 | 3.1 [1, 16] | 22.6 [11, 40] | 0 | 24 | 16 | 8 | 50.0% [28, 72] | 3.92 | 0.49 |
+
+Exploratory finds (non-planted survivors): 75 in total, released as `results/public/2026-09-14_micro_v0_2/exploratory_finds.jsonl`, not counted as hits.
+
+**T5. Permutation null over S0.** Filled by `make reproduce` (T5.md).
+
+| Statistic | Observed | Mean under null | Permutation p (10,000 shuffles) |
+|---|---|---|---|
+| Survivors among planted S0 units | 5 | 1.256 | 0.0002 |
+
+**T6. Single-note reflection (B4) versus the two-note oracle arm.** Filled by `make reproduce` (T6.md).
+
+| Arm | Bridges tested | Mechanisms recovered | Rate (Wilson 95%) | Fisher p (S0 greater than B4) |
+|---|---|---|---|---|
+| S0 two notes | 16 | 6 | 37.5% [18, 61] | 0.857 |
+| B4 single note | 16 | 8 | 50.0% [28, 72] | n/a |
+
+**T7. Partner-domain filler control (preregistered as H4).** Filled by `make reproduce` (T7.md).
+
+| Arm | Bridges tested | Mechanisms recovered | Rate (Wilson 95%) | Fisher p (S0 greater than S1) |
+|---|---|---|---|---|
+| S0 bridge note plus true partner | 16 | 6 | 37.5% [18, 61] | 0.00884 |
+| S1 bridge note plus partner-domain filler | 16 | 0 | 0.0% [0, 19] | n/a |
+| B4 bridge note alone | 16 | 8 | 50.0% [28, 72] | n/a |
+
+**T8. Recall after critic, per critic, on the same generations, before the duplicate gate.** Filled by `make reproduce` (T8.md).
+
+| Critic | Model id | Correct recoveries | Surviving | Killed | Decoy answers | Decoy surviving | Kill rate on random |
+|---|---|---|---|---|---|---|---|
+| haiku (primary) | claude-haiku-4-5-20251001 | 6 | 3 | 3 | 2 | 0 | 100.0% [34, 100] |
+| sonnet | claude-sonnet-5 | 6 | 5 | 1 | 2 | 1 | 100.0% [34, 100] |
+
+**Preregistered decision rule (`DECISION.md`, verbatim).**
+
+- H1 (planted recall 6/16 vs decoy false positives 0/12, Fisher one-sided): p = 0.0213 -> PASS
+- H2a (B7 planted card pairs 2 in 300 draws, expected 1.09, hypergeometric): p = 0.2973; arm-label permutation vs B1: gap = +0.0000, p = 0.6929 -> FAIL
+- H2b (non-NONE rate B7 58/300 vs B1 47/300, Fisher one-sided): p = 0.1413 -> FAIL
+- H3 (S0 two-note recall vs B4 one-note recall, Fisher one-sided): p = 0.8574 -> FAIL
+- H4 (S0 recall 6/16 vs S1 partner-domain-filler recall 0/16, Fisher one-sided): p = 0.0088 -> PASS
+- H5 (recall by writer family, estimation only, no pass/fail): A: 3/10 = 30.0% [11, 60]; B: 3/6 = 50.0% [19, 81]
+
+Decision: SIGNAL (signal requires H1 and H4 both passing; H2, H3, H5 are reported and do not enter the rule).
+
+**Reading.** The rule says SIGNAL, and it passed for a reason it did not test. The adversarial review of the raw outputs (`research/07-adversarial-review-v0.2-results-2026-09-14.md`) supports six statements.
+
+(a) *The eight single-note recoveries are principles read off one note's ingredient set.* Units B4-0000, B4-0007, B4-0008, B4-0009, B4-0015, B4-0016, B4-0019 and B4-0024 recover card testing, relative-schedule drift, a device step (twice), regression to the mean, receipt lag against expense cadence, an unmonitored absence, and a check interval longer than the event. In each, the note lists every ingredient for its side and never states the mechanism, so the leak judge answered CLEAN and the `one_side_test` in the specification, written for a naive reader, holds. The generator is not a naive reader. The match judge is not lenient: it rejected S0-0000 (br01), whose generated mechanism is the gold mechanism, so oracle recall is 7 of 16 on a human reading and 6 of 16 by the preregistered judge.
+
+(b) *H4 is not a recombination test.* S1 asks the model whether a bridge note and an unrelated filler connect; 29 of 32 answers were NONE, and the two answers (S1-0000, S1-0016) were honest attempts to connect the wrong pair. NONE is the correct answer to the question S1 asks, and it says nothing about whether the second note was needed. Five bridges the two-note oracle marked NONE (br05, br06, br11, br13, br20; units S0-0003, S0-0004, S0-0007, S0-0008, S0-0012) were recovered by the single-note arm: given both notes and permission to abstain, the model abstained; given one note under the reflection prompt, it produced the gold. The pair prompt's "most pairs are unrelated" framing suppresses answers the model has.
+
+(c) *Two bridges behaved as designed, and the pipeline missed both.* Of the seven planted NONEs (five Haiku-written, two Qwen-written), br09 (sequential identifiers exposing one operator) and br17 (expectation-lag dropout at the third cycle) are oblique on both sides and recoverable only from both notes. Neither was recovered by any arm. The difficulty the design was meant to create exists in exactly two of sixteen bridges, and the generator did not clear it.
+
+(d) *The sampler effect is real, small and undetectable here.* All 16 planted pairs again have their closest card pair in the nearest distance band. The cross-domain part of that band holds 20,163 card pairs, 200 of them planted (0.99 percent against a base of 0.36 percent): enrichment 2.73x, with an expectation of 3.0 planted pairs in 300 draws against 1.1 at the base rate; observed 2. Ranking all 3,526 cross-domain note pairs by minimum card distance places the planted pairs at ranks from 6 to 1748; precision at 300 is 5 of 300 (3.7x the base). Detecting a lift of this size at this base rate needs on the order of 1,500 draws per arm. The measured quantity to report is the pool enrichment; the arm-level test is dropped.
+
+(e) *No critic configuration keeps recall without passing a decoy.* The Haiku critic killed S0-0011, S0-0014 and S0-0015 (three correct recoveries) and both decoy answers; the Sonnet critic killed S0-0014 and kept decoy S0-0024. "Kill if either kills" keeps 3 of 6 correct and 0 decoys; "kill if both kill" keeps 5 of 6 and 1 decoy. The rubric's "generic" and "restates" categories remove correct answers by construction on a corpus whose gold mechanisms are principles.
+
+(f) *Shared priors are not supported as the explanation, and the test is confounded.* Recall on Qwen-written bridges (3 of 6; single-note 3 of 6) was at least as high as on Haiku-written ones (3 of 10; single-note 5 of 10). The exclusion removed 6 of 12 Qwen bridges, leaving the ones a 7B model could write without stating the mechanism, and Qwen notes are shorter, which concentrates cues.
+
+**X5, single-note prompt over every note (exploratory, not preregistered; run `2026-09-14_x5_single_note_all`; measured list-price cost $15.05).** The single-note prompt already permits NONE. To test whether it measures knowledge or compliance, it was run over every note in the v0.2 corpus with the same generator; four notes the card extractor had refused (synthetic health notes read as personal medical information) had no cards and were skipped, leaving 92 units.
+
+| Note kind | Units | Answered | NONE |
+|---|---|---|---|
+| Filler | 23 | 23 | 0 |
+| Decoy note | 21 | 21 | 0 |
+| Excluded-bridge note | 16 | 16 | 0 |
+| Planted-bridge note | 32 | 31 | 1 |
+
+Planted mechanisms recovered from one note: 6 of 16 (br01, br05, br06, br13, br14, br22), 37.5 percent [18, 61] (T4 of that run). The prompt answers on everything; its NONE permission is inert. The single-note arm therefore measures the model's willingness to state an implication from any note, and the S1-versus-B4 contrast in the sealed run is a prompt-contract artifact, not evidence about recombination.
+
+**Model and prompt provenance, v0.2.** Run id `2026-09-14_micro_v0_2`, executed 2026-09-14. Generator snapshot `claude-sonnet-5`; card, primary critic and recovery judge `claude-haiku-4-5-20251001`; second critic `claude-sonnet-5`. Note writers: `claude-haiku-4-5-20251001` (family A) and `ollama/hf.co/bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M@a693a5ed1336` (family B). Prompt hashes in the run's `metadata.yaml`. Measured list-price cost $85.04 for the run. Seal commit ad88f4314b2875330b194d6b435d6b7a118f261c, tag `v0.2.0-prereg`. Corpus sha256 f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a. OpenTimestamps proofs for both preregistrations and answer keys attest in Bitcoin blocks 966837 (v0.1) and 966878 (v0.2); `docs/verify-seal.md` gives the recipe.
+
 ---
 
 ## 7. Limitations and Future Work
 
-### 7.1 Limitations of v0.1
+### 7.1 Limitations of v0.1 and v0.2
 
 **Synthetic ground truth.** Recovery of planted structure is not evidence of real-world novelty or usefulness. A pipeline can pass this test and still produce nothing an owner would act on.
 
@@ -260,7 +370,15 @@ Everything in this subsection was decided after the seal. The post-hoc distance 
 
 **Cost.** No cost number is stated that was not read from a log.
 
-**Plan for v0.2.** Bridges written to be oblique on both sides and screened by the paraphrase-leak judge; decoys that share a failure shape (two "spike" notes, two "drift" notes) rather than a vocabulary item; 24 bridges so H3 has power; a second note-writer model family for at least half the corpus; H2 replaced by a note-level sampler test (cross-domain-near B7 against random B1, 300 draws each); the critic ablated before it is used. In parallel, the next headline experiment moves to real code repositories with execution as the critic, where a failing test replaces the LLM's opinion and a pinned commit replaces the synthetic answer key; the prior-art sweep for that direction is `research/05-prior-art-execution-verified-code-2026-09-13.md`.
+**Principle-type bridges are recoverable from one note (v0.2).** Eight of the sixteen v0.2 mechanisms are general principles, and each bridge note carries the full ingredient set for its side, so the generator reads the principle off one note (Section 6.2, reading (a)). The obliqueness gate (per-side forbidden phrases, a one-side test written for a naive reader, a paraphrase-leak judge) screened for stated mechanisms and passed implied ones. Only br09 and br17 were oblique to the generator itself, and both were missed.
+
+**The single-note prompt's NONE permission is inert.** Over every note in the v0.2 corpus it answered on 23 of 23 fillers, 21 of 21 decoy notes and 31 of 32 planted-bridge notes (X5). Any comparison between a NONE-permitting pair prompt and this prompt compares prompt contracts, not knowledge. H3 and H4 as preregistered inherit this flaw.
+
+**The writer-family exclusion is family-dependent.** The leak rule removed 6 of 12 Qwen-written bridges and 2 of 12 Haiku-written ones, and Qwen notes are half as long. H5 is reported as an estimate and cannot separate priors from length and selection.
+
+**Card-extractor refusals.** Four synthetic health notes were refused by the card extractor as personal medical information, leaving them with no concept cards; in the sealed v0.2 run this produced units with empty claim lists and two errored generator calls. The pipeline now records refusals, retries once and excludes zero-card notes from note-level arms; the sealed run is reported as executed.
+
+**Plan for v0.3.** A bridge is accepted at build time only if the generator itself, given one side with NONE permitted under the pair schema, does not produce the gold; the leak judge is replaced by that gate. Each side must carry a specific fact rather than a principle: one note holds a concrete fact, the other an unexplained observation that only that fact explains; br09 and br17 are the template. The single-note and pair prompts share one contract. The sampler is reported as pool enrichment, not an arm-level test, or run at the size that can detect a 3x lift. The critic is either dropped or replaced by a check that does not read a correct principle as generic. In parallel, the next headline experiment moves to real code repositories with execution as the critic, where a failing test replaces the LLM's opinion and a pinned commit replaces the synthetic answer key; the prior-art sweep for that direction is `research/05-prior-art-execution-verified-code-2026-09-13.md`.
 
 ### 7.2 Track C: owner-blind scoring over a real private corpus
 
@@ -282,7 +400,7 @@ Usable yield (owner KEEP rate, with "not in corpus" enforced by retrieval) as a 
 
 ## 8. Conclusion
 
-Generation is cheap and selection is the wall, and every previous attempt at a day-dreaming loop stopped at that wall without measuring it. v0.1 measured it, on a synthetic corpus with planted answers, under a sealed protocol. The selection step recovers planted structure on the oracle set: 8 of 12 mechanisms, with no decoy answer surviving the critic. The sampling hypothesis was untestable at this base rate, and the post-hoc analysis points the other way: genuine bridges in this corpus are embedding-near, not far. The corpus leaks by paraphrase, which inflates single-note recovery, and the critic as configured costs more true recoveries than it saves. By the preregistered rule the run reports no signal. The corpus, answer key, prompts, raw outputs, tables and this reasoning are released so the next run, on a corpus that does not leak and with a critic that does not need an opinion, can be judged against the same rule.
+Generation is cheap and selection is the wall, and every previous attempt at a day-dreaming loop stopped at that wall without measuring it. Two preregistered runs measured it on synthetic corpora with planted answers. Across both, the selection step held: H1 passed in v0.1 (8 of 12 planted recovered, 0 of 6 decoys surviving) and in v0.2 (6 of 16, 0 of 12), with the generator abstaining on most decoy and random pairs. Everything about recombination and sampling either failed or turned out untestable as designed: distance-forced sampling drew nothing, near-in-embedding sampling is a 2.7x pool effect invisible at 300 draws, single-note reflection recovered as many mechanisms as the two-note oracle in v0.2, and the partner-domain control that the v0.2 rule treated as a recombination test measured specificity instead. By the v0.1 rule: no signal. By the v0.2 rule: signal, for a reason the rule did not test. We report both verbatim, next to the readings that qualify them. The corpora, answer keys, prompts, raw outputs, tables, deviations and reviews are released so the next run, on bridges that the generator itself cannot read from one side and with a critic that does not need an opinion, can be judged against the same discipline; the next headline experiment moves that discipline to real code with execution as the critic.
 
 The system and the protocol are open source under MIT (code) and CC-BY-4.0 (paper and data).
 
