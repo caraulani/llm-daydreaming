@@ -1,5 +1,9 @@
 # daydreamd: the LLM daydreaming loop, evaluated
 
+<p align="center">
+  <img src="hero.png" alt="LLM Daydreaming v01. Give your LLM the power to dream new ideas, based on your actual work. Sample, connect, abstain, critique, filter, morning." width="100%"/>
+</p>
+
 *By [Julian Caraulani](https://github.com/caraulani), September 2026. An open implementation and
 preregistered test of Gwern's LLM daydreaming proposal (the day-dreaming loop) over your own notes:
 Obsidian vaults, Claude Code memory, any markdown folder.*

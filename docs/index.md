@@ -5,6 +5,8 @@ description: "daydreamd by Julian Caraulani: an open implementation and preregis
 
 # daydreamd: the LLM daydreaming loop, evaluated
 
+![LLM Daydreaming v01. Give your LLM the power to dream new ideas, based on your actual work.](assets/hero.png)
+
 *By [Julian Caraulani](https://github.com/caraulani), September 2026. An open implementation and preregistered test of Gwern's LLM daydreaming proposal (the day-dreaming loop) over your own notes: Obsidian vaults, Claude Code memory, any markdown folder. Code on [GitHub](https://github.com/caraulani/llm-daydreaming), archived with DOI [10.5281/zenodo.22746627](https://doi.org/10.5281/zenodo.22746627).*
 
 **Your notes are full of connections you never made.** daydreamd looks for them while you sleep.
