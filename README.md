@@ -25,15 +25,35 @@ truth planted by construction, a pre-registered protocol, and every raw output c
 
 This repository does not propose the day-dreaming loop. It measures one part of it. The idea and
 the first builds belong to the people below; what this repo adds is the missing measurement.
+The loop is old. What changed in 2025 is that the generator became cheap enough to run every
+night over a private corpus, and what is still missing is the measurement.
 
 | Year | Who | What | What was missing |
 |---|---|---|---|
+| 1908 | [Henri Poincaré, "Science and Method" (1914 translation)](https://archive.org/details/cu31924012248179) | invention is choice: the unconscious forms a great many combinations, and only the useful ones reach consciousness after a period of incubation | one mathematician's aesthetic sense as the sieve; no procedure, no corpus |
+| 1926 | [Graham Wallas, "The Art of Thought"](https://archive.org/details/theartofthought) | preparation, incubation, illumination, verification as the four stages of a new idea | a description of stages, not a mechanism |
+| 1945 | [Jacques Hadamard, "The Psychology of Invention in the Mathematical Field"](https://archive.org/details/eassayonthepsych006281mbp) | combinations formed below awareness and sifted by an aesthetic sense, from interviews with mathematicians | same sieve, same absence of a procedure |
+| 1960 | [Donald T. Campbell, "Blind variation and selective retention in creative thought as in other knowledge processes"](https://doi.org/10.1037/h0040373) | generate variations blindly, retain selectively: the selection half of the loop stated as a general principle | the retention criterion is left open; no generator |
+| 1962 | [Sarnoff Mednick, "The associative basis of the creative process"](https://doi.org/10.1037/h0048850) | creativity as forming remote associates; the distance between the paired elements is the variable | the flat-hierarchy mechanism was later refuted (Benedek and Neubauer 2013); the distance framing survived |
+| 1964 | [Arthur Koestler, "The Act of Creation"](https://archive.org/details/actofcreation0000arth_p2s0) | bisociation: a new idea is the collision of two previously unconnected frames of thought | a name for the collision, no way to produce or test one |
+| 1983 | [Francis Crick and Graeme Mitchison, "The function of dream sleep"](https://doi.org/10.1038/304111a0) | dreaming as reverse learning that removes parasitic associations from an overloaded network | pruning without generation; no idea comes out of it |
+| 1986 | [Don R. Swanson, "Fish oil, Raynaud's syndrome, and undiscovered public knowledge"](https://doi.org/10.1353/pbm.1986.0087) | two literatures that never cite each other can jointly hold an unnoticed discovery; the closest ancestor of colliding two distant notes | public literature, searched by hand, one investigator as the judge |
+| 1990 | [Erik T. Mueller, "Daydreaming in Humans and Machines" (DAYDREAMER)](https://openlibrary.org/works/OL4776122W) | the first program that daydreams: a stream of thought that generates and evaluates alternative plans between tasks | daydreams over its own goals and episodes, not over a corpus of notes; no novelty evaluation |
+| 1990 | [Margaret Boden, "The Creative Mind: Myths and Mechanisms"](https://archive.org/details/creativemindmyth0000bode) | combinational, exploratory and transformational creativity as three distinct kinds | a taxonomy; the loop is combinational by definition, still without a runnable form |
+| 1993 | [Melanie Mitchell, "Analogy-Making as Perception"](https://archive.org/details/analogymakingasp0000mitc) and [Hofstadter and Mitchell, "Fluid Concepts and Creative Analogies" (1995)](https://archive.org/details/fluidconceptscre0000hofs_w7o9) | Copycat: generate associations in parallel, filter, with a literal temperature knob controlling how far to reach | a micro-domain of letter strings; temperature is a risk parameter, not a novelty parameter |
+| 1995 | [Hinton, Dayan, Frey and Neal, "The wake-sleep algorithm for unsupervised neural networks"](https://doi.org/10.1126/science.7761831) | a sleep phase generates fantasies that train the recognition model | learning weights, not proposing ideas |
+| 2002 | [Gilles Fauconnier and Mark Turner, "The Way We Think"](https://archive.org/details/waywethinkconcep00gill) | conceptual blending: the cognitive mechanism under every recombination | no computation, no evaluation |
+| 2021 | [Erik Hoel, "The overfitted brain: Dreams evolved to assist generalization"](https://doi.org/10.1016/j.patter.2021.100244) | dreams as noise injection against overfitting, hence the need for a dedicated offline phase | an argument for why to dream, not for what to dream about |
+| 2023 | [Park et al., "Generative Agents"](https://arxiv.org/abs/2304.03442) | periodic reflection that synthesises stored memories into higher-level insights | synthesis of what is there; no recombination of distant items, no discard |
+| 2025 | [Lin et al., "Sleep-time Compute"](https://arxiv.org/abs/2504.13171) | offline computation over an agent's context while it is idle | consolidation for later queries, not generation of anything new |
 | 2025 | [Gwern, "LLM Daydreaming"](https://gwern.net/ai-daydreaming) | proposed the day-dreaming loop: sample two facts, ask for a connection, keep the interesting ones, write them back | no implementation, no evaluation |
 | 2025 | [Sean Goedecke, idea-mill](https://github.com/sgoedecke/idea-mill) | first prototype, one day after the essay; "a few genuinely novel ideas" | hand-written facts, no critic evaluation, no baselines |
 | 2025 | [Zbigniew Lukasiak, DayDreamingDayDreaming](https://github.com/zby/DayDreamingDayDreaming) | first temporal-novelty pilot with pre-cutoff models | "I manually selected combinations"; "a domain-agnostic novelty verifier is the fundamental research bottleneck" |
 | 2026 | [Vault Daydream](https://github.com/glebis/claude-skills) | Obsidian skill: vault pairs, generator plus critic, threshold, writeback | run on demand, no distance control, no evaluation |
 | 2026 | [Oliver Zahn, James Evans and David Eagleman, "Discovery by Dreaming"](https://arxiv.org/abs/2607.16256) | recombination over public corpora, validated against 50,000 cross-field pairs and a 2026 holdout | no critic, no distance control, no private corpus; the holdout is not leakage-safe by the authors' own account |
 | 2026 | this repo | the selection step under a preregistered test with planted ground truth | real-corpus usefulness (Track C) and temporal validation (Track A) are still open |
+
+*Sources verified 2026-09-14: DOIs resolved through Crossref, books through archive.org or Open Library, preprints through arXiv.*
 
 The consolidation branch (Letta's sleep-time compute, Google's "Language Models Need Sleep",
 Anthropic's Dreams, OpenClaw's dreaming mode) reorganises memory. It does not generate. We build
