@@ -19,5 +19,6 @@ The first thirteen records were derived from the founding brief (`~/Desktop/I/dr
 | [011](ADR-011-headless-claude-default-backend.md) | Default backend is headless `claude -p`; generators are pluggable | Accepted |
 | [012](ADR-012-claim-discipline-erdos-taxonomy.md) | Every hit is classified on Tao's Erdős taxonomy before it is called novel | Accepted |
 | [013](ADR-013-synthetic-corpus-with-planted-bridges.md) | v0.1 runs over a synthetic corpus with planted ground truth | Accepted |
+| [014](ADR-014-bridge-acceptance-by-one-side-test.md) | a planted bridge is accepted only if one side alone does not yield it (from v0.3) | Accepted |
 
 To add one: copy the format, number it, open an issue first (see `CONTRIBUTING.md`).

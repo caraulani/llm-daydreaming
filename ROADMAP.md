@@ -2,25 +2,24 @@
 
 The order is fixed by one rule from the founding brief: every prior attempt at this loop died at the verifier, not the generator. So evaluation ships before features, and every version has a gate that can fail.
 
-## v0.1: preregistered synthetic micro-experiment (current)
+## v0.1: preregistered synthetic micro-experiment (done, 2026-09-13)
 
-- Corpus: `data/synth/v0.1/`, 60 model-written notes of a fictional solo builder with 12 hand-authored cross-domain bridges planted and 6 decoy pairs (ADR-013). Released under CC BY 4.0 with a datasheet.
-- Arms: banded distance (B3), anchor plus remote (B6), random pairing (B1), single-note reflection (B4).
-- Ground truth: `gold.json`, written before the notes existed.
-- Primary metric: planted-bridge recovery rate per arm against the decoy false-positive rate and B1, with the label-permutation null (ADR-006).
-- Gate: permutation p below 0.05 for B3 or B6 against B1, and the winner above B4. Anything else is published as a null.
-- Deliverables: `PREREGISTRATION.md` frozen, tables T1 to T5 in `results/`, `paper/paper.md` v0.1 with an abstract that claims recovery of planted structure and nothing more.
+- Corpus `data/synth/v0.1/` (60 notes, 12 bridges, 6 decoys), `PREREGISTRATION.md` sealed and anchored (Bitcoin block 966837), run `2026-09-13_micro`. H1 pass, H2 fail, H3 not significant: NULL by rule, published as such. Exploratory X1, X3, X4 committed.
 
-## v0.2: adapters, packaging, the yield curve
+## v0.2: oblique bridges, two writer families, two critics (done, 2026-09-14)
 
-- Obsidian adapter (markdown vault in, daily note with wikilinks out).
-- PyPI release so `uvx daydreamd` works, `daydreamd dream` and `daydreamd review` commands.
-- Yield-vs-distance run on a public corpus (arXiv cs abstracts, CC0 metadata), including the far tail. This is Figure 1 if the curve is single-peaked, and a null result if it is not.
-- Concept-card fidelity audit published (faithful / distorted / hallucinated rates).
-- Synthetic corpus regenerated with a second model family; v0.1 rerun to bound the shared-imagination effect (ADR-013).
-- Base-model axis: at least three generator models crossed with two samplers, with a variance decomposition.
+- Corpus `data/synth/v0.2/` (96 notes, 24 bridges of which 8 excluded by the leak rule, 12 decoys), `PREREGISTRATION-v0.2.md` sealed and anchored (block 966878), run `2026-09-14_micro_v0_2`. H1 pass, H4 pass, H2 fail, H3 inverted: SIGNAL by rule, recombination not claimed. X5 showed the single-note prompt's NONE gate is inert.
+- Lesson recorded in ADR-014: principle-type bridges are recoverable from one note.
 
-## v0.3: Track A, retrospective evaluation
+## v0.3: bridges that need both sides, and the first real corpus
+
+- Corpus v0.3 built under ADR-014: a bridge is accepted only if the generator, given one side with a working NONE gate, does not produce the gold. Each side carries a specific fact, not a principle. Single-note abstention reported on fillers in every run.
+- A NONE-permitted single-note prompt whose gate is verified on fillers before use.
+- Match judge with two votes; card extractor refusals recorded and reported.
+- Obsidian and markdown-folder adapters, `uvx daydreamd` packaging, `daydreamd dream` and `daydreamd review` commands for Track C on a real private corpus (owner-blind protocol in `docs/human-eval-protocol.md`).
+- Headline experiment moves to execution-verified findings over real repositories (`research/05`): distance-forced pairing of code parts, NONE-permitted conjecture, a failing test as the critic, random-pairing control and permutation null, verified-yield vs distance.
+
+## v0.4: Track A, retrospective evaluation
 
 - Old-cutoff open-weight generator with a 6-month safety margin (ADR-007).
 - Time-frozen arXiv slice, hit detection by retrieval over post-cutoff literature plus an entailment matcher.
@@ -28,7 +27,7 @@ The order is fixed by one rule from the founding brief: every prior attempt at t
 - Lead-time distribution and future-neighbourhood rate.
 - False-positive rate reported with a Wilson interval.
 
-## v0.4: Track B, public registry
+## v0.5: Track B, public registry
 
 - `registry/entries/` opened to outside submissions (PR-based, see `registry/README.md`).
 - OpenTimestamps proofs on every entry.
