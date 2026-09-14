@@ -21,6 +21,11 @@ make smoke          # tiny end-to-end run with real model calls
 make micro          # the pre-registered v0.1 run (only after PREREGISTRATION.md is sealed)
 make micro CONFIG=experiments/micro-v0.2/config.yaml   # the v0.2 run (after PREREGISTRATION-v0.2.md is sealed)
 make reproduce      # rebuild results/ from committed runs, no model calls
+uv run daydreamd dream <folder> --kind obsidian   # product: one night over a corpus -> morning.md
+uv run daydreamd review morning.md                 # ticked boxes -> ~/.daydreamd/verdicts.jsonl
+uv run daydreamd skill                             # -> SKILL.md + ~/.daydreamd/learnings.md
+uv run daydreamd mcp                               # MCP server over stdio (mcp extra)
+uv run daydreamd schedule install --path <folder>  # nightly launchd/cron job
 uv run daydreamd --help
 ```
 
@@ -47,7 +52,9 @@ adapters → core.ingest (snapshot) → core.cards → core.embed → core.sampl
 | `src/daydreamd/core/stats.py` | tables T1..T8 (synthetic), DECISION.md (v0.1 rule, or v0.2 rule when the config says `prereg: v0.2`), H1..H4 (owner-blind) |
 | `src/daydreamd/synth/` | spec loader (v0.2 fields: `forbidden_phrases_a/b`, `one_side_test`), 6-gram leakage check, paraphrase-leak judge (`prompts/leak_judge.md`, bridge notes, oblique specs only), note writer with writer families by parity |
 | `src/daydreamd/eval/recovery.py` | enrichment (B1/B3/B6/B7), recall, specificity, per-critic comparison, recall by writer family, exploratory finds |
-| `prompts/*.md` | versioned prompts; header comment carries version and role |
+| `src/daydreamd/product/` | the product front door: `dream.py` (cache, sampler policy, critic with learnings, morning.md), `morning.py` (render and parse), `review.py`, `skill.py`, `schedule.py`, `mcp_server.py`, `paths.py` (`~/.daydreamd`, override `DAYDREAMD_HOME`) |
+| `src/daydreamd/core/embed.py` | `StaticEmbedder` (model2vec, product default, no PyTorch), `Embedder` (MiniLM, research runs, `research` extra), `FakeEmbedder` (tests); `make_embedder(kind)` |
+| `prompts/*.md` | versioned prompts; header comment carries version and role; `critic_with_learnings.md` is the product critic once the owner has reviewed something |
 | `experiments/*/config.yaml` | arm sizes, seed, models, backend |
 
 ## Invariants (do not break)
@@ -70,6 +77,9 @@ adapters → core.ingest (snapshot) → core.cards → core.embed → core.sampl
 9. **Several critics judge the same generations.** Only the first (primary) critic feeds dupgate
    and the main tables; the others exist so T8 can compare them. Never swap the primary after
    a run without a logged deviation.
+10. **Product runs never touch the corpus.** `daydreamd dream` reads notes, writes `morning.md`
+    and `~/.daydreamd/`, nothing else. Endorsed dreams go into a SKILL.md, never back into the
+    notes (ADR-009). The critic's kills stay visible in morning.md (research/06, research/07).
 
 ## Conventions
 

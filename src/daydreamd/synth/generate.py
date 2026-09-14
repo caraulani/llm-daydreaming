@@ -294,7 +294,7 @@ def build_corpus(
             reused_notes += 1
             pd = r["prior"]
             judged = r.get("judge_now")
-            doc = {
+            doc: dict[str, Any] = {
                 **pd,
                 "sha256": sha256_text(r["text"]),
                 "words": len(r["text"].split()),
@@ -326,7 +326,7 @@ def build_corpus(
             failed.append(n.note_id)
             if last.get("leak_judge") and last["leak_judge"]["verdict"] != "CLEAN":
                 leak_failed.append(n.note_id)
-        doc: dict[str, Any] = {
+        doc = {
             "id": n.note_id,
             "domain": n.domain,
             "kind": n.kind,

@@ -1,6 +1,6 @@
 [project]
 name = "daydreamd"
-version = "0.1.0"
+version = "0.3.0"
 description = "A local-first daemon that recombines distant concepts from your own notes and keeps only what survives a blind, pre-registered selection test."
 readme = "README.md"
 license = "MIT"
@@ -19,7 +19,8 @@ dependencies = [
   "scipy>=1.14",
   "pyyaml>=6.0",
   "typer>=0.15",
-  "sentence-transformers>=3.0",
+  "httpx>=0.27",
+  "model2vec>=0.5",
 ]
 
 [project.optional-dependencies]
@@ -28,6 +29,10 @@ docs = [
     "mkdocs>=1.6,<2",
     "mkdocs-material>=9.5,<10",
 ]
+# The committed research runs used sentence-transformers/all-MiniLM-L6-v2 (PyTorch). Install
+# this extra to recompute those embeddings exactly; the product default is a static embedder.
+research = ["sentence-transformers>=3.0"]
+mcp = ["mcp>=1.0"]
 
 [project.scripts]
 daydreamd = "daydreamd.cli:app"

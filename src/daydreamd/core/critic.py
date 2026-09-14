@@ -10,20 +10,21 @@ from .run import RunDir, load_prompt
 REASONS = {"restates_claim", "not_checkable", "generic", "ok"}
 
 
-def critic_prompt(template: str, gen: dict) -> str:
+def critic_prompt(template: str, gen: dict, learnings: str = "") -> str:
     claims = [f"A: {c}" for c in gen["claims_a"]] + [f"B: {c}" for c in gen.get("claims_b") or []]
     out = gen["output"]
     return (
-        template.replace("{{claims}}", "\n".join(claims))
+        template.replace("{{learnings}}", learnings)
+        .replace("{{claims}}", "\n".join(claims))
         .replace("{{connection}}", out["connection"])
         .replace("{{mechanism}}", out["mechanism"])
         .replace("{{testable_implication}}", out["testable_implication"])
     )
 
 
-def judge_one(backend: Backend, model: str, template: str, gen: dict) -> dict:
+def judge_one(backend: Backend, model: str, template: str, gen: dict, learnings: str = "") -> dict:
     try:
-        parsed, comp = complete_json(backend, critic_prompt(template, gen), model)
+        parsed, comp = complete_json(backend, critic_prompt(template, gen, learnings), model)
     except Exception as exc:  # noqa: BLE001
         return {
             "unit_id": gen["unit_id"],
@@ -53,6 +54,8 @@ def run_critic(
     concurrency: int = 4,
     outfile: str = "critic.jsonl",
     role: str = "critic",
+    prompt_name: str = "critic",
+    learnings: str = "",
 ) -> list[dict]:
     """Judge every non-NONE generation with one critic model.
 
@@ -60,10 +63,10 @@ def run_critic(
     critic writes ``critic.jsonl`` under role ``critic``; every critic also writes
     ``critic_<alias>.jsonl`` under role ``critic_<alias>``.
     """
-    template, sha = load_prompt("critic")
-    run.record_prompt("critic", sha)
+    template, sha = load_prompt(prompt_name)
+    run.record_prompt(prompt_name, sha)
     todo = [g for g in generations if g["status"] == "ok"]
-    rows = pmap(lambda g: judge_one(backend, model, template, g), todo, concurrency)
+    rows = pmap(lambda g: judge_one(backend, model, template, g, learnings), todo, concurrency)
     write_jsonl(run.path / outfile, rows)
     guard_error_rate(rows, "critic")
     cost = sum((r["usage"] or {}).get("cost_usd", 0.0) for r in rows)

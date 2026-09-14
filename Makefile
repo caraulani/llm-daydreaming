@@ -1,4 +1,4 @@
-.PHONY: setup test lint typecheck smoke synth micro blind stats reproduce clean
+.PHONY: setup test lint typecheck smoke synth micro blind stats reproduce dream clean
 
 UV ?= uv
 RUN ?=
@@ -46,6 +46,12 @@ reproduce:
 	  echo "== $$name ($$cfg)"; \
 	  $(UV) run daydreamd stats $$d $$cfg --out results/public/$$name; \
 	done
+
+# Product: one night over a folder of notes (real model calls). NOTES=~/vault KIND=obsidian
+NOTES ?=
+KIND ?= markdown
+dream:
+	$(UV) run daydreamd dream $(NOTES) --kind $(KIND)
 
 clean:
 	rm -rf .pytest_cache .ruff_cache

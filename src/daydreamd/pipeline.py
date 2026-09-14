@@ -14,7 +14,8 @@ from .core import blind as blind_mod
 from .core.cards import extract_cards
 from .core.critic import run_critic
 from .core.dupgate import dupgate
-from .core.embed import Embedder, FakeEmbedder, embed_cards
+from .core.embed import Embedder, FakeEmbedder, StaticEmbedder, embed_cards
+from .core.embed import make_embedder as _make_embedder
 from .core.generator import generate
 from .core.ingest import Doc, load_snapshot, snapshot
 from .core.io import copy_jsonl, read_json, read_jsonl, write_json, write_jsonl
@@ -49,8 +50,12 @@ def resolve(p: str | Path) -> Path:
     return p if p.is_absolute() else REPO / p
 
 
-def make_embedder(cfg: dict[str, Any]) -> Embedder | FakeEmbedder:
-    return FakeEmbedder() if cfg.get("backend") == "fake" else Embedder()
+def make_embedder(cfg: dict[str, Any]) -> Embedder | StaticEmbedder | FakeEmbedder:
+    """Research runs default to the MiniLM model the committed runs used (`embedder: minilm`);
+    a config may say `embedder: static` for the product default. Fake backend, fake embedder."""
+    if cfg.get("backend") == "fake":
+        return FakeEmbedder()
+    return _make_embedder(str(cfg.get("embedder", "minilm")))
 
 
 def open_run(cfg: dict[str, Any], run_root: Path | None = None, slug: str | None = None) -> RunDir:

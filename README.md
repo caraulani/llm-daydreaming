@@ -23,7 +23,7 @@ truth planted by construction, a pre-registered protocol, and every raw output c
 [![CI](https://github.com/caraulani/llm-daydreaming/actions/workflows/ci.yml/badge.svg)](https://github.com/caraulani/llm-daydreaming/actions/workflows/ci.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22746627.svg)](https://doi.org/10.5281/zenodo.22746627) [![License: MIT](https://img.shields.io/badge/code-MIT-black.svg)](LICENSE) [![Paper: CC BY 4.0](https://img.shields.io/badge/paper-CC%20BY%204.0-black.svg)](LICENSE-CC-BY-4.0)
 
 > Works with a Claude subscription (headless `claude -p`, zero marginal cost), the Anthropic API,
-> and, in v0.2, any local model through Ollama.
+> or a local model through Ollama.
 
 ## Lineage
 
@@ -62,6 +62,58 @@ night over a private corpus, and what is still missing is the measurement.
 The consolidation branch (Letta's sleep-time compute, Google's "Language Models Need Sleep",
 Anthropic's Dreams, OpenClaw's dreaming mode) reorganises memory. It does not generate. We build
 none of it. See [paper/paper.md](paper/paper.md) for the full map.
+
+## Use it tonight
+
+A morning list of connections from your own notes, that you judge, that becomes a skill file your agent loads.
+
+```bash
+uvx --from git+https://github.com/caraulani/llm-daydreaming daydreamd dream ~/vault --kind obsidian
+#   -> morning.md next to where you ran it, plus ~/.daydreamd/runs/<date>_<vault>/ with every raw call
+daydreamd review morning.md      # after you tick KEEP or KNOWN on each dream
+daydreamd skill                  # -> .claude/skills/daydreamd-<vault>/SKILL.md, loaded by Claude Code, Cursor, Windsurf
+daydreamd schedule install --path ~/vault --kind obsidian --at 03:00   # nightly (launchd or cron); prints the file first
+```
+
+`--kind` is `obsidian`, `claude-memory` (`~/.claude/projects/<slug>/memory`) or `markdown` (any folder).
+Concept cards are cached by note hash under `~/.daydreamd/cache/`, so a nightly run only pays for
+notes that changed.
+
+Or paste this into Claude Code:
+
+```
+Add this MCP server: {"mcpServers": {"daydreamd": {"command": "uvx", "args": ["--from", "git+https://github.com/caraulani/llm-daydreaming", "daydreamd", "mcp"]}}}
+Then dream over ~/vault with kind obsidian and show me the morning.
+```
+
+What `morning.md` looks like (shape; numbers come from your run):
+
+```markdown
+# morning.md, <date>, <k> of <n> dreams survived
+Corpus: `~/vault` (<notes> notes, <cards> cards). Pairs asked: <n>. NONE: <x>. Killed by the critic: <y>. Survivors: <k>.
+Models: generator `claude-sonnet-5`, critic `claude-haiku-4-5-20251001`, embeddings `model2vec/minishlab/potion-base-8M`. Measured cost at list price: $<cost>.
+
+## 1. <the connection, at most 40 words>
+**Mechanism.** <why it holds>
+**Check this week.** <one concrete thing to do>
+Sources: [[note-a]] and [[note-b]] · distance 0.61 · critic: keep
+- [ ] KEEP: I would act on this or write it down
+- [ ] KNOWN: I already had this thought
+
+<details><summary>Killed by the critic (<y>). Kept here because the critic is known to kill correct connections.</summary> ... </details>
+```
+
+Backends: `--backend claude-cli` (default; your Claude Code subscription, zero marginal cost),
+`--backend anthropic` (API key in `ANTHROPIC_API_KEY`), `--backend ollama --model <tag>` (fully
+offline; honest note: a 7B model produced terse, weaker notes in our v0.2 corpus build, so expect
+fewer and worse dreams than with a frontier generator).
+
+Privacy: nothing leaves your machine except the prompts sent to the model you chose. No
+telemetry, no accounts, nothing written back into your notes. Embeddings run locally.
+
+What this does not claim: that the dreams are novel or useful. Two preregistered runs (below)
+support the selection step and do not demonstrate recombination. Your review is the ground truth;
+the skill file only ever contains what you endorsed.
 
 ## What we found
 
@@ -146,7 +198,7 @@ Sources: `ops-refund-queue.md` × `fraud-card-testing.md` · distance 0.81 · cr
 - [ ] KEEP  - [ ] KNOWN
 ```
 
-## Try it in 60 seconds
+## Reproduce the research in 60 seconds
 
 ```bash
 git clone https://github.com/caraulani/llm-daydreaming && cd llm-daydreaming

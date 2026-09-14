@@ -4,7 +4,7 @@ cosine between the generated connection and the gold connection, reported side b
 from __future__ import annotations
 
 from ..backends import Backend
-from ..core.embed import Embedder, FakeEmbedder
+from ..core.embed import Embedder, FakeEmbedder, StaticEmbedder
 from ..core.io import write_jsonl
 from ..core.llm import complete_json, pmap, usage_record
 from ..core.run import RunDir, load_prompt
@@ -54,7 +54,7 @@ def match_one(backend: Backend, model: str, template: str, gen: dict, g: dict) -
 def match_gold(
     run: RunDir,
     backend: Backend,
-    embedder: Embedder | FakeEmbedder,
+    embedder: Embedder | StaticEmbedder | FakeEmbedder,
     generations: list[dict],
     gold: dict,
     model: str = "haiku",

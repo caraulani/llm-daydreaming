@@ -153,5 +153,123 @@ def fetch_arxiv(out: Path = typer.Option(Path("data/public/arxiv-cs-2026")), n: 
     typer.echo(f"fetched {m['n_docs']} abstracts into {out}")
 
 
+# ---------------------------------------------------------------------------------------------
+# Product commands: dream, review, skill, mcp, schedule. State lives in ~/.daydreamd (or
+# $DAYDREAMD_HOME). Nothing leaves the machine except prompts to the backend you chose.
+
+
+@app.command()
+def dream(
+    path: Path = typer.Argument(
+        ...,
+        help="Folder of notes: an Obsidian vault, a Claude Code memory dir, any markdown folder",
+    ),
+    out: Path = typer.Option(Path("morning.md"), help="Where to write the morning file"),
+    kind: str = typer.Option("markdown", help="markdown | obsidian | claude-memory"),
+    n: int = typer.Option(40, help="How many pairs to ask about"),
+    backend: str = typer.Option("claude-cli", help="claude-cli | anthropic | ollama"),
+    model: str = typer.Option("sonnet", help="Generator model alias or id"),
+    cards_model: str = typer.Option("haiku", help="Concept-card extractor alias or id"),
+    critic_model: str = typer.Option("haiku", help="Critic alias or id"),
+    no_critic: bool = typer.Option(
+        False, "--no-critic", help="Skip the critic; everything non-NONE survives"
+    ),
+    embedder: str = typer.Option("static", help="static (default, no PyTorch) | minilm | fake"),
+    concurrency: int = typer.Option(4),
+    exclude: list[str] = typer.Option([], help="Extra filename patterns to skip"),
+) -> None:
+    """One night over your notes: pairs distant concepts, asks the model, keeps what survives, writes morning.md."""
+    from .product.dream import DreamConfig
+    from .product.dream import dream as _dream
+
+    r = _dream(
+        DreamConfig(
+            path=path,
+            kind=kind,
+            n=n,
+            backend=backend,
+            model=model,
+            cards_model=cards_model,
+            critic_model=critic_model,
+            critic=not no_critic,
+            embedder=embedder,
+            out=out,
+            concurrency=concurrency,
+            exclude=list(exclude),
+        )
+    )
+    c = r.counts
+    typer.echo(
+        f"{r.morning}: {c['survivors']} survivors of {c['asked']} pairs "
+        f"(NONE {c['none']}, killed {c['killed']}, cached cards {c['cached_cards']}/{c['notes']} notes); "
+        f"measured cost ${r.cost_usd:.4f}; run {r.run}"
+    )
+
+
+@app.command()
+def review(morning: Path = typer.Argument(Path("morning.md"))) -> None:
+    """Read the KEEP and KNOWN boxes you ticked into ~/.daydreamd/verdicts.jsonl."""
+    from .product.review import review as _review
+
+    s = _review(morning)
+    typer.echo(
+        f"reviewed {s.reviewed}: kept {s.kept}, known {s.known}, unmarked {s.unmarked}; log {s.log}"
+    )
+
+
+@app.command()
+def skill(
+    out: Path | None = typer.Option(
+        None, help="Defaults to .claude/skills/daydreamd-<corpus>/SKILL.md"
+    ),
+) -> None:
+    """Write a SKILL.md of the connections you endorsed, and the learnings the critic reads next time."""
+    from .product.skill import build_skill
+
+    r = build_skill(out)
+    typer.echo(
+        f"wrote {r.skill} ({r.endorsed} endorsed, {r.known} known, {r.rejected} rejected); learnings {r.learnings}"
+    )
+
+
+@app.command()
+def mcp() -> None:
+    """Serve dream, review, skill and status as MCP tools over stdio (needs the mcp extra)."""
+    from .product.mcp_server import main as _main
+
+    _main()
+
+
+schedule_app = typer.Typer(
+    help="Run `daydreamd dream` every night (launchd on macOS, cron on Linux)."
+)
+app.add_typer(schedule_app, name="schedule")
+
+
+@schedule_app.command("install")
+def schedule_install(
+    path: Path = typer.Option(..., "--path", help="Folder of notes to dream over"),
+    at: str = typer.Option("03:00", help="Local time HH:MM"),
+    kind: str = typer.Option("markdown"),
+    out: Path = typer.Option(Path("morning.md")),
+    n: int = typer.Option(40),
+    no_load: bool = typer.Option(False, "--no-load", help="Write the file but do not register it"),
+) -> None:
+    """Install the nightly job. The plist or crontab line is printed before it is installed."""
+    from .product import paths
+    from .product.schedule import install
+
+    target, _ = install(path, kind, out, n, at, load=not no_load, home=paths.home())
+    typer.echo(f"installed: {target or 'crontab'} (runs daily at {at})")
+
+
+@schedule_app.command("remove")
+def schedule_remove(no_load: bool = typer.Option(False, "--no-load")) -> None:
+    """Remove the nightly job."""
+    from .product.schedule import remove
+
+    typer.echo(remove(load=not no_load))
+
+
 if __name__ == "__main__":
     app()

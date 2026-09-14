@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from .embed import Embedder, FakeEmbedder
+from .embed import Embedder, FakeEmbedder, StaticEmbedder
 from .io import write_jsonl
 from .run import RunDir
 
@@ -20,7 +20,7 @@ def chunk_text(text: str, size: int = CHUNK_WORDS) -> list[str]:
 
 def dupgate(
     run: RunDir,
-    embedder: Embedder | FakeEmbedder,
+    embedder: Embedder | StaticEmbedder | FakeEmbedder,
     generations: list[dict],
     critic: list[dict],
     cards: list[dict],

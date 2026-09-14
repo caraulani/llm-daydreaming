@@ -91,6 +91,7 @@ Clone https://github.com/caraulani/llm-daydreaming, run `make setup && make test
 
 | You want to | Read |
 |---|---|
+| Use it tonight on your own notes (`dream`, `review`, `skill`, `mcp`, `schedule`) | [README, "Use it tonight"](https://github.com/caraulani/llm-daydreaming#use-it-tonight) |
 | The full argument, related work and every table | [Paper](paper.md) |
 | What we promised to measure before we measured it | [Preregistration](preregistration/index.md) |
 | Check that the protocol preceded the data | [Verify the seal](verify-seal.md) |

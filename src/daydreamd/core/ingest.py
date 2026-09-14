@@ -23,6 +23,14 @@ class Doc:
     name: str
     text: str
     sha: str
+    path: str = ""  # relative posix path inside the corpus (empty for legacy snapshots)
+
+    @property
+    def domain(self) -> str:
+        """Top-level folder of the note, or "" at the corpus root. The product sampler treats
+        notes in different top-level folders as different domains."""
+        parts = self.path.split("/")
+        return parts[0] if len(parts) > 1 else ""
 
 
 def strip_frontmatter(text: str) -> str:
@@ -34,18 +42,26 @@ def strip_frontmatter(text: str) -> str:
 
 
 def load_markdown_folder(
-    source: Path, excludes: list[str] | None = None, min_words: int = 20
+    source: Path,
+    excludes: list[str] | None = None,
+    min_words: int = 20,
+    skip_hidden: bool = True,
 ) -> list[Doc]:
     patterns = list(DEFAULT_EXCLUDES) + list(excludes or [])
     docs: list[Doc] = []
     for path in sorted(source.rglob("*.md")):
+        rel = path.relative_to(source)
+        if skip_hidden and any(part.startswith(".") for part in rel.parts):
+            continue  # .obsidian, .trash, .git and friends
         if any(fnmatch.fnmatch(path.name, p) for p in patterns):
             continue
         text = strip_frontmatter(path.read_text(encoding="utf-8", errors="replace")).strip()
         if len(text.split()) < min_words:
             continue
         sha = sha256_text(text)
-        docs.append(Doc(id=f"doc-{sha[:10]}", name=path.name, text=text, sha=sha))
+        docs.append(
+            Doc(id=f"doc-{sha[:10]}", name=path.name, text=text, sha=sha, path=rel.as_posix())
+        )
     return docs
 
 
@@ -72,6 +88,7 @@ def snapshot(run: RunDir, docs: list[Doc], source: Path, anonymise: bool) -> dic
             {
                 "id": d.id,
                 "name": "<redacted>" if anonymise else d.name,
+                "path": "<redacted>" if anonymise else d.path,
                 "sha256": d.sha,
                 "words": len(d.text.split()),
             }
@@ -91,5 +108,13 @@ def load_snapshot(run: RunDir) -> list[Doc]:
     docs = []
     for entry in manifest["docs"]:
         text = (run.path / "snapshot" / "docs" / f"{entry['id']}.md").read_text(encoding="utf-8")
-        docs.append(Doc(id=entry["id"], name=entry["name"], text=text, sha=entry["sha256"]))
+        docs.append(
+            Doc(
+                id=entry["id"],
+                name=entry["name"],
+                text=text,
+                sha=entry["sha256"],
+                path=entry.get("path", ""),
+            )
+        )
     return docs

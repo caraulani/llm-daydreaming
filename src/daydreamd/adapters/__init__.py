@@ -20,6 +20,10 @@ def load_corpus(kind: str, path: Path, excludes: list[str] | None = None) -> lis
         from .markdown_folder import load as load_markdown
 
         return load_markdown(path, excludes)
+    if kind == "obsidian":
+        from .obsidian import load as load_obsidian
+
+        return load_obsidian(path, excludes)
     if kind == "arxiv":
         from .arxiv_abstracts import load as load_arxiv
 
