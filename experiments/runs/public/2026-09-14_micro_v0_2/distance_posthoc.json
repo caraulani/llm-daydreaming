@@ -1,0 +1,143 @@
+{
+  "n_cards": 483,
+  "n_cross_note_card_pairs": 115345,
+  "band_edges": {
+    "q25": 0.8294,
+    "q75": 0.9642,
+    "q95": 1.0405
+  },
+  "planted": [
+    {
+      "bridge": "br01",
+      "min_card_distance": 0.5843,
+      "min_quantile": 0.0063,
+      "mean_card_distance": 0.7857,
+      "mean_quantile": 0.1484,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br02",
+      "min_card_distance": 0.4438,
+      "min_quantile": 0.0004,
+      "mean_card_distance": 0.7289,
+      "mean_quantile": 0.0679,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br04",
+      "min_card_distance": 0.597,
+      "min_quantile": 0.0077,
+      "mean_card_distance": 0.7853,
+      "mean_quantile": 0.1475,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br05",
+      "min_card_distance": 0.5754,
+      "min_quantile": 0.0053,
+      "mean_card_distance": 0.7957,
+      "mean_quantile": 0.1684,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br06",
+      "min_card_distance": 0.7377,
+      "min_quantile": 0.0772,
+      "mean_card_distance": 0.8875,
+      "mean_quantile": 0.4438,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br07",
+      "min_card_distance": 0.6197,
+      "min_quantile": 0.0115,
+      "mean_card_distance": 0.7637,
+      "mean_quantile": 0.1115,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br09",
+      "min_card_distance": 0.6699,
+      "min_quantile": 0.0273,
+      "mean_card_distance": 0.9121,
+      "mean_quantile": 0.5417,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br11",
+      "min_card_distance": 0.7109,
+      "min_quantile": 0.0519,
+      "mean_card_distance": 0.9274,
+      "mean_quantile": 0.6034,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br13",
+      "min_card_distance": 0.6189,
+      "min_quantile": 0.0113,
+      "mean_card_distance": 0.7946,
+      "mean_quantile": 0.1662,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br14",
+      "min_card_distance": 0.6649,
+      "min_quantile": 0.0254,
+      "mean_card_distance": 0.8841,
+      "mean_quantile": 0.4309,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br17",
+      "min_card_distance": 0.7292,
+      "min_quantile": 0.0681,
+      "mean_card_distance": 0.8668,
+      "mean_quantile": 0.3687,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br19",
+      "min_card_distance": 0.6308,
+      "min_quantile": 0.014,
+      "mean_card_distance": 0.8408,
+      "mean_quantile": 0.2834,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br20",
+      "min_card_distance": 0.5465,
+      "min_quantile": 0.0032,
+      "mean_card_distance": 0.7782,
+      "mean_quantile": 0.1344,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br21",
+      "min_card_distance": 0.6375,
+      "min_quantile": 0.0157,
+      "mean_card_distance": 0.8508,
+      "mean_quantile": 0.3147,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br22",
+      "min_card_distance": 0.6672,
+      "min_quantile": 0.0262,
+      "mean_card_distance": 0.8465,
+      "mean_quantile": 0.3009,
+      "closest_pair_band": "Q1"
+    },
+    {
+      "bridge": "br23",
+      "min_card_distance": 0.6423,
+      "min_quantile": 0.0169,
+      "mean_card_distance": 0.8051,
+      "mean_quantile": 0.189,
+      "closest_pair_band": "Q1"
+    }
+  ],
+  "planted_min_median": 0.6341,
+  "random_cross_domain_min_median": 0.7385,
+  "planted_closest_pair_in_Q1": 16,
+  "n_planted": 16
+}

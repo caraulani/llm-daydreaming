@@ -84,5 +84,5 @@ stages:
   stats:
     finished: '2026-09-14T00:11:17+00:00'
     human_track: false
-    tables: /Users/julian/Desktop/I/dreaming/repo/experiments/runs/public/2026-09-14_x5_single_note_all/tables
+    tables: experiments/runs/public/2026-09-14_x5_single_note_all/tables
 visibility: public

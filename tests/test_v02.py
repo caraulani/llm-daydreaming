@@ -348,7 +348,7 @@ def test_note_acceptable_reasons():
         )[1]
         == "leak"
     )
-    assert note_acceptable(long_text + " a—b", golds, 150, False, None)[1] == "em_dash"
+    assert note_acceptable(long_text + " a\u2014b", golds, 150, False, None)[1] == "em_dash"
     assert note_acceptable("too short", golds, 150, False, None)[1] == "short"
     assert note_acceptable(long_text, golds, 150, True, None) == (False, "needs_judge")
     assert note_acceptable(long_text, golds, 150, True, "LEAK") == (False, "not_clean")

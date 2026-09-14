@@ -308,7 +308,11 @@ def stage_stats(run: RunDir, cfg: dict[str, Any], out_dir: Path | None = None) -
     if out_dir is None:
         # Only an in-run stats pass touches the run's metadata. `make reproduce` writes tables
         # to results/ and must leave committed run directories byte-identical.
-        run.mark_stage("stats", tables=str(out), human_track=bool(human))
+        try:
+            tables = str(out.resolve().relative_to(Path.cwd().resolve()))
+        except ValueError:
+            tables = out.name
+        run.mark_stage("stats", tables=tables, human_track=bool(human))
     return summary
 
 
