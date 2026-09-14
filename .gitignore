@@ -16,3 +16,6 @@ docs/paper.md
 docs/preregistration/
 docs/research/
 docs/results/
+
+# local agent worktrees and session files
+.claude/
