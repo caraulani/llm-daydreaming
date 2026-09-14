@@ -11,7 +11,7 @@ generate connections. It can, cheaply and endlessly. The question is whether any
 a real connection from a fluent one. This repo is the test rig for that question, with ground
 truth planted by construction, a pre-registered protocol, and every raw output committed.
 
-[![CI](https://github.com/caraulani/llm-daydreaming/actions/workflows/ci.yml/badge.svg)](https://github.com/caraulani/llm-daydreaming/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/code-MIT-black.svg)](LICENSE) [![Paper: CC BY 4.0](https://img.shields.io/badge/paper-CC%20BY%204.0-black.svg)](LICENSE-CC-BY-4.0)
+[![CI](https://github.com/caraulani/llm-daydreaming/actions/workflows/ci.yml/badge.svg)](https://github.com/caraulani/llm-daydreaming/actions/workflows/ci.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22746627.svg)](https://doi.org/10.5281/zenodo.22746627) [![License: MIT](https://img.shields.io/badge/code-MIT-black.svg)](LICENSE) [![Paper: CC BY 4.0](https://img.shields.io/badge/paper-CC%20BY%204.0-black.svg)](LICENSE-CC-BY-4.0)
 
 > Works with a Claude subscription (headless `claude -p`, zero marginal cost), the Anthropic API,
 > and, in v0.2, any local model through Ollama.
@@ -252,7 +252,20 @@ make smoke        # tiny real run on the synthetic corpus
 
 ## Citing
 
-See [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button uses it).
+See [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button uses it). Archived on
+Zenodo: concept DOI [10.5281/zenodo.22746627](https://doi.org/10.5281/zenodo.22746627) (latest
+release), v0.2.0 DOI [10.5281/zenodo.22746628](https://doi.org/10.5281/zenodo.22746628).
+
+```bibtex
+@software{caraulani2026daydreamd,
+  author  = {Caraulani, Julian},
+  title   = {daydreamd: the LLM daydreaming loop, evaluated},
+  year    = {2026},
+  version = {0.2.0},
+  doi     = {10.5281/zenodo.22746627},
+  url     = {https://github.com/caraulani/llm-daydreaming}
+}
+```
 
 ## License
 

@@ -9,6 +9,13 @@ abstract: "A local-first daemon that recombines distant concepts from a corpus, 
 version: 0.2.0
 date-released: 2026-09-13
 license: MIT
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22746627
+    description: "Concept DOI, resolves to the latest release archived on Zenodo"
+  - type: doi
+    value: 10.5281/zenodo.22746628
+    description: "DOI of release v0.2.0"
 repository-code: "https://github.com/caraulani/llm-daydreaming"
 url: "https://github.com/caraulani/llm-daydreaming"
 authors:
