@@ -1,0 +1,97 @@
+backend: claude-cli
+config: experiments/micro-v0.3/config.yaml
+corpus_sha256: d044765e9dff6c49d042fcbc7adc98d6cfaf18d8210787e9ec64f04c90f9d749
+cost_usd_total: 87.856028
+created: '2026-09-14T15:51:18+00:00'
+models:
+  cards:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_haiku:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_sonnet:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  generator:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  match_gold:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+n_docs: 96
+prompts:
+  cards: f2a7ac1a733d6e0e1d85783c70fec47a8b6bb5e607d9186e4269507c18495f83
+  critic: 49ec635bc7728fd788fefbe89a9c950518d024e087a014a5c78be6a0b3e63232
+  generate_pair: feddedd87fb396dbc5a724189027844ae38afdf09d3fa132f3ea44654c784dc3
+  generate_single_strict: 109a4b1f30c304776568362211cbc8603dde0407e303f2fe8caa22598e64f553
+  match_gold: 09d4576cca8726d24b2f74030fa7c9334d2b4a3284bd3482f9bf03958470a1fc
+run_id: 2026-09-14_micro_v0_3
+seed: 20260930
+stages:
+  cards:
+    cost_usd: 3.1769
+    finished: '2026-09-14T16:00:32+00:00'
+    n_cards: 521
+    n_docs: 96
+    zero_card_docs: []
+  critic:
+    critics:
+    - haiku
+    - sonnet
+    finished: '2026-09-14T16:41:30+00:00'
+    n_judged: 125
+    n_keep: 86
+    primary: haiku
+  critic_haiku:
+    cost_usd: 3.7469
+    finished: '2026-09-14T16:41:30+00:00'
+    n_judged: 125
+    n_keep: 86
+  critic_sonnet:
+    cost_usd: 11.2422
+    finished: '2026-09-14T16:47:14+00:00'
+    n_judged: 125
+    n_keep: 92
+  dupgate:
+    finished: '2026-09-14T16:47:18+00:00'
+    n_checked: 86
+    n_dup: 0
+    threshold: 0.85
+  embed:
+    finished: '2026-09-14T16:00:46+00:00'
+    model: sentence-transformers/all-MiniLM-L6-v2
+    n: 521
+  generate:
+    cost_usd: 68.6825
+    error: 0
+    finished: '2026-09-14T16:30:38+00:00'
+    malformed: 0
+    n_units: 782
+    none: 657
+    ok: 125
+  match_gold:
+    cost_usd: 1.0075
+    finished: '2026-09-14T16:52:49+00:00'
+    n_judged: 36
+    n_match: 10
+  sample:
+    arms:
+      B1: 300
+      B4: 68
+      B7: 300
+      S0: 70
+      S1: 44
+    finished: '2026-09-14T16:00:46+00:00'
+    n_units: 782
+  snapshot:
+    finished: '2026-09-14T15:51:18+00:00'
+    n_docs: 96
+  stats:
+    finished: '2026-09-14T16:52:49+00:00'
+    human_track: false
+    tables: experiments/runs/public/2026-09-14_micro_v0_3/tables
+visibility: public
