@@ -100,7 +100,14 @@ Sources: [[note-a]] and [[note-b]] · distance 0.61 · critic: keep
 - [ ] KEEP: I would act on this or write it down
 - [ ] KNOWN: I already had this thought
 
-<details><summary>Killed by the critic (<y>). Kept here because the critic is known to kill correct connections.</summary> ... </details>
+## Killed by the critic (<y>)
+Shown because the critic is known to kill correct connections. Same block shape, same checkboxes.
+
+## Declined by the generator (<x>)
+- [[note-c]] and [[note-d]] · distance 0.58
+- ...
+
+(`--compact` collapses the killed section; nothing is ever dropped from the file.)
 ```
 
 Backends: `--backend claude-cli` (default; your Claude Code subscription, zero marginal cost),

@@ -48,6 +48,7 @@ class DreamConfig:
     concurrency: int = 4
     seed: int | None = None
     exclude: list[str] = field(default_factory=list)
+    compact: bool = False  # collapse the killed section; everything is still in the file
 
 
 @dataclass
@@ -215,6 +216,15 @@ def dream(cfg: DreamConfig) -> DreamResult:
         "survivors": len(survivors),
     }
     cost = float(meta.get("cost_usd_total", 0.0))
+    declined = [
+        (
+            _source_label(by_id.get(g["note_a"]), cfg.kind),
+            _source_label(by_id.get(g["note_b"]), cfg.kind) if g.get("note_b") else "(single note)",
+            g.get("distance"),
+        )
+        for g in gens
+        if g["status"] == "none"
+    ]
     text = render(
         run_id=run.path.name,
         corpus=str(corpus),
@@ -225,6 +235,8 @@ def dream(cfg: DreamConfig) -> DreamResult:
         counts=counts,
         models=models,
         cost_usd=cost,
+        declined=declined,
+        compact=cfg.compact,
     )
     out_path = (cfg.out or Path("morning.md")).expanduser()
     out_path.parent.mkdir(parents=True, exist_ok=True)

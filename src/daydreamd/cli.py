@@ -177,6 +177,9 @@ def dream(
     embedder: str = typer.Option("static", help="static (default, no PyTorch) | minilm | fake"),
     concurrency: int = typer.Option(4),
     exclude: list[str] = typer.Option([], help="Extra filename patterns to skip"),
+    compact: bool = typer.Option(
+        False, "--compact", help="Collapse the killed section (everything stays in the file)"
+    ),
 ) -> None:
     """One night over your notes: pairs distant concepts, asks the model, keeps what survives, writes morning.md."""
     from .product.dream import DreamConfig
@@ -196,6 +199,7 @@ def dream(
             out=out,
             concurrency=concurrency,
             exclude=list(exclude),
+            compact=compact,
         )
     )
     c = r.counts

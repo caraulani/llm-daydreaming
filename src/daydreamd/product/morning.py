@@ -1,9 +1,10 @@
 """Render and parse `morning.md`, the file the owner reads and ticks.
 
 Every dream block carries an HTML comment with its id, its critic verdict and reason, so
-`daydreamd review` can read the ticked boxes back without any other state. Dreams the critic
-killed are kept in a collapsed section: the v0.1 and v0.2 runs showed the critic removes
-correct connections (research/06, research/07), so the owner sees them too.
+`daydreamd review` can read the ticked boxes back without any other state. The owner sees
+everything the night produced: dreams the critic kept, dreams it killed (the v0.1 and v0.2
+runs showed the critic removes correct connections, research/06 and research/07), dreams
+already close to an existing note, and the pairs the generator declined with NONE.
 """
 
 from __future__ import annotations
@@ -68,6 +69,8 @@ def render(
     counts: dict[str, int],
     models: dict[str, str],
     cost_usd: float,
+    declined: list[tuple[str, str, float | None]] | None = None,
+    compact: bool = False,
 ) -> str:
     lines = [
         f"# morning.md, {date}, {len(survivors)} of {counts['asked']} dreams survived",
@@ -87,15 +90,32 @@ def render(
     for i, d in enumerate(survivors, 1):
         lines.append(_block(str(i), d, "##"))
     if killed:
-        lines += [
-            "<details>",
-            f"<summary>Killed by the critic ({len(killed)}). Kept here because the critic is "
-            "known to kill correct connections.</summary>",
-            "",
-        ]
+        note = "Shown because the critic is known to kill correct connections."
+        if compact:
+            lines += [
+                "<details>",
+                f"<summary>Killed by the critic ({len(killed)}). {note}</summary>",
+                "",
+            ]
+        else:
+            lines += [f"## Killed by the critic ({len(killed)})", "", note, ""]
         for i, d in enumerate(killed, 1):
             lines.append(_block(f"k{i}", d, "###"))
-        lines += ["</details>", ""]
+        if compact:
+            lines += ["</details>"]
+        lines += [""]
+    if declined:
+        lines += [
+            f"## Declined by the generator ({len(declined)})",
+            "",
+            "Pairs the model was shown and answered NONE to. Listed so you can see what it "
+            "looked at, and so a declined pair that should have been a hit can be reported.",
+            "",
+        ]
+        for a, b, dist in declined:
+            d_str = f" · distance {dist:.2f}" if dist is not None else ""
+            lines.append(f"- {a} and {b}{d_str}")
+        lines.append("")
     lines += [
         "---",
         "Tick KEEP or KNOWN, then run `daydreamd review morning.md`. "
