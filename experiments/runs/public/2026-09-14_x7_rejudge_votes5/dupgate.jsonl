@@ -1,0 +1,86 @@
+{"unit_id": "S0-0000", "max_cosine": 0.6115, "nearest": "## May 3 spike 44 new accounts created between 02:10 and 02:40 UTC. Tight cluster within a 30-minute window. Each account topped up exactly 5 euros on signup, n", "already_in_corpus": false}
+{"unit_id": "S0-0001", "max_cosine": 0.5407, "nearest": "Small orders bypass one verification step in checkout aimed at reducing cart abandonment", "already_in_corpus": false}
+{"unit_id": "S0-0002", "max_cosine": 0.7879, "nearest": "## Eval set locked 200 SKUs in the 1000-1199 range, selected by merchandiser on 2 July. Hasn't changed since. Good stable baseline for tracking improvements ove", "already_in_corpus": false}
+{"unit_id": "S0-0004", "max_cosine": 0.7277, "nearest": "Tuesday medication misses occur despite consistent 07:00 reminders and no identified calendar conflicts or memory problems.", "already_in_corpus": false}
+{"unit_id": "S0-0006", "max_cosine": 0.7065, "nearest": "## Next Moves - Reached out to the grant program contact to ask if there's a known issue with the SME check - Will attempt resubmission with slight formatting a", "already_in_corpus": false}
+{"unit_id": "S0-0009", "max_cosine": 0.7402, "nearest": "Portal login alert on July 22nd after unknown device detected; no suspicious activity confirmed.", "already_in_corpus": false}
+{"unit_id": "S0-0010", "max_cosine": 0.5435, "nearest": "```yaml --- name: EU Grant Fundraising - Q4 Push description: Working notes on grant applications and upcoming Brussels interview type: project --- # EU Grant F", "already_in_corpus": false}
+{"unit_id": "S0-0011", "max_cosine": 0.5658, "nearest": "W4 reporting format and data output standards not yet defined.", "already_in_corpus": false}
+{"unit_id": "S0-0012", "max_cosine": 0.6111, "nearest": "Local compute box degrades specifically during 13:00-15:00 hours.", "already_in_corpus": false}
+{"unit_id": "S0-0013", "max_cosine": 0.5954, "nearest": "Scale was recalibrated using a 1 kg reference weight on 5/7.", "already_in_corpus": false}
+{"unit_id": "S0-0015", "max_cosine": 0.777, "nearest": "The '62234' prefix numbers are pre-purchased SIMs used for verification bypass.", "already_in_corpus": false}
+{"unit_id": "S0-0016", "max_cosine": 0.7707, "nearest": "Living room CO2 maxes around 900 ppm overnight, well below bedroom levels", "already_in_corpus": false}
+{"unit_id": "S0-0017", "max_cosine": 0.6563, "nearest": "PM2.5 spikes reach approximately 90 micrograms per cubic metre on Monday and Thursday evenings.", "already_in_corpus": false}
+{"unit_id": "S0-0018", "max_cosine": 0.5851, "nearest": "40 transaction records from sandbox using consistent 411xxx card pattern establish evaluation baseline.", "already_in_corpus": false}
+{"unit_id": "S0-0019", "max_cosine": 0.5397, "nearest": "Disagreement rates increased when category definitions were unclear or ambiguous", "already_in_corpus": false}
+{"unit_id": "S0-0021", "max_cosine": 0.5989, "nearest": "External audit confirmed equipment cost validity by 4 August", "already_in_corpus": false}
+{"unit_id": "S0-0027", "max_cosine": 0.5632, "nearest": "Check post-export CSV for trailing commas, empty cells, and run_id format compliance.", "already_in_corpus": false}
+{"unit_id": "S0-0057", "max_cosine": 0.5177, "nearest": "Measurement discrepancies have been noted in the scale since recalibration.", "already_in_corpus": false}
+{"unit_id": "S1-0000", "max_cosine": 0.6185, "nearest": "## May 3 spike 44 new accounts created between 02:10 and 02:40 UTC. Tight cluster within a 30-minute window. Each account topped up exactly 5 euros on signup, n", "already_in_corpus": false}
+{"unit_id": "S1-0002", "max_cosine": 0.6603, "nearest": "Small orders bypass one verification step in checkout aimed at reducing cart abandonment", "already_in_corpus": false}
+{"unit_id": "S1-0036", "max_cosine": 0.5013, "nearest": "Transaction model achieved 98% accuracy across all 40 test items consistently.", "already_in_corpus": false}
+{"unit_id": "S1-0043", "max_cosine": 0.5081, "nearest": "IoT retail sensor networks use different hardware than similar installations; unclear if this constitutes ethical novelty.", "already_in_corpus": false}
+{"unit_id": "B1-0002", "max_cosine": 0.6846, "nearest": "## May 3 spike 44 new accounts created between 02:10 and 02:40 UTC. Tight cluster within a 30-minute window. Each account topped up exactly 5 euros on signup, n", "already_in_corpus": false}
+{"unit_id": "B1-0028", "max_cosine": 0.6585, "nearest": "New Library Rolled Out ---------------------- - New device-fingerprint library deployed at 08:00 AM UTC on 19 August. - Initial testing phase over two weeks sho", "already_in_corpus": false}
+{"unit_id": "B1-0031", "max_cosine": 0.6, "nearest": "Blocking decision made within two days of fraud report.", "already_in_corpus": false}
+{"unit_id": "B1-0048", "max_cosine": 0.5718, "nearest": "Caching judge outputs reduces computational strain on LLM systems during evaluation.", "already_in_corpus": false}
+{"unit_id": "B1-0062", "max_cosine": 0.5572, "nearest": "The steady deep sleep decline likely stems from an environmental or external factor rather than known variables", "already_in_corpus": false}
+{"unit_id": "B1-0074", "max_cosine": 0.6342, "nearest": "Friday 7am-11am orders spike 35-40% versus baseline, with higher conversion following newsletter sends", "already_in_corpus": false}
+{"unit_id": "B1-0082", "max_cosine": 0.6439, "nearest": "All sensors set to transmit SMS error alerts to admin", "already_in_corpus": false}
+{"unit_id": "B1-0083", "max_cosine": 0.7397, "nearest": "Suspicious Top-Ups Surge ## Activity Overview - 29.90 top-ups spiked to 31% of total volume from June 12. - New accounts show high propensity for initial transa", "already_in_corpus": false}
+{"unit_id": "B1-0086", "max_cosine": 0.4023, "nearest": "power consumption - Haven't run full analysis yet on actual savings - Temperature data will show whether anything shifted in the space ## Current bench setup Bl", "already_in_corpus": false}
+{"unit_id": "B1-0091", "max_cosine": 0.698, "nearest": "Client A's model accuracy dropped 0.5 points on a fixed test set last week.", "already_in_corpus": false}
+{"unit_id": "B1-0104", "max_cosine": 0.5574, "nearest": "Black server box currently positioned on shed bench beside logger.", "already_in_corpus": false}
+{"unit_id": "B1-0145", "max_cosine": 0.6928, "nearest": "Most disputes post-update involve small orders, with customers denying they placed them", "already_in_corpus": false}
+{"unit_id": "B1-0160", "max_cosine": 0.6948, "nearest": "Annotation schema assignment and spot verification required before pilot scoring begins.", "already_in_corpus": false}
+{"unit_id": "B1-0173", "max_cosine": 0.5071, "nearest": "Health protocol involves regular check-ins and immediate treatment upon detecting illness signs.", "already_in_corpus": false}
+{"unit_id": "B1-0174", "max_cosine": 0.5559, "nearest": "Will schedule call with lead evaluator next week.", "already_in_corpus": false}
+{"unit_id": "B1-0226", "max_cosine": 0.5833, "nearest": "## Verification Delivery Anomaly SMS verification delivery dropped sharply around August 15. Yoigo numbers showing 12% delivery rate, down from 97% baseline. Or", "already_in_corpus": false}
+{"unit_id": "B1-0255", "max_cosine": 0.6363, "nearest": "Total discrepancy between marketplace and store records is $487.95.", "already_in_corpus": false}
+{"unit_id": "B1-0277", "max_cosine": 0.6844, "nearest": "## Eval set locked 200 SKUs in the 1000-1199 range, selected by merchandiser on 2 July. Hasn't changed since. Good stable baseline for tracking improvements ove", "already_in_corpus": false}
+{"unit_id": "B1-0282", "max_cosine": 0.4777, "nearest": "R-300, R-310, R-312, R-320 live; R-330 pending QA; others based on caller behavior data.", "already_in_corpus": false}
+{"unit_id": "B7-0025", "max_cosine": 0.4603, "nearest": "Measurement discrepancies have been noted in the scale since recalibration.", "already_in_corpus": false}
+{"unit_id": "B7-0029", "max_cosine": 0.6317, "nearest": "Three accounts created within 45 minutes using Gmail, Yahoo, and Proton Mail for signups.", "already_in_corpus": false}
+{"unit_id": "B7-0037", "max_cosine": 0.7239, "nearest": "ESP32-WROOM-32D is 20% overstocked yet remains on reorder list for future needs.", "already_in_corpus": false}
+{"unit_id": "B7-0044", "max_cosine": 0.4659, "nearest": "## Reports arrived 14 Sept came back with summaries for both proposals. Each one is exactly 61 pages. The two are substantially different in what they propose a", "already_in_corpus": false}
+{"unit_id": "B7-0046", "max_cosine": 0.5949, "nearest": "Dashboard card for R-300-R-399 shows hourly firing rate, false positive ratio per rule, and threshold drift tracking.", "already_in_corpus": false}
+{"unit_id": "B7-0052", "max_cosine": 0.6056, "nearest": "Rotating 10-15% discount codes typically generate 60-70 orders on high-traffic sends", "already_in_corpus": false}
+{"unit_id": "B7-0066", "max_cosine": 0.76, "nearest": "Total discrepancy between marketplace and store records is $487.95.", "already_in_corpus": false}
+{"unit_id": "B7-0076", "max_cosine": 0.5829, "nearest": "Budget section requires update to reflect newly identified IoT sensor costs.", "already_in_corpus": false}
+{"unit_id": "B7-0084", "max_cosine": 0.5843, "nearest": "Two-week testing phase of the new library showed mixed results overall.", "already_in_corpus": false}
+{"unit_id": "B7-0102", "max_cosine": 0.669, "nearest": "Transaction model achieved 98% accuracy across all 40 test items consistently.", "already_in_corpus": false}
+{"unit_id": "B7-0106", "max_cosine": 0.5341, "nearest": "Rate improvements justify the tight Tuesday schedule, though one close call has already occurred.", "already_in_corpus": false}
+{"unit_id": "B7-0123", "max_cosine": 0.6284, "nearest": "W4 reporting format and data output standards not yet defined.", "already_in_corpus": false}
+{"unit_id": "B7-0131", "max_cosine": 0.8245, "nearest": "Ethics templates assume binary compliance but project involves gray zones: semi-synthetic data and incremental hardware changes.", "already_in_corpus": false}
+{"unit_id": "B7-0133", "max_cosine": 0.6033, "nearest": "API fraud blocking integration completed by February 3, 2024.", "already_in_corpus": false}
+{"unit_id": "B7-0145", "max_cosine": 0.5413, "nearest": "Rotating 10-15% discount codes typically generate 60-70 orders on high-traffic sends", "already_in_corpus": false}
+{"unit_id": "B7-0172", "max_cosine": 0.6051, "nearest": "Most disputes post-update involve small orders, with customers denying they placed them", "already_in_corpus": false}
+{"unit_id": "B7-0202", "max_cosine": 0.3978, "nearest": "The steady deep sleep decline likely stems from an environmental or external factor rather than known variables", "already_in_corpus": false}
+{"unit_id": "B7-0214", "max_cosine": 0.7213, "nearest": "ESP32-WROOM-32D is 20% overstocked yet remains on reorder list for future needs.", "already_in_corpus": false}
+{"unit_id": "B7-0225", "max_cosine": 0.5803, "nearest": "Method selection decision must be finalized by March 5th for March 15th round start.", "already_in_corpus": false}
+{"unit_id": "B7-0237", "max_cosine": 0.4079, "nearest": "Completeness vs brevity was weakest dimension (k=0.59) because raters held different priors about acceptable output length.", "already_in_corpus": false}
+{"unit_id": "B7-0254", "max_cosine": 0.6865, "nearest": "CNC machine draws 3.2 kW under heavy cutting, correlating with booking schedule.", "already_in_corpus": false}
+{"unit_id": "B7-0266", "max_cosine": 0.6891, "nearest": "August shipments experienced delays due to warped wood defects from supplier A", "already_in_corpus": false}
+{"unit_id": "B7-0289", "max_cosine": 0.6055, "nearest": "Legal form switch on April 1st created dual VAT identifiers (old 771, new 402) causing backend integration and reconciliation friction.", "already_in_corpus": false}
+{"unit_id": "B4-0000", "max_cosine": 0.5063, "nearest": "41 SPRING24 redemptions concentrated between 02:05 and 02:45 on May 3rd with no processing issues.", "already_in_corpus": false}
+{"unit_id": "B4-0003", "max_cosine": 0.5364, "nearest": "New accounts predominantly initiate with exactly 29.90 as their first transaction.", "already_in_corpus": false}
+{"unit_id": "B4-0009", "max_cosine": 0.5094, "nearest": "Tuesday is full-staff day with no rotation gaps; other weekdays have staffing gaps causing slower responses.", "already_in_corpus": false}
+{"unit_id": "B4-0010", "max_cosine": 0.4568, "nearest": "volume doesn't hit Monday evening anyway. ## Early days on the new rhythm Rates improved enough to justify the squeeze. Running against the clock Tuesday mornin", "already_in_corpus": false}
+{"unit_id": "B4-0012", "max_cosine": 0.7282, "nearest": "Manual invoices issued in early April scattered between old and new VAT numbers despite processor compatibility.", "already_in_corpus": false}
+{"unit_id": "B4-0018", "max_cosine": 0.7581, "nearest": "Portal login alert on July 22nd after unknown device detected; no suspicious activity confirmed.", "already_in_corpus": false}
+{"unit_id": "B4-0020", "max_cosine": 0.6445, "nearest": "If Digital Tools rejected before Brussels, pivot narrative to other two applications.", "already_in_corpus": false}
+{"unit_id": "B4-0024", "max_cosine": 0.5429, "nearest": "power consumption - Haven't run full analysis yet on actual savings - Temperature data will show whether anything shifted in the space ## Current bench setup Bl", "already_in_corpus": false}
+{"unit_id": "B4-0025", "max_cosine": 0.6195, "nearest": "Local compute box degrades specifically during 13:00-15:00 hours.", "already_in_corpus": false}
+{"unit_id": "B4-0027", "max_cosine": 0.5558, "nearest": "--- name: LLM Evaluation Notes description: Quick review on recent assessments and findings of language models for client evaluations. type: project LLM System ", "already_in_corpus": false}
+{"unit_id": "B4-0030", "max_cosine": 0.668, "nearest": "All sensors set to transmit SMS error alerts to admin", "already_in_corpus": false}
+{"unit_id": "B4-0042", "max_cosine": 0.672, "nearest": "Draft EU grant application was completed on 17 June", "already_in_corpus": false}
+{"unit_id": "B4-0044", "max_cosine": 0.5027, "nearest": "QR prints poorly on thermal printers; offset and gravure printing required. Mobile layout breaks below 320px.", "already_in_corpus": false}
+{"unit_id": "B4-0045", "max_cosine": 0.8199, "nearest": "Internal ledger manually adjusted to correct $67.32 overpayment.", "already_in_corpus": false}
+{"unit_id": "B4-0046", "max_cosine": 0.544, "nearest": "Ceramic dish set requires 12-unit minimum due to supplier's glazing batch requirement.", "already_in_corpus": false}
+{"unit_id": "B4-0049", "max_cosine": 0.6403, "nearest": "Challenges Faced - Initial implementation took 2 days. - Debugging cache inconsistencies cost extra time.", "already_in_corpus": false}
+{"unit_id": "B4-0054", "max_cosine": 0.5821, "nearest": "if available - Keep one master template; vary only the narrative and evidence per case - Response deadline is processor-specific: Visa 21 days, Mastercard 45 da", "already_in_corpus": false}
+{"unit_id": "B4-0058", "max_cosine": 0.675, "nearest": "On high-effort days, sweat rate reaches 800ml/hr; adjust sodium dose upward proportionally.", "already_in_corpus": false}
+{"unit_id": "B4-0060", "max_cosine": 0.61, "nearest": "Considering repositioning evaluation work as separate work package to address data handling concerns.", "already_in_corpus": false}
+{"unit_id": "B4-0063", "max_cosine": 0.5617, "nearest": "Grant application status confirmation is a primary kick-off meeting objective", "already_in_corpus": false}
+{"unit_id": "B4-0064", "max_cosine": 0.6148, "nearest": "Corner lift began around hour 6 of 12-hour print at 60°C bed temperature", "already_in_corpus": false}
+{"unit_id": "B4-0066", "max_cosine": 0.7315, "nearest": "Five-color cable categorization: red for power, blue for data, yellow for sensors, green for IoT, white for obsolete.", "already_in_corpus": false}

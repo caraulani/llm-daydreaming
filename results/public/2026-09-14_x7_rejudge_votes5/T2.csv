@@ -1,0 +1,3 @@
+arm,draws,planted_hits,distinct_bridges,expected_hits,p_hypergeom
+B1,300,1,1,1.396,0.754
+B7,300,3,3,1.396,0.165

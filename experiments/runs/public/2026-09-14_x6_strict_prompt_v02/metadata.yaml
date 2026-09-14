@@ -1,0 +1,88 @@
+backend: claude-cli
+config: experiments/exploratory/X6_strict_prompt_v02/config.yaml
+corpus_sha256: f8a6e9e335772ff44fd86ff0245933ce73d9c5354ef5164c476cb93cdd1ef44a
+cost_usd_total: 9.930771
+created: '2026-09-14T16:58:15+00:00'
+models:
+  cards:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  critic_haiku:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+  generator:
+    alias: sonnet
+    model_id: claude-sonnet-5
+  match_gold:
+    alias: haiku
+    model_id: claude-haiku-4-5-20251001
+n_docs: 96
+prompts:
+  cards: f2a7ac1a733d6e0e1d85783c70fec47a8b6bb5e607d9186e4269507c18495f83
+  critic: 49ec635bc7728fd788fefbe89a9c950518d024e087a014a5c78be6a0b3e63232
+  generate_pair: feddedd87fb396dbc5a724189027844ae38afdf09d3fa132f3ea44654c784dc3
+  generate_single_strict: 109a4b1f30c304776568362211cbc8603dde0407e303f2fe8caa22598e64f553
+  match_gold: 09d4576cca8726d24b2f74030fa7c9334d2b4a3284bd3482f9bf03958470a1fc
+run_id: 2026-09-14_x6_strict_prompt_v02
+seed: 20260914
+stages:
+  cards:
+    cost_usd: 3.0967
+    finished: '2026-09-14T17:07:52+00:00'
+    n_cards: 491
+    n_docs: 96
+    zero_card_docs:
+    - dc02-a
+    - dc02-b
+    - dc06-b
+    - fl04
+  critic:
+    critics:
+    - haiku
+    finished: '2026-09-14T17:16:14+00:00'
+    n_judged: 29
+    n_keep: 21
+    primary: haiku
+  critic_haiku:
+    cost_usd: 0.922
+    finished: '2026-09-14T17:16:13+00:00'
+    n_judged: 29
+    n_keep: 21
+  dupgate:
+    finished: '2026-09-14T17:16:18+00:00'
+    n_checked: 21
+    n_dup: 0
+    threshold: 0.85
+  embed:
+    finished: '2026-09-14T17:08:06+00:00'
+    model: sentence-transformers/all-MiniLM-L6-v2
+    n: 491
+  generate:
+    cost_usd: 5.4929
+    error: 0
+    finished: '2026-09-14T17:13:00+00:00'
+    malformed: 0
+    n_units: 55
+    none: 26
+    ok: 29
+  match_gold:
+    cost_usd: 0.4192
+    finished: '2026-09-14T17:19:00+00:00'
+    n_judged: 14
+    n_match: 6
+  sample:
+    arms:
+      B4: 55
+    finished: '2026-09-14T17:08:06+00:00'
+    n_units: 55
+  snapshot:
+    finished: '2026-09-14T16:58:15+00:00'
+    n_docs: 96
+  stats:
+    finished: '2026-09-14T17:19:01+00:00'
+    human_track: false
+    tables: experiments/runs/public/2026-09-14_x6_strict_prompt_v02/tables
+visibility: public
