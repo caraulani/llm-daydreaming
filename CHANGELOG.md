@@ -13,7 +13,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ### Fixed
 - Single-note recall denominator: every planted bridge the arm showed the generator, not only answered notes (v0.3 B4 recall 2 of 22, not 2 of 12).
-- Exploratory X6 (strict prompt over the v0.2 corpus) and X7 (five-vote re-judge) configs added; runs pending.
+- Exploratory X6 (strict prompt over the v0.2 corpus: one-note recovery 6/16, fillers answered 65 percent) and X7 (five-vote re-judge of v0.3: two verdicts flip, oracle recall 10/22 under five votes; sealed decision unchanged) run and committed.
 
 ## [0.3.0] - 2026-09-14
 

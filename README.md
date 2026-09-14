@@ -328,8 +328,8 @@ that produces it is listed so nobody has to trust us.
 | X3 | near, cross-domain sampler on v0.1 | 2 planted in 100 (0.6 expected, p = 0.13); far bands NONE on 50 of 50 | `make reproduce` |
 | X4 | Sonnet critic on the v0.1 generations | kills 3 of 8 correct recoveries and keeps the decoy | `make reproduce` |
 | X5 | single-note prompt over every v0.2 note | answers on 23/23 fillers, 21/21 decoy notes, 31/32 bridge notes; 6 of 16 mechanisms from one note | `make reproduce` |
-| X6 | strict single-note prompt over the v0.2 corpus (prompt effect, corpus fixed) | in progress | `make reproduce` |
-| X7 | five-vote re-judge of every answered v0.3 unit (judge consistency) | in progress | `make reproduce` |
+| X6 | strict single-note prompt over the v0.2 corpus (prompt effect, corpus fixed) | one note recovers 6/16 (inert prompt: 8/16); fillers answered 15/23 | `make reproduce` |
+| X7 | five-vote re-judge of every answered v0.3 unit (judge consistency) | 2 of 36 verdicts flip to MATCH; oracle recall 10/22 under five votes; decision unchanged | `make reproduce` |
 
 `make reproduce` rebuilds every table from the committed run outputs with no model call.
 
